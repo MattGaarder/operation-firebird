@@ -1,10 +1,10 @@
 <template>
   <q-layout view="hhh LpR lFf" class="bg-primary">
     <q-header  class="q-pa-lg bg-primary header">
-      <q-toolbar class="q-pa-lg ">
+      <q-toolbar class="q-py-lg ">
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title class="q-pa-lg bg-primary">Matteus Gaarder</q-toolbar-title>
+        <q-toolbar-title class="q-pa-lg bg-primary toolbar">Matteus <router-link to="/" class="text-white no-underline"><span class="surname">gAARDER</span></router-link></q-toolbar-title>
 
         <div class="q-pr-xl">About</div>
       </q-toolbar>
@@ -19,7 +19,7 @@
 
         <q-list>
           <q-item-label header>Links</q-item-label>
-          <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" class="top-border q-px-xl"/>
+          <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" class="top-border q-pr-xl"/>
         </q-list>
 
     </q-drawer>
@@ -31,10 +31,8 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-  import EssentialLink from 'components/EssentialLink.vue'
-
-  
+  import { ref } from 'vue';
+  import EssentialLink from 'components/EssentialLink.vue';
 
   const leftDrawerOpen = ref(false)
 
@@ -42,54 +40,45 @@
     leftDrawerOpen.value = !leftDrawerOpen.value
   }
 
-
-
   const linksList = [
     {
-      title: 'Docs',
-      caption: 'quasar.dev',
+      title: 'Projects',
+      caption: 'web.dev/projects',
       icon: 'school',
-      link: '/',
+      link: '/projects-page',
     },
     {
       title: 'Github',
-      caption: 'github.com/quasarframework',
+      caption: 'https://github.com/MattGaarder',
       icon: 'code',
-      link: '/',
+      link: 'https://github.com/MattGaarder',
     },
     {
       title: 'Test',
-      caption: 'chat.quasar.dev',
+      caption: '/test-page',
       icon: 'chat',
       link: '/test',
     },
     {
-      title: 'Forum',
-      caption: 'forum.quasar.dev',
+      title: 'LinkedIn',
+      caption: 'https://www.linkedin.com/in/matteus-gaarder-991494178/',
       icon: 'record_voice_over',
-      link: '/',
+      link: 'https://www.linkedin.com/in/matteus-gaarder-991494178/',
     },
     {
-      title: 'Twitter',
+      title: 'Illustrations',
       caption: '@quasarframework',
       icon: 'rss_feed',
-      link: '/',
+      link: '/illustrations',
     },
-  ];
+  ]
 </script>
 
 
 
 <style scoped>
 
-  ::v-deep .q-header {
-    transition-duration: 0.3s !important;
-  }
 
-  ::v-deep .q-drawer,
-  ::v-deep .q-header {
-    transition-timing-function: ease-out !important;
-  }
 </style>
 
 

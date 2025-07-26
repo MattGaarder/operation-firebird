@@ -5,32 +5,41 @@
     </q-item-section>
 
     <q-item-section >
-      <q-item-label class="text-white">{{ props.title }}</q-item-label>
-      <q-item-label caption class="text-white">{{ props.caption }}</q-item-label>
+      <q-item-label :class="isActive ? 'text-black' : 'text-white'">{{ props.title }}<q-icon name="arrow_outward" class="arrow-outward-icon"></q-icon></q-item-label>
+      <q-item-label caption :class="isActive ? 'text-black' : 'text-white'">{{ props.caption }}</q-item-label>
+      
     </q-item-section>
+    
   </q-item>
 </template>
 
 <script setup>
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
+  import { computed } from 'vue';
+  import { useRoute } from 'vue-router';
 
-  caption: {
-    type: String,
-    default: '',
-  },
+  const props = defineProps({
+    title: {
+      type: String,
+      required: true,
+    },
 
-  link: {
-    type: String,
-    default: '#',
-  },
+    caption: {
+      type: String,
+      default: '',
+    },
 
-  icon: {
-    type: String,
-    default: '',
-  },
-})
+    link: {
+      type: String,
+      default: '#',
+    },
+
+    icon: {
+      type: String,
+      default: '',
+    },
+  });
+
+  const route = useRoute();
+
+  const isActive = computed(() => route.path === props.link);
 </script>

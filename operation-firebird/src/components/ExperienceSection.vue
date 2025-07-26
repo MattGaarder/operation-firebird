@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="col-8">
-                    <ul class="q-pl-xl">
+                    <ul class="q-pl-xl bullet-points">
                         <li v-for="(item, i) in bullets" :key="i">{{ item }}</li>
                     </ul>
                 </div>
