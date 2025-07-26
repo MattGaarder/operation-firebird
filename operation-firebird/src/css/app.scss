@@ -33,7 +33,6 @@
 }
 
 .q-layout-padding {
-    padding: 24px;
     padding-top: 0; 
 }
 
@@ -42,9 +41,7 @@
     font-size: larger;
 }
 
-:v-deep .no-underline {
-    text-decoration: lime;
-}
+
 
 .bullet-points {
     max-width: 32rem;
@@ -64,3 +61,9 @@
 :v-deep .q-header {
     transition-timing-function: ease-out !important;
 }
+
+.project-row {
+    display: flex !important;
+    flex-wrap: wrap;
+}
+

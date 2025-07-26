@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hhh LpR lFf" class="bg-primary">
-    <q-header  class="q-pa-lg bg-primary header">
+    <q-header class="q-pa-lg bg-primary header">
       <q-toolbar class="q-py-lg ">
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
@@ -10,7 +10,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above class="bg-primary text-white q-px-lg drawer" behavior="desktop" :width="500" :breakpoint="700">
+    <q-drawer v-model="leftDrawerOpen" class="bg-primary text-white q-px-lg drawer" :width="500" :breakpoint="900">
       <q-card flat square dark class="bio-card text-white text-weight-bold q-pa-md top-border">
         <q-card-section>
           A seasoned Senior Producer with 10+ years of experience, I excel in leading complex marketing and design projects from concept to completion.
