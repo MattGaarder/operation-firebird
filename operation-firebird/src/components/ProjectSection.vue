@@ -1,19 +1,29 @@
 <template>
-  <q-card flat class="q-mb-none">
+  <q-card flat class="q-mb-none project-section">
     <q-card-section class="q-pa-sm q-pl-sm">
-                <div class="wrapper flex flex-center flex-column q-pl-none" :class="id">
-                  <img
-                    v-if="images.length"
-                    :src="images[0]"
-                    :alt="`Logo for ${title}`"
-                    class="project-logo"
-                    :to="deployed"
-                  />
-                  <div class="text-caption q-pt-lg  project-summary" :to="repo">{{ summary }}</div>
-                  <ul class="q-pl-none technology">
-                        <li v-for="(tech, i) in technology" :key="i">{{ tech }}</li>
-                  </ul>
-                </div>
+      <div class="wrapper flex flex-center flex-column q-pl-none" :class="id">
+        
+        <img
+          v-if="images.length"
+          :src="images[0]"
+          :alt="`Logo for ${title}`"
+          class="project-logo q-mr-md"
+          :to="deployed"
+        />
+        <div class="tech-list">
+          <q-img
+            v-for="tech in technology"
+            :key="tech.name"
+            :src="tech.logo"                     
+            :alt="tech.name"
+            class="tech-logo"
+          />
+        </div>
+        <div class="text-caption q-pt-lg  project-summary q-pa-md" :to="repo">{{ summary }}</div>
+
+
+      
+      </div>
     </q-card-section>
   </q-card>
 </template>
@@ -31,36 +41,50 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
 </script>
 
 <style scoped>
+  .tech-list {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  }
+
+  .tech-logo {
+    filter: grayscale(100%) brightness(1.2);
+    opacity: 0.4;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+    width: 2rem;
+    height: auto;
+    margin-top: 0.8rem;
+
+    margin-left: 0.7rem;
+
+  }
+
+  .tech-logo:hover {
+    filter: none;
+    opacity: 1;
+  }
+
+
   .project-logo {
     max-width: 15rem;
     max-height: 8rem;
-    min-height: 7rem;
+    min-height: 8rem;
     object-fit: contain;
     opacity: 0.4;
   }
 
-  .technology {
-    display: flex;
-    list-style: none;
-    li {
-      padding-left: 2rem;
-    }
-  }
-
-
-
-
+  
 
   .project-logo,
   .project-summary,
-  .technology li {
+  .technology {
     opacity: 0.4;
     transition: opacity 0.3s ease;
   }
 
   .project-section:hover .project-logo,
   .project-section:hover .project-summary,
-  .project-section:hover .technology li {
+  .project-section:hover {
     opacity: 1;
     color: white;
   }

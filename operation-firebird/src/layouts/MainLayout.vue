@@ -25,7 +25,7 @@
     </q-drawer>
 
     <q-page-container class="page-container">
-      <router-view />
+      <router-view  />
     </q-page-container>
   </q-layout>
 </template>
@@ -34,7 +34,7 @@
   import { ref } from 'vue';
   import EssentialLink from 'components/EssentialLink.vue';
 
-  const leftDrawerOpen = ref(false)
+  const leftDrawerOpen = ref(true)
 
   function toggleLeftDrawer() {
     leftDrawerOpen.value = !leftDrawerOpen.value

@@ -8,10 +8,6 @@
   }
 }
 
-.row {
-    flex-wrap: nowrap;
-}
-
 .drawer {
     padding-left: 9rem;
 }
@@ -41,10 +37,10 @@
     font-size: larger;
 }
 
-
-
 .bullet-points {
-    max-width: 32rem;
+    max-width: 40rem;
+    padding-left: 5rem;
+    font-size: 0.93rem;
 }
 
 .arrow-outward-icon {
