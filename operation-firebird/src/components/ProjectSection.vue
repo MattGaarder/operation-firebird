@@ -1,28 +1,30 @@
 <template>
   <q-card flat class="q-mb-none project-section">
     <q-card-section class="q-pa-sm q-pl-sm">
-      <div class="wrapper flex flex-center flex-column q-pl-none" :class="id">
+      <div class="wrapper flex flex-center q-pl-none" :class="id">
         
         <img
           v-if="images.length"
           :src="images[0]"
           :alt="`Logo for ${title}`"
-          class="project-logo q-mr-md"
+          class="project-logo"
           :to="deployed"
         />
         <div class="tech-list">
+          <div class="tech-items" v-for="tech in technology"
+            :key="tech.name">
           <q-img
-            v-for="tech in technology"
-            :key="tech.name"
+            fit
             :src="tech.logo"                     
             :alt="tech.name"
             class="tech-logo"
           />
-        </div>
-        <div class="text-caption q-pt-lg  project-summary q-pa-md" :to="repo">{{ summary }}</div>
-
-
-      
+          <q-tooltip anchor="top right" self="top left" class="my-tooltip">
+            {{ tech.name }}
+          </q-tooltip>
+          </div>
+        </div> 
+        <div class="text-caption q-pt-lg project-summary q-pr-xl q-pl-md" :to="repo">{{ summary }}</div>  
       </div>
     </q-card-section>
   </q-card>
@@ -41,10 +43,27 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
 </script>
 
 <style scoped>
-  .tech-list {
+.tech-items {
+  position: relative; 
+  display: inline-block;
+    display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+}
+
+.tech-list {
   display: grid;
   grid-template-rows: repeat(3, auto);
   grid-auto-flow: column;
+  gap: 0.5rem;
+  min-height: 160px;
+}
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
   }
 
   .tech-logo {
@@ -54,9 +73,7 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     width: 2rem;
     height: auto;
     margin-top: 0.8rem;
-
     margin-left: 0.7rem;
-
   }
 
   .tech-logo:hover {
@@ -69,8 +86,10 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     max-width: 15rem;
     max-height: 8rem;
     min-height: 8rem;
+    min-width: 240px;
     object-fit: contain;
     opacity: 0.4;
+    
   }
 
   

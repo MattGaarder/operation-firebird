@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .q-drawer {
     .q-item {
         opacity: 0.8;
@@ -63,3 +65,13 @@
     flex-wrap: wrap;
 }
 
+.my-tooltip {
+  --q-tooltip-bg: #fff !important;
+  --q-tooltip-color: #000 !important;
+  background-color: #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  padding: 0.6rem 1rem !important;
+  border-radius: 0 !important;
+  text-align: center;
+}

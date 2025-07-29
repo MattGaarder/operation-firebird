@@ -4,13 +4,13 @@
       <q-toolbar class="q-py-lg ">
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title class="q-pa-lg bg-primary toolbar">Matteus <router-link to="/" class="text-white no-underline"><span class="surname">gAARDER</span></router-link></q-toolbar-title>
+        <q-toolbar-title class="q-pa-lg bg-primary toolbar">Matteus <router-link to="/" class="text-white no-underline"><span class="surname">Gaarder</span></router-link></q-toolbar-title>
 
         <div class="q-pr-xl">About</div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" class="bg-primary text-white q-px-lg drawer" :width="500" :breakpoint="900">
+    <q-drawer v-model="leftDrawerOpen" class="bg-primary text-white q-px-lg drawer" :width="500" :breakpoint="1100">
       <q-card flat square dark class="bio-card text-white text-weight-bold q-pa-md top-border">
         <q-card-section>
           A seasoned Senior Producer with 10+ years of experience, I excel in leading complex marketing and design projects from concept to completion.

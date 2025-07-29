@@ -57,6 +57,12 @@ export default [
 
       // allow debugger during development only
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+      "vue/no-parsing-error": [
+        "error", 
+        {
+            "invalid-first-character-of-tag-name": false,
+        }
+      ],
     },
   },
 
