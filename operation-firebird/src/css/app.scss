@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import 'src/css/quasar.variables.scss';
 
 .q-drawer {
     .q-item {
@@ -8,6 +9,17 @@
     background-color: white;
     }
   }
+}
+
+/* e.g. in src/css/app.scss or quasar.variables.scss */
+
+
+
+
+html,
+body,
+#q-app {
+  background-color: $primary !important;
 }
 
 .drawer {

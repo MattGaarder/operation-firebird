@@ -1,11 +1,10 @@
 <template>
   <q-page padding class="bg-primary text-white" >
-    
-    <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg">PROJECTS</div>
+    <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg">PROJECTS</div>
     
 
 
-    <div class="row project-row">
+    <div class="row project-row bg-primary" :class="{ 'three-col': !leftDrawerOpen }">
       <div v-for="project in projects" :key="project.id" class="col-12 col-md-6 col-lg-4 cursor-pointer" @click="openProject(project)">
         <ProjectSection v-bind="project" class="bg-primary q-pt-xl"/>
       </div>
@@ -20,13 +19,15 @@
         v-model:h="win.height"
         v-model:w="win.width"
         v-model:active="win.active"
-        :minWidth="522" 
+        :minWidth="360" 
         :minHeight="135"
+
         :style="{ zIndex: win.zIndex }"
         :drag-handle="'.window-handle'"
         @mousedown="bringToFront(i)"
         :parent="false"
         >
+
             <q-card class="window-card bg-white text-black" bordered>
                 <q-card-section class="window-handle bg-primary row items-center text-white">
                     <div class="col">{{ win.project.title }}</div>
@@ -38,7 +39,7 @@
                         <component :is="win.project.component" :images="win.project.images"></component>
                      </div>
                     
-             
+                     
                     
                 </q-card-section>
                 <div class="row window-handle">
@@ -54,7 +55,8 @@
 </template>
 
 <script setup>
-    import { ref, markRaw } from 'vue';
+    import { ref, markRaw, inject } from 'vue';
+    import { useQuasar } from 'quasar';
     import ProjectSection from 'src/components/ProjectSection.vue';
     import DraggableResizableVue from 'draggable-resizable-vue3';
     import TeamBuilder from 'src/components/projects/TeamBuilder.vue';
@@ -65,22 +67,46 @@
     import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
     import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
 
+    // const leftDrawerOpen = inject('leftDrawerOpen', ref(true))
 
-    // const dialogOpen = ref(false)
+    const leftDrawerOpen = inject('leftDrawerOpen');
+
+    const $q = useQuasar();
     const windows = ref([]);
 
     let topZ = 2001;
 
+    function getWindowConfig() {
+        const w = $q.screen.width;
+       
+        if (w < 400) {
+            return { width: (w - 15), x: 0, y: -3056 }
+        }
+        else if (w < 1129) {
+            return { width: (w - 15), x: 0, y: -1415 }
+        }
+        else if (w < 1513) {
+            return { width: (w - 370), x: 356, y: -1506 }
+        } else {
+            return { width: (w - 625), x: 525, y: -1226 }
+        }
+    }
+
+
+
     function openProject(proj) {
+    const cfg = getWindowConfig()
+
     windows.value.push({
         uid:     Date.now() + Math.random(),  
         project: proj,                       
-        x: 150,    
-        y: -1200,    
-        width: "70vw",  
-        height: "auto",  
+        x: cfg.x,    
+        y: cfg.y,    
+        width: cfg.width,  
+        height: cfg.height,  
         active: true, 
         zIndex: ++topZ,
+        
         
     })
     }
@@ -273,10 +299,16 @@
         overflow-y: none;
     }
 
-    @media (min-width: 600px) and (max-width: 1650px) {
+    @media (min-width: 600px) and (max-width: 1550px) {
     .project-row > .col-lg-4 {
         flex: 0 0 50%;
         max-width: 50%;
         }
     }
+
+    @media (min-width: 1100px) and (max-width: 1550px) {    .three-col.project-row > .col-lg-4 {
+        flex: 0 0 33.3333% !important;
+        max-width: 33.3333% !important;
+    }
+}
 </style>

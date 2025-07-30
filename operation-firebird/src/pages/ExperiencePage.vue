@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="bg-primary text-white">
+  <q-page padding class="bg-primary text-white" :class="{ 'with-closed-drawer': !leftDrawerOpen }">
 
     <div class="text-h8 text-weight-bold q-mb-lg q-mr-xl q-pt-lg top-border">EXPERIENCE</div>
 
@@ -17,6 +17,9 @@
 
 <script setup>
   import ExperienceSection from 'src/components/ExperienceSection.vue';
+  import { inject } from 'vue';
+  const leftDrawerOpen = inject('leftDrawerOpen')
+        
 
   const experiences = [
     {
@@ -76,3 +79,9 @@
     },
   ];
 </script>
+
+<style scoped>
+.with-closed-drawer {
+  margin-left: 25rem;
+}
+</style>

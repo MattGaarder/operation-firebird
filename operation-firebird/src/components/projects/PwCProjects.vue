@@ -721,10 +721,10 @@ function insertAss() {
   flex-direction: column;
 }
 .column-left {
-  flex: 2 1 200px;
+  flex: 1 1 360px;
 }
 .column-right {
-  flex: 1 1 400px;
+  flex: 1 1 360px;
 }
 .projects-wrapper {
   display: flex;
@@ -732,7 +732,7 @@ function insertAss() {
 }
 
 .project-card {
-  flex: 1 1 300px;
+  flex: 1 1 400px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);

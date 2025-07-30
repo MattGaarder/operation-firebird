@@ -5,7 +5,7 @@
     </q-item-section>
 
     <q-item-section >
-      <q-item-label :class="isActive ? 'text-black' : 'text-white'">{{ props.title }}<q-icon name="arrow_outward" class="arrow-outward-icon"></q-icon></q-item-label>
+      <q-item-label :class="isActive ? 'text-black' : 'text-white'" class="text-bold">{{ props.title }}<q-icon name="arrow_outward" class="arrow-outward-icon"></q-icon></q-item-label>
       <q-item-label caption :class="isActive ? 'text-black' : 'text-white'">{{ props.caption }}</q-item-label>
       
     </q-item-section>
