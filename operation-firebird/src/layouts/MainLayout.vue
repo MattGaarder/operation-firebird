@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hhh LpR lFf" class="bg-primary">
-    <q-header class="q-pa-lg bg-primary header">
+    <q-header class="q-pa-lg bg-primary header" :style="{ paddingLeft: sidePadding }">
       <q-toolbar class="q-py-lg ">
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
@@ -10,7 +10,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" class="bg-primary text-white q-px-lg drawer" :width="500" :breakpoint="1100">
+    <q-drawer v-model="leftDrawerOpen" class="bg-primary text-white q-px-lg drawer" :width="drawerWidth" :breakpoint="1100" :style="{ paddingLeft: sidePadding }">
       <q-card flat square dark class="bio-card text-white text-weight-bold q-pa-md top-border">
         <q-card-section>
           A seasoned Senior Producer with 10+ years of experience, I excel in leading complex marketing and design projects from concept to completion.
@@ -31,8 +31,20 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
+  import { useQuasar } from 'quasar';
+  const $q = useQuasar();
   import EssentialLink from 'components/EssentialLink.vue';
+
+  const sidePadding = computed(() => {
+    const w = $q.screen.width
+    return (w < 1513) ? '2rem' : '9rem'
+  });
+
+  const drawerWidth = computed(() => {
+    const w = $q.screen.width
+    return (w > 1101 && w < 1513) ? 380 : 500
+  });
 
   const leftDrawerOpen = ref(true)
 
@@ -61,7 +73,7 @@
     },
     {
       title: 'LinkedIn',
-      caption: 'https://www.linkedin.com/in/matteus-gaarder-991494178/',
+      caption: `https://www.linkedin.com/in/matteus-gaarder-991494178/`,
       icon: 'record_voice_over',
       link: 'https://www.linkedin.com/in/matteus-gaarder-991494178/',
     },

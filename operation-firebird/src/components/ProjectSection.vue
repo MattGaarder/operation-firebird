@@ -43,21 +43,21 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
 </script>
 
 <style scoped>
-.tech-items {
-  position: relative; 
-  display: inline-block;
-    display: grid;
-  grid-template-rows: repeat(3, auto);
-  grid-auto-flow: column;
-}
+  .tech-items {
+    position: relative; 
+    display: inline-block;
+      display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+  }
 
-.tech-list {
-  display: grid;
-  grid-template-rows: repeat(3, auto);
-  grid-auto-flow: column;
-  gap: 0.5rem;
-  min-height: 160px;
-}
+  .tech-list {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 0.5rem;
+    min-height: 160px;
+  }
 
   .wrapper {
     display: flex;

@@ -2,12 +2,7 @@
   <div class="projects-wrapper">
     <q-card flat bordered class="project-card">
       <q-card-section class="project-header">
-        <q-img
-          src="/src/assets/logos/project_logos/SVG/SVG/cloud-day.svg"
-          alt="Weather Dashboard Logo"
-          class="project-icon"
-          contain
-        />
+        <!-- <q-img src="/src/assets/logos/project_logos/SVG/SVG/cloud-day.svg" alt="Weather Dashboard Logo" class="project-icon" contain/> -->
         <div class="project-info">
           <div class="project-title">Weather Dashboard</div>
           <div class="project-tagline">
@@ -29,12 +24,19 @@
           <li><strong>Learned:</strong> chaining AJAX calls, dataset usage, and persistent state management</li>
         </ul>
       </q-card-section>
+      <q-img :src="props.images[1]" class="project-gif" alt="Weather Dashboard logo"/> 
     </q-card>
   </div>
 </template>
 
 <script setup>
-// purely presentational
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  images: {
+    type: Array,
+    required: true
+  }});
 </script>
 
 <style scoped>

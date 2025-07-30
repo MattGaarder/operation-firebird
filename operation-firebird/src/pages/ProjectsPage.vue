@@ -35,7 +35,7 @@
                 <q-card-section style="overflow:auto; height:calc(100% - 48px)">
                     <!-- <p>{{ win.project.summary }}</p> <br /> -->
                      <div class="window-body">
-                        <component :is="win.project.component"></component>
+                        <component :is="win.project.component" :images="win.project.images"></component>
                      </div>
                     
              
@@ -63,6 +63,7 @@
     import ProjectNocado from 'src/components/projects/ProjectNocado.vue';
     import PwCProjects from 'src/components/projects/PwCProjects.vue';
     import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
+    import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
 
 
     // const dialogOpen = ref(false)
@@ -76,10 +77,11 @@
         project: proj,                       
         x: 150,    
         y: -1200,    
-        width: 550,  
+        width: "70vw",  
         height: "auto",  
         active: true, 
-        zIndex: ++topZ 
+        zIndex: ++topZ,
+        
     })
     }
 
@@ -93,6 +95,7 @@
     }
 
     const projects = [
+        // COMPLETE
     {
         id:       'project4',
         title:    'PwC',
@@ -113,6 +116,7 @@
         ],
         component: markRaw(PwCProjects),
     },
+        // COMPLETE
     {
         id:       'project12',
         title:    'Nocado',
@@ -129,7 +133,7 @@
             { name: 'Express_js', logo: '/src/assets/deprecated-logos/express-js-vector-logo-seeklogo/SVG/express.svg'},
             { name: 'PDF_js',logo: '/src/assets/deprecated-logos/Pdf-js_logo.svg'},
         ],
-        component: ProjectNocado,
+        component: markRaw(ProjectNocado),
     },
     {
         id:       'project2',
@@ -146,7 +150,7 @@
             { name: 'Firebase', logo: '/src/assets/deprecated-logos/firebase-icon.svg'}, 
             { name: 'React',logo: '/src/assets/deprecated-logos/react-2.svg'}, 
         ],
-        component: ProjectVibely,
+        component: markRaw(ProjectVibely),
     },
     {
         id:       'project3',
@@ -163,7 +167,7 @@
             { name: 'Git',    logo: '/src/assets/deprecated-logos/Git-Icon-1788C.svg'},
             { name: 'iFrame_YoutubeAPI',logo: '/src/assets/deprecated-logos/iframe-svgrepo-com.svg'},  
         ],
-        component: MoovieMatch,
+        component: markRaw(MoovieMatch),
     },
     {
         id:       'project6',
@@ -181,7 +185,7 @@
             { name: 'Inquirer',logo: '/src/assets/deprecated-logos/inquirer_readme.svg'},
            
         ],
-        component: TeamBuilder,
+        component: markRaw(TeamBuilder),
     },
 
     {
@@ -199,7 +203,7 @@
             { name: 'Moment.js', logo: '/src/assets/deprecated-logos/momentjs-svgrepo-com.svg'}, 
             { name: 'Postman',logo: '/src/assets/deprecated-logos/postman-icon-svgrepo-com.svg'}, 
         ],
-        component: WeatherDashboard,
+        component: markRaw(WeatherDashboard),
     },
     
     {
@@ -211,13 +215,13 @@
         ],
         deployed: 'https://mattgaarder.github.io/password-generator/',
         repo:     'https://github.com/MattGaarder/password-generator',
-        summary:  'An application that can be used to generate a random password based on user-selected criteria.',
+        summary:  'Craft a dynamic, parallax-rich site with custom infinite scrolling galleries, JavaScript-driven parallax-scroll transforms, and view iterated UI design proccess — assets hand-crafted in Photoshop & Illustrator for an immersive browsing experience.',
         technology: [
             { name: 'Premiere', logo: '/src/assets/deprecated-logos/Adobe_Premiere_Pro.svg'},
             { name: 'Illustrator', logo: '/src/assets/deprecated-logos/Adobe_Illustrator.svg'}, 
             { name: 'Photoshop',logo: '/src/assets/deprecated-logos/Adobe_Photoshop.svg'}, 
         ],
-        component: WeatherDashboard,
+        component: markRaw(ProjectOnafa),
     },
     {
         id:       'project7',

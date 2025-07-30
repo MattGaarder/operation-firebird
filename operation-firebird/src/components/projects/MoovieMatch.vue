@@ -22,12 +22,19 @@
           <li><strong>Learned:</strong> chaining API calls, DOM manipulation & clean UX for list-based navigation</li>
         </ul>
       </q-card-section>
+      <q-img :src="props.images[1]" class="project-gif" alt="Moovie Match logo"/> 
     </q-card>
   </div>
 </template>
 
 <script setup>
-// purely presentational
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  images: {
+    type: Array,
+    required: true
+  }});
 </script>
 
 <style scoped>

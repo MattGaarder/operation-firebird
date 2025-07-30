@@ -23,15 +23,24 @@
           <li><strong>Responsive:</strong> Flex/Grid layouts adapt across desktop and mobile</li>
         </ul>
       </q-card-section>
+      <q-img :src="props.images[1]" class="project-gif" alt="Vibely logo"/> 
     </q-card>
   </div>
 </template>
 
 <script setup>
-// purely presentational
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  images: {
+    type: Array,
+    required: true
+  }});
 </script>
 
 <style scoped>
+
+
 .projects-wrapper {
   display: flex;
   flex-wrap: wrap;

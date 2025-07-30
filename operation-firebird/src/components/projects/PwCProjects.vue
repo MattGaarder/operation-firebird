@@ -731,21 +731,6 @@ function insertAss() {
   flex-wrap: wrap;
 }
 
-.code-container {
-  color: #dcdcdc;
-  padding-bottom: .75rem;
-  height: 250px; 
-  width: 100%; 
-  margin-top: -0.5rem; 
-  font-size: 0.7rem;
-}
-
-.code-container pre {
-  margin: 0;
-}
-
-/* each card will try to be at least 300px wide,
-   but grow to fill available space */
 .project-card {
   flex: 1 1 300px;
   display: flex;
