@@ -6,8 +6,7 @@
         <div class="project-info">
           <div class="project-title">Weather Dashboard</div>
           <div class="project-tagline">
-            A dynamic weather app with search, city-history buttons and a 5-day forecast plus current conditions.  
-            Uses OpenWeather’s Geo API for coords, then forecast data, persisting recent cities to localStorage.
+            This is a jQuery-based weather dashboard. The user enters a city, which is geocoded via OpenWeather’s Geocoding API to get coordinates; those are saved to localStorage and rendered as history buttons. Clicking a city or searching fetches the 5-day forecast, extracts midday data, and updates the DOM with temperature, humidity, wind, and icons. Moment.js formats dates. Reused buttons support recall, and localStorage avoids duplicate entries. Core tech: jQuery AJAX, OpenWeather APIs, Moment.js, DOM manipulation, and client-side persistence.
           </div>
         </div>
       </q-card-section>

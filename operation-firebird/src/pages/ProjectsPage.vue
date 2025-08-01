@@ -43,8 +43,8 @@
                     
                 </q-card-section>
                 <div class="row window-handle">
-                    <q-btn  flat icon="code" label="GitHub" :to="win.project.repo"  target="_blank" class="q-pl-sm q-prlgl bordered"/>
-                    <q-btn  flat icon="launch" label="Live" :disable="win.project.deployed[0]" :to="win.project.deployed[1]" target="_blank" />
+                    <q-btn  flat icon="code" label="GitHub" :disable="!win.project.repo[0]" :href="win.project.repo[1]"  target="_blank" class="q-pl-sm q-prlgl bordered"/>
+                    <q-btn  flat icon="launch" label="Live" :disable="!win.project.deployed[0]" :href="win.project.deployed[1]" target="_blank" />
                         
                 </div>
             </q-card>
@@ -132,16 +132,16 @@
         '/src/assets/logos/project_logos/PwC_Logo_white.svg',
         'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzFkZjk4NzUwYzBmMDI1YzgzYzQ5YzQxMTE2ZTg4NjVmYjI2ZTg1ZCZjdD1n/pgvPIQVTNPtA2nL1S1/giphy.gif'
         ],
-        deployed: ['disable'],
-        repo:     'https://github.com/MattGaarder/work-day-scheduler',
+        deployed: [false],
+        repo:     [false],
         summary:  'I architect Google Apps Script automations to streamline repetitive tasks — building form-driven folder generators, custom UI elements to parse and validate document data into Sheets, auto-apply templates to documents, and much more!',
         technology: [
-            { name: 'Google_AppsScript',    logo: '/src/assets/deprecated-logos/SVG/Google_AppsScript.svg'},
-            { name: 'Articulate_Storyline',logo: '/src/assets/deprecated-logos/Articulate_idnfwbsbzM_1.svg'},
+            { name: 'GoogleAppsScript',    logo: '/src/assets/deprecated-logos/SVG/Google_AppsScript.svg'},
+            { name: 'ArticulateStoryline',logo: '/src/assets/deprecated-logos/Articulate_idnfwbsbzM_1.svg'},
             { name: 'Azure', logo: '/src/assets/deprecated-logos/Azure.svg'}, 
             { name: 'Alteryx', logo: '/src/assets/deprecated-logos/SVG/alteryx.svg'}, 
             { name: 'CSharp', logo: '/src/assets/deprecated-logos/SVG/csharp.svg'},
-            { name: 'Creative_Cloud', logo: '/src/assets/deprecated-logos/adobe-creative-cloud-1.svg'},  
+            { name: 'CreativeCloud', logo: '/src/assets/deprecated-logos/adobe-creative-cloud-1.svg'},  
         ],
         component: markRaw(PwCProjects),
     },
@@ -153,14 +153,14 @@
         '/src/assets/logos/project_logos/Nocado_Logo_white.svg',
         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif'
         ],
-        deployed: [true, 'https://github.com/MattGaarder/team-profile-generator'],
-        repo:     'https://github.com/MattGaarder/team-profile-generator',
+        deployed: [false, 'https://github.com/MattGaarder/team-profile-generator'],
+        repo:     [true, 'https://github.com/MattGaarder/ocado-helper-frontend'],
         summary:  'Upload your Ocado PDF receipts and instantly extract ingredients into a synced “Fridge, Cupboard & Freezer” Notion database. Powered by Multer & Express file-upload, PDF.js text extraction, PapaParse + FoundationFoods lookup, MongoDB persistence and two-way sync with Notion via the Notion API.',
         technology: [
             
             { name: 'MongoDB',    logo: '/src/assets/deprecated-logos/mongodb-svgrepo-com.svg'},
-            { name: 'Express_js', logo: '/src/assets/deprecated-logos/express-js-vector-logo-seeklogo/SVG/express.svg'},
-            { name: 'PDF_js',logo: '/src/assets/deprecated-logos/Pdf-js_logo.svg'},
+            { name: 'Expressjs', logo: '/src/assets/deprecated-logos/express-js-vector-logo-seeklogo/SVG/express.svg'},
+            { name: 'PDFjs',logo: '/src/assets/deprecated-logos/Pdf-js_logo.svg'},
         ],
         component: markRaw(ProjectNocado),
     },
@@ -171,8 +171,8 @@
         '/src/assets/logos/project_logos/vibely-logo-white.svg',
         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif'
         ],
-        deployed: 'https://main--endearing-sundae-33b843.netlify.app/',
-        repo:     'https://github.com/MattGaarder/vibely',
+        deployed: [true, 'https://main--endearing-sundae-33b843.netlify.app/'],
+        repo:     [true, 'https://github.com/MattGaarder/vibely'],
         summary:  'A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” to posts. Built with React, Material UI & Firebase for instant auth and live updates.',
         technology: [
             { name: 'MaterialUI', logo: '/src/assets/deprecated-logos/material-ui-1.svg'},
@@ -188,13 +188,13 @@
             '/src/assets/logos/project_logos/cow-white.svg',
             'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdkNjkyN2FiNmMxODUzMTVkN2ExOWRiOTZhMzYyODkxYmMwMDBlNiZjdD1n/32AslOrbvFhGKaEO4Q/giphy.gif'
         ],
-        deployed: [false, 'https://mattgaarder.github.io/weather-dashboard/'],
-        repo:     'https://github.com/MattGaarder/weather-dashboard',
+        deployed: [true, 'https://mattgaarder.github.io/moovie-search/'],
+        repo:     [true, 'https://github.com/MattGaarder/moovie-search'],
         summary:  'Compare and manage movie trailers effortlessly: view side-by-side previews and key film details, then save your picks to persistent Watch or Seen lists—your personalized cinematic dashboard for smarter, stress-free movie decisions.',
         technology: [
             { name: 'jQuery', logo: '/src/assets/deprecated-logos/SVG/j-query.svg'},
             { name: 'Git',    logo: '/src/assets/deprecated-logos/Git-Icon-1788C.svg'},
-            { name: 'iFrame_YoutubeAPI',logo: '/src/assets/deprecated-logos/iframe-svgrepo-com.svg'},  
+            { name: 'iFrameYoutubeAPI',logo: '/src/assets/deprecated-logos/iframe-svgrepo-com.svg'},  
         ],
         component: markRaw(MoovieMatch),
     },
@@ -205,11 +205,11 @@
         '/src/assets/logos/project_logos/SVG/team-builder-test-2_1.svg',
         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif'
         ],
-        deployed: [true],
-        repo:     'https://github.com/MattGaarder/team-profile-generator',
+        deployed: [false],
+        repo:     [true, 'https://github.com/MattGaarder/team-profile-generator'],
         summary:  "Streamline project documentation and team overviews with a customizable Node.js CLI suite that both generates a professional, styled HTML roster for your team and seamlessly produces a badge-topped, sectioned README.md with interactive prompts.",
         technology: [
-            { name: 'Node_js', logo: '/src/assets/deprecated-logos/nodejs-icon.svg'},
+            { name: 'Nodejs', logo: '/src/assets/deprecated-logos/nodejs-icon.svg'},
             { name: 'Jest',    logo: '/src/assets/deprecated-logos/jest-js-icon.svg'},
             { name: 'Inquirer',logo: '/src/assets/deprecated-logos/inquirer_readme.svg'},
            
@@ -224,12 +224,12 @@
             '/src/assets/logos/project_logos/SVG/SVG/cloud-day.svg',
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif'
         ],
-        deployed: [false, 'https://mattgaarder.github.io/moovie-search/'],
-        repo:     'https://github.com/MattGaarder/moovie-search',
+        deployed: [true, 'https://mattgaarder.github.io/weather-dashboard/'],
+        repo:     [true, 'https://github.com/MattGaarder/weather-dashboard'],
         summary:  'Save and revisit your favorite cities with ease—enter a location to pull current conditions and a five-day forecast from the OpenWeather API, then build a persistent, personalized dashboard of weather insights.',
         technology: [
             { name: 'OpenWeatherAPI', logo: '/src/assets/deprecated-logos/openweather-vector-logo-seeklogo/openweather-logo.svg'},
-            { name: 'Moment.js', logo: '/src/assets/deprecated-logos/momentjs-svgrepo-com.svg'}, 
+            { name: 'Momentjs', logo: '/src/assets/deprecated-logos/momentjs-svgrepo-com.svg'}, 
             { name: 'Postman',logo: '/src/assets/deprecated-logos/postman-icon-svgrepo-com.svg'}, 
         ],
         component: markRaw(WeatherDashboard),
@@ -243,7 +243,7 @@
         'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTdjOGI2MjRmMmI4Y2NmNGIyMzU2NTIwZjI4YjA0M2MyNTYwYjhlZiZjdD1n/mTkFZnQ8EvNSXfV9xP/giphy.gif'
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
-        repo:     'https://github.com/MattGaarder/password-generator',
+        repo:     [false, 'https://github.com/MattGaarder/password-generator'],
         summary:  'Craft a dynamic, parallax-rich site with custom infinite scrolling galleries, JavaScript-driven parallax-scroll transforms, and view iterated UI design proccess — assets hand-crafted in Photoshop & Illustrator for an immersive browsing experience.',
         technology: [
             { name: 'Premiere', logo: '/src/assets/deprecated-logos/Adobe_Premiere_Pro.svg'},

@@ -5,8 +5,7 @@
         <div class="project-info">
           <div class="project-title">Vibely</div>
           <div class="project-tagline">
-            A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” on posts.  
-            Built with React, Material UI & Firebase for instant auth and live updates.
+            This is a React single-page app using Firebase for authentication and real-time data. It wraps routes in a hash router and shares the current user via context. The NavBar adapts based on login state. Home subscribes to Firestore “posts” collections with real-time updates, rendering them as post cards. Users can create new “vibes” which are saved to Firestore. Material UI supplies layout/components and Firebase Auth tracks signed-in state. Overall: client-side routing, real-time DB sync, and auth integration.
           </div>
         </div>
       </q-card-section>

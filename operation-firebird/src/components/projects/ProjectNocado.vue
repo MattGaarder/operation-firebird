@@ -6,9 +6,7 @@
         <div class="project-info">
           <div class="project-title">Nocado</div>
           <div class="project-tagline">
-            Upload your Ocado PDF receipts and instantly extract ingredients into a synced “Fridge, Cupboard & Freezer” inventory.  
-            Powered by Multer & Express file-upload, PDF.js text extraction, PapaParse + FoundationFoods lookup,  
-            MongoDB persistence and two-way sync with Notion via the Notion API.
+            This project syncs ingredient data between a PDF (your Ocado grocery shopping receipt), MongoDB, and Notion. The backend uses Express with Mongoose models to store ingredients, exposes REST routes, and integrates with Notion via its API to create/update pages and reconcile missing entries. The frontend uploads a PDF, extracts and cleans ingredient names, posts them to the server, and triggers Notion synchronization. 
           </div>
         </div>
       </q-card-section>

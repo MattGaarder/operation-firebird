@@ -8,7 +8,7 @@
         <div class="project-info">
           <div class="project-title">Onafa</div>
           <div class="project-tagline">
-            Craft a dynamic, parallax-rich site with custom scrolling galleries, layered background effects, and a responsive navbar. Engineered JavaScript-driven scroll transforms, infinite-loop image tracks, and iterated UI designs—assets hand-crafted in Photoshop & Illustrator for an immersive browsing experience.
+            This is a vanilla JavaScript frontend implementing layered parallax scrolling, looping image carousels, and a paginated modal gallery. On scroll it shifts hero, main, and background elements at different rates for depth, triggers a splash animation past a threshold, and continuously animates three duplicated gallery tracks for infinite horizontal scroll using requestAnimationFrame. A modal toggles visibility with next/prev controls showing two gallery items per page. No frameworks—just DOM APIs and event listeners.
           </div>
         </div>
       </q-card-section>
