@@ -43,16 +43,16 @@ const illustrations = [
             { src: '/src/assets/illustrations/samurai.png', alt: 'Sketch A', span: 1 },
 
     { src: '/src/assets/illustrations/fall.png', alt: 'Poster C', span: 1 },
-    // { src: '/src/assets/illustrations/fish.png', alt: 'Concept B', span: 2 },
+    
     { src: '/src/assets/illustrations/french.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/frenchNkd.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/haggard.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/frog.png', alt: 'Detail D', span: 1 },
-    { src: '/src/assets/illustrations/hey.png', alt: 'Poster C', span: 1 },
+
         { src: '/src/assets/illustrations/faces.png', alt: 'Poster C', span: 2 },
 
     { src: '/src/assets/illustrations/kobe.png', alt: 'Sketch A', span: 1 },
-    // { src: '/src/assets/illustrations/lamp.png', alt: 'Concept B', span: 1 },
+    
 
     { src: '/src/assets/illustrations/nachi.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/notebook.png', alt: 'Poster C', span: 1 },
@@ -62,13 +62,23 @@ const illustrations = [
     { src: '/src/assets/illustrations/penguins.png', alt: 'Sketch A', span: 2 },
     { src: '/src/assets/illustrations/rosen.png', alt: 'Sketch A', span: 1 },
 { src: '/src/assets/illustrations/skull.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/overthere.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/self.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/self2.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/self3.png', alt: 'Concept B', span: 1 },
         { src: '/src/assets/illustrations/life1.png', alt: 'Poster C', span: 1 },
+            { src: '/src/assets/illustrations/quick.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/yuka-clean.png', alt: 'Poster C', span: 2 },
     { src: '/src/assets/illustrations/cato.png', alt: 'cato', span: 1 },
-    
+        { src: '/src/assets/illustrations/salaryman.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/trapcard.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/fish.png', alt: 'Concept B', span: 2 },
+    { src: '/src/assets/illustrations/lamp.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/lawyer.png', alt: 'Concept B', span: 1 },
+        { src: '/src/assets/illustrations/hey.png', alt: 'Poster C', span: 1 },
+
+
+
 ];
 const grid = ref(null);
 let msnry = null;

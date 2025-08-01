@@ -1,10 +1,11 @@
 <template>
-  <q-item clickable :to="props.link">
+  <q-item clickable :to="!props.isExternal ? props.link : undefined" :href="props.isExternal ? props.link : undefined">
     <q-item-section v-if="props.icon" avatar>
       <q-icon :name="props.icon" />
     </q-item-section>
 
     <q-item-section >
+      
       <q-item-label :class="isActive ? 'text-black' : 'text-white'" class="text-bold">{{ props.title }}<q-icon :name="props.name" class="arrow-outward-icon"></q-icon></q-item-label>
       <q-item-label caption :class="isActive ? 'text-black' : 'text-white'">{{ props.caption }}</q-item-label>
       
@@ -40,7 +41,11 @@
     name: {
       type: String,
       default: '',
-    }
+    },
+    isExternal: {
+      type: Boolean,
+      default: false,
+    },
   });
 
   const route = useRoute();

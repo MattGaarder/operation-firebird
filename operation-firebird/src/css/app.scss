@@ -17,7 +17,6 @@
 
 
 html {
-
   color: var(--site-text, #fff);
 }
 
@@ -36,32 +35,6 @@ html {
   background-color: var(--site-bg) !important;
   color: #000;
 }
-
-/* apply to layout/page/drawer */
-.theme-default,
-.theme-illustrations {
-  background-color: var(--site-bg) !important;
-  color: var(--site-text) !important;
-}
-
-.theme-illustrations .q-drawer,
-.theme-illustrations .q-drawer__content,
-.theme-illustrations .q-card,
-.theme-illustrations .q-item,
-.theme-illustrations .q-page,
-.theme-illustrations .q-page-container {
-  background-color: var(--site-bg) !important;
-  color: var(--site-text) !important;
-      .q-item {
-        opacity: 1;
-  &.q-router-link--exact-active {
-    opacity: 1;
-    background-color: rgb(0, 0, 0);
-    
-    }
-  }
-}
-
 /* if some inner text is still inheriting white from utility classes, force it */
 .theme-illustrations .text-white {
   color: var(--site-text) !important;
@@ -97,9 +70,14 @@ html {
 }
 
 .bullet-points {
-    max-width: 40rem;
-    padding-left: 5rem;
-    font-size: 0.93rem;
+    margin-top: 0.2rem;
+    padding-left: 4rem;
+    font-size: 0.92rem;
+    line-height: 1.2rem;
+}
+
+.bullet {
+    margin-top: 0.9rem;
 }
 
 .arrow-outward-icon {
@@ -148,4 +126,61 @@ html {
 
 .scroll {
     overflow: hidden;
+}
+
+.theme-default,
+.theme-illustrations {
+  background-color: var(--site-bg) !important;
+  color: var(--site-text) !important;
+}
+
+.theme-illustrations .q-drawer,
+.theme-illustrations .q-drawer__content,
+.theme-illustrations .q-card,
+.theme-illustrations .q-item,
+.theme-illustrations .q-page,
+.theme-illustrations .q-page-container {
+  background-color: var(--site-bg) !important;
+  color: var(--site-text) !important;
+}
+
+.theme-illustrations .top-border {
+  border-top: 1px solid #9aaab9 !important;
+}
+
+.theme-illustrations .q-item:hover,
+.theme-illustrations .essential-contact:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.theme-illustrations .q-item:hover .q-item__label,
+.theme-illustrations .essential-contact:hover .q-item__label {
+  color: white !important;
+}
+
+/* active / exact-active link */
+.theme-illustrations .q-item.q-router-link--exact-active,
+.theme-illustrations .q-item.q-router-link--active {
+  background-color: black !important;
+  color: white !important;
+}
+
+.theme-illustrations a.q-item.q-router-link--exact-active .q-item__label {
+  color: white !important;
+}
+
+.theme-illustrations .essential-contact.q-item--clickable.q-hoverable:hover,
+.theme-illustrations .essential-contact.q-item--clickable.q-hoverable:hover > .q-item__section {
+  background-color: black !important;
+  transition-duration: 0s !important;
+  font-weight: bold;
+}
+
+/* force the labels inside to be white on hover */
+.theme-illustrations .essential-contact:hover .q-item__label {
+  color: white !important;
+}
+.theme-illustrations .essential-contact:hover .arrow-outward-icon {
+  color: white !important;
 }

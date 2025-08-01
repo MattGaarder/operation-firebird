@@ -6,8 +6,10 @@
     <ExperienceSection
       v-for="entry in experiences"
       :key="entry.company"
+      :role="entry.role"
       :company="entry.company"
       :duration="entry.duration"
+      :location="entry.location"
       :bullets="entry.bullets"
       square
       class="bg-primary experience-section top-border q-pt-lg q-pr-xl"
@@ -24,58 +26,69 @@
 
   const experiences = [
     {
+      role: "eLearning Developer",
       company:  "PwC",
-      duration: "Oct 2023 - Present",
+      duration: "August 2023 - March 2025",
+      location: "WC2N 6RH, London",
       bullets: [
-        "Designed and delivered eLearning solutions using Articulate Storyline",
-        "Automated 20+ workflows with Power Automate and Azure Functions",
-        "Collaborated with non-technical stakeholders to gather requirements"
+        "Leverage Articulate Storyline and Creative Suite to design and author eLearning materials. Produce multimedia assets, implement custom functionality with JavaScript to maximize engagement and interactivity in our learning experiences. ",
+        "Automated 20+ workflows with Google App Scripts, Power Automate, Alteryx and Azure Functions. Work with user data and backend technologies - Azure, Dataverse, Microsoft ecosystem.",
+        "Integrate AI, automation, and tech solutions in our workflows - improving quality-of-work and reducing administrative and managerial burden - increasing the time we get to spend on the creative stuff! "
       ]
     },
     {
-      company:  "H&M",
-      duration: "Jan 2021 - Sep 2023",
-      bullets: [
-        "Led visual merchandising projects for 15 stores across Japan",
-        "Managed a team of 5 designers to refresh seasonal displays",
-        "Analyzed foot-traffic data to optimize product placement"
-      ]
-    },
-        {
-      company:  "TransPerfect",
-      duration: "Jan 2021 - Sep 2023",
-      bullets: [
-        "I conduct data collection sessions with paid participants, to aid in the improvement of voice assistants in their responsiveness to a range of dialects, accents, and individuals.",
-        "Communicate instructions clearly to those with varying levels of familiarity with technology.",
-        "Work seamlessly with an international team to provide data matching client specifications."
-      ]
-    },
-        {
-      company:  "CPM UK",
-      duration: "Jan 2021 - Sep 2023",
-      bullets: [
-        "Provided clear and concise guidance for Diageo customers and clients regarding a wide range of potential technical faults in their outlet setups; diagnosing issues including, but not limited to, gas pressurisation, product flow integrity, and appropriate equipment usage.",
-        "In the event of undiagnosable issues I clearly and concisely logged jobs on Salesforce and internal systems. Often handling 200+ calls a day during high traffic periods.",
-        "Liaised and coordinated with teams of engineers and contractors across the UK to resolve issues in a timely manner, with the aim to resolve urgent tickets within 24 hours.",
-        "Guided customers through ullaging procedures, directing them to appropriate wholesalers, or other potential solutions.",
-      ]
-    },
-        {
-      company:  "H&M",
-      duration: "Jan 2021 - Sep 2023",
-      bullets: [
-        "Led visual merchandising projects for 15 stores across Japan",
-        "Managed a team of 5 designers to refresh seasonal displays",
-        "Analyzed foot-traffic data to optimize product placement"
-      ]
-    },
-        {
+      role: "Localisation Tester",
       company:  "Testronic",
-      duration: "Jan 2021 - Sep 2023",
+      duration: "2020 - 2023",
+      location: "CR0 1PE, London",
       bullets: [
-        "I provided quality assurance for games in their final stages of production for leading AAA game developers. Part of a team that ensured that the final product was free from bugs, user experience issues, and language errors before the its final release to the public.",
-        "Communicated efficiently between large international teams to assure speedy elimination of bugs and UX/UI issues.",
-        "Verified there were no language discrepancies in the game by cross referencing Japanese and English script files."
+        "Conducted final-stage quality assurance for AAA game titles, ensuring release-ready products free from bugs, UX/UI issues, and language inconsistencies.",
+        "Collaborated with international teams to expedite bug resolution and cross-referenced Japanese and English scripts to maintain language accuracy.",
+        "Used Excel and JIRA to streamline issue tracking.",
+      ]
+    },
+    {
+      role: "Project Moderator",
+      company:  "TransPerfect",
+      duration: "2022 - 2023",
+      location: "EC3N 1AH, London",
+      bullets: [
+        "Facilitated structured data collection sessions for a range of ai and assistant products - to better recognize individual speech patterns.",
+        "Delivered clear, actionable instructions, ensuring high-quality data output aligned with client standards.",
+      ],
+    },
+    {
+      role: "Inbound Contact Executive",
+      company:  "CPM UK",
+      duration: "2022",
+      location: "OX9 3PG, Thame",
+      bullets: [
+        "Delivered technical support to Diageo customers.",
+        "Managed high call volumes (200+ daily) - logging cases in Salesforce - coordinating with UK-wide engineering teams to resolve urgent issues.",
+        "Guided clients through troubleshooting and supply chain solutions to ensure operational continuity.",
+  
+      ]
+    },
+
+    {
+      role: "Assistant Lanugage Teacher",
+      company:  "JET Programme",
+      duration: "2015 - 2018",
+      location: "Tachikawa International, Tokyo",
+      bullets: [
+        "Prepared learning materials, supervised school excursions, and organized cultural events.",
+        "Originated mathematics and science curriculum for international students.",
+        "Elected as Head Teacher of English Club and as Cultural Exchange Ambassador."
+      ]
+    },
+    {
+      role: "Film Production Instructor",
+      company:  "Digital Media Academy",
+      duration: "2011",
+      location: "Stanford University, California",
+      bullets: [
+        "Aided students in using professional cameras and editing software.",
+        "Hired by programme director by demonstrating outstanding achievements in short-film production.",
       ]
     },
   ];

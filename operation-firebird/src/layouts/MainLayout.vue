@@ -4,10 +4,10 @@
       <q-toolbar class="q-py-md">
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
         <div class="title-subtitle q-pa-md">
-          <q-toolbar-title >Matteus <router-link to="/" class="text-white no-underline"><span class="surname">Gaarder</span></router-link></q-toolbar-title>
+          <q-toolbar-title >Matteus <router-link  to="/" class="text-white"><span class="surname">Gaarder</span></router-link></q-toolbar-title>
         <p class="subtitle">Web Development</p>
         </div>
-        <q-btn flat round class="q-mr-xl about" icon="home" to="/"/>
+        <q-btn flat round class="q-mr-xl about" :icon="isHome ? 'download' : 'home'" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
       </q-toolbar>
     </q-header>
 
@@ -18,11 +18,11 @@
         </q-card-section>
       </q-card>
         <q-list>
-          <EssentialContact v-for="link in contactList" :key="link.title" v-bind="link" class="top-border q-pr-xl" />
+          <EssentialContact v-for="link in contactList" :key="link.title" v-bind="link" class="top-border q-pr-xl"/>
         </q-list>
         <q-list>
           <q-item-label header>Links</q-item-label>
-          <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" class="top-border q-pr-xl"/>
+          <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" class="top-border q-pr-xl" :to="link.link"/>
         </q-list>
 
     </q-drawer>
@@ -36,11 +36,30 @@
 <script setup>
   import { ref, computed, provide } from 'vue';
   import { useQuasar } from 'quasar';
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
+  const router = useRouter();
+
   import EssentialLink from 'components/EssentialLink.vue';
   import EssentialContact from 'src/components/EssentialContact.vue';
 
   const route = useRoute();
+  const isHome = computed(() => route.path === '/');
+
+  function onHomeBtnClick(e) {
+  if (isHome.value) {
+    // trigger CV download
+    e.preventDefault(); // don't navigate
+    const link = document.createElement('a');
+    link.href = '/src/assets/GAARDER-CV.pdf'; 
+    link.download = 'GAARDER-CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } else {
+    // navigate home
+    router.push('/');
+  }
+}
   const isIllustrations = computed(() => route.path.includes('illustrations'));
   const $q = useQuasar();
 
@@ -64,18 +83,15 @@
   const contactList = [
     {
       title: 'matteus.gaarder@gmail.com',
-      link: 'matteus.gaarder@gmail.com',
+      link: 'mailto:matteus.gaarder@gmail.com?subject=Hello',
     },
     {
       title: '(0044) 7498-658-030',
-      caption: 'https://github.com/MattGaarder',
-      icon: 'code',
-      link: 'https://github.com/MattGaarder',
+      link: 'https://wa.me/447498658030?text=Hi%20Matteus',
     },
     {
       title: 'London, N10 2PT',
-      caption: `https://www.linkedin.com/in/matteus-gaarder-991494178/`,
-      link: 'https://www.linkedin.com/in/matteus-gaarder-991494178/',
+      link: 'https://www.google.com/maps/place/Tokyo+Toritsu+Tachikawa+Kokusai+Chutokyoiku+School/@35.7028492,139.4234056,17z/data=!3m1!4b1!4m6!3m5!1s0x6018e15da4b4c8d9:0x4dd0b8ee677da43e!8m2!3d35.7028449!4d139.4282765!16s%2Fg%2F122bl_0n?entry=ttu&g_ep=EgoyMDI1MDcyOS4wIKXMDSoASAFQAw%3D%3D',
     },
   ]
 
@@ -86,6 +102,7 @@
       icon: 'code',
       link: '/projects-page',
       name: '',
+      isExternal: false,
     },
     {
       title: 'Illustrations',
@@ -93,29 +110,34 @@
       icon: 'draw',
       link: '/illustrations-page',
       name: '',
+      isExternal: false,
     },
-    {
-      title: 'Test',
-      caption: '/test-page',
-      icon: 'chat',
-      link: '/test',
-      name: 'arrow_outward',
-    },
-
     {
       title: 'Github',
       caption: 'https://github.com/MattGaarder',
       icon: 'mdi-github',
       link: 'https://github.com/MattGaarder',
       name: 'arrow_outward',
+      isExternal: true,
     },
+    {
+      title: 'Youtube',
+      caption: 'https://www.youtube.com/@AudibleJello',
+      icon: 'mdi-youtube',
+      link: 'https://www.youtube.com/@AudibleJello',
+      name: 'arrow_outward',
+      isExternal: true,
+    },
+
     {
       title: 'LinkedIn',
       caption: `https://www.linkedin.com/in/matteus-gaarder-991494178/`,
       icon: 'mdi-linkedin',
       link: 'https://www.linkedin.com/in/matteus-gaarder-991494178/',
       name: 'arrow_outward',
+      isExternal: true,
     },
+    
 
   ]
 </script>
