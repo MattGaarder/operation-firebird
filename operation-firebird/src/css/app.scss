@@ -3,7 +3,7 @@
 
 .q-drawer {
     .q-item {
-        opacity: 0.8;
+        opacity: 1;
   &.q-router-link--exact-active {
     opacity: 1;
     background-color: white;
@@ -16,10 +16,55 @@
 
 
 
-html,
-body,
-#q-app {
-  background-color: $primary !important;
+html {
+
+  color: var(--site-text, #fff);
+}
+
+.theme-default {
+  --site-bg: #161f27 ; 
+  --site-text: #fff;
+}
+
+.theme-illustrations {
+  --site-bg: #fff !important;
+  --site-text: #000 !important;
+}
+
+/* if you have utility classes like bg-primary on q-layout, the theme class can override them: */
+.theme-illustrations .q-layout__section--marginal  {
+  background-color: var(--site-bg) !important;
+  color: #000;
+}
+
+/* apply to layout/page/drawer */
+.theme-default,
+.theme-illustrations {
+  background-color: var(--site-bg) !important;
+  color: var(--site-text) !important;
+}
+
+.theme-illustrations .q-drawer,
+.theme-illustrations .q-drawer__content,
+.theme-illustrations .q-card,
+.theme-illustrations .q-item,
+.theme-illustrations .q-page,
+.theme-illustrations .q-page-container {
+  background-color: var(--site-bg) !important;
+  color: var(--site-text) !important;
+      .q-item {
+        opacity: 1;
+  &.q-router-link--exact-active {
+    opacity: 1;
+    background-color: rgb(0, 0, 0);
+    
+    }
+  }
+}
+
+/* if some inner text is still inheriting white from utility classes, force it */
+.theme-illustrations .text-white {
+  color: var(--site-text) !important;
 }
 
 .drawer {

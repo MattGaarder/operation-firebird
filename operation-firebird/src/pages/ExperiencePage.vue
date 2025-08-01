@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="bg-primary text-white" :class="{ 'with-closed-drawer': !leftDrawerOpen }">
+  <q-page padding class="bg-primary text-white" :style="{ paddingLeft: sidePadding }">
 
     <div class="text-h8 text-weight-bold q-mb-lg q-mr-xl q-pt-lg top-border">EXPERIENCE</div>
 
@@ -17,14 +17,15 @@
 
 <script setup>
   import ExperienceSection from 'src/components/ExperienceSection.vue';
-  import { inject } from 'vue';
+  import { inject, computed } from 'vue';
+  import { useQuasar } from 'quasar';
   const leftDrawerOpen = inject('leftDrawerOpen')
         
 
   const experiences = [
     {
       company:  "PwC",
-      duration: "Oct 2023 – Present",
+      duration: "Oct 2023 - Present",
       bullets: [
         "Designed and delivered eLearning solutions using Articulate Storyline",
         "Automated 20+ workflows with Power Automate and Azure Functions",
@@ -33,7 +34,7 @@
     },
     {
       company:  "H&M",
-      duration: "Jan 2021 – Sep 2023",
+      duration: "Jan 2021 - Sep 2023",
       bullets: [
         "Led visual merchandising projects for 15 stores across Japan",
         "Managed a team of 5 designers to refresh seasonal displays",
@@ -42,7 +43,7 @@
     },
         {
       company:  "TransPerfect",
-      duration: "Jan 2021 – Sep 2023",
+      duration: "Jan 2021 - Sep 2023",
       bullets: [
         "I conduct data collection sessions with paid participants, to aid in the improvement of voice assistants in their responsiveness to a range of dialects, accents, and individuals.",
         "Communicate instructions clearly to those with varying levels of familiarity with technology.",
@@ -51,7 +52,7 @@
     },
         {
       company:  "CPM UK",
-      duration: "Jan 2021 – Sep 2023",
+      duration: "Jan 2021 - Sep 2023",
       bullets: [
         "Provided clear and concise guidance for Diageo customers and clients regarding a wide range of potential technical faults in their outlet setups; diagnosing issues including, but not limited to, gas pressurisation, product flow integrity, and appropriate equipment usage.",
         "In the event of undiagnosable issues I clearly and concisely logged jobs on Salesforce and internal systems. Often handling 200+ calls a day during high traffic periods.",
@@ -61,7 +62,7 @@
     },
         {
       company:  "H&M",
-      duration: "Jan 2021 – Sep 2023",
+      duration: "Jan 2021 - Sep 2023",
       bullets: [
         "Led visual merchandising projects for 15 stores across Japan",
         "Managed a team of 5 designers to refresh seasonal displays",
@@ -70,7 +71,7 @@
     },
         {
       company:  "Testronic",
-      duration: "Jan 2021 – Sep 2023",
+      duration: "Jan 2021 - Sep 2023",
       bullets: [
         "I provided quality assurance for games in their final stages of production for leading AAA game developers. Part of a team that ensured that the final product was free from bugs, user experience issues, and language errors before the its final release to the public.",
         "Communicated efficiently between large international teams to assure speedy elimination of bugs and UX/UI issues.",
@@ -78,10 +79,40 @@
       ]
     },
   ];
+
+  const $q = useQuasar();
+
+  const sidePadding = computed(() => {
+  const w = $q.screen.width;
+
+  if (w < 1113) {
+    // narrow screen
+    if (!leftDrawerOpen?.value) {
+      // drawer closed + narrow
+      return '2rem';
+    } else {
+      // drawer open + narrow
+      return '4rem';
+    }
+  } else {
+    // wide screen
+    if (leftDrawerOpen?.value) {
+      // drawer open + wide
+      return '4rem';
+    } else {
+      // drawer closed + wide
+      return '25rem';
+    }
+  }
+});
 </script>
 
 <style scoped>
-.with-closed-drawer {
+
+
+
+
+/* .with-closed-drawer {
   margin-left: 25rem;
-}
+} */
 </style>
