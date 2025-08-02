@@ -260,7 +260,7 @@
         '/src/assets/logos/project_logos/SVG/SVG/this_portfolio.svg',
         'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGM3MDVmYTRiZDkyMDM4YmQ5OWQzNWUzMWY1NzA5MmRjYjA2Yjg5ZSZjdD1n/HbVX9TkQKmc0mOLV4C/giphy.gif'
         ],
-        deployed: [true,'https://mattgaarder.github.io/readme-generator/'],
+        deployed: [true, 'https://gaarder.netlify.app/#/'],
         repo:     'https://github.com/MattGaarder/operation-firebird',
         summary:  'Vue3/Quasar portfolio with dynamic theme switching, Masonry illustration gallery, responsive layout, smart internal/external link handling, CV download, and interactive contact integration.',
         technology: [
