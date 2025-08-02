@@ -1,13 +1,14 @@
 <template>
   <q-card flat class="q-mb-none project-section">
     <q-card-section class="q-pa-sm q-pl-sm">
-      <div class="wrapper flex flex-center q-pl-none" :class="id">
+      <div class="wrapper flex flex-center q-pl-none" >
         
         <q-img
           v-if="images.length"
           :src="images[0]"
           :alt="`Logo for ${title}`"
-          class="project-logo "
+          class="project-logo"
+          :class="id"
           :to="deployed"
         />
         <div class="tech-list">
@@ -91,9 +92,12 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     /* object-fit: fit; */
     opacity: 0.4;
     
+    
   }
 
-  
+  .q-img__image {
+    object-position: 60% 40% !important;
+  }
 
   .project-logo,
   .project-summary,
@@ -108,4 +112,44 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     opacity: 1;
     color: white;
   }
+
+  @media (max-width: 400px) {
+  .wrapper {
+    text-align: center;
+  }
+
+
+  .project-logo {
+    width: 100%;
+    max-width: none;
+    min-width: 100vw;
+    height: auto;
+    margin-bottom: 1.2rem;
+  }
+
+  
+
+  .tech-list {
+    display: flex;
+    min-height: auto;
+  }
+
+  .tech-items {
+    /* margin-right: 0.5rem; */
+  }
+
+  .project-summary {
+    padding-left: 1rem;
+    padding-right: 0;
+  }
+
+  .project4 {
+    max-width: none !important;
+    max-height: none !important;
+  }
+
+  .project6, .project1, .project3 {
+    max-height: 11rem
+  }
+}
 </style>

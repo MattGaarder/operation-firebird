@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="q-pl-xl">
+  <q-page padding :class="pagePaddingClass">
     <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg">PROJECTS</div>
     
 
@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-    import { ref, markRaw, inject } from 'vue';
+    import { ref, markRaw, inject, computed } from 'vue';
     import { useQuasar } from 'quasar';
     import ProjectSection from 'src/components/ProjectSection.vue';
     import DraggableResizableVue from 'draggable-resizable-vue3';
@@ -73,7 +73,9 @@
 
     const leftDrawerOpen = inject('leftDrawerOpen');
 
-
+    const pagePaddingClass = computed(() => {
+    return $q.screen.width <= 400 ? 'q-pl-xs' : 'q-pl-xl';
+    });
     
     const $q = useQuasar();
     const windows = ref([]);

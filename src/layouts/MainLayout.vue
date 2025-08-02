@@ -12,8 +12,8 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" class="q-px-lg drawer" :width="drawerWidth" :breakpoint="1128" :style="{ paddingLeft: sidePadding }" :class="{ 'theme-default': !isIllustrations, 'theme-illustrations': isIllustrations }">
-      <q-card flat square class="bg-primary text-white text-weight-bold q-pa-xs top-border">
-        <q-card-section class="bio">
+      <q-card bordered="false" flat square class="bg-primary text-white text-weight-bold q-pa-xs top-border">
+        <q-card-section  class="bio">
           I'm a creative technologist and former educator fluent in Japanese. I tackle complex problems with JavaScript-powered solutions and multimedia design.
         </q-card-section>
       </q-card>
@@ -65,12 +65,24 @@
 
   const sidePadding = computed(() => {
     const w = $q.screen.width
-    return (w < 1513) ? '4rem' : '9rem'
+    if (w < 1513 && w >= 1101 ) {
+      return '4rem';
+    } else if (w < 1101) {
+      return '2rem';
+    } else {
+      return '9rem';
+    }
   });
 
   const drawerWidth = computed(() => {
     const w = $q.screen.width
-    return (w > 1101 && w < 1513) ? 400 : 500
+    if (w > 1101 && w < 1513) {
+      return 400;
+    } else if (w > 1513) {
+      return 500;
+    } else {
+      return 350;
+    }
   });
 
   const leftDrawerOpen = ref(true)
