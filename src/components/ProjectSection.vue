@@ -3,25 +3,25 @@
     <q-card-section class="q-pa-sm q-pl-sm">
       <div class="wrapper flex flex-center q-pl-none" :class="id">
         
-        <img
+        <q-img
           v-if="images.length"
           :src="images[0]"
           :alt="`Logo for ${title}`"
-          class="project-logo"
+          class="project-logo "
           :to="deployed"
         />
         <div class="tech-list">
-          <div class="tech-items" v-for="tech in technology"
-            :key="tech.name">
-          <q-img
-            fit
-            :src="tech.logo"                     
-            :alt="tech.name"
-            class="tech-logo"
-          />
-          <q-tooltip anchor="top right" self="top left" class="my-tooltip">
-            {{ tech.name }}
-          </q-tooltip>
+          <div class="tech-items" v-for="tech in technology" :key="tech.name">
+            <q-img
+              fit
+              :src="tech.logo"                     
+              :alt="tech.name"
+              class="tech-logo"
+              ratio="1"
+            />
+            <q-tooltip anchor="top right" self="top left" class="my-tooltip">
+              {{ tech.name }}
+            </q-tooltip>
           </div>
         </div> 
         <div class="text-caption q-pt-lg project-summary q-pr-xl q-pl-md" :to="repo">{{ summary }}</div>  
@@ -55,8 +55,8 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     display: grid;
     grid-template-rows: repeat(3, auto);
     grid-auto-flow: column;
-    gap: 0.5rem;
-    min-height: 160px;
+    gap: 0.1rem;
+    min-height: 130px;
   }
 
   .wrapper {
@@ -70,9 +70,10 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     filter: grayscale(100%) brightness(1.2);
     opacity: 0.4;
     transition: filter 0.3s ease, opacity 0.3s ease;
-    width: 2rem;
+    width: 1.7rem;
     height: auto;
-    margin-top: 0.8rem;
+    object-fit:fill;
+    margin-top: 0.2rem;
     margin-left: 0.7rem;
   }
 
@@ -86,8 +87,8 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     max-width: 15rem;
     max-height: 8rem;
     min-height: 8rem;
-    min-width: 240px;
-    object-fit: contain;
+    min-width: 344px;
+    /* object-fit: fit; */
     opacity: 0.4;
     
   }

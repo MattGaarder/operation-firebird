@@ -15,7 +15,7 @@
         :class="`span-${ill.span || 1}`"
       >
         <div class="img-wrapper">
-          <img
+          <q-img
             :src="ill.src"
             :alt="ill.alt || 'illustration'"
             loading="lazy"
