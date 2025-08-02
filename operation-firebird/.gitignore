@@ -33,7 +33,3 @@ yarn-error.log*
 .env.local*
 
 # assets and images
-
-/src/assets
-assets
-./src/assets
