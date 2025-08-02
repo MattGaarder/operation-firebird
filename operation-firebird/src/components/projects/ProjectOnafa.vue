@@ -6,7 +6,7 @@
     <q-card flat bordered class="project-card">
       <q-card-section class="project-body">
         <div class="project-info">
-          <div class="project-title">Onafa</div>
+          <div class="project-title">Onafã</div>
           <div class="project-tagline">
             This is a vanilla JavaScript frontend implementing layered parallax scrolling, looping image carousels, and a paginated modal gallery. On scroll it shifts hero, main, and background elements at different rates for depth, triggers a splash animation past a threshold, and continuously animates three duplicated gallery tracks for infinite horizontal scroll using requestAnimationFrame. A modal toggles visibility with next/prev controls showing two gallery items per page. No frameworks—just DOM APIs and event listeners.
           </div>
@@ -314,6 +314,7 @@ arrowLeft.addEventListener('click', function () {
 /* feature list section */
 .project-body {
   padding: 0.75rem 1rem;
+  padding-top: 0rem;
   background: var(--q-color-grey-2);
   flex-grow: 1;
 }

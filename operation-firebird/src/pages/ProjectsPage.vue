@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="bg-primary text-white" >
+  <q-page padding class="q-pl-xl">
     <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg">PROJECTS</div>
     
 
@@ -67,6 +67,7 @@
     import PwCProjects from 'src/components/projects/PwCProjects.vue';
     import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
     import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
+    import ThisPortfolio from 'src/components/projects/ThisPortfolio.vue';
 
     // const leftDrawerOpen = inject('leftDrawerOpen', ref(true))
 
@@ -237,14 +238,14 @@
     
     {
         id:       'project5',
-        title:    'Onafa',
+        title:    'Onafã',
         images:   [
         '/src/assets/logos/project_logos/SVG/onafa-white.svg',
         'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTdjOGI2MjRmMmI4Y2NmNGIyMzU2NTIwZjI4YjA0M2MyNTYwYjhlZiZjdD1n/mTkFZnQ8EvNSXfV9xP/giphy.gif'
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
         repo:     [false, 'https://github.com/MattGaarder/password-generator'],
-        summary:  'Craft a dynamic, parallax-rich site with custom infinite scrolling galleries, JavaScript-driven parallax-scroll transforms, and view iterated UI design proccess — assets hand-crafted in Photoshop & Illustrator for an immersive browsing experience.',
+        summary:  'Craft a dynamic, parallax-rich site with custom infinite scrolling galleries, JavaScript-driven parallax-scroll transforms, and view iterated UI design process — assets hand-crafted in Photoshop & Illustrator for an immersive browsing experience.',
         technology: [
             { name: 'Premiere', logo: '/src/assets/deprecated-logos/Adobe_Premiere_Pro.svg'},
             { name: 'Illustrator', logo: '/src/assets/deprecated-logos/Adobe_Illustrator.svg'}, 
@@ -254,15 +255,20 @@
     },
     {
         id:       'project7',
-        title:    'README.md Generator',
+        title:    'this.portfolio',
         images:   [
-        '/src/assets/logos/project_logos/readme.svg',
+        '/src/assets/logos/project_logos/SVG/SVG/this_portfolio.svg',
         'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGM3MDVmYTRiZDkyMDM4YmQ5OWQzNWUzMWY1NzA5MmRjYjA2Yjg5ZSZjdD1n/HbVX9TkQKmc0mOLV4C/giphy.gif'
         ],
         deployed: [true,'https://mattgaarder.github.io/readme-generator/'],
-        repo:     'https://github.com/MattGaarder/readme-generator',
-        summary:  'A command-line application that dynamically generates README.md documentation from a user\'s input. Node.js dynamically generates this document in the project repository.',
-        technology: ['inquirer', 'Node.js', 'ajax', 'fs']
+        repo:     'https://github.com/MattGaarder/operation-firebird',
+        summary:  'Vue3/Quasar portfolio with dynamic theme switching, Masonry illustration gallery, responsive layout, smart internal/external link handling, CV download, and interactive contact integration.',
+        technology: [
+            { name: 'Vue3', logo: '/src/assets/deprecated-logos/Vue.js_Logo_2.svg'},
+            { name: 'Quasar', logo: '/src/assets/deprecated-logos/favicon-128x128.png'}, 
+            { name: 'Prism',logo: '/src/assets/deprecated-logos/prism.svg'}, 
+        ],
+        component: markRaw(ThisPortfolio),
     }
     ];
 
@@ -319,5 +325,4 @@
         opacity: 0.4 !important;
     }
 
-    
 </style>

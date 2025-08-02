@@ -40,6 +40,8 @@ html {
   color: var(--site-text) !important;
 }
 
+
+
 .drawer {
     padding-left: 9rem;
 }
@@ -145,7 +147,7 @@ html {
 }
 
 .theme-illustrations .top-border {
-  border-top: 1px solid #9aaab9 !important;
+  border-top: 1px solid #6c7781 !important;
 }
 
 .theme-illustrations .q-item:hover,
@@ -183,4 +185,10 @@ html {
 }
 .theme-illustrations .essential-contact:hover .arrow-outward-icon {
   color: white !important;
+}
+
+  html, body, #q-app {
+  background-color: var(--site-bg, #161f27);
+  color: var(--site-text, #fff);
+  min-height: 100%; /* ensure full height */
 }

@@ -90,8 +90,8 @@
       link: 'https://wa.me/447498658030?text=Hi%20Matteus',
     },
     {
-      title: 'London, N10 2PT',
-      link: 'https://www.google.com/maps/place/Tokyo+Toritsu+Tachikawa+Kokusai+Chutokyoiku+School/@35.7028492,139.4234056,17z/data=!3m1!4b1!4m6!3m5!1s0x6018e15da4b4c8d9:0x4dd0b8ee677da43e!8m2!3d35.7028449!4d139.4282765!16s%2Fg%2F122bl_0n?entry=ttu&g_ep=EgoyMDI1MDcyOS4wIKXMDSoASAFQAw%3D%3D',
+      title: 'London, N8',
+      link: 'https://maps.app.goo.gl/ssShuV8iibBrxwpR9',
     },
   ]
 

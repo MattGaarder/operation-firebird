@@ -33,27 +33,19 @@ import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
 
 const illustrations = [
-    
     { src: '/src/assets/illustrations/deer.png', alt: 'Concept B', span: 1 },
-        { src: '/src/assets/illustrations/brief.png', alt: 'brief', span: 1 },
-        
+    { src: '/src/assets/illustrations/brief.png', alt: 'brief', span: 1 },
     { src: '/src/assets/illustrations/bike.png', alt: 'bike', span: 1 },
-
     { src: '/src/assets/illustrations/composer.png', alt: 'Concept B', span: 1 },
-            { src: '/src/assets/illustrations/samurai.png', alt: 'Sketch A', span: 1 },
-
+    { src: '/src/assets/illustrations/samurai.png', alt: 'Sketch A', span: 1 },
     { src: '/src/assets/illustrations/fall.png', alt: 'Poster C', span: 1 },
-    
     { src: '/src/assets/illustrations/french.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/frenchNkd.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/haggard.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/frog.png', alt: 'Detail D', span: 1 },
-
-        { src: '/src/assets/illustrations/faces.png', alt: 'Poster C', span: 2 },
-
+    { src: '/src/assets/illustrations/bignosedude.png', alt: 'Poster C', span: 1 },
+    { src: '/src/assets/illustrations/faces.png', alt: 'Poster C', span: 2 },
     { src: '/src/assets/illustrations/kobe.png', alt: 'Sketch A', span: 1 },
-    
-
     { src: '/src/assets/illustrations/nachi.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/notebook.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/osaka.png', alt: 'Detail D', span: 1 },
@@ -61,24 +53,29 @@ const illustrations = [
     { src: '/src/assets/illustrations/penguin2.png', alt: 'Sketch A', span: 1 },
     { src: '/src/assets/illustrations/penguins.png', alt: 'Sketch A', span: 2 },
     { src: '/src/assets/illustrations/rosen.png', alt: 'Sketch A', span: 1 },
-{ src: '/src/assets/illustrations/skull.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/skull.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/overthere.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/self.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/self2.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/self3.png', alt: 'Concept B', span: 1 },
-        { src: '/src/assets/illustrations/life1.png', alt: 'Poster C', span: 1 },
-            { src: '/src/assets/illustrations/quick.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/life1.png', alt: 'Poster C', span: 1 },
+    { src: '/src/assets/illustrations/quick.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/yuka-clean.png', alt: 'Poster C', span: 2 },
     { src: '/src/assets/illustrations/cato.png', alt: 'cato', span: 1 },
-        { src: '/src/assets/illustrations/salaryman.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/salaryman.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/trapcard.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/fish.png', alt: 'Concept B', span: 2 },
     { src: '/src/assets/illustrations/lamp.png', alt: 'Concept B', span: 1 },
     { src: '/src/assets/illustrations/lawyer.png', alt: 'Concept B', span: 1 },
-        { src: '/src/assets/illustrations/hey.png', alt: 'Poster C', span: 1 },
-
-
-
+    { src: '/src/assets/illustrations/hey.png', alt: 'Poster C', span: 1 },
+    { src: '/src/assets/illustrations/angryblue.png', alt: 'cato', span: 1 },
+    { src: '/src/assets/illustrations/devilangryblue.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/pug.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/frogandmouse.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/lifeback.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/animedude.png', alt: 'Concept B', span: 1 },
+    { src: '/src/assets/illustrations/smokechar.png', alt: 'Poster C', span: 1 },
+    { src: '/src/assets/illustrations/lg-lady.png', alt: 'Poster C', span: 1 },
 ];
 const grid = ref(null);
 let msnry = null;
@@ -141,11 +138,9 @@ onBeforeUnmount(() => {
     width: 25%; 
     padding: 1rem;
     box-sizing: border-box;
-
-    display: flex;               /* make it flex so its child can center */
+    display: flex;              
     align-items: center;
     justify-content: center;
-
 }
 
 
@@ -185,6 +180,12 @@ onBeforeUnmount(() => {
   max-height: 100%;
   object-fit: contain; 
   border-radius: 4px;
+    transition: transform 0.2s; 
+  
+}
+
+.masonry-item:hover .masonry-img {
+  transform: scale(1.01);
 }
 
 /* responsive fallback */
