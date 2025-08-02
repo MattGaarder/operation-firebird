@@ -18,6 +18,7 @@
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
     "draggable-resizable-vue3": "^1.0.94-beta",
+    "imagesloaded": "^5.0.0",
     "masonry-layout": "^4.2.2",
     "pinia": "^3.0.1",
     "prismjs": "^1.30.0",
