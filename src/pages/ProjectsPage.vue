@@ -159,7 +159,7 @@
         id:       'project12',
         title:    'Nocado',
         images:   [
-        loadProjectLogo('Nocado.svg'),
+        loadProjectLogo('Nocado'),
         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif'
         ],
         deployed: [false, 'https://github.com/MattGaarder/team-profile-generator'],
@@ -177,7 +177,7 @@
         id:       'project2',
         title:    'Vibely',
         images:   [
-        loadProjectLogo('vibely.svg'),
+        loadProjectLogo('vibely'),
         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif'
         ],
         deployed: [true, 'https://main--endearing-sundae-33b843.netlify.app/'],
@@ -194,7 +194,7 @@
         id:       'project3',
         title:    'Moovie Match',
         images:   [
-        loadProjectLogo('cow-white.svg'),
+        loadProjectLogo('cow-white'),
             'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdkNjkyN2FiNmMxODUzMTVkN2ExOWRiOTZhMzYyODkxYmMwMDBlNiZjdD1n/32AslOrbvFhGKaEO4Q/giphy.gif'
         ],
         deployed: [true, 'https://mattgaarder.github.io/moovie-search/'],
@@ -211,7 +211,7 @@
         id:       'project6',
         title:    'Team Builder',
         images:   [
-        loadProjectLogo('team_builder.svg'),
+        loadProjectLogo('team_builder'),
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif'
         ],
         deployed: [false],
@@ -230,7 +230,7 @@
         id:       'project1',
         title:    'Weather Dashboard',
         images:   [
-        loadProjectLogo('cloud-day.svg'),
+        loadProjectLogo('cloud-day'),
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif'
         ],
         deployed: [true, 'https://mattgaarder.github.io/weather-dashboard/'],
@@ -248,7 +248,7 @@
         id:       'project5',
         title:    'Onafã',
         images:   [
-        loadProjectLogo('onafa-white.svg'),
+        loadProjectLogo('onafa-white'),
         'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTdjOGI2MjRmMmI4Y2NmNGIyMzU2NTIwZjI4YjA0M2MyNTYwYjhlZiZjdD1n/mTkFZnQ8EvNSXfV9xP/giphy.gif'
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
@@ -265,7 +265,7 @@
         id:       'project7',
         title:    'this.portfolio',
         images:   [
-        loadProjectLogo('this_portfolio.svg'),
+        loadProjectLogo('this_portfolio'),
         'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGM3MDVmYTRiZDkyMDM4YmQ5OWQzNWUzMWY1NzA5MmRjYjA2Yjg5ZSZjdD1n/HbVX9TkQKmc0mOLV4C/giphy.gif'
         ],
         deployed: [true, 'https://gaarder.netlify.app/#/'],
