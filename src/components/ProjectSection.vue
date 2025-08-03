@@ -47,7 +47,7 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
   .tech-items {
     position: relative; 
     display: inline-block;
-      display: grid;
+    display: grid;
     grid-template-rows: repeat(3, auto);
     grid-auto-flow: column;
   }
@@ -134,22 +134,32 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     min-height: auto;
   }
 
-  .tech-items {
-    /* margin-right: 0.5rem; */
-  }
 
-  .project-summary {
-    padding-left: 1rem;
+  :deep(.project-summary) {
     padding-right: 0;
+    padding-left: 0 !important;
   }
 
   .project4 {
     max-width: none !important;
     max-height: none !important;
+    margin-top: -5rem;
+    margin-left: -0.4rem;
   }
 
   .project6, .project1, .project3 {
-    max-height: 11rem
+    max-height: 11rem;
+
   }
+
+  .project2 {
+    margin-left: -0.75rem;
+  }
+
+  .project12 {
+    margin-left: -1.1rem;
+  }
+
+
 }
 </style>
