@@ -2,7 +2,6 @@
   <q-card flat class="q-mb-none project-section">
     <q-card-section class="q-pa-sm q-pl-sm">
       <div class="wrapper flex flex-center q-pl-none" >
-        
         <q-img
           v-if="images.length"
           :src="images[0]"
@@ -32,15 +31,15 @@
 </template>
 
 <script setup>
-const { id, title, images, deployed, repo, summary, technology } = defineProps({
-  id:         { type: String, required: true },
-  title:      { type: String, required: true },
-  images:     { type: Array,  default: () => [] },
-  deployed:   { type: String,  default: '' },
-  repo:       { type: String,  default: '' },
-  summary:    { type: String,  default: '' },
-  technology: { type: Array,   default: () => [] }
-})
+  const { id, title, images, deployed, repo, summary, technology } = defineProps({
+    id:         { type: String, required: true },
+    title:      { type: String, required: true },
+    images:     { type: Array,  default: () => [] },
+    deployed:   { type: String,  default: '' },
+    repo:       { type: String,  default: '' },
+    summary:    { type: String,  default: '' },
+    technology: { type: Array,   default: () => [] }
+  });
 </script>
 
 <style scoped>
@@ -63,8 +62,7 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
   .wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    
+    justify-content: space-evenly;  
   }
 
   .tech-logo {
@@ -83,20 +81,26 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     opacity: 1;
   }
 
-
   .project-logo {
     max-width: 15rem;
     max-height: 8rem;
     min-height: 8rem;
     min-width: 344px;
-    /* object-fit: fit; */
     opacity: 0.4;
-    
-    
   }
 
-  .q-img__image {
-    object-position: 60% 40% !important;
+
+
+  :deep(.project5onafa) .q-img__image {
+    object-fit: none !important;
+    object-position: center !important;
+  }
+
+  :deep(.project4pwc) .q-img__image {
+    object-fit:cover !important;
+    object-position: 30% 70%  !important;
+    margin-left: 2rem;
+    
   }
 
   .project-logo,
@@ -117,8 +121,6 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
   .wrapper {
     text-align: center;
   }
-
-
   .project-logo {
     width: 100%;
     max-width: none;
@@ -127,39 +129,33 @@ const { id, title, images, deployed, repo, summary, technology } = defineProps({
     margin-bottom: 1.2rem;
   }
 
-  
-
   .tech-list {
     display: flex;
     min-height: auto;
   }
-
 
   :deep(.project-summary) {
     padding-right: 0;
     padding-left: 0 !important;
   }
 
-  .project4 {
+  .project4pwc {
     max-width: none !important;
     max-height: none !important;
     margin-top: -5rem;
     margin-left: -0.4rem;
   }
 
-  .project6, .project1, .project3 {
+  .project6teamb, .project1weatherd, .project3moviem {
     max-height: 11rem;
-
   }
 
-  .project2 {
+  .project2vibely {
     margin-left: -0.75rem;
   }
 
-  .project12 {
-    margin-left: -1.1rem;
+  .project5onafa {
+    margin-left: -1rem;
   }
-
-
 }
 </style>

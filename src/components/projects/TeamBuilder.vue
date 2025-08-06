@@ -3,7 +3,7 @@
     <q-card flat bordered class="project-card">
       <q-card-section class="project-header">
         <q-img
-          src="/src/assets/logos/project_logos/SVG/SVG/team-builder-crop.svg"
+          :src="teambuildertitle"
           alt="Team Builder Logo"
           class="project-icon"
         />
@@ -13,7 +13,7 @@
           <div class="project-tagline">
             A Node.js CLI tool that builds a styled HTML roster for your engineering team.
             Answer prompts for Manager, Engineers &amp; Interns and get a single-page summary
-            with each member’s name, role, ID, email (clickable) and role-specific details.
+            with each member's name, role, ID, email (clickable) and role-specific details.
           </div>
         </div>
       </q-card-section>
@@ -45,9 +45,10 @@
     <!-- README.md Generator -->
     <q-card flat bordered class="project-card">
       <q-card-section class="project-header">
-        <q-icon name="code-brackets" size="64px" class="project-icon readme-icon" />
+        <q-icon name="book" size="64px" class="project-icon readme-icon" />
+        <div class="project-title">README.md Generator</div>
         <div class="project-info">
-          <div class="project-title">README.md Generator</div>
+          
           <div class="project-tagline">
             A Node.js CLI that prompts for Title, Description, Installation, Usage, Screenshots,
             Contribution, License &amp; Contact — then spits out a badge-topped
@@ -83,10 +84,13 @@
 </template>
 
 <script setup>
-// purely presentational
+import teambuildertitle from 'src/assets/logos/team-builder-crop.svg';
 </script>
 
 <style scoped>
+
+
+
 .projects-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -119,10 +123,9 @@
 }
 
 .project-icon {
-  flex: 0 0 174px;
+  flex: 0 0 104px;
   height: auto;
   border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }
 
 .readme-icon {

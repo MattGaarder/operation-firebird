@@ -1,6 +1,6 @@
 <template>
     <video class="vidya" autoplay muted>
-      <source src="/src/assets/onafa/splash-main_7.mp4" type="video/mp4" class="vidya" autoplay muted loop>
+      <source :src="splash" type="video/mp4" class="vidya" autoplay muted loop>
     </video>
   <div class="projects-wrapper">
     <q-card flat bordered class="project-card">
@@ -193,24 +193,24 @@ arrowLeft.addEventListener('click', function () {
       <q-carousel-slide :name="1" class="column no-wrap">
         <div class="iteration">Iteration 1</div>
         <div class="row fit justify-start items-center q-gutter-sm no-wrap">
-          <q-img class="rounded-borders col-4 full-height" src="/src/assets/onafa/mockup.png" />
+          <q-img class="rounded-borders col-4 full-height" :src="mockup" />
           <div class=" col-8">
-            <q-img class="rounded-borders full-height inner-image-tshirt" src="/src/assets/onafa/SVG/t-shirt.svg"/>
-            <q-img class="rounded-borders full-height inner-image" src="src/assets/onafa/iteration-1.png"/>
+            <q-img class="rounded-borders full-height inner-image-tshirt" :src="tshirt"/>
+            <q-img class="rounded-borders full-height inner-image" :src="iteration1"/>
           </div>
         </div>
       </q-carousel-slide>
       <q-carousel-slide :name="2" class="column no-wrap">
         <div class="iteration">Iteration 2</div>
         <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="rounded-borders col-12 full-height" src="/src/assets/onafa/Screen_Recording1.gif" />
+          <q-img class="rounded-borders col-12 full-height" :src="screenR1" />
         </div>
       </q-carousel-slide>
       <q-carousel-slide :name="3" class="column no-wrap">
         <div class="iteration">Iteration 3</div>
         <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="rounded-borders col-8 full-height" src="/src/assets/onafa/Screen2.gif" />
-          <q-img class="rounded-borders col-4 full-height" src="/src/assets/onafa/Screen3.gif" />
+          <q-img class="rounded-borders col-8 full-height" :src="screenR2" />
+          <q-img class="rounded-borders col-4 full-height" :src="screenR3" />
         </div>
       </q-carousel-slide>
     </q-carousel>
@@ -219,6 +219,13 @@ arrowLeft.addEventListener('click', function () {
 
 <script setup>
   import { ref } from 'vue';
+  import splash from 'src/assets/onafa/splash-main_7.mp4';
+  import tshirt from 'src/assets/onafa/SVG/t-shirt.svg'
+  import iteration1 from 'src/assets/onafa/iteration-1.png';
+  import mockup from 'src/assets/onafa/mockup.png';
+  import screenR1 from 'src/assets/onafa/Screen_Recording1.gif';
+  import screenR2 from 'src/assets/onafa/Screen2.gif';
+  import screenR3 from 'src/assets/onafa/Screen3.gif';
 
   const slide = ref(1);
 </script>

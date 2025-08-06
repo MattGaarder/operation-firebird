@@ -84,7 +84,6 @@
 
     function getWindowConfig() {
         const w = $q.screen.width;
-       
         if (w < 400) {
             return { width: (w - 15), x: 0, y: -3056 }
         }
@@ -98,11 +97,8 @@
         }
     }
 
-
-
     function openProject(proj) {
     const cfg = getWindowConfig()
-
     windows.value.push({
         uid:     Date.now() + Math.random(),  
         project: proj,                       
@@ -111,9 +107,7 @@
         width: cfg.width,  
         height: cfg.height,  
         active: true, 
-        zIndex: ++topZ,
-        
-        
+        zIndex: ++topZ, 
     })
     }
 
@@ -122,22 +116,20 @@
         windows.value[i].active = true
     }
 
+
+    // PROJECT ARRAY
     function closeWindow( i) {
     windows.value.splice(i, 1)
     }
-
-    // helpers to dynamically resolve asset URLs
     function loadProjectLogo(name, ext = 'svg') {
         return new URL(`/src/assets/logos/project_logos/${name}.${ext}`, import.meta.url).href;
     }
     function loadTechLogo(relativePath) {
         return new URL(`/src/assets/tech_logos/${relativePath}`, import.meta.url).href;
     }
-
     const projects = [
-        // COMPLETE
     {
-        id:       'project4',
+        id:       'project4pwc',
         title:    'PwC',
         images:   [
         loadProjectLogo('PwC_Logo_white'),
@@ -156,9 +148,8 @@
         ],
         component: markRaw(PwCProjects),
     },
-        // COMPLETE
     {
-        id:       'project12',
+        id:       'project12nocado',
         title:    'Nocado',
         images:   [
         loadProjectLogo('Nocado'),
@@ -176,7 +167,7 @@
         component: markRaw(ProjectNocado),
     },
     {
-        id:       'project2',
+        id:       'project2vibely',
         title:    'Vibely',
         images:   [
         loadProjectLogo('vibely'),
@@ -193,7 +184,7 @@
         component: markRaw(ProjectVibely),
     },
     {
-        id:       'project3',
+        id:       'project3moviem',
         title:    'Moovie Match',
         images:   [
         loadProjectLogo('cow-white'),
@@ -210,7 +201,7 @@
         component: markRaw(MoovieMatch),
     },
     {
-        id:       'project6',
+        id:       'project6teamb',
         title:    'Team Builder',
         images:   [
         loadProjectLogo('team_builder'),
@@ -227,9 +218,8 @@
         ],
         component: markRaw(TeamBuilder),
     },
-
     {
-        id:       'project1',
+        id:       'project1weatherd',
         title:    'Weather Dashboard',
         images:   [
         loadProjectLogo('cloud-day'),
@@ -245,9 +235,8 @@
         ],
         component: markRaw(WeatherDashboard),
     },
-    
     {
-        id:       'project5',
+        id:       'project5onafa',
         title:    'Onafã',
         images:   [
         loadProjectLogo('onafa-white'),
@@ -281,9 +270,6 @@
         component: markRaw(ThisPortfolio),
     }
     ];
-
-    
- 
 </script>
 
 <style scoped>
