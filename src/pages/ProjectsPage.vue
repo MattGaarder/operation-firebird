@@ -1,5 +1,5 @@
 <template>
-  <q-page padding :class="pagePaddingClass">
+  <q-page padding>
     <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg">PROJECTS</div>
     
 
@@ -10,52 +10,47 @@
       </div>
     </div>
     <teleport to="body">
-    <!-- <q-dialog v-model="dialogOpen" no-backdrop persistent> -->
-        <draggable-resizable-vue 
-        v-for="(win, i) in windows"
-            :key="win.uid"
-            v-model:x="win.x"
-            v-model:y="win.y"
-            v-model:h="win.height"
-            v-model:w="win.width"
-            v-model:active="win.active"
-            :minWidth="360" 
-            :minHeight="135"
-            :style="{ zIndex: win.zIndex }"
-            :drag-handle="'.window-handle'"
-            @mousedown="bringToFront(i)"
-            :parent="false"
-        >
+        <div class="windows-layer">
+            <draggable-resizable-vue 
+                v-for="(win, i) in windows"
+                :key="win.uid"
+                v-model:x="win.x"
+                v-model:y="win.y"
+                v-model:h="win.height"
+                v-model:w="win.width"
+                v-model:active="win.active"
+                :minWidth="212" 
+                :minHeight="100"
+                :style="{ zIndex: win.zIndex }"
+                :drag-handle="'.window-handle'"
+                @mousedown="bringToFront(i)"
+                :parent="true"
+            >
 
-            <q-card class="window-card bg-white text-black" bordered>
-                <q-card-section class="window-handle bg-primary row items-center text-white">
-                    <div class="col">{{ win.project.title }}</div>
-                    <q-btn dense flat round icon="close" @click="closeWindow(i)"/>
-                </q-card-section>
-                <q-card-section style="overflow:auto; height:calc(100% - 48px)">
-                    <!-- <p>{{ win.project.summary }}</p> <br /> -->
-                     <div class="window-body">
-                        <component :is="win.project.component" :images="win.project.images"></component>
-                     </div>
-                    
-                     
-                    
-                </q-card-section>
-                <div class="row window-handle">
-                    <q-btn  flat icon="code" label="GitHub" :disable="!win.project.repo[0]" :href="win.project.repo[1]"  target="_blank" class="q-pl-sm q-prlgl bordered"/>
-                    <q-btn  flat icon="launch" label="Live" :disable="!win.project.deployed[0]" :href="win.project.deployed[1]" target="_blank" />
-                        
-                </div>
-            </q-card>
-        </draggable-resizable-vue>
-        </teleport>
-    <!-- </q-dialog> -->
-
+                <q-card class="window-card bg-white text-black" bordered>
+                    <q-card-section class="window-handle window-handle-header bg-primary row items-center text-white">
+                        <div class="col project-title">{{ win.project.title }}</div>
+                        <q-btn dense flat round icon="close" @click="closeWindow(i)"/>
+                    </q-card-section>
+                    <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 48px)">
+                        <!-- <p>{{ win.project.summary }}</p> <br /> -->
+                        <div class="window-body">
+                            <component :is="win.project.component" :images="win.project.images"></component>
+                        </div>
+                    </q-card-section>
+                    <div class="row window-handle q-py-xs">
+                        <q-btn  flat icon="code" label="GitHub" :disable="!win.project.repo[0]" :href="win.project.repo[1]"  target="_blank" class="q-pl-sm p- bordered"/>
+                        <q-btn  flat icon="launch" label="Live" :disable="!win.project.deployed[0]" :href="win.project.deployed[1]" target="_blank" />
+                    </div>
+                </q-card>
+            </draggable-resizable-vue>
+        </div>
+    </teleport>
   </q-page>
 </template>
 
 <script setup>
-    import { ref, markRaw, inject, computed } from 'vue';
+    import { ref, markRaw, inject } from 'vue';
     import { useQuasar } from 'quasar';
     import ProjectSection from 'src/components/ProjectSection.vue';
     import DraggableResizableVue from 'draggable-resizable-vue3';
@@ -72,9 +67,7 @@
 
     const leftDrawerOpen = inject('leftDrawerOpen');
 
-    const pagePaddingClass = computed(() => {
-    return $q.screen.width <= 400 ? 'q-pl-xs' : 'q-pl-xl';
-    });
+
     
     const $q = useQuasar();
     const windows = ref([]);
@@ -83,16 +76,13 @@
 
     function getWindowConfig() {
         const w = $q.screen.width;
-        if (w < 400) {
-            return { width: (w - 15), x: 0, y: -3056 }
-        }
-        else if (w < 1129) {
-            return { width: (w - 15), x: 0, y: -1415 }
-        }
-        else if (w < 1513) {
-            return { width: (w - 470), x: 356, y: -1506 }
-        } else {
-            return { width: (w - 625), x: 525, y: -1226 }
+        const h = $q.screen.height;
+
+        return {
+            width:  Math.floor(w * 0.7),    // 70% of screen width
+            height: Math.floor(h * 0.7),    // 70% of screen height
+            x:      Math.floor(w * 0.15),   // centered horizontally
+            y:      Math.floor(h * 0.15)    // centered vertically
         }
     }
 
@@ -299,8 +289,20 @@
         border-top: 1px black solid;
     }
 
+    .window-handle-header {
+        padding: 0.5rem !important;
+    }
+
     .window-body {
         overflow-y: none;
+    }
+
+    .project-title {
+        padding-left: 0.6rem;
+    }
+
+    .project-body {
+        padding: 0px !important;
     }
 
     @media (min-width: 600px) and (max-width: 1550px) {
@@ -320,4 +322,13 @@
         opacity: 0.4 !important;
     }
 
+    .windows-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;       /* ensure it’s above the page */
+    pointer-events: none;/* clicks pass through unless we re-enable below */
+    }
+    .windows-layer > * {
+    pointer-events: auto; /* allow interacting with windows */
+    }
 </style>
