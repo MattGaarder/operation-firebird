@@ -13,19 +13,18 @@
     <!-- <q-dialog v-model="dialogOpen" no-backdrop persistent> -->
         <draggable-resizable-vue 
         v-for="(win, i) in windows"
-        :key="win.uid"
-        v-model:x="win.x"
-        v-model:y="win.y"
-        v-model:h="win.height"
-        v-model:w="win.width"
-        v-model:active="win.active"
-        :minWidth="360" 
-        :minHeight="135"
-
-        :style="{ zIndex: win.zIndex }"
-        :drag-handle="'.window-handle'"
-        @mousedown="bringToFront(i)"
-        :parent="false"
+            :key="win.uid"
+            v-model:x="win.x"
+            v-model:y="win.y"
+            v-model:h="win.height"
+            v-model:w="win.width"
+            v-model:active="win.active"
+            :minWidth="360" 
+            :minHeight="135"
+            :style="{ zIndex: win.zIndex }"
+            :drag-handle="'.window-handle'"
+            @mousedown="bringToFront(i)"
+            :parent="false"
         >
 
             <q-card class="window-card bg-white text-black" bordered>
