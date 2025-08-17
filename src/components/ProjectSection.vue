@@ -55,6 +55,7 @@
   .wrapper {
     display: flex;
     flex-direction: column;
+
    
   }
 
@@ -113,7 +114,7 @@
   }
 
   .project-summary {
-    max-width: 20rem;
+    max-width: 25rem;
   }
 
   .project-section:hover .project-logo,

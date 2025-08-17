@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="" :style="{ paddingLeft: sidePadding }">
+  <q-page padding class="q-pl-xl"  :style="{ paddingLeft: sidePadding }">
 
     <div class="text-h8 text-weight-bold q-mb-lg q-mr-xl q-pt-lg top-border">EXPERIENCE</div>
 
@@ -21,7 +21,7 @@
   import ExperienceSection from 'src/components/ExperienceSection.vue';
 //   import { inject, computed } from 'vue';
 //   import { useQuasar } from 'quasar';
-//   const leftDrawerOpen = inject('leftDrawerOpen');
+  // const leftDrawerOpen = inject('leftDrawerOpen');
         
 
   

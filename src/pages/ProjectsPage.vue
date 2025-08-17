@@ -1,12 +1,12 @@
 <template>
-  <q-page padding>
+  <q-page padding class="">
     <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg">PROJECTS</div>
     
 
 
     <div class="row project-row bg-primary" :class="{ 'three-col': !leftDrawerOpen }">
       <div v-for="project in projects" :key="project.id" class="col-12 col-md-6 col-lg-4 cursor-pointer" @click="openProject(project)">
-        <ProjectSection v-bind="project" class="bg-primary q-pt-xl"/>
+        <ProjectSection v-bind="project" class="bg-primary q-pt-xl project-section"/>
       </div>
     </div>
     <teleport to="body">
@@ -62,8 +62,6 @@
     import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
     import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
     import ThisPortfolio from 'src/components/projects/ThisPortfolio.vue';
-
-    // const leftDrawerOpen = inject('leftDrawerOpen', ref(true))
 
     const leftDrawerOpen = inject('leftDrawerOpen');
 
@@ -305,18 +303,30 @@
         padding: 0px !important;
     }
 
+
+
     @media (min-width: 600px) and (max-width: 1550px) {
     .project-row > .col-lg-4 {
         flex: 0 0 50%;
         max-width: 50%;
+        padding-left: 1rem;
+      
         }
     }
 
     @media (min-width: 1100px) and (max-width: 1550px) { .three-col.project-row > .col-lg-4 {
         flex: 0 0 33.3333% !important;
         max-width: 33.3333% !important;
+        padding-left: 1rem;
+        }
     }
-}
+
+    @media (min-width: 1800px) { .three-col.project-row > .col-lg-4 {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+        padding-left: 1rem;
+        }
+    }
 
     .disabled {
         opacity: 0.4 !important;
