@@ -47,8 +47,7 @@
 
   function onHomeBtnClick(e) {
   if (isHome.value) {
-    // trigger CV download
-    e.preventDefault(); // don't navigate
+    e.preventDefault(); 
     const link = document.createElement('a');
     link.href = '/src/assets/GAARDER-CV.pdf'; 
     link.download = 'GAARDER-CV.pdf';
@@ -56,7 +55,6 @@
     link.click();
     link.remove();
   } else {
-    // navigate home
     router.push('/');
   }
 }
@@ -149,7 +147,6 @@
       name: 'arrow_outward',
       isExternal: true,
     },
-    
 
   ]
 </script>
@@ -180,7 +177,3 @@
   color: black !important;
 }
 </style>
-
-
-
-<!-- reveal :reveal-offset="40" -->

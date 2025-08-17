@@ -24,7 +24,35 @@
   const leftDrawerOpen = inject('leftDrawerOpen');
         
 
-  const experiences = [
+  
+
+  const $q = useQuasar();
+
+  const sidePadding = computed(() => {
+  const w = $q.screen.width;
+
+  if (w < 1113) {
+    // narrow screen
+    if (!leftDrawerOpen?.value) {
+      // drawer closed + narrow
+      return '2rem';
+    } else {
+      // drawer open + narrow
+      return '4rem';
+    }
+  } else {
+    // wide screen
+    if (leftDrawerOpen?.value) {
+      // drawer open + wide
+      return '4rem';
+    } else {
+      // drawer closed + wide
+      return '25rem';
+    }
+  }
+});
+
+const experiences = [
     {
       role: "eLearning Developer",
       company:  "PwC",
@@ -92,32 +120,6 @@
       ]
     },
   ];
-
-  const $q = useQuasar();
-
-  const sidePadding = computed(() => {
-  const w = $q.screen.width;
-
-  if (w < 1113) {
-    // narrow screen
-    if (!leftDrawerOpen?.value) {
-      // drawer closed + narrow
-      return '2rem';
-    } else {
-      // drawer open + narrow
-      return '4rem';
-    }
-  } else {
-    // wide screen
-    if (leftDrawerOpen?.value) {
-      // drawer open + wide
-      return '4rem';
-    } else {
-      // drawer closed + wide
-      return '25rem';
-    }
-  }
-});
 </script>
 
 <style scoped>
