@@ -19,38 +19,38 @@
 
 <script setup>
   import ExperienceSection from 'src/components/ExperienceSection.vue';
-  import { inject, computed } from 'vue';
-  import { useQuasar } from 'quasar';
-  const leftDrawerOpen = inject('leftDrawerOpen');
+//   import { inject, computed } from 'vue';
+//   import { useQuasar } from 'quasar';
+//   const leftDrawerOpen = inject('leftDrawerOpen');
         
 
   
 
-  const $q = useQuasar();
+//   const $q = useQuasar();
 
-  const sidePadding = computed(() => {
-  const w = $q.screen.width;
+//   const sidePadding = computed(() => {
+//   const w = $q.screen.width;
 
-  if (w < 1113) {
-    // narrow screen
-    if (!leftDrawerOpen?.value) {
-      // drawer closed + narrow
-      return '2rem';
-    } else {
-      // drawer open + narrow
-      return '4rem';
-    }
-  } else {
-    // wide screen
-    if (leftDrawerOpen?.value) {
-      // drawer open + wide
-      return '4rem';
-    } else {
-      // drawer closed + wide
-      return '25rem';
-    }
-  }
-});
+//   if (w < 1113) {
+//     // narrow screen
+//     if (!leftDrawerOpen?.value) {
+//       // drawer closed + narrow
+//       return '2rem';
+//     } else {
+//       // drawer open + narrow
+//       return '4rem';
+//     }
+//   } else {
+//     // wide screen
+//     if (leftDrawerOpen?.value) {
+//       // drawer open + wide
+//       return '4rem';
+//     } else {
+//       // drawer closed + wide
+//       return '25rem';
+//     }
+//   }
+// });
 
 const experiences = [
     {
@@ -125,9 +125,4 @@ const experiences = [
 <style scoped>
 
 
-
-
-/* .with-closed-drawer {
-  margin-left: 25rem;
-} */
 </style>

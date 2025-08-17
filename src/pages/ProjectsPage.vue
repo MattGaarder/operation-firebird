@@ -126,7 +126,7 @@
         ],
         deployed: [false],
         repo:     [false],
-        summary:  'I architect Google Apps Script automations to streamline repetitive tasks — building form-driven folder generators, custom UI elements to parse and validate document data into Sheets, auto-apply templates to documents, and much more!',
+        summary:  'I architect Google Apps Script automations to streamline repetitive tasks. This project section highlights a form-driven folder generator, a custom Word UI element that applies templates to documents, and a Google Drive "document-logger" - more interesting than it sounds, promise!',
         technology: [
             { name: 'GoogleAppsScript', logo: loadTechLogo('Google_AppsScript.svg')},
             { name: 'ArticulateStoryline',logo: loadTechLogo('Articulate.svg')},
@@ -146,7 +146,7 @@
         ],
         deployed: [false, 'https://github.com/MattGaarder/team-profile-generator'],
         repo:     [true, 'https://github.com/MattGaarder/ocado-helper-frontend'],
-        summary:  'Upload your Ocado PDF receipts and instantly extract ingredients into a synced “Fridge, Cupboard & Freezer” Notion database. Powered by Multer & Express file-upload, PDF.js text extraction, PapaParse + FoundationFoods lookup, MongoDB persistence and two-way sync with Notion via the Notion API.',
+        summary:  'Upload your Ocado receipt, "sync", and have all the items purchased arranged into neat “Fridge, Cupboard & Freezer” sections in your Notion database for all your shopping-listing needs. Never forget those carrots at the back of the fridge, or buy your 10th can of lentils ever again! ',
         technology: [
             
             { name: 'MongoDB', logo: loadTechLogo('mongodb-svgrepo-com.svg')},
@@ -164,7 +164,7 @@
         ],
         deployed: [true, 'https://main--endearing-sundae-33b843.netlify.app/'],
         repo:     [true, 'https://github.com/MattGaarder/vibely'],
-        summary:  'A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” to posts. Built with React, Material UI & Firebase for instant auth and live updates.',
+        summary:  'A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” to posts. Live updates using React and Firebase so you never miss an opportunity to vibe with your friends again.',
         technology: [
             { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg')},
             { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg')}, 
@@ -181,7 +181,7 @@
         ],
         deployed: [true, 'https://mattgaarder.github.io/moovie-search/'],
         repo:     [true, 'https://github.com/MattGaarder/moovie-search'],
-        summary:  'Compare and manage movie trailers effortlessly: view side-by-side previews and key film details, then save your picks to persistent Watch or Seen lists—your personalized cinematic dashboard for smarter, stress-free movie decisions.',
+        summary:  'Spend forever picking what to watch? Go through the process every time? Compare options side-by-side with trailers, key details, and save your picks to persistent Watch or Seen lists — don\'t start from scratch next time.',
         technology: [
             { name: 'jQuery', logo: loadTechLogo('j-query.svg')},
             { name: 'Git',    logo: loadTechLogo('Git-Icon-1788C.svg')},
@@ -198,7 +198,7 @@
         ],
         deployed: [false],
         repo:     [true, 'https://github.com/MattGaarder/team-profile-generator'],
-        summary:  "Streamline project documentation and team overviews with a customizable Node.js CLI suite that both generates a professional, styled HTML roster for your team and seamlessly produces a badge-topped, sectioned README.md with interactive prompts.",
+        summary:  "My Node.js CLI suite. Project documentation a chore? Run this generator and seamlessly produce customizable badge-topped, sectioned README.md with interactive prompts. (Also can create styled HTML roster for your team).",
         technology: [
             { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg')},
             { name: 'Jest',    logo: loadTechLogo('jest-js-icon.svg')},
@@ -233,7 +233,7 @@
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
         repo:     [false, 'https://github.com/MattGaarder/password-generator'],
-        summary:  'Craft a dynamic, parallax-rich site with custom infinite scrolling galleries, JavaScript-driven parallax-scroll transforms, and view iterated UI design process — assets hand-crafted in Photoshop & Illustrator for an immersive browsing experience.',
+        summary:  'Dynamic, parallax-scroll transforms, infinite scrolling galleries - view my design iteration process — assets hand-crafted in Photoshop & Illustrator for immersive browsing experience.',
         technology: [
             { name: 'Premiere', logo: loadTechLogo('Adobe_Premiere_Pro.svg')},
             { name: 'Illustrator', logo: loadTechLogo('Adobe_Illustrator.svg')}, 
@@ -245,12 +245,12 @@
         id:       'project7',
         title:    'this.portfolio',
         images:   [
-        loadProjectLogo('this_portfolio'),
+        loadProjectLogo('thisportfolio'),
         'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGM3MDVmYTRiZDkyMDM4YmQ5OWQzNWUzMWY1NzA5MmRjYjA2Yjg5ZSZjdD1n/HbVX9TkQKmc0mOLV4C/giphy.gif'
         ],
         deployed: [true, 'https://gaarder.netlify.app/#/'],
         repo:     'https://github.com/MattGaarder/operation-firebird',
-        summary:  'Vue3/Quasar portfolio with dynamic theme switching, Masonry illustration gallery, responsive layout, smart internal/external link handling, CV download, and interactive contact integration.',
+        summary:  'Vue3/Quasar portfolio with dynamic theme switching, Masonry illustration gallery, responsive layout, smart internal/external link handling, CV download, and interactive contact integration. Thanks for checking it out!',
         technology: [
             { name: 'Vue3', logo: loadTechLogo('Vue.js_Logo_2.svg')},
             { name: 'Quasar', logo: loadTechLogo('Quasar.svg')}, 

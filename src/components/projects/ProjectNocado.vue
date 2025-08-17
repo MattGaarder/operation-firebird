@@ -7,6 +7,8 @@
           <div class="project-title">Nocado</div>
           <div class="project-tagline">
             This project syncs ingredient data between a PDF (your Ocado grocery shopping receipt), MongoDB, and Notion. The backend uses Express with Mongoose models to store ingredients, exposes REST routes, and integrates with Notion via its API to create/update pages and reconcile missing entries. The frontend uploads a PDF, extracts and cleans ingredient names, posts them to the server, and triggers Notion synchronization. 
+          
+          summary:  'Upload your Ocado PDF receipts and instantly extract ingredients into a synced “Fridge, Cupboard & Freezer” Notion database. Powered by Multer & Express file-upload, PDF.js text extraction, PapaParse + FoundationFoods lookup, MongoDB persistence and two-way sync with Notion via the Notion API.',
           </div>
         </div>
       </q-card-section>
@@ -533,7 +535,6 @@ module.exports = { createPages, updateData, getDataBase, getIds }
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
 
-/* on very narrow widths stack header contents centered */
 @media (max-width: 360px) {
   .project-header {
     justify-content: center;

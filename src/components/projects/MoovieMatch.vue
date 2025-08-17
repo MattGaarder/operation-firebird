@@ -6,6 +6,8 @@
           <div class="project-title">Moovie Match</div>
           <div class="project-tagline">
             This project is a jQuery-based film comparison UI. Clicking “find” AJAX-requests movie data from OMDB, renders a discover panel with poster/details, then queries YouTube’s API for a trailer and instantiates the YouTube iframe player. Users can mark titles as “seen” or “watch,” which are persisted in localStorage and shown in dynamic lists. Event delegation handles interactions (activate, delete, move), and layout tweaking functions adjust presentation. Core tech: jQuery, OMDB API, YouTube IFrame API, and browser localStorage.
+
+            'Compare and manage movie trailers effortlessly: view side-by-side previews and key film details, then save your picks to persistent Watch or Seen lists—your personalized cinematic dashboard for smarter, stress-free movie decisions.',
           </div>
         </div>
       </q-card-section>

@@ -187,7 +187,7 @@ html {
   color: white !important;
 }
 
-  html, body, #q-app {
+html, body, #q-app {
   background-color: var(--site-bg, #161f27);
   color: var(--site-text, #fff);
   min-height: 100%; /* ensure full height */

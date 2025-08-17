@@ -1,16 +1,7 @@
 <template>
   <q-card flat class="q-mb-none project-section">
-    <q-card-section class="q-pa-sm q-pl-sm">
-      <div class="wrapper flex flex-center q-pl-none" >
-        <q-img
-          v-if="images.length"
-          :src="images[0]"
-          :alt="`Logo for ${title}`"
-          class="project-logo"
-          :class="id"
-          :to="deployed"
-        />
-        <div class="tech-list">
+    <q-card-section class="q-pa-sm q-pl-sm qward">
+      <div class="tech-list">
           <div class="tech-items" v-for="tech in technology" :key="tech.name">
             <q-img
               fit
@@ -24,8 +15,20 @@
             </q-tooltip>
           </div>
         </div> 
-        <div class="text-caption q-pt-lg project-summary q-pr-xl q-pl-md" :to="repo">{{ summary }}</div>  
+      <div class="wrapper flex flex-center q-pl-md" >
+        <q-img
+          v-if="images.length"
+          :src="images[0]"
+          :alt="`Logo for ${title}`"
+          class="project-logo"
+          :class="id"
+          :to="deployed"
+        />
+        <div class="text-caption q-pt-md project-summary q-pr-none q-pl-sm" :to="repo">{{ summary }}</div>
+        
+          
       </div>
+      
     </q-card-section>
   </q-card>
 </template>
@@ -43,37 +46,27 @@
 </script>
 
 <style scoped>
-  .tech-items {
-    position: relative; 
-    display: inline-block;
-    display: grid;
-    grid-template-rows: repeat(3, auto);
-    grid-auto-flow: column;
-  }
-
   .tech-list {
-    display: grid;
-    grid-template-rows: repeat(3, auto);
-    grid-auto-flow: column;
-    gap: 0.1rem;
-    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
   .wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;  
+    flex-direction: column;
+   
   }
 
   .tech-logo {
     filter: grayscale(100%) brightness(1.2);
     opacity: 0.4;
     transition: filter 0.3s ease, opacity 0.3s ease;
-    width: 1.7rem;
+    width: 1.6rem;
     height: auto;
     object-fit:fill;
     margin-top: 0.2rem;
-    margin-left: 0.7rem;
+    margin-left: 0.4rem;
   }
 
   .tech-logo:hover {
@@ -82,32 +75,45 @@
   }
 
   .project-logo {
-    max-width: 15rem;
-    max-height: 8rem;
-    min-height: 8rem;
-    min-width: 344px;
+    max-width: 20rem;
+    max-height: 6.1rem;
+    min-height: 5rem;
     opacity: 0.4;
   }
 
 
 
   :deep(.project5onafa) .q-img__image {
-    object-fit: none !important;
-    object-position: center !important;
+    object-fit: contain !important;
+  
+    height: 90%;
+  
   }
 
   :deep(.project4pwc) .q-img__image {
-    object-fit:cover !important;
-    object-position: 30% 70%  !important;
-    margin-left: 2rem;
-    
+    object-fit: cover !important;
+    margin-left: 1.5rem;
+
+   
   }
+
+
+  :deep(.project2vibely) .q-img__image {
+    object-fit:cover !important;
+    height: 105%;
+    margin-top: 0.3rem;
+  }
+
 
   .project-logo,
   .project-summary,
   .technology {
     opacity: 0.4;
     transition: opacity 0.3s ease;
+  }
+
+  .project-summary {
+    max-width: 20rem;
   }
 
   .project-section:hover .project-logo,
@@ -124,7 +130,6 @@
   .project-logo {
     width: 100%;
     max-width: none;
-    min-width: 100vw;
     height: auto;
     margin-bottom: 1.2rem;
   }
@@ -158,4 +163,9 @@
     margin-left: -1rem;
   }
 }
+
+  .qward {
+    display: flex;
+    flex-direction: row;
+  }
 </style>

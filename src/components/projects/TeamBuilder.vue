@@ -14,6 +14,8 @@
             A Node.js CLI tool that builds a styled HTML roster for your engineering team.
             Answer prompts for Manager, Engineers &amp; Interns and get a single-page summary
             with each member's name, role, ID, email (clickable) and role-specific details.
+
+            "Streamline project documentation and team overviews with a customizable Node.js CLI suite that both generates a professional, styled HTML roster for your team and seamlessly produces a badge-topped, sectioned README.md with interactive prompts."
           </div>
         </div>
       </q-card-section>

@@ -11,7 +11,14 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" class="q-px-lg drawer" :width="drawerWidth" :breakpoint="1128" :style="{ paddingLeft: sidePadding }" :class="{ 'theme-default': !isIllustrations, 'theme-illustrations': isIllustrations }">
+    <q-drawer 
+      v-model="leftDrawerOpen" 
+      class="q-px-lg drawer" 
+      :width="drawerWidth" 
+      :breakpoint="1128" 
+      :style="{ paddingLeft: sidePadding }" 
+      :class="{ 'theme-default': !isIllustrations, 'theme-illustrations': isIllustrations }"
+    >
       <q-card bordered="false" flat square class="bg-primary text-white text-weight-bold q-pa-xs top-border">
         <q-card-section  class="bio">
           I'm a creative technologist and former educator fluent in Japanese. I tackle complex problems with JavaScript-powered solutions and multimedia design.
@@ -27,7 +34,7 @@
 
     </q-drawer>
 
-    <q-page-container class="page-container " >
+    <q-page-container class="page-container"  :class="{ 'with-padding': isHome && isWide && !leftDrawerOpen }">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -37,29 +44,37 @@
   import { ref, computed, provide } from 'vue';
   import { useQuasar } from 'quasar';
   import { useRoute, useRouter } from 'vue-router';
-  const router = useRouter();
 
   import EssentialLink from 'components/EssentialLink.vue';
   import EssentialContact from 'src/components/EssentialContact.vue';
 
+  const $q = useQuasar();
+  const router = useRouter();
   const route = useRoute();
   const isHome = computed(() => route.path === '/');
-
-  function onHomeBtnClick(e) {
-  if (isHome.value) {
-    e.preventDefault(); 
-    const link = document.createElement('a');
-    link.href = '/src/assets/GAARDER-CV.pdf'; 
-    link.download = 'GAARDER-CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  } else {
-    router.push('/');
-  }
-}
   const isIllustrations = computed(() => route.path.includes('illustrations'));
-  const $q = useQuasar();
+  const isWide = computed(() => $q.screen.width >= 1128)
+  const leftDrawerOpen = ref(true)
+
+  provide('leftDrawerOpen', leftDrawerOpen);
+
+  function toggleLeftDrawer() {
+    leftDrawerOpen.value = !leftDrawerOpen.value
+  }
+  
+  function onHomeBtnClick(e) {
+    if (isHome.value) {
+      e.preventDefault(); 
+      const link = document.createElement('a');
+      link.href = '/src/assets/GAARDER-CV.pdf'; 
+      link.download = 'GAARDER-CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } else {
+      router.push('/');
+    }
+  }
 
   const sidePadding = computed(() => {
     const w = $q.screen.width
@@ -83,12 +98,7 @@
     }
   });
 
-  const leftDrawerOpen = ref(true)
-  provide('leftDrawerOpen', leftDrawerOpen);
 
-  function toggleLeftDrawer() {
-    leftDrawerOpen.value = !leftDrawerOpen.value
-  }
 
   const contactList = [
     {
@@ -103,7 +113,7 @@
       title: 'London, N8',
       link: 'https://maps.app.goo.gl/ssShuV8iibBrxwpR9',
     },
-  ]
+  ];
 
   const linksList = [
     {
@@ -147,8 +157,7 @@
       name: 'arrow_outward',
       isExternal: true,
     },
-
-  ]
+  ];
 </script>
 
 
@@ -176,4 +185,13 @@
   background-color: white !important;
   color: black !important;
 }
+
+.page-container.with-padding {
+  padding-left: 14rem; /* or whatever feels good */
+  transition: padding-left 5.3s ease; /* optional smooth effect */
+}
 </style>
+
+
+
+<!-- reveal :reveal-offset="40" -->
