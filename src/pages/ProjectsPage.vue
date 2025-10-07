@@ -243,7 +243,7 @@
         id:       'project7',
         title:    'this.portfolio',
         images:   [
-        loadProjectLogo('thisportfolio'),
+        loadProjectLogo('this_portfolio'),
         'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGM3MDVmYTRiZDkyMDM4YmQ5OWQzNWUzMWY1NzA5MmRjYjA2Yjg5ZSZjdD1n/HbVX9TkQKmc0mOLV4C/giphy.gif'
         ],
         deployed: [true, 'https://gaarder.netlify.app/#/'],
