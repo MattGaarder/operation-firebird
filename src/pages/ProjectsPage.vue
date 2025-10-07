@@ -292,7 +292,7 @@
     }
 
     .window-body {
-        overflow-y: none;
+        overflow-y: none; 
     }
 
     .project-title {
