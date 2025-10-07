@@ -1,5 +1,7 @@
 <template>
   <q-page padding class="q-pl-xl"  :style="{ paddingLeft: sidePadding }">
+    <div class="text-h8 text-weight-bold q-mb-lg  q-pt-lg top-border">SKILLS  &  INTERESTS</div>
+    <SkillsSection class="bg-primary experience-section top-border q-pt-lg "></SkillsSection>
 
     <div class="text-h8 text-weight-bold q-mb-lg q-mr-xl q-pt-lg top-border">EXPERIENCE</div>
 
@@ -19,6 +21,7 @@
 
 <script setup>
   import ExperienceSection from 'src/components/ExperienceSection.vue';
+  import SkillsSection from 'src/components/SkillsSection.vue';
 //   import { inject, computed } from 'vue';
 //   import { useQuasar } from 'quasar';
   // const leftDrawerOpen = inject('leftDrawerOpen');
@@ -52,7 +55,7 @@
 //   }
 // });
 
-const experiences = [
+  const experiences = [
     {
       role: "AI Data Contributor",
       company:  "Postwork Labs, Inc",
