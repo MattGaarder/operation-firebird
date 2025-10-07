@@ -32,5 +32,14 @@ const { role, company, duration, location } = defineProps({
 </script>
 
 <style scoped>
+  @media (max-width: 590px) {
+    .bullet-points {
+      width: 87vw;    
+      margin-left: -32px;
+    }
+    .about {
+      right: -10%;
+    }
+  }
 
 </style>

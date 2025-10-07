@@ -54,6 +54,17 @@
 
 const experiences = [
     {
+      role: "AI Data Contributor",
+      company:  "Postwork Labs, Inc",
+      duration: "Current",
+      location: "Remote",
+      bullets: [
+        "Complete coding projects across a range of technical domains, producing high-quality datasets designed to support the training of frontier AI systems.",
+        "Apply problem-solving and programming skills to deliver efficient, well-documented solutions aligned with project specifications.",
+        "Ensure accuracy, consistency, and clarity of code outputs to contribute to robust, real-world AI training data."
+      ]
+    },
+    {
       role: "eLearning Developer",
       company:  "PwC",
       duration: "August 2023 - March 2025",

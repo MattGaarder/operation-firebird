@@ -6,19 +6,9 @@
         <q-toolbar class="q-py-md toolbar">
           <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
           <router-link  to="/" aria-label="Home" class="home-hitbox"></router-link>
-          <!-- <div class="title-subtitle q-pa-md">
-          
-
-
-
-
-            
-          <p class="subtitle">Web Development</p>
-          </div> -->
           <q-btn flat round class="q-mr-xl about" :icon="isHome ? 'download' : 'home'" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
         </q-toolbar>
       </div>
-
     </q-header>
 
     <q-drawer 
@@ -83,7 +73,6 @@
       loop: false,
       autoplay: true,
 
-      // path: animationPath, // <- use if you put JSON in /public
       animationData: animationJson,
       name: 'homepage-hero',
       rendererSettings: {
@@ -91,11 +80,6 @@
         progressiveLoad: true
       }
     })
-
-    // Optional controls:
-    // anim.setSpeed(1)      // 1 = normal, 2 = double speed, etc.
-    // anim.setDirection(1)  // 1 forward, -1 reverse
-    // anim.goToAndPlay(0, true)
   })
 
 
@@ -229,15 +213,12 @@
 }
 
 .page-container.with-padding {
-  padding-left: 14rem; /* or whatever feels good */
-  transition: padding-left 5.3s ease; /* optional smooth effect */
-
+  padding-left: 14rem; 
+  transition: padding-left 5.3s ease; 
 }
 
 .page-container.with-padding 
 
-
-/* keep header above drawer */
 .app-header { position: relative; z-index: 2000; overflow: visible; }
 
 
@@ -250,72 +231,60 @@
   pointer-events: none;
 }
 
-/* toolbar content sits above animation */
 .toolbar { position: relative; z-index: 1; }
 
-/* the clickable home area (small, precise hitbox) */
 .home-hitbox {
   position: absolute;
-  top: 8px; left: 40px;   /* put it over your final shrunken title */
-  width: 280px; height: 40px; /* tweak to match your visual title */
+  top: 8px; left: 40px;   
+  width: 280px; height: 40px;
   z-index: 2001;
-  pointer-events: auto;   /* this one *does* take clicks */
+  pointer-events: auto; 
 }
 
 
 
 @media (max-width: 940px) {
   .title-animation-v3 {
-    position: absolute;
-    top: -245%;
     left: -14%;    
-    height: 600%;
-    pointer-events: none;
   }
+
 }
 
 @media (max-width: 590px) {
   .title-animation-v3 {
-    position: absolute;
-    top: -245%;
     left: -20%;    
-    height: 600%;
-    pointer-events: none;
+  }
+  .about {
+    right: -10%;
   }
 }
 
 @media (max-width: 440px) {
   .title-animation-v3 {
-    position: absolute;
-    top: -245%;
     left: -10%;    
-    height: 600%;
     width: 90%;
-    pointer-events: none;
+
+  }
+  .about {
+    right: -15%;
+  }
+  .home-hitbox {
+    top: 8px; left: 40px;   
+    width: 170px; height: 40px;
+    z-index: 2001;
+    pointer-events: auto; 
   }
 }
 
 @media (min-width: 1390px) {
   .title-animation-v3 {
-    position: absolute;
-    top: -245%;
     left: -2%;    
-    height: 600%;
-    pointer-events: none;
   }
 }
 
 @media (min-width: 1520px) {
   .title-animation-v3 {
-    position: absolute;
-    top: -245%;
     left: 2%;    
-    height: 600%;
-    pointer-events: none;
   }
 }
 </style>
-
-
-
-<!-- reveal :reveal-offset="40" -->
