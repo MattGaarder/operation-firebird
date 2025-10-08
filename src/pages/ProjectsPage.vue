@@ -62,6 +62,7 @@
     import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
     import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
     import ThisPortfolio from 'src/components/projects/ThisPortfolio.vue';
+    import CodeJournal from 'src/components/projects/CodeJournal.vue';
 
     const leftDrawerOpen = inject('leftDrawerOpen');
 
@@ -157,7 +158,7 @@
         id:       'project2vibely',
         title:    'Vibely',
         images:   [
-        loadProjectLogo('vibely'),
+        loadProjectLogo('vibely-logo-v2'),
         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif'
         ],
         deployed: [true, 'https://main--endearing-sundae-33b843.netlify.app/'],
@@ -226,7 +227,7 @@
         id:       'project5onafa',
         title:    'Onafã',
         images:   [
-        loadProjectLogo('onafa-white'),
+        loadProjectLogo('onafa-white-v3'),
         'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTdjOGI2MjRmMmI4Y2NmNGIyMzU2NTIwZjI4YjA0M2MyNTYwYjhlZiZjdD1n/mTkFZnQ8EvNSXfV9xP/giphy.gif'
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
@@ -255,7 +256,25 @@
             { name: 'Prism',logo: loadTechLogo('prism.svg')}, 
         ],
         component: markRaw(ThisPortfolio),
-    }
+    },
+    {
+        id:       'project8journal',
+        title:    'postwork.journal',
+        images:   [
+        loadProjectLogo('code-journal-logo'),
+        'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif'
+        ],
+        deployed: [true, 'https://code-journal.netlify.app'],
+        repo:     'https://github.com/MattGaarder/postwork-journal',
+        summary:  'Code Journal supports Markdown formatting allowing users to document code snippets easily - as well as headings, lists, inline code, bold/italic, and links. Entries are stored in browser localStorage. No backend and no external data libraries required.',
+        technology: [
+            { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg')},
+            { name: 'HTML',logo: loadTechLogo('html-5-logo-svgrepo-com.svg')}, 
+            { name: 'CSS', logo: loadTechLogo('Official_CSS_Logo.svg')}, 
+            
+        ],
+        component: markRaw(CodeJournal),
+    },
     ];
 </script>
 
@@ -310,7 +329,6 @@
         flex: 0 0 50%;
         max-width: 50%;
         padding-left: 1rem;
-      
         }
     }
 
@@ -333,12 +351,12 @@
     }
 
     .windows-layer {
-    position: fixed;
-    inset: 0;
-    z-index: 2000;       /* ensure it’s above the page */
-    pointer-events: none;/* clicks pass through unless we re-enable below */
+        position: fixed;
+        inset: 0;
+        z-index: 2000;       
+        pointer-events: none;
     }
     .windows-layer > * {
-    pointer-events: auto; /* allow interacting with windows */
+        pointer-events: auto;
     }
 </style>

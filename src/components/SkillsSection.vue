@@ -11,6 +11,14 @@
                         <li>Alteryx, Power BI</li>
                     </ul>
                 </div>
+                <div class="col-12 col-md-4 col-lg-4 skill-column">
+                    <h1 class="text-h5 text-weight-bold">Misc.</h1>
+                    <ul>
+                        <li><span class="text-weight-bolder text-size-larger">Japanese</span> Speaker</li>
+                        <li>Illustrator</li>
+                        <li>Climber</li>
+                    </ul>
+                </div>
 
                 <div class="col-12 col-md-4 col-lg-4 skill-column">
                     <h1 class="text-h5 text-weight-bold">Creative</h1>
@@ -21,14 +29,7 @@
                     </ul>
                 </div>
 
-                <div class="col-12 col-md-4 col-lg-4 skill-column">
-                    <h1 class="text-h5 text-weight-bold">Misc.</h1>
-                    <ul>
-                        <li><span class="text-weight-bolder text-size-larger">Japanese</span> Speaker</li>
-                        <li>Illustrator</li>
-                        <li>Climber</li>
-                    </ul>
-                </div>
+
             </div>
 
     </q-card-section>

@@ -30,7 +30,6 @@ html {
   --site-text: #000 !important;
 }
 
-/* if you have utility classes like bg-primary on q-layout, the theme class can override them: */
 .theme-illustrations .q-layout__section--marginal  {
   background-color: var(--site-bg) !important;
   color: #000;

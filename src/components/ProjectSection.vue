@@ -23,6 +23,7 @@
           class="project-logo"
           :class="id"
           :to="deployed"
+
         />
         <div class="text-caption q-pt-md project-summary q-pr-none q-pl-sm" :to="repo">{{ summary }}</div>
         
@@ -55,8 +56,6 @@
   .wrapper {
     display: flex;
     flex-direction: column;
-
-   
   }
 
   .tech-logo {
@@ -77,30 +76,26 @@
 
   .project-logo {
     max-width: 20rem;
-    max-height: 6.1rem;
+    max-height: 6.5rem;
     min-height: 5rem;
     opacity: 0.4;
+    margin-right: 1.8rem;
+    
+
   }
 
 
 
-  :deep(.project5onafa) .q-img__image {
-    object-fit: contain !important;
-  
-    height: 90%;
-  
-  }
+
 
   :deep(.project4pwc) .q-img__image {
     object-fit: cover !important;
     margin-left: 1.5rem;
-
-   
   }
 
 
   :deep(.project2vibely) .q-img__image {
-    object-fit:cover !important;
+    object-fit: cover !important;
     height: 105%;
     margin-top: 0.3rem;
   }
@@ -114,7 +109,7 @@
   }
 
   .project-summary {
-    max-width: 25rem;
+    max-width: 23rem;
   }
 
   .project-section:hover .project-logo,
@@ -125,43 +120,28 @@
   }
 
   @media (max-width: 400px) {
-  .wrapper {
-    text-align: center;
-  }
-  .project-logo {
-    width: 100%;
-    max-width: none;
-    height: auto;
-    margin-bottom: 1.2rem;
-  }
-
-  .tech-list {
-    display: flex;
-    min-height: auto;
-  }
-
   :deep(.project-summary) {
-    padding-right: 0;
+    padding-right: 1rem;
     padding-left: 0 !important;
   }
 
-  .project4pwc {
-    max-width: none !important;
-    max-height: none !important;
-    margin-top: -5rem;
-    margin-left: -0.4rem;
+  :deep( .project-summaryp) {
+    padding-right: 190rem;
+    padding-left: 0 !important;
   }
 
-  .project6teamb, .project1weatherd, .project3moviem {
-    max-height: 11rem;
-  }
 
-  .project2vibely {
-    margin-left: -0.75rem;
-  }
 
-  .project5onafa {
-    margin-left: -1rem;
+
+
+
+
+
+
+  .tech-list {
+    flex-direction: row;
+    position: absolute;
+    margin-top: -2.5rem;
   }
 }
 

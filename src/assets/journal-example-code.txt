@@ -1,0 +1,100 @@
+// escape html function for use with innerHtml to prevent XSS attacks
+
+function escapeHTML (unsafe_str) {
+    return unsafe_str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\"/g, '&quot;')
+      .replace(/\'/g, '&#39;')
+      .replace(/\//g, '&#x2F;')
+}
+
+// use regular expressions to convert markdown to html elements
+
+function markdownToHtml(md) {
+    if (!md) return "";
+
+    // normalize newlines & trim
+    md = String(md).replace(/\r\n?/g, "\n").trim();
+
+    // escape raw HTML
+    md = escapeHTML(md);
+
+
+    md = md.replace(/```([\w+-]+)?\n([\s\S]*?)```/g, (_, lang, code) => {
+    const cls = lang ? `class="lang-${lang}"` : "";
+    return `<pre><code ${cls}>${code}</code></pre>`;
+    });
+
+    // headings
+    md = md
+    .replace(/^######\s+(.*)$/gm, "<h6>$1</h6>")
+    .replace(/^#####\s+(.*)$/gm, "<h5>$1</h5>")
+    .replace(/^####\s+(.*)$/gm, "<h4>$1</h4>")
+    .replace(/^###\s+(.*)$/gm, "<h3>$1</h3>")
+    .replace(/^##\s+(.*)$/gm, "<h2>$1</h2>")
+    .replace(/^#\s+(.*)$/gm, "<h1>$1</h1>");
+
+    // inline: bold, italics
+    md = md
+    .replace(/(\*\*|__)(.+?)\1/g, "<strong>$2</strong>")
+    .replace(/(\*|_)([^*_]+)\1/g, "<em>$2</em>");
+
+    // inline: links [text](url)
+    md = md.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, text, url) => {
+        const safeUrl = url.replace(/"/g, "%22");
+        return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+    });
+
+        // BLOCK: lists
+        // Build <ul>/<ol> from consecutive lines starting with "- " / "* " or "1. "
+    (function buildLists() {
+    const lines = md.split("\n");
+    const out = [];
+    let inUL = false, inOL = false;
+
+    const closeLists = () => {
+        if (inUL) { out.push("</ul>"); inUL = false; }
+        if (inOL) { out.push("</ol>"); inOL = false; }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const liUL = /^\s*[-*]\s+(.+)$/.exec(raw);     // "- item" or "* item"
+    const liOL = /^\s*\d+\.\s+(.+)$/.exec(raw);    // "1. item"
+
+    if (liUL) {
+    if (inOL) { out.push("</ol>"); inOL = false; }
+    if (!inUL) { out.push("<ul>"); inUL = true; }
+    out.push(`<li>${liUL[1]}</li>`);
+    } else if (liOL) {
+    if (inUL) { out.push("</ul>"); inUL = false; }
+    if (!inOL) { out.push("<ol>"); inOL = true; }
+    out.push(`<li>${liOL[1]}</li>`);
+    } else {
+    // Blank line ends any open list
+    if (raw.trim() === "") {
+        closeLists();
+        out.push(""); // preserve blank line as separator
+    } else {
+        // Non-list content: close any open list and pass the line through
+        closeLists();
+        out.push(raw);
+            }
+        }
+    }
+    closeLists();
+    md = out.join("\n");
+    })();
+
+    // Paragraphs (don’t wrap blocks that already are HTML)
+    const blocks = md.split(/\n{2,}/).map(block => {
+    const trimmed = block.trim();
+    const isHtmlBlock = /^<(h\d|pre|ul|ol|blockquote|hr)/i.test(trimmed);
+    if (isHtmlBlock) return trimmed;
+    return `<p>${trimmed.replace(/\n/g, "<br>")}</p>`;
+    });
+
+    return blocks.join("\n");
+}

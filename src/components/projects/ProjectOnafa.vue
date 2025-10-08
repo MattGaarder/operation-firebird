@@ -277,7 +277,6 @@ arrowLeft.addEventListener('click', function () {
   background: white;
 }
 
-/* header: icon + info, wrapping when too narrow */
 .project-header {
   display: flex;
   align-items: center;
@@ -301,7 +300,7 @@ arrowLeft.addEventListener('click', function () {
 
 .project-info {
   flex: 1 1 auto;
-  min-width: 0; /* allow text to wrap */
+  min-width: 0; 
 }
 
 .project-title {
@@ -349,7 +348,6 @@ arrowLeft.addEventListener('click', function () {
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
 
-/* on very narrow widths stack header contents centered */
 @media (max-width: 360px) {
   .project-header {
     justify-content: center;
