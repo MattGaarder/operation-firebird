@@ -113,10 +113,9 @@ html {
 }
 
 .code-container {
-  color: #dcdcdc;
-  padding-bottom: .75rem;
-  height: 250px; 
-  width: 100%; 
+
+  height: 350px; 
+
   margin-top: -0.5rem; 
   font-size: 0.7rem;
 }
@@ -125,9 +124,7 @@ html {
     max-width: 750px;
 }
 
-.scroll {
-    overflow: hidden;
-}
+
 
 .theme-default,
 .theme-illustrations {

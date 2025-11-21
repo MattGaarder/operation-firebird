@@ -41,6 +41,8 @@
 </script>
 
 <style scoped>
+
+
     .row {
         align-items: center;
         justify-content: center;

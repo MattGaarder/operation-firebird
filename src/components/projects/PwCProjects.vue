@@ -1,23 +1,25 @@
 <template>
   <div class="projects-wrapper">
-    <div class="column-left">
-    <q-card flat bordered class="project-card">
+    <q-card bordered class="project-card">
       <q-card-section class="project-header">
-        <q-icon name="folder" size="64px" class="project-icon" />
+        <q-icon name="folder" class="project-icon" />
         <div class="project-info">
-          <div class="project-title">Project Generator (Google Form)</div>
+          <div class="project-title">PROJECT GENERATOR <span class="sub">(Google Form)</span></div>
 
         </div>
       </q-card-section>
       <div class="project-tagline">
-        Automate your folder-structure creation with a Google Form-driven Apps Script.  
-        Fill in course name, version, location & type → on submit the script parses your answers,  
+        Automate your folder-structure creation with a Google Form-driven Apps Script.
+        <q-separator class="separator invisi" />
+        Fill in course name, version, location & type → on submit the script parses your answers,
         validates inputs, then copies a matching template tree into the correct Drive folder.
       </div>
-      <q-separator />
-        <q-card-section class="project-code">
-          <q-scroll-area class="code-container">
-          <pre v-prism><code class="language-js">
+      <q-separator class="separator" />
+      <h1 class="text-h5 text-weight-bold info-code">Code Snippets</h1>
+      <q-separator class="separator" />
+      <q-card-section class="project-code">
+        <q-scroll-area class="code-container">
+          <pre v-prism class="prism-block"><code class="language-js">
   function extractFormResponses(e) {
     let courseName, courseVersion, courseLocation, courseType;
     if(e.response){
@@ -56,20 +58,19 @@
     return { courseName, courseVersion, courseLocation, courseType };
   };
           </code></pre>
-          
         </q-scroll-area>
-        
       </q-card-section>
-          <q-card-section class="project-code">
-          <q-scroll-area class="code-container" >
-          <pre v-prism><code class="language-js">
-// main function triggered on form submission
-const responsesSheet = SpreadsheetApp.openById('spreadsheetId');
-const courseLinkColumnIndex = "H";
-const courseRow = responsesSheet.getLastRow();
-let courseLink;
+      <q-separator class="separator" />
+      <q-card-section class="project-code">
+        <q-scroll-area class="code-container">
+          <pre v-prism class="prism-block"><code class="language-js">
+  // main function triggered on form submission
+  const responsesSheet = SpreadsheetApp.openById('spreadsheetId');
+  const courseLinkColumnIndex = "H";
+  const courseRow = responsesSheet.getLastRow();
+  let courseLink;
 
-function onFormSubmit(e) {
+  function onFormSubmit(e) {
   // extract form responses and object destructure form answers into variables
   let { courseName, courseVersion, courseLocation, courseType } = extractFormResponses(e);
 
@@ -92,10 +93,10 @@ function onFormSubmit(e) {
   // pass all information for copy action 
   copyCourseFolderStructure(sourceFolderId, targetFolderId, courseName, courseVersion, courseType);
   responsesSheet.getRange(courseLinkColumnIndex + courseRow).setValue(courseLink);
-};
+  };
 
-// function that uses event object to get responses from form and assign to variables
-function extractFormResponses(e) {
+  // function that uses event object to get responses from form and assign to variables
+  function extractFormResponses(e) {
   let courseName, courseVersion, courseLocation, courseType;
   if(e.response){
     let formResponse = e.response;
@@ -126,10 +127,10 @@ function extractFormResponses(e) {
 
   // return extracted data
   return { courseName, courseVersion, courseLocation, courseType };
-};
+  };
 
-// function that copies course folder structure 
-function copyCourseFolderStructure(sourceFolderId, targetFolderId, courseName, courseVersion, courseType) {
+  // function that copies course folder structure 
+  function copyCourseFolderStructure(sourceFolderId, targetFolderId, courseName, courseVersion, courseType) {
 
   // gets target folder
   let targetFolder = DriveApp.getFolderById(targetFolderId);
@@ -156,7 +157,7 @@ function copyCourseFolderStructure(sourceFolderId, targetFolderId, courseName, c
     versionFolder = courseFolder.createFolder(versionFolderName);
     versionFolder.setDescription(courseType);
   }
-  
+
   // get template folders
   const templateFolderStructure = DriveApp.getFolderById(sourceFolderId);
   const templateFolders = templateFolderStructure.getFolders();
@@ -167,9 +168,9 @@ function copyCourseFolderStructure(sourceFolderId, targetFolderId, courseName, c
     const currentFolder = templateFolders.next();
     copyFolder(currentFolder, versionFolder);
   }
-};
+  };
 
-function getExistingFolder(targetFolder, courseName){
+  function getExistingFolder(targetFolder, courseName){
   // loop thorugh and return the folder with the same name if it is found
   let folders = targetFolder.getFolders();
   while(folders.hasNext()){
@@ -179,10 +180,10 @@ function getExistingFolder(targetFolder, courseName){
     }
   }
   return null;
-}
+  }
 
-// function that copies a folder structure from a source folder to a target folder
-function copyFolder(sourceFolder, targetFolder) {
+  // function that copies a folder structure from a source folder to a target folder
+  function copyFolder(sourceFolder, targetFolder) {
   let folderName = sourceFolder.getName();
 
   let newFolder = targetFolder.createFolder(folderName);
@@ -192,10 +193,10 @@ function copyFolder(sourceFolder, targetFolder) {
     let subFolder = folders.next();
     copyFolder(subFolder, newFolder);
   }
-};
+  };
 
-// function that determines the target folder ID based on the course location
-function determineTargetFolderId(courseLocation) {
+  // function that determines the target folder ID based on the course location
+  function determineTargetFolderId(courseLocation) {
   const digitalAuditFolderId = 'dAuditId';
   const digitalUsFolderId = 'dUsFId';
   const productionFolderId = 'prodFId';
@@ -212,9 +213,9 @@ function determineTargetFolderId(courseLocation) {
     default: 
       return null;
   }
-};
+  };
 
-function determineSourceFolderId(courseType, courseLocation) {
+  function determineSourceFolderId(courseType, courseLocation) {
   const productionTemplates = 'prodTemp';
   const digitalTemplates = 'digTemp';
   let templates;
@@ -231,58 +232,74 @@ function determineSourceFolderId(courseType, courseLocation) {
   }
   console.log('no folder found with the course type: ' + courseType);
   return null
-};
+  };
           </code></pre>
-          
         </q-scroll-area>
       </q-card-section>
+      <q-separator class="separator" />
 
-      <q-card-section class="project-body file-lister">
+      <q-card-section class="project-body">
+        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
+        <q-separator class="separator-info" />
         <ul class="feature-list">
           <li>
-            <strong>Trigger:</strong> Form submission fires an <code>onFormSubmit(e)</code> Apps Script bound to your spreadsheet.
+            <strong>Trigger:</strong> Form submission fires an <code>onFormSubmit(e)</code> Apps Script bound to your
+            spreadsheet.
           </li>
           <li>
-            <strong>Response parsing:</strong> <code>extractFormResponses(e)</code> reads questions “Course Name”, “Location”, “Type”,
+            <strong>Response parsing:</strong> <code>extractFormResponses(e)</code> reads questions “Course Name”,
+            “Location”, “Type”,
             uses RegEx to split “ v#” version suffix.
           </li>
           <li>
-            <strong>Validation:</strong> Ensures name, location &amp; type are present and match allowed options before proceeding.
+            <strong>Validation:</strong> Ensures name, location &amp; type are present and match allowed options before
+            proceeding.
           </li>
           <li>
-            <strong>Drive API:</strong> <code>determineTargetFolderId()</code> &amp; <code>determineSourceFolderId()</code> pick your destination & template folders.
+            <strong>Drive API:</strong> <code>determineTargetFolderId()</code> &amp;
+            <code>determineSourceFolderId()</code> pick your destination & template folders.
           </li>
           <li>
-            <strong>Template copy:</strong> <code>copyCourseFolderStructure()</code> creates (or finds) the base folder, then
+            <strong>Template copy:</strong> <code>copyCourseFolderStructure()</code> creates (or finds) the base folder,
+            then
             recursively clones every subfolder via <code>copyFolder()</code>.
           </li>
           <li>
-            <strong>Versioning:</strong> Auto‐creates a “CourseName vX” folder, prevents duplicate versions, and logs “already exists”.
+            <strong>Versioning:</strong> Auto‐creates a “CourseName vX” folder, prevents duplicate versions, and logs
+            “already exists”.
           </li>
           <li>
-            <strong>Learned:</strong> Google Apps Script event objects, DriveApp folder operations, recursive folder cloning & user‐friendly form tooling.
+            <strong>Learned:</strong> Google Apps Script event objects, DriveApp folder operations, recursive folder
+            cloning & user‐friendly form tooling.
           </li>
         </ul>
       </q-card-section>
     </q-card>
-    </div>
-    <div class="column-right">
-    <q-card flat bordered class="project-card">
-      <q-card-section class="project-header">
-        <q-icon name="description" size="64px" class="project-icon" />
-        <div class="project-info">
-          <div class="project-title">File Lister</div>
 
+
+    <!-- FILE LISTER (now matching layout) -->
+    <q-card bordered class="project-card">
+      <q-card-section class="project-header">
+        <q-icon name="description" class="project-icon" />
+        <div class="project-info">
+          <div class="project-title">FILE LISTER<span class="sub">(Google Drive)</span></div>
         </div>
       </q-card-section>
-                <div class="project-tagline">
-            Apps Script project that incrementally crawls Google Drive — checkpointing progress to dodge execution limits — and exports a comprehensive file-path report into Sheets for use in Power BI for migration auditing (to SharePoint).
-          </div>
-          <q-separator />
+
+      <div class="project-tagline">
+        Apps Script project that incrementally crawls Google Drive — checkpointing progress to dodge execution limits —
+        and exports a comprehensive file-path report into Sheets for use in Power BI for migration auditing (to
+        SharePoint).
+        <q-separator class="separator invisi" />
+      </div>
+
+      <q-separator class="separator" />
+      <h1 class="text-h5 text-weight-bold info-code">Code Snippets</h1>
+      <q-separator class="separator" />
       <q-card-section class="project-code">
-        
+
         <q-scroll-area class="code-container">
-          <pre v-prism><code class="language-js">
+          <pre v-prism class="prism-block"><code class="language-js">
 function listFilesInDrive() {
   try {
     var folderId = 'folderId';  // Root folder ID
@@ -594,119 +611,139 @@ function getOrCreateSubfolderData(subfolderId, parentFolderData) {
           </code></pre>
         </q-scroll-area>
       </q-card-section>
+      <q-separator class="separator" />
+
       <q-card-section class="project-body">
+        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
+        <q-separator class="separator-info" />
         <ul class="feature-list">
           <li>
-            <strong>Incremental crawl:</strong> Uses a top-level snapshot + path array in `PropertiesService` to resume folder traversal after time-out.
+            <strong>Incremental crawl:</strong> Uses a top-level snapshot + path array in <code>PropertiesService</code>
+            to resume folder traversal after time-out.
           </li>
           <li>
-            <strong>Progress table:</strong> Logs folder name, ID, index &amp; processed flag in a side-table so you can pick up where you left off.
+            <strong>Progress table:</strong> Logs folder name, ID, index &amp; processed flag in a side-table so you can
+            pick up where you left off.
           </li>
           <li>
-            <strong>File export:</strong> Appends clickable `HYPERLINK` rows ([File Name, Full Path]) for every Drive file.
+            <strong>File export:</strong> Appends clickable <code>HYPERLINK</code> rows ([File Name, Full Path]) for
+            every Drive file.
           </li>
           <li>
-            <strong>Timeout workaround:</strong> Batches work into slices, checkpointing every N files/folders to survive Apps Script’s 6-minute limit.
+            <strong>Timeout workaround:</strong> Batches work into slices, checkpointing every N files/folders to
+            survive Apps Script’s 6-minute limit.
           </li>
           <li>
-            <strong>Migration QA:</strong> Feeds the output into Power BI to compare Google Drive vs SharePoint sets and catch missing or mismatched items.
+            <strong>Migration QA:</strong> Feeds the output into Power BI to compare Google Drive vs SharePoint sets and
+            catch missing or mismatched items.
           </li>
           <li>
-            <strong>Learned:</strong> Advanced GAS recursion, state persistence with `PropertiesService`, efficient sheet I/O and BI-driven validation.
+            <strong>Learned:</strong> Advanced GAS recursion, state persistence with <code>PropertiesService</code>,
+            efficient sheet I/O and BI-driven validation.
           </li>
         </ul>
       </q-card-section>
     </q-card>
-    <q-card flat bordered class="project-card">
-        <q-card-section class="project-header">
-          <q-icon name="settings" size="64px" class="project-icon" />
-          <div class="project-info">
-            <div class="project-title">Components Toolbar</div>
-
-          </div>
-        </q-card-section>
-        <div class="project-tagline">
-          Adds a 'Components' menu to Google Docs for one-click insertion of Face-to-Face, Digital, Video & Assessment templates—
-          streamlining document assembly with reusable content blocks.
+    <q-card bordered class="project-card">
+      <q-card-section class="project-header">
+        <q-icon name="settings" class="project-icon" />
+        <div class="project-info">
+          <div class="project-title">TOOLBAR COMPONENTS<span class="sub">(Google Docs)</span></div>
         </div>
-        <q-separator />
-        <q-card-section class="project-code">
-          <q-scroll-area class="code-container">
-            <pre v-prism><code class="language-js">
+      </q-card-section>
+
+      <div class="project-tagline">
+        Adds a 'Components' menu to Google Docs for one-click insertion of Face-to-Face, Digital, Video & Assessment
+        templates—
+        streamlining document assembly with reusable content blocks.
+        <q-separator class="separator invisi" />
+      </div>
+
+      <q-separator class="separator" />
+      <h1 class="text-h5 text-weight-bold info-code">Code Snippets</h1>
+      <q-separator class="separator" />
+      <q-card-section class="project-code">
+        <q-scroll-area class="code-container">
+          <pre v-prism class="prism-block"><code class="language-js">
 function onOpen(e) {
-  const ui = DocumentApp.getUi();
-  ui.createMenu('Components')
-    .addItem('Face to face', 'insertF2f')
-    .addItem('Digital', 'insertDig')
-    .addItem('Video', 'insertVid')
-    .addItem('Assessment', 'insertAss')
-    .addToUi();
+const ui = DocumentApp.getUi();
+ui.createMenu('Components')
+  .addItem('Face to face', 'insertF2f')
+  .addItem('Digital', 'insertDig')
+  .addItem('Video', 'insertVid')
+  .addItem('Assessment', 'insertAss')
+  .addToUi();
 };
 
 function insertTemplateElements(templateDocId) {
-  const doc = DocumentApp.getActiveDocument();
-  const body = doc.getBody();
-  const templateDoc = DocumentApp.openById(templateDocId);
-  const templateBody = templateDoc.getBody();
-  var cursor = doc.getCursor();
-  var index = 0;
-  if (cursor) {
-    var element = cursor.getElement();
-    while (element.getParent().getType() != DocumentApp.ElementType.BODY_SECTION) {
-      element = element.getParent();
-    }
-    index = body.getChildIndex(element);
-  } else {
-    DocumentApp.getUi().alert("Could not find current position. Ensure you have selected where you want to paste the template.");
-    return;
+const doc = DocumentApp.getActiveDocument();
+const body = doc.getBody();
+const templateDoc = DocumentApp.openById(templateDocId);
+const templateBody = templateDoc.getBody();
+var cursor = doc.getCursor();
+var index = 0;
+if (cursor) {
+  var element = cursor.getElement();
+  while (element.getParent().getType() != DocumentApp.ElementType.BODY_SECTION) {
+    element = element.getParent();
   }
-  for (var i = templateBody.getNumChildren() - 1; i >= 0; i--) {
-    var child = templateBody.getChild(i).copy();
-    switch (child.getType()) {
-      case DocumentApp.ElementType.PARAGRAPH:
-        body.insertParagraph(index, child);
-        break;
-      case DocumentApp.ElementType.LIST_ITEM:
-        body.insertListItem(index, child);
-        break;
-      case DocumentApp.ElementType.TABLE:
-        body.insertTable(index, child);
-        break;
-      case DocumentApp.ElementType.INLINE_IMAGE:
-        body.insertImage(index, child);
-        break;
-    }
+  index = body.getChildIndex(element);
+} else {
+  DocumentApp.getUi().alert("Could not find current position. Ensure you have selected where you want to paste the template.");
+  return;
+}
+for (var i = templateBody.getNumChildren() - 1; i >= 0; i--) {
+  var child = templateBody.getChild(i).copy();
+  switch (child.getType()) {
+    case DocumentApp.ElementType.PARAGRAPH:
+      body.insertParagraph(index, child);
+      break;
+    case DocumentApp.ElementType.LIST_ITEM:
+      body.insertListItem(index, child);
+      break;
+    case DocumentApp.ElementType.TABLE:
+      body.insertTable(index, child);
+      break;
+    case DocumentApp.ElementType.INLINE_IMAGE:
+      body.insertImage(index, child);
+      break;
   }
+}
 }
 
 function insertF2f() {
-  insertTemplateElements('docId');
+insertTemplateElements('docId');
 }
 
 function insertDig() {
-  insertTemplateElements('docId');
+insertTemplateElements('docId');
 }
 
 function insertVid() {
-  insertTemplateElements('docId');
+insertTemplateElements('docId');
 }
 
 function insertAss() {
-  insertTemplateElements('docId');
+insertTemplateElements('docId');
 }
-            </code></pre>
-          </q-scroll-area>
-        </q-card-section>
-        <q-card-section class="project-body">
-          <ul class="feature-list">
-            <li><strong>Menu Integration:</strong> Creates a 'Components' toolbar with four template actions.</li>
-            <li><strong>Template Insertion:</strong> Fetches docs by ID and inserts paragraphs, lists, tables & images at the cursor.</li>
-            <li><strong>Cursor & Index Handling:</strong> Locates insertion point or alerts if none selected.</li>
-            <li><strong>Learned:</strong> DocumentApp UI menus, body child iteration, element copying, and cursor management.</li>
-          </ul>
-        </q-card-section>
-      </q-card>
-  </div>
+          </code></pre>
+        </q-scroll-area>
+      </q-card-section>
+      <q-separator class="separator" />
+
+      <q-card-section class="project-body">
+        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
+        <q-separator class="separator-info" />
+        <ul class="feature-list">
+          <li><strong>Menu Integration:</strong> Creates a 'Components' toolbar with four template actions.</li>
+          <li><strong>Template Insertion:</strong> Fetches docs by ID and inserts paragraphs, lists, tables & images at
+            the cursor.</li>
+          <li><strong>Cursor & Index Handling:</strong> Locates insertion point or alerts if none selected.</li>
+          <li><strong>Learned:</strong> DocumentApp UI menus, body child iteration, element copying, and cursor
+            management.</li>
+        </ul>
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 
@@ -715,70 +752,96 @@ function insertAss() {
 </script>
 
 <style scoped>
-.column-left,
-.column-right {
-  display: flex;
-  flex-direction: column;
+.info {
+  /* justify-self: right; */
+  font-size: 0.9rem;
+  /* position: absolute; */
+  color: black;
+  margin-top: -1rem;
+  padding: 0px;
 }
-.column-left {
-  flex: 1 1 360px;
+
+.info-code {
+  /* justify-self: right; */
+  font-size: 0.9rem;
+  /* position: absolute; */
+  color: black;
+
+  padding: 0px;
+  padding-left: 1.2rem;
 }
-.column-right {
-  flex: 1 1 360px;
+
+.invisi {
+  opacity: 0;
+  margin-top: 0.5rem;
 }
+
 .projects-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: rgb(253, 253, 253);
 }
 
 .project-card {
-  flex: 1 1 400px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   border-radius: 6px;
   /* overflow: hidden; */
   background: white;
+  margin: 0.6rem;
+  padding: 0.8rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  border-color: rgb(207, 207, 207);
 }
 
 /* header: icon + info, wrapping when too narrow */
 .project-header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   flex-wrap: wrap;
-  
-  gap: 0.75rem;
+
+  /* gap: 0.3rem; */
   background: var(--q-color-grey-1);
-  padding: 1rem;
+  margin-top: 0.7rem;
 }
 
 .project-icon {
-  flex: 0 0 74px;
+
   height: auto;
   border-radius: 4px;
+  color: #2B6CAF;
+  font-size: 1.8rem;
+  padding-left: 0.5rem;
+  padding-right: 0.4rem;
 
+
+}
+
+.sub {
+  color: #6B7C94;
+  font-size: small;
+  font-weight: 400;
+  padding-left: 0.6rem;
 }
 
 .readme-icon {
   color: var(--q-color-blue-6);
 }
 
-.project-info {
-  flex: 1 1 auto;
-  min-width: 0; /* allow text to wrap */
-}
+
 
 .project-title {
-  font-size: 1.7rem;
+  font-size: 1.55rem;
   font-weight: 600;
-  margin-left: auto;
+
   margin-top: auto;
+  margin-left: 0.3rem;
 }
 
 .project-tagline {
-
   padding: 1.5rem;
-  padding-top: 0;
+  padding-left: 1.2rem;
+  padding-top: 0.7rem;
   font-size: 0.95rem;
   line-height: 1.4;
 }
@@ -789,16 +852,19 @@ function insertAss() {
 
 /* feature list section */
 .project-body {
-  margin-top: -0.7rem;
+  padding: 1rem;
+  padding-top: 1.8rem;
 }
 
 .feature-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 1.5rem;
 }
 
 .feature-list li {
+
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
 }
@@ -812,7 +878,26 @@ function insertAss() {
   width: 100%;
   height: auto;
   border-radius: 4px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.separator {
+  margin-left: -0.8rem;
+  margin-right: -0.8rem;
+}
+
+.separator-info {
+  margin-left: -1.8rem;
+  margin-right: -1.8rem;
+  margin-top: 0.5rem;
+}
+
+.project-code {
+  background-color: #ECF2F8;
+  margin-left: -0.8rem;
+  margin-right: -0.8rem;
+
+  padding-bottom: 0rem;
 }
 
 /* on very narrow widths stack header contents centered */
@@ -822,4 +907,16 @@ function insertAss() {
     text-align: center;
   }
 }
+
+.prism-block {
+  margin: 0rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  padding-left: 1.3rem;
+  font-family: sans-serif;
+  background-color: #ECF2F8;
+
+}
+
+
 </style>

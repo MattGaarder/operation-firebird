@@ -120,30 +120,17 @@
   }
 
   @media (max-width: 400px) {
-  :deep(.project-summary) {
-    padding-right: 1rem;
-    padding-left: 0 !important;
+    :deep(.project-summary) {
+      padding-right: 2rem;
+      padding-left: 0 !important;
+    }
+
+    .tech-list {
+      flex-direction: row;
+      position: absolute;
+      margin-top: -2.7rem;
+    }
   }
-
-  :deep( .project-summaryp) {
-    padding-right: 190rem;
-    padding-left: 0 !important;
-  }
-
-
-
-
-
-
-
-
-
-  .tech-list {
-    flex-direction: row;
-    position: absolute;
-    margin-top: -2.5rem;
-  }
-}
 
   .qward {
     display: flex;

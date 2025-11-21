@@ -74,14 +74,23 @@
     let topZ = 2001;
 
     function getWindowConfig() {
-        const w = $q.screen.width;
-        const h = $q.screen.height;
+        const w = $q.screen.width
+        const h = $q.screen.height
+
+        const factor = $q.screen.lt.md ? 0.9 : 0.7
+
+        const width  = Math.floor(w * factor)
+        const height = Math.floor(h * factor)
+
+        // center the window
+        const x = Math.floor((w - width) / 2)
+        const y = Math.floor((h - height) / 2)
 
         return {
-            width:  Math.floor(w * 0.7),    // 70% of screen width
-            height: Math.floor(h * 0.7),    // 70% of screen height
-            x:      Math.floor(w * 0.15),   // centered horizontally
-            y:      Math.floor(h * 0.15)    // centered vertically
+            width,
+            height,
+            x,
+            y
         }
     }
 
@@ -325,24 +334,26 @@
 
 
     @media (min-width: 600px) and (max-width: 1550px) {
-    .project-row > .col-lg-4 {
-        flex: 0 0 50%;
-        max-width: 50%;
-        padding-left: 1rem;
+        .project-row > .col-lg-4 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-left: 1rem;
         }
     }
 
-    @media (min-width: 1100px) and (max-width: 1550px) { .three-col.project-row > .col-lg-4 {
-        flex: 0 0 33.3333% !important;
-        max-width: 33.3333% !important;
-        padding-left: 1rem;
+    @media (min-width: 1100px) and (max-width: 1550px) { 
+        .three-col.project-row > .col-lg-4 {
+            flex: 0 0 33.3333% !important;
+            max-width: 33.3333% !important;
+            padding-left: 1rem;
         }
     }
 
-    @media (min-width: 1800px) { .three-col.project-row > .col-lg-4 {
-        flex: 0 0 25% !important;
-        max-width: 25% !important;
-        padding-left: 1rem;
+    @media (min-width: 1800px) { 
+        .three-col.project-row > .col-lg-4 {
+            flex: 0 0 25% !important;
+            max-width: 25% !important;
+            padding-left: 1rem;
         }
     }
 
