@@ -6,7 +6,7 @@
                 <div class="col-12 col-md-4 col-lg-4 skill-column">
                     <h1 class="text-h5 text-weight-bold">Technical</h1>
                     <ul>
-                        <li><span class="text-weight-bolder text-size-larger">JavaScript</span>, HTML, CSS, Vue 3</li>
+                        <li><span class="text-weight-bolder text-size-larger">JavaScript</span>, Vue, CSS </li>
                         <li>C#, Power Platform, <span class="text-weight-bolder text-size-larger">Excel (VBA)</span></li>
                         <li>Alteryx, Power BI</li>
                     </ul>
@@ -65,6 +65,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        
 
     }
 
@@ -74,10 +75,15 @@
 
     @media (max-width: 900px) {
         .skill-column:not(:last-child) {
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-column {
+            line-height: 0.8rem;
+            
         }
         .skill-summary-row {
-            margin-left: -4rem;
+            margin-left: -3rem;
         }
     }
 

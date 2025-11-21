@@ -14,7 +14,11 @@
       :location="entry.location"
       :bullets="entry.bullets"
       square
-      class="bg-primary experience-section top-border q-pt-lg q-pr-xl"
+      class="bg-primary experience-section top-border q-pt-lg"
+      :class="{
+        'q-pr-xl': !isMobile,
+        'q-pr-none': isMobile
+      }"
     />
   </q-page>
 </template>
@@ -22,38 +26,12 @@
 <script setup>
   import ExperienceSection from 'src/components/ExperienceSection.vue';
   import SkillsSection from 'src/components/SkillsSection.vue';
-//   import { inject, computed } from 'vue';
-//   import { useQuasar } from 'quasar';
-  // const leftDrawerOpen = inject('leftDrawerOpen');
-        
 
-  
+  import { computed } from 'vue'
+  import { useQuasar } from 'quasar'
 
-//   const $q = useQuasar();
-
-//   const sidePadding = computed(() => {
-//   const w = $q.screen.width;
-
-//   if (w < 1113) {
-//     // narrow screen
-//     if (!leftDrawerOpen?.value) {
-//       // drawer closed + narrow
-//       return '2rem';
-//     } else {
-//       // drawer open + narrow
-//       return '4rem';
-//     }
-//   } else {
-//     // wide screen
-//     if (leftDrawerOpen?.value) {
-//       // drawer open + wide
-//       return '4rem';
-//     } else {
-//       // drawer closed + wide
-//       return '25rem';
-//     }
-//   }
-// });
+  const $q = useQuasar()
+  const isMobile = computed(() => $q.screen.lt.md)  // < md == mobile/tablet
 
   const experiences = [
     {
@@ -137,10 +115,13 @@
 </script>
 
 <style scoped>
+
     @media (max-width: 900px) {
         .experience-title {
-            margin-left: -0.8rem;
+            margin-left: -1.9rem;
         }
+
+
     }
 
 

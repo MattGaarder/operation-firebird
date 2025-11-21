@@ -4,7 +4,7 @@
       <div class="header-wrap">
         <div ref="lottieEl" class="title-animation-v3"></div>
         <q-toolbar class="q-py-md toolbar">
-          <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
+          <q-btn flat dense round icon="menu" class="drawer" aria-label="Menu" @click="toggleLeftDrawer" />
           <router-link  to="/" aria-label="Home" class="home-hitbox"></router-link>
           <q-btn flat round class="q-mr-xl about" :icon="isHome ? 'download' : 'home'" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
         </q-toolbar>
@@ -286,12 +286,17 @@
   }
   .about {
     right: -15%;
+    margin-right: 0.9rem;
   }
   .home-hitbox {
     top: 8px; left: 40px;   
     width: 170px; height: 40px;
     z-index: 2001;
     pointer-events: auto; 
+  }
+
+  .drawer {
+    margin-left: -1rem;
   }
 }
 

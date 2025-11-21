@@ -193,3 +193,18 @@ html, body, #q-app {
   color: var(--site-text, #fff);
   min-height: 100%; /* ensure full height */
 }
+
+@media (max-width: 900px) {
+    .experience-section {
+      margin-left: -0.7rem; 
+      margin-bottom: 2.5rem;
+    }
+
+    .bullet-points {
+      width: 100%;
+    }
+
+    .bullet {
+      width: 105%;
+    }
+}
