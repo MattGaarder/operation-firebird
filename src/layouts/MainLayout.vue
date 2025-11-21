@@ -15,7 +15,7 @@
       v-model="leftDrawerOpen" 
       class="q-px-lg drawer" 
       :width="drawerWidth" 
-      :breakpoint="1128" 
+      :breakpoint="DRAWER_BREAKPOINT" 
       :style="{ paddingLeft: sidePadding }" 
       :class="{ 'theme-default': !isIllustrations, 'theme-illustrations': isIllustrations }"
     >
@@ -41,7 +41,8 @@
 </template>
 
 <script setup>
-  import { ref, computed, provide, onMounted } from 'vue';
+
+  import { ref, computed, provide, onMounted, watch } from 'vue';
   import { useQuasar } from 'quasar';
   import { useRoute, useRouter } from 'vue-router';
   import lottie from 'lottie-web';
@@ -56,8 +57,26 @@
   const route = useRoute();
   const isHome = computed(() => route.path === '/');
   const isIllustrations = computed(() => route.path.includes('illustrations'));
-  const isWide = computed(() => $q.screen.width >= 1128)
-  const leftDrawerOpen = ref(true)
+  const DRAWER_BREAKPOINT = 1128
+  const isWide = computed(() => $q.screen.width >= DRAWER_BREAKPOINT)
+
+
+  const leftDrawerOpen = ref(isWide.value)
+
+
+  watch(isWide, (wide) => {
+    if (wide) {
+
+      leftDrawerOpen.value = true
+    } else {
+
+      leftDrawerOpen.value = false
+    }
+  })
+
+
+
+
 
   provide('leftDrawerOpen', leftDrawerOpen);
 

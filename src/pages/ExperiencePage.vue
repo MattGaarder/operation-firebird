@@ -1,9 +1,9 @@
 <template>
   <q-page padding class="q-pl-xl"  :style="{ paddingLeft: sidePadding }">
-    <div class="text-h8 text-weight-bold q-mb-lg  q-pt-lg top-border">SKILLS  &  INTERESTS</div>
+    <div class="text-h8 text-weight-bold q-mb-lg  q-pt-lg top-border experience-title">SKILLS  &  INTERESTS</div>
     <SkillsSection class="bg-primary experience-section top-border q-pt-lg "></SkillsSection>
 
-    <div class="text-h8 text-weight-bold q-mb-lg q-mr-xl q-pt-lg top-border">EXPERIENCE</div>
+    <div class="text-h8 text-weight-bold q-mb-lg q-mr-xl q-pt-lg top-border experience-title">EXPERIENCE</div>
 
     <ExperienceSection
       v-for="entry in experiences"
@@ -137,6 +137,11 @@
 </script>
 
 <style scoped>
+    @media (max-width: 900px) {
+        .experience-title {
+            margin-left: -0.8rem;
+        }
+    }
 
 
 </style>

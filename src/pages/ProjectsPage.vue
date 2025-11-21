@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="">
+  <q-page padding class="projects">
     <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg">PROJECTS</div>
     
 

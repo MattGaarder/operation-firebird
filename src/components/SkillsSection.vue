@@ -2,7 +2,7 @@
   <q-card flat class="q-mb-xl">
     <q-card-section class="q-pa-none">
 
-            <div class="row">
+            <div class="row skill-summary-row">
                 <div class="col-12 col-md-4 col-lg-4 skill-column">
                     <h1 class="text-h5 text-weight-bold">Technical</h1>
                     <ul>
@@ -70,6 +70,15 @@
 
     .text-size-larger {
         font-size: 1.09rem;
+    }
+
+    @media (max-width: 900px) {
+        .skill-column:not(:last-child) {
+            margin-bottom: 2.5rem;
+        }
+        .skill-summary-row {
+            margin-left: -4rem;
+        }
     }
 
 </style>
