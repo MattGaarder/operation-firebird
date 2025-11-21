@@ -1,5 +1,5 @@
-// escape html function for use with innerHtml to prevent XSS attacks
 
+// escape html function for use with innerHtml to prevent XSS attacks
 function escapeHTML (unsafe_str) {
     return unsafe_str
       .replace(/&/g, '&amp;')
@@ -11,17 +11,12 @@ function escapeHTML (unsafe_str) {
 }
 
 // use regular expressions to convert markdown to html elements
-
 function markdownToHtml(md) {
     if (!md) return "";
-
     // normalize newlines & trim
     md = String(md).replace(/\r\n?/g, "\n").trim();
-
     // escape raw HTML
     md = escapeHTML(md);
-
-
     md = md.replace(/```([\w+-]+)?\n([\s\S]*?)```/g, (_, lang, code) => {
     const cls = lang ? `class="lang-${lang}"` : "";
     return `<pre><code ${cls}>${code}</code></pre>`;
@@ -47,8 +42,8 @@ function markdownToHtml(md) {
         return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
     });
 
-        // BLOCK: lists
-        // Build <ul>/<ol> from consecutive lines starting with "- " / "* " or "1. "
+    // BLOCK: lists
+    // Build <ul>/<ol> from consecutive lines starting with "- " / "* " or "1. "
     (function buildLists() {
     const lines = md.split("\n");
     const out = [];
@@ -93,7 +88,7 @@ function markdownToHtml(md) {
     const trimmed = block.trim();
     const isHtmlBlock = /^<(h\d|pre|ul|ol|blockquote|hr)/i.test(trimmed);
     if (isHtmlBlock) return trimmed;
-    return `<p>${trimmed.replace(/\n/g, "<br>")}</p>`;
+        return `<p>${trimmed.replace(/\n/g, "<br>")}</p>`;
     });
 
     return blocks.join("\n");
