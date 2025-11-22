@@ -1,117 +1,157 @@
 <template>
   <div class="projects-wrapper">
-    <q-card flat bordered class="project-card">
-      <q-card-section class="project-body">
+    <q-card bordered class="project-card">
+      <!-- Header -->
+      <q-card-section class="project-header">
+        <q-icon name="movie" class="project-icon" />
         <div class="project-info">
-          <div class="project-title">Moovie Match</div>
-          <div class="project-tagline">
-            This project is a jQuery-based film comparison UI. Clicking “find” AJAX-requests movie data from OMDB, renders a discover panel with poster/details, then queries YouTube’s API for a trailer and instantiates the YouTube iframe player. Users can mark titles as “seen” or “watch,” which are persisted in localStorage and shown in dynamic lists. Event delegation handles interactions (activate, delete, move), and layout tweaking functions adjust presentation. Core tech: jQuery, OMDB API, YouTube IFrame API, and browser localStorage.
-
-            'Compare and manage movie trailers effortlessly: view side-by-side previews and key film details, then save your picks to persistent Watch or Seen lists—your personalized cinematic dashboard for smarter, stress-free movie decisions.',
-          </div>
+          <div class="project-title">MOOVIE MATCH</div>
         </div>
       </q-card-section>
 
-      <q-separator />
+      <!-- Tagline -->
+      <div class="project-tagline">
+        This project is a jQuery-based film comparison UI. Clicking “find” AJAX-requests movie data from OMDB,
+        renders a discover panel with poster/details, then queries YouTube’s API for a trailer and instantiates
+        the YouTube iframe player. Users can mark titles as “seen” or “watch,” which are persisted in
+        <code>localStorage</code> and shown in dynamic lists. Event delegation handles interactions (activate,
+        delete, move), and layout tweaking functions adjust presentation. Core tech: jQuery, OMDB API,
+        YouTube IFrame API, and browser localStorage.
+        <q-separator class="separator invisi" />
+        <em>
+          Compare and manage movie trailers effortlessly: view side-by-side previews and key film details,
+          then save your picks to persistent Watch or Seen lists — your personalized cinematic dashboard for
+          smarter, stress-free movie decisions.
+        </em>
+      </div>
 
+      <!-- Further Information -->
+      <q-separator class="separator" />
       <q-card-section class="project-body">
+        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
+        <q-separator class="separator-info" />
         <ul class="feature-list">
-          <li><strong>Movie Data:</strong> Fetches film details from OMDB API via AJAX</li>
-          <li><strong>Trailers:</strong> Integrates YouTube iFrame API to embed trailers</li>
-          <li><strong>Lists:</strong> “Watch” & “Seen” arrays persisted in localStorage</li>
-          <li><strong>Dynamic UI:</strong> jQuery generates and updates cards, buttons & event handlers</li>
-          <li><strong>State Management:</strong> data-attributes & click handlers rehydrate selected movie info</li>
-          <li><strong>Learned:</strong> chaining API calls, DOM manipulation & clean UX for list-based navigation</li>
+          <li>
+            <strong>Movie Data:</strong> Fetches film details from OMDB API via AJAX.
+          </li>
+          <li>
+            <strong>Trailers:</strong> Integrates YouTube iFrame API to embed trailers.
+          </li>
+          <li>
+            <strong>Lists:</strong> “Watch” &amp; “Seen” arrays persisted in <code>localStorage</code>.
+          </li>
+          <li>
+            <strong>Dynamic UI:</strong> jQuery generates and updates cards, buttons &amp; event handlers.
+          </li>
+          <li>
+            <strong>State Management:</strong> <code>data-*</code> attributes &amp; click handlers rehydrate selected movie info.
+          </li>
+          <li>
+            <strong>Learned:</strong> Chaining API calls, DOM manipulation &amp; clean UX for list-based navigation.
+          </li>
         </ul>
       </q-card-section>
-      <q-img :src="props.images[1]" class="project-gif" alt="Moovie Match logo"/> 
+
+      <!-- Screenshot / Logo -->
+      <q-img :src="props.images[1]" class="project-gif" alt="Moovie Match screenshot" />
     </q-card>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps } from 'vue';
 
 const props = defineProps({
   images: {
     type: Array,
     required: true
-  }});
+  }
+});
 </script>
 
 <style scoped>
-.projects-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  /* if you want some padding inside your draggable window */
-  padding: 1rem;
+.info {
+  font-size: 0.9rem;
+  color: black;
+  margin-top: -1rem;
+  padding: 0;
 }
 
-/* each card will try to be at least 300px wide,
-   but grow to fill available space */
-.project-card {
-  flex: 1 1 300px;
+.invisi {
+  opacity: 0;
+  margin-top: 0.5rem;
+}
+
+.projects-wrapper {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background-color: rgb(253, 253, 253);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
   border-radius: 6px;
-  overflow: hidden;
   background: white;
+  margin: 0.6rem;
+  /* no padding here so separators can go full-width via negative margins */
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  border-color: rgb(207, 207, 207);
 }
 
 /* header: icon + info, wrapping when too narrow */
 .project-header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   flex-wrap: wrap;
-  
-  gap: 0.75rem;
   background: var(--q-color-grey-1);
-  padding: 1rem;
+  margin-top: 0.7rem;
 }
 
 .project-icon {
-  flex: 0 0 174px;
   height: auto;
   border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-}
-
-.readme-icon {
-  color: var(--q-color-blue-6);
+  color: #2b6caf;
+  font-size: 1.8rem;
+  padding-left: 0.5rem;
+  padding-right: 0.4rem;
 }
 
 .project-info {
   flex: 1 1 auto;
-  min-width: 0; /* allow text to wrap */
+  min-width: 0;
 }
 
 .project-title {
-  font-size: 1.7rem;
+  font-size: 1.55rem;
   font-weight: 600;
-  margin-left: auto;
   margin-top: auto;
+  margin-left: 0.3rem;
 }
 
 .project-tagline {
-  margin-top: 0.25rem;
+  padding: 1.5rem;
+  padding-left: 1.2rem;
+  padding-top: 0.7rem;
   font-size: 0.95rem;
-  color: var(--q-color-grey-7);
   line-height: 1.4;
+}
+
+.q-card__section--vert {
+  padding: 8px;
 }
 
 /* feature list section */
 .project-body {
-  padding: 0.75rem 1rem;
-  background: var(--q-color-grey-2);
-  flex-grow: 1;
+  padding: 1rem;
+  padding-top: 1.8rem;
 }
 
 .feature-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 1.5rem;
 }
 
 .feature-list li {
@@ -119,16 +159,24 @@ const props = defineProps({
   font-size: 0.9rem;
 }
 
-/* demo GIF */
-.project-demo {
-  padding: 0.75rem 1rem;
+/* separators */
+.separator {
+  margin-left: -0.8rem;
+  margin-right: -0.8rem;
 }
 
+.separator-info {
+  margin-left: -1.8rem;
+  margin-right: -1.8rem;
+  margin-top: 0.5rem;
+}
+
+/* demo / screenshot */
 .project-gif {
   width: 100%;
   height: auto;
   border-radius: 4px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* on very narrow widths stack header contents centered */

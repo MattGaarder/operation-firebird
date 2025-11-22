@@ -201,7 +201,7 @@
         id:       'project6teamb',
         title:    'Team Builder',
         images:   [
-        loadProjectLogo('team_builder'),
+        loadProjectLogo('EdX_newer_logo'),
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif'
         ],
         deployed: [false],
@@ -270,7 +270,7 @@
         id:       'project8journal',
         title:    'postwork.journal',
         images:   [
-        loadProjectLogo('code-journal-logo'),
+        loadProjectLogo('postwork'),
         'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif'
         ],
         deployed: [true, 'https://code-journal.netlify.app'],
