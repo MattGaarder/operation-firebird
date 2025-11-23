@@ -42,7 +42,7 @@
       <q-separator class="separator" />
       <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
       <q-separator class="separator-info separator-info-exception" />
-      <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
+      <q-card-section class="project-body-exception" :class="{ 'stacked-layout': isNarrow }">
         <!-- Left column: bullet list -->
         <div class="project-body-left">
           <ul class="feature-list">
@@ -94,7 +94,8 @@
       <!-- Tagline -->
       <div class="project-tagline">
         Two versions of this weather dashboard were built — both practically identical in functionality and UI:
-        the first written in <strong>jQuery</strong>, and the second fully <strong>refactored in modern JavaScript</strong>
+        the first written in <strong>jQuery</strong>, and the second fully <strong>refactored in modern
+          JavaScript</strong>
         to remove dependencies and improve readability.
         <q-separator class="separator invisi" />
         <em>
@@ -107,7 +108,7 @@
       <q-separator class="separator" />
       <div class="carousel-wrapper">
         <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" swipeable animated
-          control-color="black" navigation  height="auto" width="100%" class="rounded-borders"
+          control-color="black" navigation height="auto" width="100%" class="rounded-borders"
           navigation-position="bottom">
           <q-carousel-slide :name="1" class="column no-wrap">
 
@@ -124,7 +125,7 @@
             <q-separator class="separator" />
             <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
             <q-separator class="separator-info separator-info-exception" />
-            <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
+            <q-card-section class="project-body-exception" :class="{ 'stacked-layout': isNarrow }">
               <div class="project-body-left">
                 <ul class="feature-list">
                   <li><strong>Geolocation:</strong> City coords via OpenWeather Geo API</li>
@@ -156,7 +157,7 @@
             <q-separator class="separator" />
             <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
             <q-separator class="separator-info separator-info-exception" />
-            <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
+            <q-card-section class="project-body-exception" :class="{ 'stacked-layout': isNarrow }">
               <div class="project-body-left">
                 <ul class="feature-list">
                   <li><strong>Functionality:</strong> Mostly identical just written more concisely and with JavaScript
@@ -171,11 +172,88 @@
           </q-carousel-slide>
         </q-carousel>
       </div>
+    </q-card>
+    <!-- Demo Image -->
+    <q-separator class="separator" />
+    <!-- POST-WORK EXPENSES (replaces duplicated Weather card) ------------- -->
+    <q-card bordered class="project-card">
+      <!-- Header -->
+      <q-card-section class="project-header">
+        <q-icon name="receipt_long" class="project-icon" />
+        <div class="project-info">
+          <div class="project-title">POST-WORK EXPENSES<span class="sub">(Node.js CLI)</span></div>
+        </div>
+      </q-card-section>
 
-      <!-- Demo Image -->
+      <!-- Tagline -->
+      <div class="project-tagline">
+        A Node.js command-line tool that transforms raw CSV exports from your financial software into a clean,
+        human-readable monthly expense report for internal operations staff.
+        <q-separator class="invisi" />
+        The script validates input, parses each line into structured expense objects, aggregates totals by category,
+        and writes a neatly aligned text report to a <code>reports/expenses_report.txt</code> file placed alongside the
+        original CSV — ready to be shared, archived, or audited without ever opening a spreadsheet.
+        <q-separator class="separator invisi" />
+        <em>
+          "Drop in a CSV, get back a formatted monthly expense report — predictable totals, readable rows, and
+          zero manual spreadsheet wrangling."
+        </em>
+      </div>
+
+      <!-- Code Snippets heading -->
+      <q-separator class="separator" />
+      <h1 class="text-h5 text-weight-bold info-code">Code Snippets</h1>
       <q-separator class="separator" />
 
+      <!-- Code block for the CLI script -->
+      <q-card-section class="project-code">
+        <q-scroll-area class="code-container">
+          <pre v-prism class="prism-block">
+            <code class="language-js" :textContent="expenseFormatterCode"></code>
+          </pre>
+        </q-scroll-area>
+      </q-card-section>
 
+      <!-- Further Information -->
+      <q-separator class="separator" />
+      <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
+      <q-separator class="separator-info separator-info-exception" />
+
+      <q-card-section class="project-body-exception" :class="{ 'stacked-layout': isNarrow }">
+        <div class="project-body-left">
+          <ul class="feature-list">
+            <li>
+              <strong>Input Validation:</strong> Verifies a <code>.csv</code> file and exits with clear errors on bad
+              input.
+            </li>
+            <li>
+              <strong>Structured Parsing:</strong> Maps each row to
+              <code>{ date, description, amount, category }</code> with sensible fallbacks.
+            </li>
+            <li>
+              <strong>Safe Number Handling:</strong> Skips invalid amounts so category totals and the grand total never
+              become <code>NaN</code>.
+            </li>
+            <li>
+              <strong>Category Totals:</strong> Groups expenses by category and computes an overall monthly total.
+            </li>
+            <li>
+              <strong>Output Location:</strong> Writes <code>reports/expenses_report.txt</code> alongside the source
+              CSV.
+            </li>
+            <li>
+              <strong>Learned:</strong> CLI args, <code>path</code> utilities, robust parsing, and readable reporting
+              from raw data.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Optional: demo image on the right, using props.images[2] like the others -->
+        <q-card-section class="project-demo">
+          <video :src="expensesFormatter" alt="Post-work expenses report output preview" class="project-video" autoplay
+            loop muted playsinline></video>
+        </q-card-section>
+      </q-card-section>
     </q-card>
   </div>
 </template>
@@ -185,7 +263,9 @@ import { ref, defineProps, computed, watch } from 'vue';
 import codeExample from '../../assets/snippets/journal-example-code.txt?raw';
 import weatherDash1 from '../../assets/snippets/dash-1.txt?raw';
 import codeJournalVideo from '../../assets/animations/code-journal-demo.mp4';
-import weatherDash2 from '../../assets/snippets/dash-2.txt?raw'
+import expensesFormatter from '../../assets/animations/expensesFormatter.mp4';
+import weatherDash2 from '../../assets/snippets/dash-2.txt?raw';
+import expenseFormatterCode from '../../assets/snippets/expensesFormatter.txt?raw';
 
 const exampleCode = ref(codeExample);
 const WeatherDashboard1 = ref(weatherDash1);
@@ -315,7 +395,7 @@ const slide = ref(1)
   padding-left: 1rem;
   display: flex;
   gap: 1rem;
-  align-items: center;
+
 }
 
 .project-body-left {
@@ -371,6 +451,7 @@ const slide = ref(1)
   /* can crop a bit but looks good */
   border-radius: 4px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  
 }
 
 .separator {
@@ -450,14 +531,36 @@ const slide = ref(1)
 .stacked-layout {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 /* children inside the stacked container: just flow one after the other */
 .stacked-layout .project-body-left,
 .stacked-layout .project-demo {
-  flex: 0 0 auto;  /* no flex-basis magic */
-  width: 100%;     /* take full width */
+  flex: 0 0 auto;
+  /* no flex-basis magic */
+  width: 100%;
+  /* take full width */
   margin-top: -1rem;
-  margin-bottom: 2rem; /* optional */
+  margin-bottom: 2rem;
+  /* optional */
+}
+
+.stacked-layout .project-body-left,
+.stacked-layout .project-video {
+
+  width: 100%;
+  /* take full width */
+  margin-bottom: 0.5rem;
+}
+
+.stacked-layout .project-demo {
+
+  padding: 0rem;
+  width: 104%;
+  /* take full width */
+  margin-bottom: 1rem;
+  margin-left: -0.5rem;
+
 }
 </style>

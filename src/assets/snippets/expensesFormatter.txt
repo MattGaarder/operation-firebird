@@ -1,0 +1,112 @@
+
+const fs = require('fs');
+const path = require('path');
+
+// get CSV file path from command-line argument
+const inputFile = process.argv[2];
+
+if(!inputFile) {
+    console.error('Please provide a CSV file path as an argument');
+    process.exit(1);
+}
+
+// minimal format check (make sure that the document is in .csv format)
+
+const ext = path.extname(inputFile).toLowerCase();
+
+if( ext !== '.csv') {
+    console.error(`Incorrect filename type expected: .csv. Got file extension ${ext}`)
+    process.exit(1);
+}
+
+try {
+    // convert any relative path to an absolute path and read file text
+    const csvData = fs.readFileSync(path.resolve(inputFile), "utf8");
+
+    // normalise text, white space, and new lines
+    const lines = csvData.trim().split('\n');
+
+    // remove headers from the data (first element of the new array)
+    const headers = lines.shift().split(',');
+
+    // go through each line and transform into structured expense objects
+    const expenses = lines.map((line, index) => {
+        const parts = line.split(',');
+         if(parts.length < 4) {
+            console.warn(`Skipping line ${index + 2} : incomplete data `)
+         }
+
+        console.log(parts);
+        console.log(line);
+        const [date, description, amountStr, category] = parts.map(v => v.trim());
+        const amount = parseFloat(amountStr);
+
+        // make sure we validate numbers so we don't end up with grand total = NaN
+        if(isNaN(amount)) {
+        console.warn(`Skipping line, invalid amount`);
+        return null;
+        }
+
+        // this is the object structure for each of our expenses - 
+        // fallbacks in case of missing values
+        return {
+        date: date || "unknown Date",
+        description: description || "No Description",
+        amount, 
+        category: category || "Uncategorized",
+        }
+        }
+        // only pick up the truthy values, ignore the rest
+    ).filter(Boolean)
+   
+    // calculate totals
+    const totals = {};
+    let grandTotal = 0;
+
+    for(const exp of expenses) {
+        const category = exp.category;
+        const amount = exp.amount;
+
+        // initialise category bucket if it's the first time encountering 
+        // (assign zero so we can add our amounts to it for the total)
+        if(!totals[exp.category]) {
+            totals[exp.category] = 0;
+            console.log(`New category found: ${exp.category}`)
+        }
+
+        totals[exp.category] += exp.amount;
+        console.log(totals[exp.amount]);
+        grandTotal += exp.amount;
+        console.log(`Grand Total ${grandTotal}`);
+    }
+
+    // start building the report 
+    let report = "";
+
+    report += "================================================================\n";
+    report += "MONTHLY EXPENSE REPORT\n";
+    report += "================================================================\n\n";
+    report += `Total Expenses: £${grandTotal.toFixed(2)}\n\n`;
+    report += 'Expenses by Category:\n'
+
+    for(const [cat, total] of Object.entries(totals)) {
+        report += `${cat.padEnd(15)} = £${total.toFixed(2)}\n`
+    }
+
+    report += `\nDetailed Breakdown:\n`;
+    report += `Date        |  Description                 |  Amount     |  Category \n`;
+    report += `----------------------------------------------------------------\n`;
+
+for(const exp of expenses) {
+    report += `${exp.date.padEnd(11)} | ${exp.description.padEnd(29)} |  £${exp.amount.toFixed(2).padEnd(7)}  |  ${exp.category}\n`;
+}
+    // determine output file path
+    const inputDir = path.dirname(path.resolve(inputFile));
+    const reportDir = path.join(inputDir, 'reports');
+    const outputFile = path.join(reportDir, 'expenses_report.txt');
+    // write file to the disk
+    fs.writeFileSync(outputFile, report, 'utf8');
+} catch (err) {
+    console.log('Error reading or processing file:', err);
+    process.exit(1);
+}

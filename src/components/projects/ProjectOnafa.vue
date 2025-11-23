@@ -5,18 +5,18 @@
   </video>
 
   <!-- Main project card -->
-  <div class="projects-wrapper">
+  <div class="projects-wrapper special-padding ">
     <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header">
+      <q-card-section class="project-header special-padding special-padding-left">
         <q-icon name="restaurant" class="project-icon" />
-        <div class="project-info">
+        <div class="project-info ">
           <div class="project-title">ONAFÃ</div>
         </div>
       </q-card-section>
 
       <!-- Tagline -->
-      <div class="project-tagline">
+      <div class="project-tagline special-padding-left">
         This is a vanilla JavaScript frontend implementing layered parallax scrolling, looping image carousels,
         and a paginated modal gallery. On scroll it shifts hero, main, and background elements at different rates
         for depth, triggers a splash animation past a threshold, and continuously animates three duplicated gallery
@@ -31,157 +31,15 @@
 
       <!-- Code Snippets heading -->
       <q-separator class="separator" />
-      <h1 class="text-h5 text-weight-bold info-code">Code Snippets</h1>
+      <h1 class="text-h5 text-weight-bold info-code special-padding-left">Code Snippets</h1>
       <q-separator class="separator" />
 
       <!-- Code block -->
       <q-card-section class="project-code">
         <q-scroll-area class="code-container">
           <pre v-prism class="prism-block">
-<code class="language-js">
-const hero = document.querySelector('.hero');
-const main = document.querySelector('.main');
-const splash = document.querySelector('.splash');
-const food = document.querySelector('.food');
-const foodbkg = document.querySelector('.food-bkg');
-const heroSection = document.querySelector('section.hero');
-
-document.addEventListener('DOMContentLoaded', function() {
-  window.addEventListener('scroll', function() {
-    const scrollY = window.scrollY;
-    hero.style.transform = `translateY(-${scrollY * 0.1}px)`;  
-    main.style.transform = `translateY(-${scrollY * 0.5}px)`;  
-    food.style.transform = `translateY(-${scrollY * 0.8}px)`;
-    foodbkg.style.transform = `translateY(-${scrollY * 0.6}px)`;
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const threshold = hero.offsetTop + hero.clientHeight - 500;
-  let hasAnimated = false;
-
-  window.addEventListener('scroll', function() {
-    const scrollY = window.scrollY;
-    if (!hasAnimated && scrollY > threshold) {
-      splash.classList.add('animate-in');
-      hasAnimated = true;
-    }
-    if (hasAnimated) {
-      splash.style.transform = `translateY(-${scrollY * 3}px)`; 
-    }
-  });
-});
-
-// START OF FIRST TRACK
-const track = document.querySelector('#gallery-track');
-const container = document.querySelector('.image-flex-container');
-const originalContent = track.innerHTML;
-track.innerHTML += originalContent;
-const trackWidth = track.offsetWidth;
-const containerWidth = container.offsetWidth;
-let scrollPosition = 0;
-const scrollSpeed = 1; 
-
-// SECOND TRACK
-const track2 = document.querySelector('#gallery-track-2');
-const container2 = document.querySelector('.image-flex-container-2');
-const originalContent2 = track2.innerHTML;
-track2.innerHTML += originalContent2;
-const trackWidth2 = track2.offsetWidth;
-const containerWidth2 = container2.offsetWidth;
-let scrollPosition2 = 0;
-const scrollSpeed2 = 1; 
-
-// THIRD TRACK
-const track3 = document.querySelector('#gallery-track-3');
-const container3 = document.querySelector('.image-flex-container-3');
-const originalContent3 = track3.innerHTML;
-track3.innerHTML += originalContent3;
-const trackWidth3 = track3.offsetWidth;
-const containerWidth3 = container3.offsetWidth;
-let scrollPosition3 = 0;
-const scrollSpeed3 = 1; 
-
-function animate() {
-  scrollPosition -= scrollSpeed;
-  scrollPosition2 -= scrollSpeed2;
-  scrollPosition3 -= scrollSpeed3;
-
-  if (Math.abs(scrollPosition) >= trackWidth / 2) {
-    scrollPosition = 0;
-  }
-  if (Math.abs(scrollPosition2) >= trackWidth2 / 2) {
-    scrollPosition2 = 0;
-  }
-  if (Math.abs(scrollPosition3) >= trackWidth3 / 2) {
-    scrollPosition3 = 0;
-  }
-
-  track.style.transform = `translate3d(${scrollPosition}px, 0, 0)`;
-  track2.style.transform = `translate3d(${-scrollPosition2}px, 0, 0)`;
-  track3.style.transform = `translate3d(${scrollPosition3}px, 0, 0)`;
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-// END OF TRACKS
-
-const itemsPerPage = 2;
-let currentPage = 0;
-
-const galleryItems = document.querySelectorAll('.gallery-item');
-const modalGallery = document.getElementById('modalGallery');
-const menuLink = document.getElementById('menuLink');
-const arrowRight = document.getElementById('arrowRight');
-const arrowLeft = document.getElementById('arrowLeft');
-const modalClose = document.getElementById('modalClose');
-
-function showPage(page) {
-  galleryItems.forEach(item =&gt; {
-    item.style.display = 'none';
-  });
-
-  const startIndex = page * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  for (let i = startIndex; i &lt; endIndex &amp;&amp; i &lt; galleryItems.length; i++) {
-    galleryItems[i].style.display = 'block';
-  }
-}
-
-function openModal() {
-  modalGallery.style.display = 'flex';
-  currentPage = 0;
-  showPage(currentPage);
-}
-
-function closeModal() {
-  modalGallery.style.display = 'none';
-}
-
-menuLink.addEventListener('click', function (e) {
-  e.preventDefault(); 
-  openModal();
-});
-
-modalClose.addEventListener('click', closeModal);
-
-arrowRight.addEventListener('click', function () {
-  if ((currentPage + 1) * itemsPerPage &lt; galleryItems.length) {
-    currentPage++;
-    showPage(currentPage);
-  }
-});
-
-arrowLeft.addEventListener('click', function () {
-  if (currentPage &gt; 0) {
-    currentPage--;
-    showPage(currentPage);
-  }
-});
-</code>
+          <code class="language-js" :textContent="onafaCode">
+          </code>
           </pre>
         </q-scroll-area>
       </q-card-section>
@@ -189,9 +47,9 @@ arrowLeft.addEventListener('click', function () {
       <!-- Further Information -->
       <q-separator class="separator" />
       <q-card-section class="project-body">
-        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
+        <h1 class="text-h5 text-weight-bold info special-padding-left">Further Information</h1>
         <q-separator class="separator-info" />
-        <ul class="feature-list">
+        <ul class="feature-list special-padding-left">
           <li>
             <strong>Responsive Navbar:</strong> Sticky, CSS-animated menu component with custom icons and dropdown
             behavior.
@@ -209,7 +67,8 @@ arrowLeft.addEventListener('click', function () {
             controls.
           </li>
           <li>
-            <strong>Design Iterations:</strong> Rapid prototyping &amp; visual polish using Photoshop &amp; Illustrator —
+            <strong>Design Iterations:</strong> Rapid prototyping &amp; visual polish using Photoshop &amp; Illustrator
+            —
             refined typography, color and asset placement.
           </li>
           <li>
@@ -218,53 +77,42 @@ arrowLeft.addEventListener('click', function () {
           </li>
         </ul>
       </q-card-section>
+      <q-card-section class="carousel-q-section">
+        <div class="carousel-wrapper">
+          <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" swipeable animated
+            control-color="black" navigation arrows height="auto" width="100%" class="rounded-borders">
+            <q-carousel-slide :name="1" class="column no-wrap">
+              <q-separator class="separator separator-info-exception" />
+              <div class="iteration ">Iteration 1</div>
+              <q-separator class="separator separator-info-exception" />
+              <div class="row fit justify-start items-center q-gutter-sm no-wrap">
+                <q-img class="rounded-borders col-4 full-height" :src="mockup" />
+                <div class="col-8">
+                  <q-img class="rounded-borders full-height inner-image-tshirt" :src="tshirt" />
+                  <q-img class="rounded-borders full-height inner-image" :src="iteration1" />
+                </div>
+              </div>
+            </q-carousel-slide>
+
+            <q-carousel-slide :name="2" class="column no-wrap">
+              <div class="iteration special-padding-left">Iteration 2</div>
+              <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+                <q-img class="rounded-borders col-12 full-height" :src="screenR1" />
+              </div>
+            </q-carousel-slide>
+
+            <q-carousel-slide :name="3" class="column no-wrap">
+              <div class="iteration">Iteration 3</div>
+              <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+                <q-img class="rounded-borders col-8 full-height" :src="screenR2" />
+                <q-img class="rounded-borders col-4 full-height" :src="screenR3" />
+              </div>
+            </q-carousel-slide>
+          </q-carousel>
+        </div>
+      </q-card-section>
     </q-card>
   </div>
-  <q-card bordered class="project-card">
-  <!-- Design iteration carousel -->
-  <div class="carousel-wrapper">
-    <q-carousel
-      v-model="slide"
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      swipeable
-      animated
-      control-color="black"
-      navigation
-      padding
-      arrows
-      height="auto"
-      width="100%"
-      class="rounded-borders"
-    >
-      <q-carousel-slide :name="1" class="column no-wrap">
-        <div class="iteration">Iteration 1</div>
-        <div class="row fit justify-start items-center q-gutter-sm no-wrap">
-          <q-img class="rounded-borders col-4 full-height" :src="mockup" />
-          <div class="col-8">
-            <q-img class="rounded-borders full-height inner-image-tshirt" :src="tshirt" />
-            <q-img class="rounded-borders full-height inner-image" :src="iteration1" />
-          </div>
-        </div>
-      </q-carousel-slide>
-
-      <q-carousel-slide :name="2" class="column no-wrap">
-        <div class="iteration">Iteration 2</div>
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="rounded-borders col-12 full-height" :src="screenR1" />
-        </div>
-      </q-carousel-slide>
-
-      <q-carousel-slide :name="3" class="column no-wrap">
-        <div class="iteration">Iteration 3</div>
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="rounded-borders col-8 full-height" :src="screenR2" />
-          <q-img class="rounded-borders col-4 full-height" :src="screenR3" />
-        </div>
-      </q-carousel-slide>
-    </q-carousel>
-  </div>
-  </q-card>
 </template>
 
 <script setup>
@@ -276,6 +124,7 @@ import mockup from 'src/assets/onafa/mockup.png';
 import screenR1 from 'src/assets/onafa/Screen_Recording1.gif';
 import screenR2 from 'src/assets/onafa/Screen2.gif';
 import screenR3 from 'src/assets/onafa/Screen3.gif';
+import onafaCode from 'src/assets/snippets/onafa-code.txt?raw';
 
 const slide = ref(1);
 </script>
@@ -322,7 +171,7 @@ const slide = ref(1);
   border-radius: 6px;
   background: white;
   margin: 0.6rem;
-  padding: 0.8rem;
+  /* padding: 0.8rem; */
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   border-color: rgb(207, 207, 207);
 }
@@ -333,7 +182,7 @@ const slide = ref(1);
   align-items: baseline;
   flex-wrap: wrap;
   background: var(--q-color-grey-1);
-  margin-top: 0.7rem;
+  margin-top: 1.7rem;
 }
 
 .project-icon {
@@ -388,23 +237,36 @@ const slide = ref(1);
   font-size: 0.9rem;
 }
 
-/* Separators */
-.separator {
+/* .separator {
   margin-left: -0.8rem;
   margin-right: -0.8rem;
-}
+} */
 
 .separator-info {
-  margin-left: -1.8rem;
-  margin-right: -1.8rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
   margin-top: 0.5rem;
 }
 
+.special-padding {
+  padding: 0.8rem;
+}
+
+
+.separator-info-exception {
+  margin-left: -2.8rem;
+  margin-right: -3.8rem;
+  
+}
+
+.special-padding-left {
+  margin-left: 1.5rem;
+}
 /* Code section */
 .project-code {
   background-color: #ecf2f8;
-  margin-left: -0.8rem;
-  margin-right: -0.8rem;
+  /* margin-left: -0.8rem;
+  margin-right: -0.8rem; */
 }
 
 .code-container {
@@ -426,20 +288,32 @@ const slide = ref(1);
 /* Carousel / iterations */
 .carousel-wrapper {
   width: 100%;
-  margin-top: 0.5rem;
+
 }
 
-.iteration {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
+
 
 .inner-image-tshirt {
   margin-top: -5rem;
   margin-bottom: 1rem;
   margin-left: 1rem;
   z-index: 4000;
+}
+
+
+
+/* Make iteration heading behave like Code Snippets / Further Information */
+.iteration {
+  font-weight: bold;
+  font-size: 0.9rem; /* match .info / .info-code */
+  padding-left: 0rem; /* same as .info-code */
+  margin-bottom: 0rem;
+  margin-left: 0.8rem;
+  padding: 1rem;
+}
+
+.carousel-q-section {
+  padding: 0;
 }
 
 /* Responsive tweaks */

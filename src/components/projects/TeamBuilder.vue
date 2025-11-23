@@ -24,9 +24,12 @@
 
       <!-- Further Information -->
       <q-separator class="separator" />
-      <q-card-section class="project-body">
-        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
-        <q-separator class="separator-info" />
+      <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
+      <q-separator class="separator-info separator-info-exception" />
+
+      <q-card-section class="project-body-exception" :class="{ 'stacked-layout': isNarrow }">
+        <!-- Left column: bullet list -->
+        <div class="project-body-left">
         <ul class="feature-list">
           <li>
             <strong>Interactive prompts:</strong> Title, Description, Installation, Usage, Screenshots,
@@ -44,6 +47,11 @@
             <strong>Output:</strong> Badge-rich, sectioned README with Table of Contents, code blocks, and links.
           </li>
         </ul>
+        </div>
+        <div class="project-demo">
+          <!-- Right column: video demo -->
+          <video :src="readmeVideo" class="project-video" autoplay loop muted playsinline></video>
+        </div>
       </q-card-section>
     </q-card>
     <q-card bordered class="project-card">
@@ -74,7 +82,7 @@
       <!-- Further Information -->
       <q-separator class="separator" />
       <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
-      <q-separator class="separator-info" />
+      <q-separator class="separator-info separator-info-exception" />
       <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
 
         <div class="project-body-left">
@@ -167,6 +175,9 @@
 
 <script setup>
 import { defineProps, computed } from 'vue';
+import readmeVideo from '../../assets/animations/readme-demo.mp4';
+
+
 
 const props = defineProps({
   images: {
@@ -305,17 +316,14 @@ const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth
 }
 
 .project-body-exception {
-  padding: 1rem;
-  padding-top: 1.8rem;
+  padding-left: 1rem;
   display: flex;
+  gap: 1rem;
 
-  align-items: flex-start;
-  gap: 1.5rem;
-  align-items: center;
 }
 
 .project-body-left {
-  flex: 1 1 0;
+    flex: 2 1 90%;
 }
 
 .team-builder-img {
@@ -329,7 +337,7 @@ const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth
   padding: 0;
   margin: 0;
   margin-top: 1.5rem;
-  justify-items: flex-start;
+
 }
 
 .feature-list li {
@@ -344,8 +352,8 @@ const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth
 }
 
 .separator-info {
-  margin-left: -1.8rem;
-  margin-right: -1.8rem;
+  margin-left: -1.3rem;
+  margin-right: -1.3rem;
   margin-top: 0.5rem;
 }
 
@@ -408,5 +416,20 @@ const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth
   width: 100%;     /* take full width */
   margin-top: -1.5rem;
 
+}
+
+.project-video {
+  width: 100%;
+  /* fill the flex column */
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  /* keep a nice video-ish shape */
+  height: auto;
+  /* let height follow width */
+  object-fit: cover;
+  /* can crop a bit but looks good */
+  border-radius: 4px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  
 }
 </style>

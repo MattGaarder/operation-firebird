@@ -1,0 +1,143 @@
+
+const hero = document.querySelector('.hero');
+const main = document.querySelector('.main');
+const splash = document.querySelector('.splash');
+const food = document.querySelector('.food');
+const foodbkg = document.querySelector('.food-bkg');
+const heroSection = document.querySelector('section.hero');
+
+document.addEventListener('DOMContentLoaded', function() {
+  window.addEventListener('scroll', function() {
+    const scrollY = window.scrollY;
+    hero.style.transform = `translateY(-${scrollY * 0.1}px)`;  
+    main.style.transform = `translateY(-${scrollY * 0.5}px)`;  
+    food.style.transform = `translateY(-${scrollY * 0.8}px)`;
+    foodbkg.style.transform = `translateY(-${scrollY * 0.6}px)`;
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const threshold = hero.offsetTop + hero.clientHeight - 500;
+  let hasAnimated = false;
+
+  window.addEventListener('scroll', function() {
+    const scrollY = window.scrollY;
+    if (!hasAnimated && scrollY > threshold) {
+      splash.classList.add('animate-in');
+      hasAnimated = true;
+    }
+    if (hasAnimated) {
+      splash.style.transform = `translateY(-${scrollY * 3}px)`; 
+    }
+  });
+});
+
+// START OF FIRST TRACK
+const track = document.querySelector('#gallery-track');
+const container = document.querySelector('.image-flex-container');
+const originalContent = track.innerHTML;
+track.innerHTML += originalContent;
+const trackWidth = track.offsetWidth;
+const containerWidth = container.offsetWidth;
+let scrollPosition = 0;
+const scrollSpeed = 1; 
+
+// SECOND TRACK
+const track2 = document.querySelector('#gallery-track-2');
+const container2 = document.querySelector('.image-flex-container-2');
+const originalContent2 = track2.innerHTML;
+track2.innerHTML += originalContent2;
+const trackWidth2 = track2.offsetWidth;
+const containerWidth2 = container2.offsetWidth;
+let scrollPosition2 = 0;
+const scrollSpeed2 = 1; 
+
+// THIRD TRACK
+const track3 = document.querySelector('#gallery-track-3');
+const container3 = document.querySelector('.image-flex-container-3');
+const originalContent3 = track3.innerHTML;
+track3.innerHTML += originalContent3;
+const trackWidth3 = track3.offsetWidth;
+const containerWidth3 = container3.offsetWidth;
+let scrollPosition3 = 0;
+const scrollSpeed3 = 1; 
+
+function animate() {
+  scrollPosition -= scrollSpeed;
+  scrollPosition2 -= scrollSpeed2;
+  scrollPosition3 -= scrollSpeed3;
+
+  if (Math.abs(scrollPosition) >= trackWidth / 2) {
+    scrollPosition = 0;
+  }
+  if (Math.abs(scrollPosition2) >= trackWidth2 / 2) {
+    scrollPosition2 = 0;
+  }
+  if (Math.abs(scrollPosition3) >= trackWidth3 / 2) {
+    scrollPosition3 = 0;
+  }
+
+  track.style.transform = `translate3d(${scrollPosition}px, 0, 0)`;
+  track2.style.transform = `translate3d(${-scrollPosition2}px, 0, 0)`;
+  track3.style.transform = `translate3d(${scrollPosition3}px, 0, 0)`;
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// END OF TRACKS
+
+const itemsPerPage = 2;
+let currentPage = 0;
+
+const galleryItems = document.querySelectorAll('.gallery-item');
+const modalGallery = document.getElementById('modalGallery');
+const menuLink = document.getElementById('menuLink');
+const arrowRight = document.getElementById('arrowRight');
+const arrowLeft = document.getElementById('arrowLeft');
+const modalClose = document.getElementById('modalClose');
+
+function showPage(page) {
+  galleryItems.forEach(item =&gt; {
+    item.style.display = 'none';
+  });
+
+  const startIndex = page * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  for (let i = startIndex; i &lt; endIndex &amp;&amp; i &lt; galleryItems.length; i++) {
+    galleryItems[i].style.display = 'block';
+  }
+}
+
+function openModal() {
+  modalGallery.style.display = 'flex';
+  currentPage = 0;
+  showPage(currentPage);
+}
+
+function closeModal() {
+  modalGallery.style.display = 'none';
+}
+
+menuLink.addEventListener('click', function (e) {
+  e.preventDefault(); 
+  openModal();
+});
+
+modalClose.addEventListener('click', closeModal);
+
+arrowRight.addEventListener('click', function () {
+  if ((currentPage + 1) * itemsPerPage &lt; galleryItems.length) {
+    currentPage++;
+    showPage(currentPage);
+  }
+});
+
+arrowLeft.addEventListener('click', function () {
+  if (currentPage &gt; 0) {
+    currentPage--;
+    showPage(currentPage);
+  }
+});
