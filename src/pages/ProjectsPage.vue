@@ -35,7 +35,7 @@
                     <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 48px)">
                         <!-- <p>{{ win.project.summary }}</p> <br /> -->
                         <div class="window-body">
-                            <component :is="win.project.component" :images="win.project.images"></component>
+                            <component :is="win.project.component" :images="win.project.images" :container-width="win.width"></component>
                         </div>
                     </q-card-section>
                     <div class="row window-handle q-py-xs">
@@ -59,7 +59,7 @@
     import MoovieMatch from 'src/components/projects/MoovieMatch.vue';
     import ProjectNocado from 'src/components/projects/ProjectNocado.vue';
     import PwCProjects from 'src/components/projects/PwCProjects.vue';
-    import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
+    // import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
     import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
     import ThisPortfolio from 'src/components/projects/ThisPortfolio.vue';
     import CodeJournal from 'src/components/projects/CodeJournal.vue';
@@ -126,6 +126,29 @@
     }
     const projects = [
     {
+        id:       'project8journal',
+        title:    'Postwork',
+        images:   [
+        loadProjectLogo('postwork'),
+        'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif',
+        'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif',
+        ],
+        deployed: [true, 'https://code-journal.netlify.app'],
+        repo:     'https://github.com/MattGaarder/postwork-journal',
+        summary:  'Hands-on coding across varied technical domains to create high-quality datasets used in the training of frontier AI systems.',
+        summaryBullets: ['Highlighted Projects:', 'Markdown-powered web journal for documenting coding projects with formatted code snippets and explanations.', 'CLI tool that processes monthly expense CSV reports into structured text files.', 'Persistent, personalised dashboard of weather insights for saved locations (x2) — jQuery, and refactored with JavaScript.'],
+        technology: [
+            { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg')},
+            { name: 'HTML',logo: loadTechLogo('html-5-logo-svgrepo-com.svg')}, 
+            { name: 'CSS', logo: loadTechLogo('Official_CSS_Logo.svg')},
+            { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg')},
+            { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg')}, 
+            { name: 'Postman',logo: loadTechLogo('postman-icon-svgrepo-com.svg')},  
+            
+        ],
+        component: markRaw(CodeJournal),
+    },
+    {
         id:       'project4pwc',
         title:    'PwC',
         images:   [
@@ -146,25 +169,7 @@
         ],
         component: markRaw(PwCProjects),
     },
-    {
-        id:       'project8journal',
-        title:    'Postwork',
-        images:   [
-        loadProjectLogo('postwork'),
-        'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif'
-        ],
-        deployed: [true, 'https://code-journal.netlify.app'],
-        repo:     'https://github.com/MattGaarder/postwork-journal',
-        summary:  'Hands-on coding across varied technical domains to create high-quality datasets used in the training of frontier AI systems.',
-        summaryBullets: ['Highlighted Projects:', 'Markdown-powered web journal for documenting coding projects with formatted code snippets and explanations.', 'CLI tool that processes monthly expense CSV reports into structured text files.', 'Real-time collaboration and code-review platform — with gamified elements to encourage feedback and engagement.'],
-        technology: [
-            { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg')},
-            { name: 'HTML',logo: loadTechLogo('html-5-logo-svgrepo-com.svg')}, 
-            { name: 'CSS', logo: loadTechLogo('Official_CSS_Logo.svg')}, 
-            
-        ],
-        component: markRaw(CodeJournal),
-    },
+
     {
         id:       'project6teamb',
         title:    'edX Trinity Skills',
@@ -176,7 +181,7 @@
         deployed: [false],
         repo:     [true, 'https://github.com/MattGaarder/team-profile-generator'],
         summary:  "Trinity Skills Bootcamp in Web Development — 16-week online bootcamp covering key front-end technologies and modern web-development practices.",
-        summaryBullets: ['Highlighted Projects:', 'Node.js CLI suite — Formatted, badge-topped, and sectioned README.md generator for your project.', "Real-time social feed where you 'Vibe' or 'Not a Vibe' to posts.", 'Persistent, personalised dashboard of weather insights for saved locations (x2) — jQuery, and refactored with JavaScript.'],
+        summaryBullets: ['Highlighted Projects:', 'Node.js CLI suite — Formatted, badge-topped, and sectioned README.md generator for your project.', "Real-time social feed where you 'Vibe' or 'Not a Vibe' to posts."],
         technology: [
             { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg')},
             { name: 'Jest',    logo: loadTechLogo('jest-js-icon.svg')},
@@ -240,23 +245,23 @@
         ],
         component: markRaw(MoovieMatch),
     },
-    {
-        id:       'project1weatherd',
-        title:    'Weather Dashboard',
-        images:   [
-        loadProjectLogo('cloud-day'),
-            'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif'
-        ],
-        deployed: [true, 'https://mattgaarder.github.io/weather-dashboard/'],
-        repo:     [true, 'https://github.com/MattGaarder/weather-dashboard'],
-        summary:  'Save and revisit your favorite cities with ease—enter a location to pull current conditions and a five-day forecast from the OpenWeather API, then build a persistent, personalized dashboard of weather insights.',
-        technology: [
-            { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg')},
-            { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg')}, 
-            { name: 'Postman',logo: loadTechLogo('postman-icon-svgrepo-com.svg')}, 
-        ],
-        component: markRaw(WeatherDashboard),
-    },
+    // {
+    //     id:       'project1weatherd',
+    //     title:    'Weather Dashboard',
+    //     images:   [
+    //     loadProjectLogo('cloud-day'),
+    //         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif'
+    //     ],
+    //     deployed: [true, 'https://mattgaarder.github.io/weather-dashboard/'],
+    //     repo:     [true, 'https://github.com/MattGaarder/weather-dashboard'],
+    //     summary:  'Save and revisit your favorite cities with ease—enter a location to pull current conditions and a five-day forecast from the OpenWeather API, then build a persistent, personalized dashboard of weather insights.',
+    //     technology: [
+    //         { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg')},
+    //         { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg')}, 
+    //         { name: 'Postman',logo: loadTechLogo('postman-icon-svgrepo-com.svg')}, 
+    //     ],
+    //     component: markRaw(WeatherDashboard),
+    // },
     {
         id:       'project5onafa',
         title:    'Onafã',

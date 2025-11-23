@@ -75,7 +75,7 @@
       <q-separator class="separator" />
       <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
       <q-separator class="separator-info" />
-      <q-card-section class="project-body-exception">
+      <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
 
         <div class="project-body-left">
           <ul class="feature-list">
@@ -137,7 +137,7 @@
       <q-separator class="separator" />
       <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
       <q-separator class="separator-info separator-info-exception" />
-      <q-card-section class="project-body-exception">
+      <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
 
         <div class="project-body-left">
           <ul class="feature-list">
@@ -166,29 +166,36 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
 
 const props = defineProps({
   images: {
     type: Array,
     required: true
+  },
+  containerWidth: {
+    type: Number,
+    default: 0
   }
 });
 import teambuildertitle from 'src/assets/logos/team-builder-crop.svg';
-import vibelyLogo from 'src/assets/logos/project_logos/vibely-logo-v2.svg?raw'
+import vibelyLogo from 'src/assets/logos/project_logos/vibely-logo-v2.svg?raw';
+
+const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth < 700);
 </script>
 
 <style scoped>
 .info {
   font-size: 0.9rem;
   color: black;
-  margin-top: 0.8rem;
+  margin-top: 0rem;
   margin-bottom: 0.1rem;
   padding: 0;
 }
 
 .info-exception {
   margin-left: 1rem;
+  margin-top: 0.8rem;
 }
 
 .vibelyLogo {
@@ -387,5 +394,19 @@ import vibelyLogo from 'src/assets/logos/project_logos/vibely-logo-v2.svg?raw'
     margin-top: 0rem;
     margin-bottom: 0rem;
   }
+}
+
+.stacked-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.stacked-layout .project-body-left,
+.stacked-layout .project-icon,
+.stacked-layout .project-gif {
+  flex: 0 0 auto;  /* no flex-basis magic */
+  width: 100%;     /* take full width */
+  margin-top: -1.5rem;
+
 }
 </style>

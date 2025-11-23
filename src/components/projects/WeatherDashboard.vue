@@ -1,62 +1,18 @@
 <template>
   <div class="projects-wrapper">
-    <q-card bordered class="project-card">
-      
-      <!-- Header -->
-      <q-card-section class="project-header">
-        <q-icon name="cloud" class="project-icon" />
-        <div class="project-info">
-          <div class="project-title">WEATHER DASHBOARD</div>
-        </div>
-      </q-card-section>
-
-      <!-- Tagline -->
-      <div class="project-tagline">
-        This is a jQuery-based weather dashboard. The user enters a city, which is geocoded via
-        OpenWeather’s Geocoding API to get coordinates; those are saved to localStorage and
-        rendered as history buttons. Clicking a city or searching fetches the 5-day forecast,
-        extracts midday data, and updates the DOM with temperature, humidity, wind, and icons.
-        <q-separator class="separator invisi" />
-        <em>
-          Check future weather instantly: persistent city history buttons, 5-day forecast cards,  
-          and live API responses — all powered by pure jQuery and client-side memory.
-        </em>
-      </div>
-
-      <!-- Further Information -->
-      <q-separator class="separator" />
-      <q-card-section class="project-body">
-        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
-        <q-separator class="separator-info" />
-        <ul class="feature-list">
-          <li><strong>Geolocation:</strong> City coords via OpenWeather Geo API</li>
-          <li><strong>Forecast:</strong> 5-day forecast & dates formatted via <code>moment.js</code></li>
-          <li><strong>History:</strong> Cities stored in <code>localStorage</code> as clickable recall buttons</li>
-          <li><strong>UI:</strong> jQuery builds DOM cards & uses <code>data-attributes</code> for state</li>
-          <li><strong>Prototyped With:</strong> Postman for debugging API requests</li>
-          <li><strong>Learned:</strong> Persistent states, AJAX chaining & dataset access</li>
-        </ul>
-      </q-card-section>
-
-      <!-- Demo Image -->
-      <q-separator class="separator" />
-      <q-card-section class="project-demo">
-        <q-img :src="props.images[1]" class="project-gif" alt="Weather Dashboard logo" />
-      </q-card-section>
-
-    </q-card>
+    
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+// import { defineProps } from 'vue';
 
-const props = defineProps({
-  images: {
-    type: Array,
-    required: true
-  }
-});
+// const props = defineProps({
+//   images: {
+//     type: Array,
+//     required: true
+//   }
+// });
 </script>
 
 <style scoped>

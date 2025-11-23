@@ -1,0 +1,83 @@
+
+const API_KEY = "----";
+
+// from index.html get the element with id getWeather (my button), add a click event to it
+// this event gets the text from inputCity (input text field)
+// does some basic validation - puts text value into cityName variable
+document.getElementById("getWeather").addEventListener("click", () => {
+    const inputCity = document.getElementById("inputCity");
+    const cityName = inputCity.value;
+    console.log(cityName);
+    if(cityName) getWeather(cityName);
+})
+
+// asynchronous function needed as we are calling an api,
+// fetch request with previous city name variable and API key with interpolated string
+// basic validation and error throwing with try and catch - 
+// after waiting for response and parseing JSON we pass the data into our weatherCard function
+
+async function getWeather(city) {
+    try{
+        const res = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
+        );
+
+        if (!res.ok) {
+            throw new Error("no response")
+        };
+        const answer = await res.json();
+
+        JSON.stringify(res, null, 2);
+        JSON.stringify(answer, null, 2);
+
+        weatherCard(answer);
+        } catch (error) {
+        console.log(error.message);
+        return error.message;
+    } 
+    
+}
+
+// weatherCard gets the wrapping results div and creates a weatherCard div,
+// populating it with a bunch of html text, img, and heading elements
+// this is then appended as a child to the row div
+function weatherCard(weather) {
+    const cards = document.getElementById("results");
+
+    const card = document.createElement("div");
+    card.className = "weatherCard";
+
+    const cityName = document.createElement("h3");
+    cityName.className = "cityName";
+    cityName.textContent = weather.name;
+
+    const temp = document.createElement("p");
+    temp.className = "temp";
+    temp.textContent = weather.main.temp;
+
+    const desc = document.createElement("p");
+    desc.className = "desc";
+    desc.textContent = weather.weather?.[0]?.description;
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const icon = document.createElement("img");
+    icon.className = "icon";
+    icon.src = `https://openweathermap.org/img/wn/${weather.weather?.[0]?.icon}@2x.png`
+    
+    
+    card.append(cityName, icon, temp, desc)
+    row.append(card);
+    cards.appendChild(row);
+    console.log("hi")
+}
+
+// Response from OpenWeather
+// {"coord":{"lon":-0.1257,"lat":51.5085},
+// "weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],
+// "base":"stations","main":{"temp":290.39,"feels_like":289.97,"temp_min":289.02,
+// "temp_max":292.14,"pressure":1005,"humidity":69,"sea_level":1005,"grnd_level":1001},
+// "visibility":10000,"wind":{"speed":9.26,"deg":250,"gust":16.46},"clouds":{"all":40},"dt":1757945848,
+// "sys":{"type":2,"id":268730,"country":"GB","sunrise":1757914533,"sunset":1757960166},
+// "timezone":3600,"id":2643743,"name":"London","cod":200}

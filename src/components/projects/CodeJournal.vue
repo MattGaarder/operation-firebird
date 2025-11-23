@@ -12,10 +12,10 @@
       <!-- Tagline -->
       <div class="project-tagline">
         A minimalist, browser-based Markdown journal built with vanilla JavaScript and the Web Storage API.
-        <q-separator class="invisi"/>
+        <q-separator class="invisi" />
         Users can create, edit, preview, and delete journal entries entirely offline — with all data persisted
-        locally in <code>localStorage</code>. Featuring a custom Markdown-to-HTML parser supporting headings, 
-        lists, inline code, fenced code blocks, and rich text formatting, the project emphasizes simplicity, 
+        locally in <code>localStorage</code>. Featuring a custom Markdown-to-HTML parser supporting headings,
+        lists, inline code, fenced code blocks, and rich text formatting, the project emphasizes simplicity,
         privacy, and total client-side functionality.
         <q-separator class="separator invisi" />
         <em>
@@ -42,16 +42,18 @@
       <q-separator class="separator" />
       <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
       <q-separator class="separator-info separator-info-exception" />
-      <q-card-section class="project-body-exception">
+      <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
         <!-- Left column: bullet list -->
         <div class="project-body-left">
           <ul class="feature-list">
             <li>
-              <strong>Local Persistence:</strong> Entries are stored in <code>localStorage</code> with a defined data model:
+              <strong>Local Persistence:</strong> Entries are stored in <code>localStorage</code> with a defined data
+              model:
               <code>{ id, title, date, content }</code>.
             </li>
             <li>
-              <strong>Markdown Parser:</strong> Custom <code>markdownToHtml()</code> function supports headings, bold/italic,
+              <strong>Markdown Parser:</strong> Custom <code>markdownToHtml()</code> function supports headings,
+              bold/italic,
               lists, code blocks, links, and inline code without third-party libraries.
             </li>
             <li>
@@ -59,46 +61,154 @@
               and preview modes.
             </li>
             <li>
-              <strong>Entry Management:</strong> Create, edit, search, and delete entries with real-time updates to the UI.
+              <strong>Entry Management:</strong> Create, edit, search, and delete entries with real-time updates to the
+              UI.
             </li>
             <li>
               <strong>Offline-First Design:</strong> All functionality runs client-side — no dependencies, accounts, or
               network calls required.
             </li>
             <li>
-              <strong>Learned:</strong> Deep understanding of browser storage APIs, Markdown parsing logic, regex patterns,
+              <strong>Learned:</strong> Deep understanding of browser storage APIs, Markdown parsing logic, regex
+              patterns,
               and UI state management with pure JavaScript.
             </li>
           </ul>
         </div>
-
-        <!-- Right column: video demo -->
-        <video
-          :src="codeJournalVideo"
-          class="project-video"
-          autoplay
-          loop
-          muted
-          playsinline
-        ></video>
+        <div class="project-demo">
+          <!-- Right column: video demo -->
+          <video :src="codeJournalVideo" class="project-video" autoplay loop muted playsinline></video>
+        </div>
       </q-card-section>
+    </q-card>
+    <q-card bordered class="project-card">
+
+      <!-- Header -->
+      <q-card-section class="project-header">
+        <q-icon name="cloud" class="project-icon" />
+        <div class="project-info">
+          <div class="project-title">WEATHER DASHBOARD<span class="sub">(jQuery / JavaScript)</span></div>
+        </div>
+      </q-card-section>
+
+      <!-- Tagline -->
+      <div class="project-tagline">
+        Two versions of this weather dashboard were built — both practically identical in functionality and UI:
+        the first written in <strong>jQuery</strong>, and the second fully <strong>refactored in modern JavaScript</strong>
+        to remove dependencies and improve readability.
+        <q-separator class="separator invisi" />
+        <em>
+          Check future weather instantly: persistent city history buttons, 5-day forecast cards,
+          and live API responses — all powered by pure jQuery and client-side memory.
+        </em>
+      </div>
+      <q-separator class="separator" />
+      <h1 class="text-h5 text-weight-bold info-code">Code Snippets</h1>
+      <q-separator class="separator" />
+      <div class="carousel-wrapper">
+        <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" swipeable animated
+          control-color="black" navigation  height="auto" width="100%" class="rounded-borders"
+          navigation-position="bottom">
+          <q-carousel-slide :name="1" class="column no-wrap">
+
+            <!-- Code block -->
+            <q-card-section class="project-code">
+              <q-scroll-area class="code-container">
+                <pre v-prism class="prism-block">
+            <code class="language-js" :textContent="WeatherDashboard1"></code>
+          </pre>
+              </q-scroll-area>
+            </q-card-section>
+
+            <!-- Further Information -->
+            <q-separator class="separator" />
+            <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
+            <q-separator class="separator-info separator-info-exception" />
+            <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
+              <div class="project-body-left">
+                <ul class="feature-list">
+                  <li><strong>Geolocation:</strong> City coords via OpenWeather Geo API</li>
+                  <li><strong>Forecast:</strong> 5-day forecast & dates formatted via <code>moment.js</code></li>
+                  <li><strong>History:</strong> Cities stored in <code>localStorage</code> as clickable recall buttons
+                  </li>
+                  <li><strong>UI:</strong> jQuery builds DOM cards & uses <code>data-attributes</code> for state</li>
+                  <li><strong>Prototyped With:</strong> Postman for debugging API requests</li>
+                  <li><strong>Learned:</strong> Persistent states, AJAX chaining & dataset access</li>
+                </ul>
+              </div>
+              <q-card-section class="project-demo">
+                <q-img :src="props.images[2]" class="project-gif" alt="Weather Dashboard logo" />
+              </q-card-section>
+            </q-card-section>
+          </q-carousel-slide>
+          <q-carousel-slide :name="2" class="column no-wrap">
+
+            <!-- Code block -->
+            <q-card-section class="project-code">
+              <q-scroll-area class="code-container">
+                <pre v-prism class="prism-block">
+                <code class="language-js" :textContent="weatherDashboard2"></code>
+                </pre>
+              </q-scroll-area>
+            </q-card-section>
+
+            <!-- Further Information -->
+            <q-separator class="separator" />
+            <h1 class="text-h5 text-weight-bold info info-exception">Further Information</h1>
+            <q-separator class="separator-info separator-info-exception" />
+            <q-card-section class="project-body-exception" :class="{'stacked-layout': isNarrow}">
+              <div class="project-body-left">
+                <ul class="feature-list">
+                  <li><strong>Functionality:</strong> Mostly identical just written more concisely and with JavaScript
+                  </li>
+                  <li><strong>Forecast:</strong> 5-day forecast & dates formatted via <code>moment.js</code></li>
+                </ul>
+              </div>
+              <q-card-section class="project-demo">
+                <q-img :src="props.images[2]" class="project-gif" alt="Weather Dashboard logo" />
+              </q-card-section>
+            </q-card-section>
+          </q-carousel-slide>
+        </q-carousel>
+      </div>
+
+      <!-- Demo Image -->
+      <q-separator class="separator" />
+
+
     </q-card>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineProps, computed, watch } from 'vue';
 import codeExample from '../../assets/snippets/journal-example-code.txt?raw';
-import codeJournalVideo from '../../assets/animations/code-journal-demo.mp4'
+import weatherDash1 from '../../assets/snippets/dash-1.txt?raw';
+import codeJournalVideo from '../../assets/animations/code-journal-demo.mp4';
+import weatherDash2 from '../../assets/snippets/dash-2.txt?raw'
 
 const exampleCode = ref(codeExample);
+const WeatherDashboard1 = ref(weatherDash1);
+const weatherDashboard2 = ref(weatherDash2);
 
-// const props = defineProps({
-//   images: {
-//     type: Array,
-//     required: true
-//   }
-// });
+const props = defineProps({
+  images: {
+    type: Array,
+    required: true
+  },
+  containerWidth: {
+    type: Number,
+    default: 0
+  }
+});
+
+const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth < 700);
+
+console.log('containerWidth:', props.containerWidth)
+watch(isNarrow, v => console.log('isNarrow changed:', v))
+
+console.log('CodeJournal props.images:', props.images);
+const slide = ref(1)
 </script>
 
 <style scoped>
@@ -119,6 +229,14 @@ const exampleCode = ref(codeExample);
 
 .info-exception {
   margin-left: 1rem;
+
+}
+
+.sub {
+  color: #6B7C94;
+  font-size: small;
+  font-weight: 400;
+  padding-left: 0.6rem;
 }
 
 
@@ -193,15 +311,15 @@ const exampleCode = ref(codeExample);
 }
 
 .project-body-exception {
-  padding: 1rem;
-  padding-top: 1.8rem;
+
+  padding-left: 1rem;
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
 }
 
 .project-body-left {
-  flex: 1 1 0;
+  flex: 0 1 50%;
 }
 
 .feature-list {
@@ -218,20 +336,39 @@ const exampleCode = ref(codeExample);
 
 /* demo GIF */
 .project-demo {
-  padding: 0.75rem 1rem;
+  flex: 1 1 0;
+  /* take remaining space */
+  display: flex;
+  /* center the image inside */
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .project-gif {
   width: 100%;
+  /* fill the flex column */
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  /* keep a nice video-ish shape */
   height: auto;
+  /* let height follow width */
+  object-fit: cover;
+  /* can crop a bit but looks good */
   border-radius: 4px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 .project-video {
-  flex: 0 0 1;
-  width: 40%;
+  width: 100%;
+  /* fill the flex column */
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  /* keep a nice video-ish shape */
   height: auto;
+  /* let height follow width */
+  object-fit: cover;
+  /* can crop a bit but looks good */
   border-radius: 4px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
@@ -289,6 +426,8 @@ const exampleCode = ref(codeExample);
   }
 }
 
+
+
 .prism-block {
   margin: 0;
   padding-top: 0;
@@ -296,5 +435,29 @@ const exampleCode = ref(codeExample);
   padding-left: 1.3rem;
   font-family: sans-serif;
   background-color: #ECF2F8;
+}
+
+.carousel-wrapper {
+  width: 102.5%;
+  margin-left: -0.8rem;
+}
+
+.q-carousel__slide,
+.q-carousel .q-carousel--padding {
+  padding: 0px;
+}
+
+.stacked-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+/* children inside the stacked container: just flow one after the other */
+.stacked-layout .project-body-left,
+.stacked-layout .project-demo {
+  flex: 0 0 auto;  /* no flex-basis magic */
+  width: 100%;     /* take full width */
+  margin-top: -1rem;
+  margin-bottom: 2rem; /* optional */
 }
 </style>
