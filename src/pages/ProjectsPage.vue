@@ -55,7 +55,7 @@
     import ProjectSection from 'src/components/ProjectSection.vue';
     import DraggableResizableVue from 'draggable-resizable-vue3';
     import TeamBuilder from 'src/components/projects/TeamBuilder.vue';
-    import ProjectVibely from 'src/components/projects/ProjectVibely.vue';
+    // import ProjectVibely from 'src/components/projects/ProjectVibely.vue';
     import MoovieMatch from 'src/components/projects/MoovieMatch.vue';
     import ProjectNocado from 'src/components/projects/ProjectNocado.vue';
     import PwCProjects from 'src/components/projects/PwCProjects.vue';
@@ -134,7 +134,8 @@
         ],
         deployed: [false],
         repo:     [false],
-        summary:  'I architect Google Apps Script automations to streamline repetitive tasks. This project section highlights a form-driven folder generator, a custom Word UI element that applies templates to documents, and a Google Drive "document-logger" - more interesting than it sounds, promise!',
+        summary:  'PwC projects have included custom Storyline functionality using JavaScript triggers, VBA with Excel for data analysis, and Apps Script automations for streamlining repetitive tasks.',
+        summaryBullets: ['Highlighted Projects:', 'Google form to template folder structure generator in Drive.', 'Docs toolbar UI element for content templates in documents.', 'Document trawler for comprehensive logging and detailing of user Drive.'],
         technology: [
             { name: 'GoogleAppsScript', logo: loadTechLogo('Google_AppsScript.svg')},
             { name: 'ArticulateStoryline',logo: loadTechLogo('Articulate.svg')},
@@ -144,6 +145,48 @@
             { name: 'CreativeCloud', logo: loadTechLogo('adobe-creative-cloud-1.svg')},  
         ],
         component: markRaw(PwCProjects),
+    },
+    {
+        id:       'project8journal',
+        title:    'Postwork',
+        images:   [
+        loadProjectLogo('postwork'),
+        'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif'
+        ],
+        deployed: [true, 'https://code-journal.netlify.app'],
+        repo:     'https://github.com/MattGaarder/postwork-journal',
+        summary:  'Hands-on coding across varied technical domains to create high-quality datasets used in the training of frontier AI systems.',
+        summaryBullets: ['Highlighted Projects:', 'Markdown-powered web journal for documenting coding projects with formatted code snippets and explanations.', 'CLI tool that processes monthly expense CSV reports into structured text files.', 'Real-time collaboration and code-review platform — with gamified elements to encourage feedback and engagement.'],
+        technology: [
+            { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg')},
+            { name: 'HTML',logo: loadTechLogo('html-5-logo-svgrepo-com.svg')}, 
+            { name: 'CSS', logo: loadTechLogo('Official_CSS_Logo.svg')}, 
+            
+        ],
+        component: markRaw(CodeJournal),
+    },
+    {
+        id:       'project6teamb',
+        title:    'edX Trinity Skills',
+        images:   [
+        loadProjectLogo('EdX_newer_logo'),
+            'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif',
+            'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif',
+        ],
+        deployed: [false],
+        repo:     [true, 'https://github.com/MattGaarder/team-profile-generator'],
+        summary:  "Trinity Skills Bootcamp in Web Development — 16-week online bootcamp covering key front-end technologies and modern web-development practices.",
+        summaryBullets: ['Highlighted Projects:', 'Node.js CLI suite — Formatted, badge-topped, and sectioned README.md generator for your project.', "Real-time social feed where you 'Vibe' or 'Not a Vibe' to posts.", 'Persistent, personalised dashboard of weather insights for saved locations (x2) — jQuery, and refactored with JavaScript.'],
+        technology: [
+            { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg')},
+            { name: 'Jest',    logo: loadTechLogo('jest-js-icon.svg')},
+            { name: 'Inquirer',logo: loadTechLogo('inquirer_readme.svg')},
+            { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg')},
+            { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg')}, 
+            { name: 'React',logo: loadTechLogo('react-2.svg')}, 
+           
+        ],
+        component: markRaw(TeamBuilder),
     },
     {
         id:       'project12nocado',
@@ -163,23 +206,23 @@
         ],
         component: markRaw(ProjectNocado),
     },
-    {
-        id:       'project2vibely',
-        title:    'Vibely',
-        images:   [
-        loadProjectLogo('vibely-logo-v2'),
-        'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif'
-        ],
-        deployed: [true, 'https://main--endearing-sundae-33b843.netlify.app/'],
-        repo:     [true, 'https://github.com/MattGaarder/vibely'],
-        summary:  'A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” to posts. Live updates using React and Firebase so you never miss an opportunity to vibe with your friends again.',
-        technology: [
-            { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg')},
-            { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg')}, 
-            { name: 'React',logo: loadTechLogo('react-2.svg')}, 
-        ],
-        component: markRaw(ProjectVibely),
-    },
+    // {
+    //     id:       'project2vibely',
+    //     title:    'Vibely',
+    //     images:   [
+    //     loadProjectLogo('vibely-logo-v2'),
+    //     'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif'
+    //     ],
+    //     deployed: [true, 'https://main--endearing-sundae-33b843.netlify.app/'],
+    //     repo:     [true, 'https://github.com/MattGaarder/vibely'],
+    //     summary:  'A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” to posts. Live updates using React and Firebase so you never miss an opportunity to vibe with your friends again.',
+    //     technology: [
+    //         { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg')},
+    //         { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg')}, 
+    //         { name: 'React',logo: loadTechLogo('react-2.svg')}, 
+    //     ],
+    //     component: markRaw(ProjectVibely),
+    // },
     {
         id:       'project3moviem',
         title:    'Moovie Match',
@@ -196,24 +239,6 @@
             { name: 'iFrameYoutubeAPI',logo: loadTechLogo('iframe-svgrepo-com.svg')},  
         ],
         component: markRaw(MoovieMatch),
-    },
-    {
-        id:       'project6teamb',
-        title:    'Team Builder',
-        images:   [
-        loadProjectLogo('EdX_newer_logo'),
-            'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif'
-        ],
-        deployed: [false],
-        repo:     [true, 'https://github.com/MattGaarder/team-profile-generator'],
-        summary:  "My Node.js CLI suite. Project documentation a chore? Run this generator and seamlessly produce customizable badge-topped, sectioned README.md with interactive prompts. (Also can create styled HTML roster for your team).",
-        technology: [
-            { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg')},
-            { name: 'Jest',    logo: loadTechLogo('jest-js-icon.svg')},
-            { name: 'Inquirer',logo: loadTechLogo('inquirer_readme.svg')},
-           
-        ],
-        component: markRaw(TeamBuilder),
     },
     {
         id:       'project1weatherd',
@@ -266,24 +291,6 @@
         ],
         component: markRaw(ThisPortfolio),
     },
-    {
-        id:       'project8journal',
-        title:    'postwork.journal',
-        images:   [
-        loadProjectLogo('postwork'),
-        'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif'
-        ],
-        deployed: [true, 'https://code-journal.netlify.app'],
-        repo:     'https://github.com/MattGaarder/postwork-journal',
-        summary:  'Code Journal supports Markdown formatting allowing users to document code snippets easily - as well as headings, lists, inline code, bold/italic, and links. Entries are stored in browser localStorage. No backend and no external data libraries required.',
-        technology: [
-            { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg')},
-            { name: 'HTML',logo: loadTechLogo('html-5-logo-svgrepo-com.svg')}, 
-            { name: 'CSS', logo: loadTechLogo('Official_CSS_Logo.svg')}, 
-            
-        ],
-        component: markRaw(CodeJournal),
-    },
     ];
 </script>
 
@@ -330,6 +337,7 @@
     .project-body {
         padding: 0px !important;
     }
+
 
 
 

@@ -23,9 +23,13 @@
           class="project-logo"
           :class="id"
           :to="deployed"
-
         />
-        <div class="text-caption q-pt-md project-summary q-pr-none q-pl-sm" :to="repo">{{ summary }}</div>
+        <div class="text-caption q-pt-md project-summary q-pr-none q-pl-xs" :to="repo">{{ summary }}</div>
+        <ul v-if="summaryBullets.length" class="summary-bullets">
+          <li v-for="item in summaryBullets" :key="item">
+            {{ item }}
+          </li>
+        </ul>
         
           
       </div>
@@ -35,13 +39,17 @@
 </template>
 
 <script setup>
-  const { id, title, images, deployed, repo, summary, technology } = defineProps({
+  const { id, title, images, deployed, repo, summary, summaryBullets, technology } = defineProps({
     id:         { type: String, required: true },
     title:      { type: String, required: true },
     images:     { type: Array,  default: () => [] },
     deployed:   { type: String,  default: '' },
     repo:       { type: String,  default: '' },
     summary:    { type: String,  default: '' },
+    summaryBullets: {
+      type: Array,
+      default: () => []
+    },
     technology: { type: Array,   default: () => [] }
   });
 </script>
@@ -51,6 +59,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    padding-top: 2.5rem;
   }
 
   .wrapper {
@@ -80,8 +89,6 @@
     min-height: 5rem;
     opacity: 0.4;
     margin-right: 1.8rem;
-    
-
   }
 
 
@@ -110,11 +117,33 @@
 
   .project-summary {
     max-width: 23rem;
+    
+  }
+
+  .summary-bullets {
+
+    max-width: 21rem;
+    padding-left: 0rem;
+    margin: 0;
+    margin-top: 0.5rem;
+    list-style: disc;
+  }
+
+  .summary-bullets li {
+    opacity: 0.4;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .summary-bullets li:first-child {
+    list-style-type: none; 
+    font-weight: 600;      
+    margin-left: -0.7rem;       
   }
 
   .project-section:hover .project-logo,
   .project-section:hover .project-summary,
-  .project-section:hover {
+  .project-section:hover .summary-bullets li {
     opacity: 1;
     color: white;
   }
@@ -128,7 +157,7 @@
     .tech-list {
       flex-direction: row;
       position: absolute;
-      margin-top: -2.7rem;
+      margin-top: -4.7rem;
     }
   }
 
