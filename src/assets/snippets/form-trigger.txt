@@ -1,0 +1,37 @@
+  function extractFormResponses(e) {
+    let courseName, courseVersion, courseLocation, courseType;
+    if(e.response){
+      let formResponse = e.response;
+      let itemResponses = formResponse.getItemResponses();
+      // loop through item response and process accordingly
+      itemResponses.forEach(itemResponse => {
+        let question = itemResponse.getItem().getTitle();
+        let response = itemResponse.getResponse();
+        // assign responses to corresponding variables based on question title
+        switch(question) {
+          case 'Enter the name of your course':
+            // Regular expression to find ' v' followed by one or more digits
+            const versionRegex = / v(\d+)/;
+            const match = response.match(versionRegex);
+            // If a match is found, split the response and extract the version
+            if (match) {
+              courseName = response.split(versionRegex)[0];
+              courseVersion = match[1]; // The first capture group, which is the version number
+            } else {
+              courseName = response; // Default to the whole response if no version is found
+              courseVersion = ''; // Default to an empty string if no version is found
+            }
+            break;
+          case 'Select course location':
+            courseLocation = response;
+            break;
+          case 'Select course type':
+            courseType = response;
+            break;
+        }
+      })
+    }
+    Logger.log(courseName + '   ' + courseVersion + '  ' + courseLocation + '     ' + courseType);
+    // return extracted data
+    return { courseName, courseVersion, courseLocation, courseType };
+  };

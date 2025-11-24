@@ -1,6 +1,6 @@
 <template>
   <div class="projects-wrapper">
-    
+
   </div>
 </template>
 
@@ -47,7 +47,7 @@
   border-radius: 6px;
   background: white;
   border-color: rgb(207, 207, 207);
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* 🔶 HEADER (icon + title band) */
@@ -76,7 +76,7 @@
   margin-top: 0.5rem;
 }
 
-/* 🔶 FURTHER INFORMATION */
+/* 🔶 More INFORMATION */
 .project-body {
   padding: 1rem;
   padding-top: 1.8rem;
@@ -98,6 +98,7 @@
   margin-left: -0.8rem;
   margin-right: -0.8rem;
 }
+
 .separator-info {
   margin: 0.5rem -1.8rem 0;
 }
@@ -107,7 +108,7 @@
   width: 100%;
   height: auto;
   border-radius: 6px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* 🔶 MOBILE */

@@ -24,17 +24,18 @@
         </em>
       </div>
 
-      <!-- Further Information -->
+      <!-- More Information -->
       <q-separator class="separator" />
       <q-card-section class="project-body">
-        <h1 class="text-h5 text-weight-bold info">Further Information</h1>
+        <h1 class="text-h5 text-weight-bold info">More Information</h1>
         <q-separator class="separator-info" />
         <ul class="feature-list">
           <li>
             <strong>UI:</strong> React with Material UI components for fast, accessible layouts.
           </li>
           <li>
-            <strong>Routing &amp; State:</strong> React Router + Context API to manage user session and route visibility.
+            <strong>Routing &amp; State:</strong> React Router + Context API to manage user session and route
+            visibility.
           </li>
           <li>
             <strong>Authentication:</strong> Firebase Auth for email/password sign-up and sign-in flows.
@@ -43,7 +44,8 @@
             <strong>Data Backend:</strong> Firestore for live posts, profile data, and “vibe” voting.
           </li>
           <li>
-            <strong>Real-Time:</strong> <code>onSnapshot</code> listeners to instantly reflect new posts and votes in the UI.
+            <strong>Real-Time:</strong> <code>onSnapshot</code> listeners to instantly reflect new posts and votes in
+            the UI.
           </li>
           <li>
             <strong>Responsive:</strong> Flex/Grid layouts that adapt across desktop and mobile breakpoints.

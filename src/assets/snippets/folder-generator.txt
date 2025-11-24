@@ -1,0 +1,169 @@
+  // main function triggered on form submission
+  const responsesSheet = SpreadsheetApp.openById('spreadsheetId');
+  const courseLinkColumnIndex = "H";
+  const courseRow = responsesSheet.getLastRow();
+  let courseLink;
+
+  function onFormSubmit(e) {
+  // extract form responses and object destructure form answers into variables
+  let { courseName, courseVersion, courseLocation, courseType } = extractFormResponses(e);
+
+  // validate all responses are there
+  if(!courseName || !courseLocation || !courseType) {
+    Logger.log('Error - Missing form responses');
+    return;
+  }
+  // determine what folder the project should be located in
+  const targetFolderId = determineTargetFolderId(courseLocation);
+
+  // determine what folder template should be used as the template for the project folder
+  // also pass targetFolderId into function to determine whether course type from prod or dig repo 
+  const sourceFolderId = determineSourceFolderId(courseType, courseLocation);
+
+  if(!targetFolderId || !sourceFolderId) {
+    Logger.log('Error - Invalid course location or type');
+    return;
+  }
+  // pass all information for copy action 
+  copyCourseFolderStructure(sourceFolderId, targetFolderId, courseName, courseVersion, courseType);
+  responsesSheet.getRange(courseLinkColumnIndex + courseRow).setValue(courseLink);
+  };
+
+  // function that uses event object to get responses from form and assign to variables
+  function extractFormResponses(e) {
+  let courseName, courseVersion, courseLocation, courseType;
+  if(e.response){
+    let formResponse = e.response;
+    let itemResponses = formResponse.getItemResponses();
+
+    // loop through item response and process accordingly
+    itemResponses.forEach(itemResponse => {
+      let question = itemResponse.getItem().getTitle();
+      let response = itemResponse.getResponse();
+
+      // assign responses to corresponding variables based on question title
+      switch(question) {
+        case 'Enter the name of your course':
+          let courseNameArray = response.split(' v');
+          courseName = courseNameArray[0];
+          courseVersion = courseNameArray[1]; 
+          break;
+        case 'Select course location':
+          courseLocation = response;
+          break;
+        case 'Select course type':
+          courseType = response;
+          break;
+      }
+    })
+  }
+  Logger.log(courseName + '   ' + courseVersion + '  ' + courseLocation + '     ' + courseType);
+
+  // return extracted data
+  return { courseName, courseVersion, courseLocation, courseType };
+  };
+
+  // function that copies course folder structure 
+  function copyCourseFolderStructure(sourceFolderId, targetFolderId, courseName, courseVersion, courseType) {
+
+  // gets target folder
+  let targetFolder = DriveApp.getFolderById(targetFolderId);
+  // if there is a folder with the same name, assign to courseFolder
+  let courseFolder = getExistingFolder(targetFolder, courseName);
+
+  // if courseFolder is not truthy, create a new folder with courseName
+  if(!courseFolder){
+    courseFolder = targetFolder.createFolder(courseName);
+  }
+  // save the id of the folder to courseLink 
+  courseLink = courseFolder.getId();
+
+  let versionFolder = null;
+  // make version folder name
+  let versionFolderName = courseName + ' v' + courseVersion;
+  if(getExistingFolder(courseFolder, versionFolderName)){
+    console.log('there is a course with the same version number as this');
+    courseLink = 'already exists';
+    responsesSheet.getRange(courseLinkColumnIndex + courseRow).setValue(courseLink);
+    return;
+  };
+  if(!versionFolder) {
+    versionFolder = courseFolder.createFolder(versionFolderName);
+    versionFolder.setDescription(courseType);
+  }
+
+  // get template folders
+  const templateFolderStructure = DriveApp.getFolderById(sourceFolderId);
+  const templateFolders = templateFolderStructure.getFolders();
+
+  // iterate through each top-level folder in the template structure calling copyFolder for each one
+  // what to copy? currentFolder, where? versionFolder
+  while(templateFolders.hasNext()) {
+    const currentFolder = templateFolders.next();
+    copyFolder(currentFolder, versionFolder);
+  }
+  };
+
+  function getExistingFolder(targetFolder, courseName){
+  // loop thorugh and return the folder with the same name if it is found
+  let folders = targetFolder.getFolders();
+  while(folders.hasNext()){
+    let folder = folders.next();
+    if(folder.getName() === courseName) {
+      return folder;
+    }
+  }
+  return null;
+  }
+
+  // function that copies a folder structure from a source folder to a target folder
+  function copyFolder(sourceFolder, targetFolder) {
+  let folderName = sourceFolder.getName();
+
+  let newFolder = targetFolder.createFolder(folderName);
+  let folders = sourceFolder.getFolders();
+  // RECURSIVELY copy each subfolder into the new target folder
+  while (folders.hasNext()) {
+    let subFolder = folders.next();
+    copyFolder(subFolder, newFolder);
+  }
+  };
+
+  // function that determines the target folder ID based on the course location
+  function determineTargetFolderId(courseLocation) {
+  const digitalAuditFolderId = 'dAuditId';
+  const digitalUsFolderId = 'dUsFId';
+  const productionFolderId = 'prodFId';
+  Logger.log(courseLocation);
+
+  // determine and return the corresponding folder ID based on the course location
+  switch (courseLocation) {
+    case 'Digital Repository Audit Curriculum': 
+      return digitalAuditFolderId;
+    case 'Digital Repository US Curriculum':
+      return digitalUsFolderId;
+    case 'Production Repository':
+      return productionFolderId;
+    default: 
+      return null;
+  }
+  };
+
+  function determineSourceFolderId(courseType, courseLocation) {
+  const productionTemplates = 'prodTemp';
+  const digitalTemplates = 'digTemp';
+  let templates;
+  if(courseLocation === 'Production Repository') {
+    templates = DriveApp.getFolderById(productionTemplates).getFolders();  
+  } else {
+    templates = DriveApp.getFolderById(digitalTemplates).getFolders();
+  }
+  while (templates.hasNext()) {
+    let templateType = templates.next();
+    if (templateType.getName() === courseType) {
+      return templateType.getId();
+    }
+  }
+  console.log('no folder found with the course type: ' + courseType);
+  return null
+  };

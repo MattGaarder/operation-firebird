@@ -1,0 +1,61 @@
+function onOpen(e) {
+const ui = DocumentApp.getUi();
+ui.createMenu('Components')
+  .addItem('Face to face', 'insertF2f')
+  .addItem('Digital', 'insertDig')
+  .addItem('Video', 'insertVid')
+  .addItem('Assessment', 'insertAss')
+  .addToUi();
+};
+
+function insertTemplateElements(templateDocId) {
+    const doc = DocumentApp.getActiveDocument();
+    const body = doc.getBody();
+    const templateDoc = DocumentApp.openById(templateDocId);
+    const templateBody = templateDoc.getBody();
+    var cursor = doc.getCursor();
+    var index = 0;
+    if (cursor) {
+    var element = cursor.getElement();
+    while (element.getParent().getType() != DocumentApp.ElementType.BODY_SECTION) {
+        element = element.getParent();
+    }
+    index = body.getChildIndex(element);
+    } else {
+        DocumentApp.getUi().alert("Could not find current position. Ensure you have selected where you want to paste the template.");
+        return;
+    }
+    for (var i = templateBody.getNumChildren() - 1; i >= 0; i--) {
+    var child = templateBody.getChild(i).copy();
+    switch (child.getType()) {
+            case DocumentApp.ElementType.PARAGRAPH:
+            body.insertParagraph(index, child);
+            break;
+            case DocumentApp.ElementType.LIST_ITEM:
+            body.insertListItem(index, child);
+            break;
+            case DocumentApp.ElementType.TABLE:
+            body.insertTable(index, child);
+            break;
+            case DocumentApp.ElementType.INLINE_IMAGE:
+            body.insertImage(index, child);
+            break;
+        }
+    }
+}
+
+function insertF2f() {
+insertTemplateElements('docId');
+}
+
+function insertDig() {
+insertTemplateElements('docId');
+}
+
+function insertVid() {
+insertTemplateElements('docId');
+}
+
+function insertAss() {
+insertTemplateElements('docId');
+}

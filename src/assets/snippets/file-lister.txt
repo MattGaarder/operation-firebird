@@ -1,0 +1,308 @@
+function listFilesInDrive() {
+  try {
+    var folderId = 'folderId';  // Root folder ID
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['File Name', 'File Path']); 
+    }
+    if (sheet.getRange(1, 3).getValue() === '') { 
+      sheet.getRange(1, 3, 1, 4).setValues([['Folder Name', 'ID', 'Index', 'Processed']]);  
+    }
+    var folder = DriveApp.getFolderById(folderId);  // Get root folder
+    Logger.log("Sheet found. Checking properties for progress...");
+    // Get stored properties for progress tracking (snapshot and path)
+    var properties = PropertiesService.getScriptProperties();
+    // Load the snapshot of the folder structure
+    var folderSnapshot = JSON.parse(properties.getProperty('folderSnapshot') || 'null'); 
+    // Load the path where processing last left off
+    var path = JSON.parse(properties.getProperty('path') || '[]');  
+    if (!folderSnapshot) {
+      Logger.log("No snapshot found. Taking a new snapshot of top-level folders.");
+      folderSnapshot = takeTopLevelFolderSnapshot(folder, sheet);
+      // Save the snapshot
+      properties.setProperty('folderSnapshot', JSON.stringify(folderSnapshot));  
+      Logger.log("Snapshot taken successfully.");
+    }
+    // Start processing folders from where we left off
+    processFolders(folderSnapshot, path, sheet, folderId);  
+  } catch (error) {
+    Logger.log("An error occurred: " + error.message);
+    resetProperties();  // Reset properties on error to avoid future issues
+  }
+}
+
+function processFolders(snapshot, path, sheet, rootFolderId) {
+  Logger.log("Starting folder processing...");
+  // Summarize and log the snapshot
+  Logger.log("Snapshot at start (summary): " + JSON.stringify(snapshot.map(f => ({
+    name: f.name, 
+    id: f.id, 
+    processed: f.processed
+  })), null, 2)); 
+  // Log the current processing path
+  Logger.log("Path at start: " + JSON.stringify(path));  
+  var properties = PropertiesService.getScriptProperties();
+  var startRow = 2;  // Side-table starts at row 2
+  // Navigate through the snapshot using the path to find the correct folder to process
+  var currentFolderLevel = getFolderDataAtPath(snapshot, path);
+  // Check if currentFolderLevel is null (invalid path)
+  if (currentFolderLevel === null) {
+    Logger.log("Error: Invalid path or folder does not exist. Skipping.");
+    return;  // Skip to avoid invalid paths, but do not continue
+  }
+
+  // If no subfolders exist, process files if available
+  if (currentFolderLevel.length === 0) {
+    Logger.log("No subfolders to process at the current level, processing files if any.");
+    var folderData = getFolderDataAtPath(snapshot, path.slice(0, -1))[path[path.length - 1]];
+    var folder = DriveApp.getFolderById(folderData.id);
+    listFilesInFolderRecursive(folder, '', sheet, rootFolderId, folderData, path, snapshot);
+    return;  // Return after processing the files to continue with the next folder
+  }
+  // Log a summarized version of currentFolderLevel for readability
+  Logger.log("Current Folder Level after path navigation:");
+  currentFolderLevel.forEach((folder, index) => {
+    Logger.log("Index: " + index + ", 
+    Name: " + folder.name + ", ID: " + folder.id + ", Processed: " + folder.processed);
+  });
+  // Process each folder in the current level
+  for (var i = path.length === 0 ? 0 : path[path.length - 1]; i < currentFolderLevel.length; i++) {
+    var folderData = currentFolderLevel[i];
+    if (!folderData || folderData.processed === undefined) {
+      Logger.log("Error: Folder data is missing or undefined at path index " + i);
+      continue;  // Skip this folder if data is invalid
+    }
+    var folder = DriveApp.getFolderById(folderData.id);  // Get the folder by its ID
+    Logger.log("Processing folder: " + folderData.name + " at path index: " + i);
+    if (folderData.processed) {
+      Logger.log("Skipping already processed folder - why doesn't this get logged #2: " + folderData.name);
+      continue;
+    }
+    sheet.getRange('H2').setValue(folderData.name);
+    Logger.log("Current folder being processed updated in sheet: " + folderData.name);
+    var rowIndex = i + 2; // Assuming side-table starts at row 2
+    sheet.getRange(rowIndex, 3, 1, 4).setValues([[folderData.name, folderData.id, i, 'false']]);
+    listFilesInFolderRecursive(folder, '', sheet, rootFolderId, folderData, path.concat(i), snapshot);
+    Logger.log("Folder processing status before marking as processed: " + JSON.stringify(folderData, null, 2));
+    folderData.processed = true;
+    Logger.log("Folder marked as processed: " + folderData.name + " | Path: " + JSON.stringify(path.concat(i)));
+
+    sheet.getRange(rowIndex, 6).setValue('true'); // Update "Processed" column to true
+
+    properties.setProperty('folderSnapshot', JSON.stringify(snapshot));  // Save updated snapshot
+    properties.setProperty('path', JSON.stringify(path.concat(i)));  // Save the updated path for resumption
+    Logger.log("Progress saved: Folder index " + i + " | Path: " + JSON.stringify(path.concat(i)));
+  }
+  Logger.log("Returning to parent folder after processing subfolder at path: " + JSON.stringify(path));
+  properties.deleteProperty('path');
+  Logger.log("All folders processed, path property cleared.");
+}
+
+
+// Recursive function to process files and subfolders
+function listFilesInFolderRecursive(folder, parentFolderPath, sheet, rootFolderId, folderData, path, snapshot) {
+  Logger.log("Folder processing status before marking as processed: " + JSON.stringify(folderData, null, 2));
+  if (!folder) {
+    Logger.log("Folder is undefined or null. Skipping.");
+    return;  // Skip invalid folders
+  }
+  var properties = PropertiesService.getScriptProperties();
+  var currentFolderPath = parentFolderPath + '/' + folder.getName();  // Build the full path of the current folder
+  Logger.log("Processing folder: " + folder.getName() + " | Full Path: " + currentFolderPath);
+  // Get all files in the current folder
+  var files = folder.getFiles();
+  var processedFileCount = folderData.lastProcessedFileIndex || 0; // Resume from the last processed file index
+  // Process each file in the folder
+  while (files.hasNext()) {
+    var file = files.next();
+    Logger.log("Processing file: " + fileName + " | Path: " + fullFilePath + " | File URL: " + fileUrl);
+    // Skip files that have already been processed
+    if (processedFileCount < folderData.lastProcessedFileIndex) {
+      processedFileCount++;  // Increment the counter for skipped files
+      Logger.log(`Skipping already processed file: ${fileName} (Index: ${processedFileCount})`);
+      continue;
+    }
+    // Process the file and add it to the sheet
+    var fileName = file.getName();
+    var fileUrl = file.getUrl();
+    var fullFilePath = getFullFilePath(file, rootFolderId);  // Get the full file path
+    var fileLink = '=HYPERLINK("' + fileUrl + '", "' + fileName + '")';  // Create a clickable hyperlink
+    sheet.appendRow([fileLink, fullFilePath]);  // Add the file to the Google Sheet
+    // Update the processed file count and save progress every 5 files
+    processedFileCount++;
+    folderData.lastProcessedFileIndex = processedFileCount;  // Update the last processed file index
+    Logger.log(`Processed file: ${fileName} | Path: ${fullFilePath} | URL: ${fileUrl} | Index: ${processedFileCount}`);
+    if (processedFileCount % 5 === 0) {
+      storeProgress(snapshot, path, folderData);  // Save the snapshot progress and folder state
+      properties.setProperty('folderSnapshot', JSON.stringify(snapshot));  // Persist the snapshot
+      properties.setProperty('path', JSON.stringify(path));  // Persist the current path
+      Logger.log("Progress saved at file index: " + processedFileCount + " | Path: " + JSON.stringify(path));
+      Logger.log("Snapshot after marking folder as processed: " + JSON.stringify(snapshot, null, 2));
+
+    }
+  }
+
+  // Process subfolders recursively
+  var subfolders = folder.getFolders();
+  // Resume from the last processed subfolder index
+  var subfolderIndex = folderData.lastProcessedSubfolderIndex || 0;  
+  var foundSubfolder = false;
+  // If there are subfolders, process them
+  while (subfolders.hasNext()) {
+    var subfolder = subfolders.next();
+    Logger.log("Processing subfolder: " + subfolder.getName() + " | Subfolder ID: " + subfolder.getId());
+    foundSubfolder = true;
+    // Retrieve or create subfolder data
+    var subfolderData = getOrCreateSubfolderData(subfolder.getId(), folderData);  
+  if (subfolderData && subfolderData.processed !== undefined) {
+    Logger.log("Processing subfolder: " + subfolder.getName() + " 
+    | Subfolder ID: " + subfolder.getId() + " | Processed: " + subfolderData.processed);
+    Logger.log("Snapshot after marking folder as processed noooooot: " + JSON.stringify(snapshot, null, 2));
+  } else {
+    Logger.log("Error: Subfolder data is missing or undefined for: " + subfolder.getName());
+    continue;  // Skip processing this subfolder if the data is invalid
+  }
+    if (subfolderIndex < folderData.lastProcessedSubfolderIndex) {
+      subfolderIndex++;  // Skip already processed subfolders
+      Logger.log("Skipping already processed subfolder - why doesn't this log?: " + subfolder.getName());
+      continue;
+    }
+    Logger.log("Processing subfolder: " + subfolder.getName() + " at index: " + subfolderIndex);
+    // Recurse into subfolders
+    listFilesInFolderRecursive(subfolder, currentFolderPath, sheet, rootFolderId, subfolderData, path.concat(subfolderIndex), snapshot);
+    
+    subfolderIndex++;
+    folderData.lastProcessedSubfolderIndex = subfolderIndex;  // Update subfolder index
+    // Save progress every 2 subfolders
+    if (subfolderIndex % 2 === 0) {
+      Logger.log("Storing progress for subfolder: " + folderData.name + " at path: " + JSON.stringify(path));
+      storeProgress(snapshot, path, folderData);
+      Logger.log("Progress successfully stored for subfolder: " + folderData.name);
+      properties.setProperty('folderSnapshot', JSON.stringify(snapshot));  // Persist the snapshot
+      properties.setProperty('path', JSON.stringify(path.concat(subfolderIndex)));  // Persist the current path
+      Logger.log("Snapshot after marking folder as processed: " + JSON.stringify(snapshot, null, 2));
+      Logger.log("Progress saved at subfolder index: " + subfolderIndex + " | Path: " + JSON.stringify(path.concat(subfolderIndex)));
+    }
+  }
+
+  // If no subfolders were found, mark the folder as processed and backtrack
+  if (!foundSubfolder) {
+    Logger.log("No subfolders in folder: " + folder.getName() + ". Marking as processed and backtracking.");
+    folderData.processed = true; // Mark folder as fully processed
+    folderData.lastProcessedFileIndex = 0;
+    folderData.lastProcessedSubfolderIndex = 0;
+    Logger.log("Storing progress for subfolder: " + folderData.name + " at path: " + JSON.stringify(path));
+    storeProgress(snapshot, path, folderData);
+    Logger.log("Progress successfully stored for subfolder: " + folderData.name);
+    properties.setProperty('folderSnapshot', JSON.stringify(snapshot));  // Persist the snapshot
+    Logger.log("Snapshot after marking folder as processed: " + JSON.stringify(snapshot, null, 2));
+    Logger.log("Folder fully processed: " + folderData.name + ". Returning to parent.");
+  }
+}
+
+// Function to store progress in the snapshot
+function storeProgress(snapshot, path, folderData) {
+  Logger.log("Storing progress for folder: " + folderData.name + 
+  " | Folder processed: " + folderData.processed + " | Path: " + JSON.stringify(path));
+  let currentLevel = snapshot;
+  // Traverse the snapshot using the path to find the current folder's data
+  for (let i = 0; i < path.length - 1; i++) {
+    currentLevel = currentLevel[path[i]].subfolders || [];  // Navigate through subfolders
+Logger.log("Navigating snapshot level: " + i + 
+" | Current folder level: " + currentLevel.map(f => f.name).join(", "));
+  }
+  currentLevel[path[path.length - 1]] = folderData;  // Save the updated folder data
+  Logger.log("Progress stored successfully for folder: " + folderData.name);
+}
+
+function getFolderDataAtPath(folderSnapshot, path) {
+  Logger.log("Retrieving folder data at path: " + JSON.stringify(path));
+  let currentLevel = folderSnapshot;
+  // Traverse through the snapshot using the path
+  for (let i = 0; i < path.length; i++) {
+    if (!currentLevel[path[i]]) {
+Logger.log("Skipping: Folder at index " + path[i] + " does not exist.");
+      continue;  // Skip invalid folders
+    }
+    // Move to next subfolder level
+    currentLevel = currentLevel[path[i]].subfolders || [];  
+    // Log subfolder names at this level
+    Logger.log("Navigating to path index: " + path[i] + 
+    " | Current level folder names: " + 
+      currentLevel.map(f => f.name).join(", "));  
+  }
+  return currentLevel;  // Return the valid folder or subfolder data
+}
+
+// Function to get the full file path by walking back from the file to the root folder
+function getFullFilePath(file, rootFolderId) {
+  var folderPath = [];
+  var currentFolder = file.getParents().next();
+  while (currentFolder && currentFolder.getId() !== rootFolderId) {
+    folderPath.unshift(currentFolder.getName());  // Add folder names to the path
+    var parentFolders = currentFolder.getParents();
+    currentFolder = parentFolders.hasNext() ? parentFolders.next() : null;
+  }
+  return 'Drive / ' + folderPath.join(' / ');  // Return full file path
+}
+// Function to reset properties in case of an error
+function resetProperties() {
+  Logger.log("Resetting properties to avoid future errors.");
+  var properties = PropertiesService.getScriptProperties();
+  properties.deleteProperty('folderSnapshot');
+  properties.deleteProperty('path');
+  properties.deleteProperty('lastProcessedFileIndex');
+  properties.deleteProperty('lastProcessedSubfolderIndex');
+}
+
+function takeTopLevelFolderSnapshot(folder, sheet) {
+  Logger.log("Taking quick snapshot of top-level folders...");
+  var snapshot = [];
+  var subFolders = folder.getFolders();
+  var index = 0;
+  var startRow = 2;
+  while (subFolders.hasNext()) {
+    var subFolder = subFolders.next();
+    var folderData = {
+      id: subFolder.getId(),
+      name: subFolder.getName(),
+      index: index++,
+      processed: false,
+      lastProcessedFileIndex: 0,
+      lastProcessedSubfolderIndex: 0
+    };
+    // Add the folder to the snapshot
+    snapshot.push(folderData);
+    // Write to the side-table in the sheet (if needed)
+    sheet.getRange(startRow, 3, 1, 4)
+    .setValues([[subFolder.getName(), subFolder.getId(), index - 1, 'false']]);
+    startRow++;
+  }
+  Logger.log("Top-level snapshot complete. Total folders: " + snapshot.length);
+  return snapshot;
+}
+
+// Helper function to get or create subfolder data
+function getOrCreateSubfolderData(subfolderId, parentFolderData) {
+  Logger.log("Checking for existing subfolder data: " + subfolderId);
+  // Check if the subfolder already exists in the parent folder's subfolders array
+  var subfolderData = parentFolderData.subfolders?.find(sf => sf.id === subfolderId);
+  if (!subfolderData) {
+    // Create the subfolder data if it doesn't already exist
+    subfolderData = {
+      id: subfolderId,
+      name: DriveApp.getFolderById(subfolderId).getName(),
+      lastProcessedFileIndex: 0,
+      lastProcessedSubfolderIndex: 0,
+      processed: false,
+      subfolders: []
+    };
+    // Add the subfolder data to the parent folder's subfolders array
+    parentFolderData.subfolders = parentFolderData.subfolders || [];
+    parentFolderData.subfolders.push(subfolderData);
+    Logger.log("Created new subfolder data for: " + subfolderData.name);
+  } else {
+    Logger.log("Found existing subfolder data for: " + subfolderData.name);
+  }
+  return subfolderData;
+}

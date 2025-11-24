@@ -13,14 +13,14 @@
         <teleport to="body">
             <div class="windows-layer">
                 <draggable-resizable-vue v-for="(win, i) in windows" :key="win.uid" v-model:x="win.x" v-model:y="win.y"
-                    v-model:h="win.height" v-model:w="win.width" v-model:active="win.active" :minWidth="212"
+                    v-model:h="win.height" v-model:w="win.width" v-model:active="win.active" :minWidth="252"
                     :minHeight="100" :style="{ zIndex: win.zIndex }" :drag-handle="'.window-handle'"
                     @mousedown="bringToFront(i)" :parent="true">
 
                     <q-card class="window-card bg-white text-black" bordered>
                         <q-card-section
                             class="window-handle window-handle-header bg-primary row items-center text-white">
-                            <div class="col project-title">{{ win.project.title }}</div>
+                            <div class="col project-title-window">{{ win.project.title }}</div>
                             <q-btn dense flat round icon="close" @click="closeWindow(i)" />
                         </q-card-section>
                         <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 48px)">
@@ -48,7 +48,7 @@ import { ref, markRaw, inject } from 'vue';
 import { useQuasar } from 'quasar';
 import ProjectSection from 'src/components/ProjectSection.vue';
 import DraggableResizableVue from 'draggable-resizable-vue3';
-import TeamBuilder from 'src/components/projects/TeamBuilder.vue';
+import TeamBuilder from 'src/components/projects/EdXProjects.vue';
 // import ProjectVibely from 'src/components/projects/ProjectVibely.vue';
 import MoovieMatch from 'src/components/projects/MoovieMatch.vue';
 import ProjectNocado from 'src/components/projects/ProjectNocado.vue';
@@ -56,7 +56,7 @@ import PwCProjects from 'src/components/projects/PwCProjects.vue';
 // import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
 import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
 import ThisPortfolio from 'src/components/projects/ThisPortfolio.vue';
-import CodeJournal from 'src/components/projects/CodeJournal.vue';
+import CodeJournal from 'src/components/projects/PostworkProjects.vue';
 import ProjectAnkify from 'src/components/projects/ProjectAnkify.vue';
 
 const leftDrawerOpen = inject('leftDrawerOpen');
@@ -197,7 +197,7 @@ const projects = [
         ],
         deployed: [false, 'https://github.com/MattGaarder/team-profile-generator'],
         repo: [true, 'https://github.com/MattGaarder/ocado-helper-frontend'],
-        summary: 'Upload your Ocado receipt, "sync", and have all the items purchased arranged into neat “Fridge, Cupboard & Freezer” sections in your Notion database for all your shopping-listing needs. Never forget those carrots at the back of the fridge, or buy your 10th can of lentils ever again! ',
+        summary: 'Upload your Ocado receipt — "sync" and all purchased items are arranged into “Fridge, Cupboard & Freezer” sections in your Notion database for all your shopping-listing needs.',
         technology: [
 
             { name: 'MongoDB', logo: loadTechLogo('mongodb-svgrepo-com.svg') },
@@ -215,7 +215,7 @@ const projects = [
         ],
         deployed: [false, 'https://github.com/MattGaarder/jsanki-toolbar'],
         repo: [true, 'https://github.com/MattGaarder/ankify'],
-        summary: 'A lightweight Electron toolbar app: paste Japanese text, the tool extracts kanji plus meanings and instantly adds them to your Anki deck on click. Perfect for Japanese-language learners and Kanji studiers who want zero friction between reading and flashcard creation.',
+        summary: 'Electron toolbar app: paste Japanese text, extract kanji plus readings/meanings and instantly add them to your Anki deck on click. Zero friction between reading and flashcard creation.',
         technology: [
             { name: 'Electron', logo: loadTechLogo('Electron.svg') },
             { name: 'Vue3', logo: loadTechLogo('Vue.js_Logo_2.svg') },
@@ -249,7 +249,7 @@ const projects = [
         ],
         deployed: [true, 'https://mattgaarder.github.io/moovie-search/'],
         repo: [true, 'https://github.com/MattGaarder/moovie-search'],
-        summary: 'Spend forever picking what to watch? Go through the process every time? Compare options side-by-side with trailers, key details, and save your picks to persistent Watch or Seen lists — don\'t start from scratch next time.',
+        summary: 'Spend forever picking what to watch? Go through the process every time? Compare options side-by-side with trailers, key details, and save picks to persistent watch or seen lists.',
         technology: [
             { name: 'jQuery', logo: loadTechLogo('j-query.svg') },
             { name: 'Git', logo: loadTechLogo('Git-Icon-1788C.svg') },
@@ -283,7 +283,7 @@ const projects = [
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
         repo: [false, 'https://github.com/MattGaarder/password-generator'],
-        summary: 'Dynamic, parallax-scroll transforms, infinite scrolling galleries - view my design iteration process — assets hand-crafted in Photoshop & Illustrator for immersive browsing experience.',
+        summary: 'View my design iteration process — assets created with Adobe software — plus dynamic, parallax-scroll transforms, infinite scrolling galleries, and more.',
         technology: [
             { name: 'Premiere', logo: loadTechLogo('Adobe_Premiere_Pro.svg') },
             { name: 'Illustrator', logo: loadTechLogo('Adobe_Illustrator.svg') },

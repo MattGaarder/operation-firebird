@@ -1,7 +1,8 @@
 
 const API_KEY = "----";
 
-// from index.html get the element with id getWeather (my button), add a click event to it
+// from index.html get the element with id getWeather (my button),
+// add a click event to it
 // this event gets the text from inputCity (input text field)
 // does some basic validation - puts text value into cityName variable
 document.getElementById("getWeather").addEventListener("click", () => {
