@@ -89,4 +89,21 @@
         }
     }
 
+    @media (max-width: 400px) {
+        .skill-column ul {
+            font-size: 0.9rem;
+            margin-bottom: -1.8rem;
+        }
+
+        .skill-column:last-child {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-column h1 {
+            font-size: 1rem;
+            color: #3b4553;
+        }
+
+    }
+
 </style>

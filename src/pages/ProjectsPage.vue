@@ -1,6 +1,6 @@
 <template>
     <q-page padding class="projects">
-        <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg">PROJECTS</div>
+        <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg project-page-title">PROJECTS</div>
 
 
 
@@ -61,8 +61,6 @@ import ProjectAnkify from 'src/components/projects/ProjectAnkify.vue';
 
 const leftDrawerOpen = inject('leftDrawerOpen');
 
-
-
 const $q = useQuasar();
 const windows = ref([]);
 
@@ -108,7 +106,6 @@ function bringToFront(i) {
     windows.value[i].active = true
 }
 
-
 // PROJECT ARRAY
 function closeWindow(i) {
     windows.value.splice(i, 1)
@@ -152,7 +149,7 @@ const projects = [
         ],
         deployed: [false],
         repo: [false],
-        summary: 'PwC projects have included custom Storyline functionality using JavaScript triggers, VBA with Excel for data analysis, and Apps Script automations for streamlining repetitive tasks.',
+        summary: 'PwC projects include custom Storyline functionality with JavaScript triggers, VBA with Excel for data analysis, and Apps Script automations to streamline repetitive tasks.',
         summaryBullets: ['Highlighted Projects:', 'Google form to template folder structure generator in Drive.', 'Docs toolbar UI element for content templates in documents.', 'Document trawler for comprehensive logging and detailing of user Drive.'],
         technology: [
             { name: 'GoogleAppsScript', logo: loadTechLogo('Google_AppsScript.svg') },
@@ -164,7 +161,6 @@ const projects = [
         ],
         component: markRaw(PwCProjects),
     },
-
     {
         id: 'project6teamb',
         title: 'edX Trinity Skills',
@@ -211,7 +207,7 @@ const projects = [
         title: 'Ankify',
         images: [
             loadProjectLogo('Anki_logo'),
-            'https://yourdomain.com/path/to/demo-gif.gif'  // ideally a GIF showing the toolbar in action
+            'https://yourdomain.com/path/to/demo-gif.gif'  // placeholder
         ],
         deployed: [false, 'https://github.com/MattGaarder/jsanki-toolbar'],
         repo: [true, 'https://github.com/MattGaarder/ankify'],
@@ -302,7 +298,6 @@ const projects = [
         repo: 'https://github.com/MattGaarder/operation-firebird',
         summary: 'Vue3/Quasar portfolio with dynamic theme switching, Masonry illustration gallery, responsive layout, smart internal/external link handling, CV download, and interactive contact integration. Thanks for checking it out!',
         technology: [
-
             { name: 'Quasar', logo: loadTechLogo('Quasar.svg') },
             { name: 'Prism', logo: loadTechLogo('prism.svg') },
         ],
@@ -320,8 +315,6 @@ const projects = [
     box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.55);
 }
 
-
-
 :v-deep .drv-active,
 .drv,
 :v-deep .drv-draggable {
@@ -332,8 +325,6 @@ const projects = [
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
 }
-
-
 
 .window-handle {
     cursor: move;
@@ -356,9 +347,6 @@ const projects = [
 .project-body {
     padding: 0px !important;
 }
-
-
-
 
 @media (min-width: 600px) and (max-width: 1550px) {
     .project-row>.col-lg-4 {
@@ -395,7 +383,18 @@ const projects = [
     pointer-events: none;
 }
 
-.windows-layer>* {
+.windows-layer > * {
     pointer-events: auto;
 }
+
+@media (max-width: 400px) {
+    .project-page-title {
+        margin-bottom: 0rem;
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+        margin-left: 1rem;
+        width: 100%;
+    }
+}
+
 </style>

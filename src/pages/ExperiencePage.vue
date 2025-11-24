@@ -120,8 +120,18 @@
         .experience-title {
             margin-left: -1.9rem;
         }
+    }
 
+    @media (max-width: 400px) {
+        .experience-title {
+            width: 120%;
+            padding: 1rem;
+            margin-bottom: 0rem;
+        }
 
+        .experience-section {
+          padding-top: 0.5rem;
+        }
     }
 
 

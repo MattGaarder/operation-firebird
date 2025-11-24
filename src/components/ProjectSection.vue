@@ -121,7 +121,6 @@
   }
 
   .summary-bullets {
-
     max-width: 21rem;
     padding-left: 0rem;
     margin: 0;
@@ -157,7 +156,29 @@
     .tech-list {
       flex-direction: row;
       position: absolute;
-      margin-top: -4.7rem;
+      margin-top: -5rem;
+      margin-left: 2.4rem;
+    }
+
+    .summary-bullets {
+      max-width: 19rem;
+
+      list-style: disc;
+    }
+
+    .summary-bullets li {
+      opacity: 0.4;
+      font-size: 0.75rem;
+      margin-left: -1.7rem;
+      max-width: 18rem;
+    }
+
+    .summary-bullets li:first-child {    
+      margin-left: -2rem;       
+    }
+
+    .project-logo {
+      margin-left: -0.3rem;
     }
   }
 

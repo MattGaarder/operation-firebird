@@ -280,12 +280,15 @@
 
 @media (max-width: 440px) {
   .title-animation-v3 {
-    left: -10%;    
-    width: 90%;
-
+    left: -20%;    
+    width: 120%;
   }
+
+  .app-header { 
+    padding: 0px;
+  }
+
   .about {
-    right: -15%;
     margin-right: 0.9rem;
   }
   .home-hitbox {

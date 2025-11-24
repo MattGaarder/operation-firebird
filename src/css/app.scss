@@ -11,11 +11,6 @@
   }
 }
 
-/* e.g. in src/css/app.scss or quasar.variables.scss */
-
-
-
-
 html {
   color: var(--site-text, #fff);
 }
@@ -34,12 +29,10 @@ html {
   background-color: var(--site-bg) !important;
   color: #000;
 }
-/* if some inner text is still inheriting white from utility classes, force it */
+
 .theme-illustrations .text-white {
   color: var(--site-text) !important;
 }
-
-
 
 .drawer {
     padding-left: 9rem;
@@ -122,8 +115,6 @@ html {
     max-width: 750px;
 }
 
-
-
 .theme-default,
 .theme-illustrations {
   background-color: var(--site-bg) !important;
@@ -139,8 +130,6 @@ html {
   background-color: var(--site-bg) !important;
   color: var(--site-text) !important;
 }
-
-
 
 .theme-illustrations .top-border {
   border-top: 1px solid #6c7781 !important;
@@ -189,21 +178,6 @@ html, body, #q-app {
   min-height: 100%; /* ensure full height */
 }
 
-@media (max-width: 900px) {
-    .experience-section {
-      margin-left: -0.7rem; 
-      margin-bottom: 2.5rem;
-    }
-
-    .bullet-points {
-      width: 100%;
-    }
-
-    .bullet {
-      width: 105%;
-    }
-}
-
 .info {
   font-size: 0.9rem;
   color: black;
@@ -236,7 +210,6 @@ html, body, #q-app {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   border-color: rgb(196, 196, 196);
 }
-
 
 .code-journal-icon {
   font-size: 1.9rem;
@@ -323,37 +296,11 @@ html, body, #q-app {
   background-color: #ECF2F8;
 }
 
-/* scrollable code */
 .code-container {
   height: 350px;
   margin-top: -0.5rem;
   font-size: 0.7rem;
 }
-
-/* on very narrow widths stack header contents centered */
-@media (max-width: 360px) {
-  .project-header {
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-/* stack text + video on small screens (match other component) */
-@media (max-width: 600px) {
-  .project-body {
-    flex-direction: column;
-    padding-top: 0;
-  }
-  
-  .project-video {
-    align-self: center;
-    width: 100%;
-    max-width: 100%;
-    margin-top: -1rem;
-  }
-}
-
-
 
 .prism-block {
   margin: 0;
@@ -394,7 +341,7 @@ html, body, #q-app {
   padding: 0rem;
   margin-bottom: 1rem;
 }
-/* header: icon + info, wrapping when too narrow */
+
 .project-header {
   display: flex;
   align-items: baseline;
@@ -405,8 +352,6 @@ html, body, #q-app {
   margin-left: -1rem;
   margin-right: -1rem;
   margin-top: -1rem;
-
-
 }
 
 .project-icon {
@@ -430,4 +375,40 @@ html, body, #q-app {
   color: black;
   padding: 0;
   padding-left: 1.2rem;
+}
+
+@media (max-width: 360px) {
+  .project-header {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-body {
+    flex-direction: column;
+    padding-top: 0;
+  }
+  
+  .project-video {
+    align-self: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: -1rem;
+  }
+}
+
+@media (max-width: 900px) {
+    .experience-section {
+      margin-left: -0.7rem; 
+      margin-bottom: 2.5rem;
+    }
+
+    .bullet-points {
+      width: 100%;
+    }
+
+    .bullet {
+      width: 105%;
+    }
 }

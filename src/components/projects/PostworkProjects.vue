@@ -375,5 +375,12 @@ const slide = ref(1)
 </script>
 
 <style scoped>
-
+.prism-block {
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3rem;
+  font-family: sans-serif;
+  background-color: #ECF2F8;
+}
 </style>
