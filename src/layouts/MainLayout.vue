@@ -42,12 +42,13 @@
 
 <script setup>
 
-  import { ref, computed, provide, onMounted, watch } from 'vue';
+  import { ref, computed, provide, onMounted, watch, onBeforeUnmount } from 'vue';
   import { useQuasar } from 'quasar';
   import { useRoute, useRouter } from 'vue-router';
   import lottie from 'lottie-web';
 
-  import animationJson from 'src/assets/animations/title-animation-v3.json';
+  import animationJsonMain from 'src/assets/animations/title-animation-v3.json';
+  import animationJsonIllustrations from 'src/assets/animations/animationJsonIllustrations.json'
 
   import EssentialLink from 'components/EssentialLink.vue';
   import EssentialContact from 'src/components/EssentialContact.vue';
@@ -55,53 +56,68 @@
   const $q = useQuasar();
   const router = useRouter();
   const route = useRoute();
+
   const isHome = computed(() => route.path === '/');
   const isIllustrations = computed(() => route.path.includes('illustrations'));
+
   const DRAWER_BREAKPOINT = 1128
   const isWide = computed(() => $q.screen.width >= DRAWER_BREAKPOINT)
 
-
   const leftDrawerOpen = ref(isWide.value)
-
 
   watch(isWide, (wide) => {
     if (wide) {
-
       leftDrawerOpen.value = true
     } else {
-
       leftDrawerOpen.value = false
     }
   })
 
-
-
-
-
   provide('leftDrawerOpen', leftDrawerOpen);
 
+  // ───────────── LOTTIE SETUP ─────────────
   const lottieEl = ref(null);
-
-  // eslint-disable-next-line no-unused-vars
+  //// eslint-disable-next-line no-unused-vars
   let _anim = null;
-  onMounted(() => {
+  function loadTitleAnimation(forIllustrations) {
+    if (!lottieEl.value) return;
+
+    // kill previous animation so don't get stacked svgs
+    if (_anim) {
+      _anim.destroy();
+      _anim = null;
+    }
 
     _anim = lottie.loadAnimation({
       container: lottieEl.value,
       renderer: 'svg',
       loop: false,
       autoplay: true,
-
-      animationData: animationJson,
-      name: 'homepage-hero',
+    animationData: forIllustrations
+      ? animationJsonIllustrations
+      : animationJsonMain,
+    name: forIllustrations ? 'illustrations-hero' : 'homepage-hero',
       rendererSettings: {
         preserveAspectRatio: 'xMidYMid meet',
         progressiveLoad: true
       }
     })
-  })
+  }
 
+  onMounted(() => {
+    loadTitleAnimation(isIllustrations.value);
+  });
 
+  watch(isIllustrations, (val) => {
+    loadTitleAnimation(val);
+  });
+
+  onBeforeUnmount(() => {
+    if (_anim) {
+      _anim.destroy();
+      _anim = null;
+    }
+  });
 
   function toggleLeftDrawer() {
     leftDrawerOpen.value = !leftDrawerOpen.value
@@ -203,6 +219,8 @@
       isExternal: true,
     },
   ];
+
+
 </script>
 
 
@@ -262,6 +280,7 @@
 
 
 
+
 @media (max-width: 940px) {
   .title-animation-v3 {
     left: -14%;    
@@ -311,7 +330,7 @@
 
 @media (min-width: 1520px) {
   .title-animation-v3 {
-    left: 2%;    
+    left: 0.4%;    
   }
 }
 </style>

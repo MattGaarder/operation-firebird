@@ -22,12 +22,12 @@ html {
 
 .theme-illustrations {
   --site-bg: #fff !important;
-  --site-text: #000 !important;
+  --site-text: #161f27!important;
 }
 
 .theme-illustrations .q-layout__section--marginal  {
   background-color: var(--site-bg) !important;
-  color: #000;
+  color: #161f27
 }
 
 .theme-illustrations .text-white {
@@ -128,7 +128,7 @@ html {
 .theme-illustrations .q-page,
 .theme-illustrations .q-page-container {
   background-color: var(--site-bg) !important;
-  color: var(--site-text) !important;
+  color: var(#161f27) !important;
 }
 
 .theme-illustrations .top-border {
@@ -137,7 +137,7 @@ html {
 
 .theme-illustrations .q-item:hover,
 .theme-illustrations .essential-contact:hover {
-  background-color: black !important;
+  background-color: #161f27 !important;
   color: white !important;
 }
 
@@ -149,7 +149,7 @@ html {
 /* active / exact-active link */
 .theme-illustrations .q-item.q-router-link--exact-active,
 .theme-illustrations .q-item.q-router-link--active {
-  background-color: black !important;
+  background-color: #161f27!important;
   color: white !important;
 }
 
@@ -159,7 +159,7 @@ html {
 
 .theme-illustrations .essential-contact.q-item--clickable.q-hoverable:hover,
 .theme-illustrations .essential-contact.q-item--clickable.q-hoverable:hover > .q-item__section {
-  background-color: black !important;
+  background-color: #161f27 !important;
   transition-duration: 0s !important;
   font-weight: bold;
 }
