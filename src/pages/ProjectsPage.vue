@@ -1,9 +1,6 @@
 <template>
     <q-page padding class="projects">
         <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg project-page-title">PROJECTS</div>
-
-
-
         <div class="row project-row bg-primary" :class="{ 'three-col': !leftDrawerOpen }">
             <div v-for="project in projects" :key="project.id" class="col-12 col-md-6 col-lg-4 cursor-pointer"
                 @click="openProject(project)">
@@ -13,7 +10,7 @@
         <teleport to="body">
             <div class="windows-layer">
                 <draggable-resizable-vue v-for="(win, i) in windows" :key="win.uid" v-model:x="win.x" v-model:y="win.y"
-                    v-model:h="win.height" v-model:w="win.width" v-model:active="win.active" :minWidth="252"
+                    v-model:h="win.height" v-model:w="win.width" v-model:active="win.active" :minWidth="212"
                     :minHeight="100" :style="{ zIndex: win.zIndex }" :drag-handle="'.window-handle'"
                     @mousedown="bringToFront(i)" :parent="true">
 
@@ -46,10 +43,12 @@
 <script setup>
 import { ref, markRaw, inject } from 'vue';
 import { useQuasar } from 'quasar';
-import ProjectSection from 'src/components/ProjectSection.vue';
+
 import DraggableResizableVue from 'draggable-resizable-vue3';
-import TeamBuilder from 'src/components/projects/EdXProjects.vue';
+
+import ProjectSection from 'src/components/ProjectSection.vue';
 // import ProjectVibely from 'src/components/projects/ProjectVibely.vue';
+import TeamBuilder from 'src/components/projects/EdXProjects.vue';
 import MoovieMatch from 'src/components/projects/MoovieMatch.vue';
 import ProjectNocado from 'src/components/projects/ProjectNocado.vue';
 import PwCProjects from 'src/components/projects/PwCProjects.vue';
@@ -70,10 +69,17 @@ function getWindowConfig() {
     const w = $q.screen.width
     const h = $q.screen.height
 
-    const factor = $q.screen.lt.md ? 0.9 : 0.7
+      // 40% of screen width, 90% of screen height
+    const widthFactor = 0.4
+    const heightFactor = 0.9
 
-    const width = Math.floor(w * factor)
-    const height = Math.floor(h * factor)
+    const width = Math.floor(w * widthFactor)
+    const height = Math.floor(h * heightFactor)
+
+    // const factor = $q.screen.lt.md ? 0.9 : 0.6
+
+    // const width = Math.floor(w * factor)
+    // const height = Math.floor(h * factor)
 
     // center the window
     const x = Math.floor((w - width) / 2)

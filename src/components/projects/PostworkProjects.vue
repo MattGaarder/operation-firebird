@@ -96,6 +96,7 @@
         </q-card-section>
       </q-expansion-item>
       <q-separator class="separator" />
+      <div class="bumper"></div>
     </q-card>
 
 
@@ -235,6 +236,7 @@
       </q-expansion-item>
 
       <q-separator class="separator" />
+      <div class="bumper"></div>
     </q-card>
 
     <!-- POST-WORK EXPENSES -->
@@ -337,6 +339,7 @@
         </q-card-section>
       </q-expansion-item>
       <q-separator class="separator" />
+      <div class="bumper"></div>
     </q-card>
   </div>
 </template>
@@ -382,5 +385,14 @@ const slide = ref(1)
   padding-left: 1.3rem;
   font-family: sans-serif;
   background-color: #ECF2F8;
+}
+
+.bumper {
+  background-color:  #263442; 
+  height: 1rem;
+  display: block;
+  /* match the separator, so it bleeds to the card edges */
+  margin: 0 -1rem -1rem; /* top 0, left/right -1rem, bottom -1rem if you want it tight */
+  opacity: 0.7;
 }
 </style>
