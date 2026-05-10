@@ -1,24 +1,24 @@
 <template>
-    <q-page padding class="projects">
-        <div class="text-h8 text-weight-bold top-border q-mb-lg q-mr-xl q-pt-lg q-ml-lg project-page-title">PROJECTS</div>
+    <q-page padding class="projects-page">
         <div class="row project-row bg-primary" :class="{ 'three-col': !leftDrawerOpen }">
             <div v-for="project in projects" :key="project.id" class="col-12 col-md-6 col-lg-4 cursor-pointer"
                 @click="openProject(project)">
-                <ProjectSection v-bind="project" class="bg-primary q-pt-xl project-section" />
+                <ProjectSection v-bind="project" class="bg-primary q-pt-xl" />
             </div>
         </div>
         <teleport to="body">
-            <div class="windows-layer">
+            <div class="windows-layer" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }">
                 <draggable-resizable-vue v-for="(win, i) in windows" :key="win.uid" v-model:x="win.x" v-model:y="win.y"
                     v-model:h="win.height" v-model:w="win.width" v-model:active="win.active" :minWidth="212"
                     :minHeight="100" :style="{ zIndex: win.zIndex }" :drag-handle="'.window-handle'"
                     @mousedown="bringToFront(i)" :parent="true">
 
-                    <q-card class="window-card bg-white text-black" bordered>
+                    <q-card class="window-card bg-primary" bordered>
                         <q-card-section
-                            class="window-handle window-handle-header bg-primary row items-center text-white">
+                            class="window-handle window-handle-header bg-primary row items-center text-white q-pa-none">
                             <div class="col project-title-window">{{ win.project.title }}</div>
-                            <q-btn dense flat round icon="close" @click="closeWindow(i)" />
+                            <q-space />
+                            <q-btn flat icon="close" @click="closeWindow(i)" />
                         </q-card-section>
                         <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 48px)">
                             <!-- <p>{{ win.project.summary }}</p> <br /> -->
@@ -27,7 +27,7 @@
                                     :container-width="win.width"></component>
                             </div>
                         </q-card-section>
-                        <div class="row window-handle q-py-xs">
+                        <div class="row window-handle">
                             <q-btn flat icon="code" label="GitHub" :disable="!win.project.repo[0]"
                                 :href="win.project.repo[1]" target="_blank" class="q-pl-sm p- bordered" />
                             <q-btn flat icon="launch" label="Live" :disable="!win.project.deployed[0]"
@@ -59,6 +59,7 @@ import CodeJournal from 'src/components/projects/PostworkProjects.vue';
 import ProjectAnkify from 'src/components/projects/ProjectAnkify.vue';
 
 const leftDrawerOpen = inject('leftDrawerOpen');
+const isDark = inject('isDark');
 
 const $q = useQuasar();
 const windows = ref([]);
@@ -237,8 +238,8 @@ const projects = [
     //     summary:  'A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” to posts. Live updates using React and Firebase so you never miss an opportunity to vibe with your friends again.',
     //     technology: [
     //         { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg')},
-    //         { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg')}, 
-    //         { name: 'React',logo: loadTechLogo('react-2.svg')}, 
+    //         { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg')},
+    //         { name: 'React',logo: loadTechLogo('react-2.svg')},
     //     ],
     //     component: markRaw(ProjectVibely),
     // },
@@ -271,8 +272,8 @@ const projects = [
     //     summary:  'Save and revisit your favorite cities with ease—enter a location to pull current conditions and a five-day forecast from the OpenWeather API, then build a persistent, personalized dashboard of weather insights.',
     //     technology: [
     //         { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg')},
-    //         { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg')}, 
-    //         { name: 'Postman',logo: loadTechLogo('postman-icon-svgrepo-com.svg')}, 
+    //         { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg')},
+    //         { name: 'Postman',logo: loadTechLogo('postman-icon-svgrepo-com.svg')},
     //     ],
     //     component: markRaw(WeatherDashboard),
     // },
@@ -332,24 +333,6 @@ const projects = [
     scrollbar-width: none !important;
 }
 
-.window-handle {
-    cursor: move;
-    font-weight: bolder;
-    border-top: 1px black solid;
-}
-
-.window-handle-header {
-    padding: 0.5rem !important;
-}
-
-.window-body {
-    overflow-y: none;
-}
-
-.project-title {
-    padding-left: 0.6rem;
-}
-
 .project-body {
     padding: 0px !important;
 }
@@ -378,9 +361,7 @@ const projects = [
     }
 }
 
-.disabled {
-    opacity: 0.4 !important;
-}
+
 
 .windows-layer {
     position: fixed;
@@ -393,14 +374,22 @@ const projects = [
     pointer-events: auto;
 }
 
-@media (max-width: 400px) {
+/* @media (max-width: 400px) {
     .project-page-title {
         margin-bottom: 0rem;
         margin-top: 0.5rem;
         padding-top: 1rem;
-        margin-left: 1rem;
-        width: 100%;
     }
+} */
+
+.projects-page {
+  margin-top: -254px !important;
+}
+
+@media (max-width: 900px) {
+  .projects-page {
+    margin-top: -164px !important;
+  }
 }
 
 </style>

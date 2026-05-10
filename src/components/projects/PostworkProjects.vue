@@ -1,17 +1,17 @@
 <template>
   <div class="projects-wrapper">
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="code" class="project-icon code-journal-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="code" class="project-icon code-journal-icon" />
         <div class="project-info">
-          <div class="project-title">CODE JOURNAL</div>
+          <div class="project-title">Code Journal</div>
         </div>
       </q-card-section>
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         A browser-based Markdown journal built with vanilla JavaScript and Web Storage API.
         <q-separator class="invisi" />
         Users can create, edit, preview, and delete journal entries entirely offline — with data persisted
@@ -29,7 +29,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -51,7 +51,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -101,20 +101,20 @@
 
 
     <!-- WEATHER DASHBOARD -------------------------------------------------- -->
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="cloud" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="cloud" class="project-icon" />
         <div class="project-info">
           <div class="project-title">
-            WEATHER DASHBOARD<span class="sub">(jQuery / JavaScript)</span>
+            Weather Refactored<span class="sub">(jQuery / JavaScript)</span>
           </div>
         </div>
       </q-card-section>
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         Two versions of this weather dashboard were built — both practically identical in functionality:
         the first written in <strong>jQuery</strong>, and the second <strong>refactored with
           JavaScript</strong>
@@ -131,7 +131,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -174,7 +174,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -240,21 +240,20 @@
     </q-card>
 
     <!-- POST-WORK EXPENSES -->
-    <q-separator class="separator" />
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="receipt_long" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="receipt_long" class="project-icon" />
         <div class="project-info">
           <div class="project-title">
-            POSTWORK EXPENSES<span class="sub">(Node.js CLI)</span>
+            Expenses<span class="sub">(Node.js CLI)</span>
           </div>
         </div>
       </q-card-section>
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         A Node.js command-line tool that transforms raw CSV exports from your financial software into a clean,
         human-readable monthly expense report.
         <q-separator class="invisi" />
@@ -273,7 +272,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -295,7 +294,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -378,21 +377,5 @@ const slide = ref(1)
 </script>
 
 <style scoped>
-.prism-block {
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3rem;
-  font-family: sans-serif;
-  background-color: #ECF2F8;
-}
 
-.bumper {
-  background-color:  #263442; 
-  height: 1rem;
-  display: block;
-  /* match the separator, so it bleeds to the card edges */
-  margin: 0 -1rem -1rem; /* top 0, left/right -1rem, bottom -1rem if you want it tight */
-  opacity: 0.7;
-}
 </style>

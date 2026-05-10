@@ -6,10 +6,10 @@
 
   <!-- Main project card -->
   <div class="projects-wrapper">
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="restaurant" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="restaurant" class="project-icon" />
         <div class="project-info">
           <div class="project-title">ONAFÃ</div>
         </div>
@@ -17,7 +17,7 @@
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         This is a vanilla JavaScript frontend implementing layered parallax scrolling, looping image carousels,
         and a paginated modal gallery. On scroll it shifts hero, main, and background elements at different rates
         for depth, triggers a splash animation past a threshold, and continuously animates three duplicated gallery
@@ -35,7 +35,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -56,7 +56,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -100,7 +100,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Design Iterations
             </h1>
           </div>
@@ -180,15 +180,6 @@ const slide = ref(1);
   width: 100%;
   height: auto;
   margin-top: -0.94rem;
-}
-
-.prism-block {
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3rem;
-  font-family: sans-serif;
-  background-color: #ecf2f8;
 }
 
 .inner-image-tshirt {

@@ -169,10 +169,6 @@ const illustrations = [
   display: flex;
   flex-direction: column;
 }
-.subtitle {
-  font-size: 0.9rem;
-  color: var(--q-color-grey-4);
-}
 
 
 .masonry-sizer {

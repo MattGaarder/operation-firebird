@@ -1,9 +1,9 @@
 <template>
   <div class="projects-wrapper">
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="receipt_long" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="receipt_long" class="project-icon" />
         <div class="project-info">
           <div class="project-title">NOCADO</div>
         </div>
@@ -11,7 +11,7 @@
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         This project syncs ingredient data between a PDF (your Ocado grocery shopping receipt), <strong>MongoDB</strong>, and Notion.
         <q-separator class="separator invisi" />
         The backend uses <strong>Express</strong> with <strong>Mongoose</strong> models to store ingredients, exposes REST routes, and integrates with
@@ -31,7 +31,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -52,7 +52,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -106,13 +106,5 @@ const nocadoCode = ref(nocado_code);
 </script>
 
 <style scoped>
-
-.prism-block {
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3rem;
-  font-family: sans-serif;
-  background-color: #ECF2F8;
-}
+/* component-specific adjustments if any */
 </style>

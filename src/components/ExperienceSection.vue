@@ -1,8 +1,8 @@
 <template>
-  <q-card flat class="q-mb-xl">
-    <q-card-section class="q-pa-none">
+  <q-card flat class="q-mb-md">
+    <q-card-section>
 
-            <div class="row">
+            <div class="row experience-section">
                 <div class="col-12 col-md-3 col-lg-4">
                     <div class="text-h7">{{ role }}</div>
                     <div class="text-h6">{{ company }}</div>
@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="col-12 col-md-9 col-lg-8">
-                    <ul class="q-pl-xl bullet-points">
+                    <ul class="bullet-points">
                         <li class="bullet" v-for="(item, i) in bullets" :key="i">{{ item }}</li>
                     </ul>
                 </div>
@@ -34,12 +34,10 @@ const { role, company, duration, location } = defineProps({
 <style scoped>
   @media (max-width: 590px) {
     .bullet-points {
-      width: 87vw;    
-      margin-left: -32px;
+      padding-left: 0rem;
     }
-    .about {
-      right: -10%;
+    .experience-section {
+      padding-left: 0.8rem;
     }
   }
-
 </style>

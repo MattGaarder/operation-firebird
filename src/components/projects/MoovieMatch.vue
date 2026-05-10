@@ -1,10 +1,10 @@
 <template>
   <div class="projects-wrapper">
 <!-- MOVIE DISCOVERY / WATCHLIST PROJECT CARD -->
-<q-card bordered class="project-card q-pa-md q-ma-sm">
+<q-card bordered class="project-card">
   <!-- Header -->
-  <q-card-section class="project-header q-mt-sm">
-    <q-icon name="movie" class="project-icon q-pl-md q-pt-md" />
+  <q-card-section class="project-header">
+    <q-icon name="movie" class="project-icon" />
     <div class="project-info">
       <div class="project-title">
         MOVIE DISCOVERY<span class="sub">(OMDb / YouTube / jQuery)</span>
@@ -14,7 +14,7 @@
   <q-separator class="separator" />
 
   <!-- Tagline -->
-  <div class="project-tagline q-mx-lg q-my-lg">
+  <div class="project-tagline">
     A jQuery-powered movie discovery tool that pulls metadata from the OMDb API, embeds YouTube
     trailers via the IFrame Player API, and lets you manage <code>Seen</code> and <code>Watch</code>
     lists persisted in <code>localStorage</code>.
@@ -30,7 +30,7 @@
   <q-expansion-item dense class="full-width-expansion">
     <template #header>
       <div class="row items-center full-width">
-        <h1 class="text-h5 text-weight-bold info q-ml-lg">
+        <h1 class="text-h5 text-weight-bold info">
           Code Snippets
         </h1>
       </div>
@@ -52,7 +52,7 @@
   <q-expansion-item dense class="full-width-expansion">
     <template #header>
       <div class="row items-center full-width">
-        <h1 class="text-h5 text-weight-bold info q-ml-lg">
+        <h1 class="text-h5 text-weight-bold info">
           More Information
         </h1>
       </div>
@@ -124,14 +124,5 @@ const isNarrow = computed(
 </script>
 
 <style scoped>
-
-.prism-block {
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3rem;
-  font-family: sans-serif;
-  background-color: #ECF2F8;
-}
-
+/* component-specific adjustments if any */
 </style>

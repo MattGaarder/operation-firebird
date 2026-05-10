@@ -1,20 +1,20 @@
 <template>
   <div class="projects-wrapper">
     <!-- PROJECT GENERATOR -------------------------------------------------- -->
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="folder" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="folder" class="project-icon" />
         <div class="project-info">
           <div class="project-title">
-            PROJECT GENERATOR <span class="sub">(Google Form)</span>
+            Project Generator<span class="sub">(Google Form)</span>
           </div>
         </div>
       </q-card-section>
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         Automate your folder-structure creation with a Google Form-driven Apps Script.
         <q-separator class="separator invisi" />
         Fill in course name, version, location & type → on submit the script parses your answers,
@@ -26,7 +26,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -59,7 +59,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -107,10 +107,10 @@
     </q-card>
 
     <!-- FILE LISTER -------------------------------------------------------- -->
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="description" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="description" class="project-icon" />
         <div class="project-info">
           <div class="project-title">
             FILE LISTER<span class="sub">(Google Drive)</span>
@@ -120,7 +120,7 @@
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         Apps Script project that incrementally crawls Google Drive — checkpointing progress to dodge execution limits —
         and exports a comprehensive file-path report into Sheets for use in Power BI for migration auditing (to
         SharePoint).
@@ -132,7 +132,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -153,7 +153,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -198,10 +198,10 @@
     </q-card>
 
     <!-- TOOLBAR COMPONENTS ------------------------------------------------- -->
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="settings" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="settings" class="project-icon" />
         <div class="project-info">
           <div class="project-title">
             TOOLBAR COMPONENTS<span class="sub">(Google Docs)</span>
@@ -211,7 +211,7 @@
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         Adds a 'Components' menu to Google Docs for one-click insertion of Face-to-Face, Digital, Video & Assessment
         templates — streamlining document assembly with reusable content blocks.
         <q-separator class="separator invisi" />
@@ -222,7 +222,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -243,7 +243,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -282,15 +282,5 @@ import templateInserter from '../../assets/snippets/template-inserter.txt?raw';
 </script>
 
 <style scoped>
-
-
-.prism-block {
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3rem;
-  font-family: sans-serif;
-  background-color: #ECF2F8;
-}
-
+/* component-specific adjustments if any */
 </style>

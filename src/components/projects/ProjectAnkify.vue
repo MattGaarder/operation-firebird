@@ -1,9 +1,9 @@
 <template>
     <div class="projects-wrapper">
-        <q-card bordered class="project-card q-pa-md q-ma-sm">
+        <q-card bordered class="project-card">
             <!-- Header -->
-            <q-card-section class="project-header q-mt-sm">
-                <q-icon name="translate" class="project-icon q-pl-md q-pt-md" />
+            <q-card-section class="project-header">
+                <q-icon name="translate" class="project-icon" />
                 <div class="project-info">
                     <div class="project-title">
                         ANKIFY TOOLBAR
@@ -14,7 +14,7 @@
             <q-separator class="separator" />
 
             <!-- Tagline -->
-            <div class="project-tagline q-mx-lg q-my-lg">
+            <div class="project-tagline">
                 An Electron tray/toolbar app for Japanese learners: paste Japanese text, run it through
                 <code>kuromoji</code> morphology analysis, cherry-pick content words, and turn them into
                 structured Anki notes with a couple of clicks.
@@ -36,7 +36,7 @@
             <q-expansion-item dense class="full-width-expansion">
                 <template #header>
                     <div class="row items-center full-width">
-                        <h1 class="text-h5 text-weight-bold info q-ml-lg">
+                        <h1 class="text-h5 text-weight-bold info">
                             Code Snippets
                         </h1>
                     </div>
@@ -79,7 +79,7 @@
             <q-expansion-item dense class="full-width-expansion">
                 <template #header>
                     <div class="row items-center full-width">
-                        <h1 class="text-h5 text-weight-bold info q-ml-lg">
+                        <h1 class="text-h5 text-weight-bold info">
                             More Information
                         </h1>
                     </div>
@@ -254,14 +254,5 @@ watch(isNarrow, v => console.log('Ankify isNarrow changed:', v));
 </script>
 
 <style scoped>
-
-.prism-block {
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 1.3rem;
-    font-family: sans-serif;
-    background-color: #ECF2F8;
-}
-
+/* component-specific adjustments if any */
 </style>

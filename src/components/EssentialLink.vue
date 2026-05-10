@@ -6,8 +6,8 @@
 
     <q-item-section >
       
-      <q-item-label :class="isActive ? 'text-black' : 'text-white'" class="text-bold">{{ props.title }}<q-icon :name="props.name" class="arrow-outward-icon"></q-icon></q-item-label>
-      <q-item-label caption :class="isActive ? 'text-black' : 'text-white'">{{ props.caption }}</q-item-label>
+      <q-item-label class="text-bold">{{ props.title }}<q-icon :name="props.name" class="arrow-outward-icon"></q-icon></q-item-label>
+      <q-item-label caption>{{ props.caption }}</q-item-label>
       
     </q-item-section>
     
@@ -15,9 +15,6 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue';
-  import { useRoute } from 'vue-router';
-
   const props = defineProps({
     title: {
       type: String,
@@ -47,8 +44,4 @@
       default: false,
     },
   });
-
-  const route = useRoute();
-
-  const isActive = computed(() => route.path === props.link);
 </script>

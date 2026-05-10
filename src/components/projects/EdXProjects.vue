@@ -1,17 +1,17 @@
 <template>
   <div class="projects-wrapper">
     <!-- README.md GENERATOR CARD -->
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="book" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="book" class="project-icon" />
         <div class="project-info">
-          <div class="project-title">README.md GENERATOR</div>
+          <div class="project-title">README.md Generator</div>
         </div>
       </q-card-section>
       <q-separator class="separator" />
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         A Node.js CLI that prompts for Title, Description, Installation, Usage, Screenshots,
         Contribution, License &amp; Contact — then spits out a badge-topped
         <code>README.md</code> in your project folder.
@@ -27,7 +27,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -46,7 +46,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -86,15 +86,15 @@
     </q-card>
 
     <!-- VIBELY -------------------------------------------------------- -->
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm vibely-project-header">
+      <q-card-section class="project-header vibely-project-header">
         <div class="vibely-logo" v-html="vibelyLogo"></div>
       </q-card-section>
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         This is a React single-page app using Firebase for authentication and real-time data.
         It wraps routes in a hash router and shares the current user via context. The NavBar
         adapts based on login state. Home subscribes to Firestore “posts” collections with
@@ -113,7 +113,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -136,7 +136,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -181,10 +181,10 @@
     </q-card>
 
     <!-- TEAM BUILDER CARD --------------------------------------------- -->
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="build" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="build" class="project-icon" />
         <div class="project-info">
           <div class="project-title">TEAM BUILDER</div>
         </div>
@@ -192,7 +192,7 @@
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         A Node.js CLI tool that builds a styled HTML roster for your engineering team.
         Answer prompts for Manager, Engineers &amp; Interns and get a single-page summary
         with each member's name, role, ID, email (clickable) and role-specific details.
@@ -209,7 +209,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               Code Snippets
             </h1>
           </div>
@@ -232,7 +232,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -298,21 +298,12 @@ const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth
   height: 230px;
 }
 
-.prism-block {
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3rem;
-  font-family: sans-serif;
-  background-color: #ECF2F8;
-}
-
 :deep(.vibely-logo svg path) {
   transition: fill 0.3s ease;
 }
 
 .vibely-project-header {
-  background-color: #263442; 
+  background-color: var(--project-header-bg, #263442);
   margin-left: -16px;
   margin-right: -16px;
   margin-top: -16px;

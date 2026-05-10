@@ -1,25 +1,38 @@
 <template>
-  <q-layout view="hhh LpR lFf" :class="{ 'theme-default': !isIllustrations, 'theme-illustrations': isIllustrations }">
-    <q-header class="q-pa-lg header app-header" :style="{ paddingLeft: sidePadding }">
+  <q-layout view="hhh LpR lFf" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }">
+    <q-header class="app-header" :style="{ paddingLeft: sidePadding }">
       <div class="header-wrap">
-        <div ref="lottieEl" class="title-animation-v3"></div>
-        <q-toolbar class="q-py-md toolbar">
-          <q-btn flat dense round icon="menu" class="drawer" aria-label="Menu" @click="toggleLeftDrawer" />
+        <q-toolbar class="q-my-xl toolbar">
+
+
+
+
+          <!-- Vertical Utility Column (Absolutely positioned below the menu) -->
+          <div class="column items-center absolute-top" style=" top: -15px; left: 0; width: 42px;">
+            <q-btn flat dense round icon="menu" class="drawer-btn" aria-label="Menu" @click="toggleLeftDrawer" />
+            <q-btn flat round :icon="isHome ? 'download' : 'home'" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
+            <q-btn flat dense round :icon="isDark ? 'dark_mode' : 'light_mode'" class="toggle-theme" aria-label="Toggle dark mode" @click="toggleTheme" />
+          </div>
+          <!-- Lottie Zero-Width Anchor (Nudged to the right) -->
+          <div class="lottie-anchor" style="margin-left: 60px;">
+            <div ref="lottieEl" class="title-animation-v3"></div>
+          </div>
+
           <router-link  to="/" aria-label="Home" class="home-hitbox"></router-link>
-          <q-btn flat round class="q-mr-xl about" :icon="isHome ? 'download' : 'home'" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
+          <q-space />
         </q-toolbar>
       </div>
     </q-header>
 
-    <q-drawer 
-      v-model="leftDrawerOpen" 
-      class="q-px-lg drawer" 
-      :width="drawerWidth" 
-      :breakpoint="DRAWER_BREAKPOINT" 
-      :style="{ paddingLeft: sidePadding }" 
-      :class="{ 'theme-default': !isIllustrations, 'theme-illustrations': isIllustrations }"
+    <q-drawer
+      v-model="leftDrawerOpen"
+      class="q-px-lg drawer"
+      :width="drawerWidth"
+      :breakpoint="DRAWER_BREAKPOINT"
+      :style="{ paddingLeft: sidePadding }"
+      :class="{ 'theme-dark': isDark, 'theme-light': !isDark }"
     >
-      <q-card bordered="false" flat square class="bg-primary text-white text-weight-bold q-pa-xs top-border">
+      <q-card bordered="false" flat square class="bg-primary text-weight-bold q-pa-xs top-border">
         <q-card-section  class="bio">
           I'm a creative technologist and former educator fluent in Japanese. I tackle complex problems with JavaScript-powered solutions and multimedia design.
         </q-card-section>
@@ -47,8 +60,8 @@
   import { useRoute, useRouter } from 'vue-router';
   import lottie from 'lottie-web';
 
-  import animationJsonMain from 'src/assets/animations/title-animation-v3.json';
-  import animationJsonIllustrations from 'src/assets/animations/animationJsonIllustrations.json'
+  import animationJsonMain from 'src/assets/animations/pcompgwd.json';
+
 
   import EssentialLink from 'components/EssentialLink.vue';
   import EssentialContact from 'src/components/EssentialContact.vue';
@@ -73,6 +86,12 @@
     }
   })
 
+  const isDark = ref(true);
+  const toggleTheme = () => {
+    isDark.value = !isDark.value;
+  };
+
+  provide('isDark', isDark);
   provide('leftDrawerOpen', leftDrawerOpen);
 
   // ───────────── LOTTIE SETUP ─────────────
@@ -93,10 +112,8 @@
       renderer: 'svg',
       loop: false,
       autoplay: true,
-    animationData: forIllustrations
-      ? animationJsonIllustrations
-      : animationJsonMain,
-    name: forIllustrations ? 'illustrations-hero' : 'homepage-hero',
+      animationData: animationJsonMain,
+      name: forIllustrations ? 'illustrations-hero' : 'homepage-hero',
       rendererSettings: {
         preserveAspectRatio: 'xMidYMid meet',
         progressiveLoad: true
@@ -122,12 +139,12 @@
   function toggleLeftDrawer() {
     leftDrawerOpen.value = !leftDrawerOpen.value
   }
-  
+
   function onHomeBtnClick(e) {
     if (isHome.value) {
-      e.preventDefault(); 
+      e.preventDefault();
       const link = document.createElement('a');
-      link.href = '/src/assets/GAARDER-CV.pdf'; 
+      link.href = '/src/assets/GAARDER-CV.pdf';
       link.download = 'GAARDER-CV.pdf';
       document.body.appendChild(link);
       link.click();
@@ -141,8 +158,10 @@
     const w = $q.screen.width
     if (w < 1513 && w >= 1101 ) {
       return '4rem';
-    } else if (w < 1101) {
+    } else if (w < 1101 && w >= 600) {
       return '2rem';
+    } else if (w < 600) {
+      return '1rem';
     } else {
       return '9rem';
     }
@@ -231,17 +250,10 @@
   font-size: 0.86rem;
 }
 
-.title-subtitle {
-  display: flex;
-  flex-direction: column;
-}
 
-.subtitle {
-  color: grey;
-}
 
-.about {
-  margin-left: auto;
+.drawer-btn {
+  margin-left: 0;
 }
 
 ::v-deep .essential-contact:hover {
@@ -250,87 +262,94 @@
 }
 
 .page-container.with-padding {
-  padding-left: 14rem; 
-  transition: padding-left 5.3s ease; 
+  padding-left: 14rem;
+  transition: padding-left 5.3s ease;
 }
 
-.page-container.with-padding 
+.app-header {
+  position: relative;
+  z-index: 2000;
+  overflow: hidden; /* Prevent overflow on small screens */
 
-.app-header { position: relative; z-index: 2000; overflow: visible; }
+}
+
+@media (min-width: 600px) {
+  .app-header {
+    padding: 1.5rem; /* Desktop padding */
+    overflow: visible;
+  }
+}
 
 
+
+.lottie-anchor {
+  position: relative;
+  width: 0;
+  height: 0;
+  display: flex;
+  align-items: center;
+}
 
 .title-animation-v3 {
   position: absolute;
-  top: -245%;
-  left: -7%;    
-  height: 600%;
+  top: 2%;
+  width: 600px;
+  height: 640px;
   pointer-events: none;
+  filter: var(--logo-filter, brightness(1.2));
 }
 
 .toolbar { position: relative; z-index: 1; }
 
 .home-hitbox {
   position: absolute;
-  top: 8px; left: 40px;   
+  top: 8px; left: 20px;
   width: 280px; height: 40px;
   z-index: 2001;
-  pointer-events: auto; 
+  pointer-events: auto;
 }
 
 
 
 
-@media (max-width: 940px) {
+/* @media (max-width: 940px) {
   .title-animation-v3 {
-    left: -14%;    
+    transform-origin: left center;
+    transform: translateY(10%) scale(3.1);
   }
-
 }
 
 @media (max-width: 590px) {
   .title-animation-v3 {
-    left: -20%;    
-  }
-  .about {
-    right: -10%;
+    transform-origin: left center;
+    transform: translateY(-50%) scale(2.7);
   }
 }
+*/
 
-@media (max-width: 440px) {
+
+
+.title-animation-v3 {
+  transform-origin: left center;
+  transform: translateY(1.5%) translateX(-123%) scale(3);
+}
+@media (max-width: 376px) {
   .title-animation-v3 {
-    left: -20%;    
-    width: 120%;
+  transform: translateY(-7.1%) translateX(-103%) scale(2.5);
   }
 
-  .app-header { 
-    padding: 0px;
-  }
-
-  .about {
-    margin-right: 0.9rem;
-  }
   .home-hitbox {
-    top: 8px; left: 40px;   
+    top: 8px; left: 60px;
     width: 170px; height: 40px;
     z-index: 2001;
-    pointer-events: auto; 
-  }
-
-  .drawer {
-    margin-left: -1rem;
+    pointer-events: auto;
   }
 }
 
-@media (min-width: 1390px) {
+/* @media (min-width: 1520px) {
   .title-animation-v3 {
-    left: -2%;    
+    transform-origin: left center;
+    transform: translateY(-50%) scale(1.2);
   }
-}
-
-@media (min-width: 1520px) {
-  .title-animation-v3 {
-    left: 0.4%;    
-  }
-}
+} */
 </style>

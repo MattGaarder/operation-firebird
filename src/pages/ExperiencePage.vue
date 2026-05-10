@@ -1,9 +1,9 @@
 <template>
-  <q-page padding class="q-pl-xl"  :style="{ paddingLeft: sidePadding }">
-    <div class="text-h8 text-weight-bold q-mb-lg  q-pt-lg top-border experience-title">SKILLS  &  INTERESTS</div>
-    <SkillsSection class="bg-primary experience-section top-border q-pt-lg "></SkillsSection>
+  <q-page padding class="experience-page">
+    <div class="text-h6 q-pa-sm top-border">Skills</div>
+    <SkillsSection class="bg-primary top-border"></SkillsSection>
 
-    <div class="text-h8 text-weight-bold q-mb-lg q-mr-xl q-pt-lg top-border experience-title">EXPERIENCE</div>
+    <div class="text-h6 top-border q-pa-sm">Experience</div>
 
     <ExperienceSection
       v-for="entry in experiences"
@@ -14,7 +14,7 @@
       :location="entry.location"
       :bullets="entry.bullets"
       square
-      class="bg-primary experience-section top-border q-pt-lg"
+      class="bg-primary top-border q-pt-lg"
       :class="{
         'q-pr-xl': !isMobile,
         'q-pr-none': isMobile
@@ -37,8 +37,7 @@
     {
       role: "AI Data Contributor",
       company:  "Postwork Labs, Inc",
-      duration: "Current",
-      location: "Remote",
+      duration: "Current — Remote",
       bullets: [
         "Complete coding projects across a range of technical domains, producing high-quality datasets designed to support the training of frontier AI systems.",
         "Apply problem-solving and programming skills to deliver efficient, well-documented solutions aligned with project specifications.",
@@ -86,7 +85,7 @@
         "Delivered technical support to Diageo customers.",
         "Managed high call volumes (200+ daily) - logging cases in Salesforce - coordinating with UK-wide engineering teams to resolve urgent issues.",
         "Guided clients through troubleshooting and supply chain solutions to ensure operational continuity.",
-  
+
       ]
     },
 
@@ -116,23 +115,15 @@
 
 <style scoped>
 
-    @media (max-width: 900px) {
-        .experience-title {
-            margin-left: -1.9rem;
-        }
-    }
+.experience-page {
+  margin-top: -194px !important;
+}
 
-    @media (max-width: 400px) {
-        .experience-title {
-            width: 120%;
-            padding: 1rem;
-            margin-bottom: 0rem;
-        }
-
-        .experience-section {
-          padding-top: 0.5rem;
-        }
-    }
+@media (max-width: 900px) {
+  .experience-page {
+    margin-top: -182px !important;
+  }
+}
 
 
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="projects-wrapper">
-    <q-card bordered class="project-card q-pa-md q-ma-sm">
+    <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header q-mt-sm">
-        <q-icon name="person_outline" class="project-icon q-pl-md q-pt-md" />
+      <q-card-section class="project-header">
+        <q-icon name="person_outline" class="project-icon" />
         <div class="project-info">
           <div class="project-title">THIS.PORTFOLIO</div>
         </div>
@@ -11,7 +11,7 @@
       <q-separator class="separator" />
 
       <!-- Tagline -->
-      <div class="project-tagline q-mx-lg q-my-lg">
+      <div class="project-tagline">
         This portfolio is a Vue 3 + Quasar single-page app that layers a responsive layout, dynamic theming,
         and intelligent navigation together. It uses Quasar components (layout, header, drawer, buttons, lists)
         with Vue Router to detect context (e.g., illustrations page) and conditionally swap themes via CSS custom
@@ -33,7 +33,7 @@
       <q-expansion-item dense class="full-width-expansion">
         <template #header>
           <div class="row items-center full-width">
-            <h1 class="text-h5 text-weight-bold info q-ml-lg">
+            <h1 class="text-h5 text-weight-bold info">
               More Information
             </h1>
           </div>
@@ -107,101 +107,5 @@
 </script>
 
 <style scoped>
-.info {
-  font-size: 0.9rem;
-  color: black;
-  padding: 0;
-}
-
-.invisi {
-  opacity: 0;
-  margin-top: 0.5rem;
-}
-
-/* main wrapper + card layout */
-.projects-wrapper {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(253, 253, 253);
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 6px;
-  background: white;
-  /* margin & padding handled by Quasar utility classes on the card */
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  border-color: rgb(207, 207, 207);
-}
-
-/* header band */
-.project-header {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  background: var(--q-color-grey-1);
-}
-
-.project-icon {
-  height: auto;
-  border-radius: 4px;
-  color: #2b6caf;
-  font-size: 1.8rem;
-}
-
-.project-info {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.project-title {
-  font-size: 1.55rem;
-  font-weight: 600;
-  margin-top: auto;
-  margin-left: 0.3rem;
-}
-
-/* tagline block – match PwC style */
-.project-tagline {
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-/* feature list section – match PwC */
-.project-body {
-  margin-left: -1.5rem;
-  margin-top: 0.5rem;
-}
-
-.feature-list {
-  list-style: none;
-  margin-left: 1rem;
-  margin-right: 2.5rem;
-}
-
-.feature-list li {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-/* separators stretched edge-to-edge within the card */
-.separator {
-  margin-left: -1rem;
-  margin-right: -1rem;
-}
-
-/* full-width expansion items to line up with separators */
-.full-width-expansion {
-  margin-left: -1rem;
-  margin-right: -1rem;
-}
-
-/* tiny screens */
-@media (max-width: 360px) {
-  .project-header {
-    justify-content: center;
-    text-align: center;
-  }
-}
+/* component-specific layout adjustments if any */
 </style>
