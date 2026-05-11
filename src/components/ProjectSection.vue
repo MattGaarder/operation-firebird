@@ -131,9 +131,10 @@
     .tech-list {
       flex-direction: row;
       position: absolute;
-      top: -3%;
+      top: -6%;
       right: 7%;
     }
+
 
 
 

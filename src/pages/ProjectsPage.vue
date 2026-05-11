@@ -70,17 +70,21 @@ function getWindowConfig() {
     const w = $q.screen.width
     const h = $q.screen.height
 
-      // 40% of screen width, 90% of screen height
-    const widthFactor = 0.4
-    const heightFactor = 0.9
+    // Default desktop factors
+    let widthFactor = 0.4
+    let heightFactor = 0.9
+
+    // Responsive overrides for mobile and small screens
+    if ($q.screen.lt.sm) {
+        widthFactor = 0.9
+        heightFactor = 0.85
+    } else if ($q.screen.lt.md) {
+        widthFactor = 0.7
+        heightFactor = 0.85
+    }
 
     const width = Math.floor(w * widthFactor)
     const height = Math.floor(h * heightFactor)
-
-    // const factor = $q.screen.lt.md ? 0.9 : 0.6
-
-    // const width = Math.floor(w * factor)
-    // const height = Math.floor(h * factor)
 
     // center the window
     const x = Math.floor((w - width) / 2)
@@ -226,23 +230,6 @@ const projects = [
         ],
         component: markRaw(ProjectAnkify),
     },
-    // {
-    //     id:       'project2vibely',
-    //     title:    'Vibely',
-    //     images:   [
-    //     loadProjectLogo('vibely-logo-v2'),
-    //     'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif'
-    //     ],
-    //     deployed: [true, 'https://main--endearing-sundae-33b843.netlify.app/'],
-    //     repo:     [true, 'https://github.com/MattGaarder/vibely'],
-    //     summary:  'A real-time, circle-centric social feed where you “Vibe” or “Not a Vibe” to posts. Live updates using React and Firebase so you never miss an opportunity to vibe with your friends again.',
-    //     technology: [
-    //         { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg')},
-    //         { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg')},
-    //         { name: 'React',logo: loadTechLogo('react-2.svg')},
-    //     ],
-    //     component: markRaw(ProjectVibely),
-    // },
     {
         id: 'project3moviem',
         title: 'Moovie Match',
@@ -260,23 +247,6 @@ const projects = [
         ],
         component: markRaw(MoovieMatch),
     },
-    // {
-    //     id:       'project1weatherd',
-    //     title:    'Weather Dashboard',
-    //     images:   [
-    //     loadProjectLogo('cloud-day'),
-    //         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif'
-    //     ],
-    //     deployed: [true, 'https://mattgaarder.github.io/weather-dashboard/'],
-    //     repo:     [true, 'https://github.com/MattGaarder/weather-dashboard'],
-    //     summary:  'Save and revisit your favorite cities with ease—enter a location to pull current conditions and a five-day forecast from the OpenWeather API, then build a persistent, personalized dashboard of weather insights.',
-    //     technology: [
-    //         { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg')},
-    //         { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg')},
-    //         { name: 'Postman',logo: loadTechLogo('postman-icon-svgrepo-com.svg')},
-    //     ],
-    //     component: markRaw(WeatherDashboard),
-    // },
     {
         id: 'project5onafa',
         title: 'Onafã',

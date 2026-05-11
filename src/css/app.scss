@@ -15,6 +15,28 @@ html {
   color: var(--site-text, #fff);
 }
 
+/* 2. Define theme colors at the root */
+:root {
+  --app-bg-light: #ffffff; /* Or your preferred light color */
+  --app-bg-dark: #000000;  /* Or your preferred dark color */
+}
+
+/* 3. Apply the background to the body based on the active theme */
+body.body--light {
+  background-color: var(--app-bg-light) !important;
+  color: #000000;
+}
+
+body.body--dark {
+  background-color: var(--app-bg-dark) !important;
+  color: #ffffff;
+}
+
+/* Ensure the layout container doesn't block the body background */
+.q-layout, .q-page-container {
+  background: transparent !important;
+}
+
 .theme-dark {
   --site-bg: #000000; 
   --site-text: #fff;
@@ -44,6 +66,11 @@ html {
 
 .theme-light .text-white {
   color: var(--site-text) !important;
+}
+
+.project-card .q-expansion-item__container {
+  margin-left: 0.5px;
+  margin-right: 0.5px;
 }
 
 
@@ -129,7 +156,6 @@ html {
 
 .code-container {
   height: 350px; 
-  margin-top: -0.5rem; 
   font-size: 0.7rem;
 }
 
@@ -570,18 +596,15 @@ pre[class*="language-"] {
     font-size: 1rem;
   }
 
-  .window-handle {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
   /* Larger, more pronounced draggable handles for mobile touch targets */
   .drv {
-    --d04bd352-handlesSize: 12px !important;
+    --d04bd352-handlesSize: 15px !important;
     --d04bd352-handlesHalfSize: 11px !important;
     --d04bd352-handlesBorder: 1.2px solid #000 !important;
+
   }
 }
+
 
 @media (max-width: 900px) {
     .experience-section {
@@ -605,6 +628,21 @@ pre[class*="language-"] {
   background-color: #ffffff !important;
   color: #000000 !important;
 }
+
+.drv-handle {
+  /* 1. Ensure it's above the window content and shadow */
+  z-index: 999; 
+  
+  /* 2. Add the box shadow */
+  /* Use a dark, high-opacity shadow for testing */
+
+  
+  /* Ensure it's not being clipped by anything */
+  overflow: visible !important;
+  
+  /* Optional: make sure it's visible against the window */
+  border: 1px solid white;
+}
 /* Dark mode draggable handles and outline */
 .theme-dark .drv {
   --d04bd352-handlesBorder: 1px solid #ffffff !important;
@@ -615,7 +653,7 @@ pre[class*="language-"] {
 }
 
 .theme-dark .drv-handle {
-  background-color: #ffffff !important;
+  background-color: #707070!important;
 }
 
 /* Specific Dark Mode Color Palette Overrides */
@@ -657,11 +695,13 @@ pre[class*="language-"] {
 
   /* Expansion item toggle styling for dark mode */
   .q-expansion-item .q-item {
-    background-color: #263442 !important;
+    background-color: #252525 !important;
+     border-bottom: 1px solid #707070 !important;
+     margin-bottom: -1px;
   }
 
   .q-expansion-item .q-item:hover,
   .q-expansion-item .q-item[aria-expanded="true"] {
-    background-color: #0E1019 !important;
+    background-color: #263442 !important;
   }
 }

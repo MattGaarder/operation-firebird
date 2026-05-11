@@ -8,17 +8,16 @@
 
 
           <!-- Vertical Utility Column (Absolutely positioned below the menu) -->
-          <div class="column items-center absolute-top" style=" top: -15px; left: 0; width: 42px;">
+          <div class="column items-center absolute-top" style="top: -1px; left: 0; width: 42px;">
             <q-btn flat dense round icon="menu" class="drawer-btn" aria-label="Menu" @click="toggleLeftDrawer" />
-            <q-btn flat round :icon="isHome ? 'download' : 'home'" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
-            <q-btn flat dense round :icon="isDark ? 'dark_mode' : 'light_mode'" class="toggle-theme" aria-label="Toggle dark mode" @click="toggleTheme" />
+            <q-btn flat dense round :icon="isHome ? 'download' : 'home'" class="drawer-btn" style="margin-top: -8px;" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
+            <q-btn flat dense round :icon="isDark ? 'dark_mode' : 'light_mode'" class="toggle-theme drawer-btn" aria-label="Toggle dark mode" @click="toggleTheme" />
           </div>
           <!-- Lottie Zero-Width Anchor (Nudged to the right) -->
-          <div class="lottie-anchor" style="margin-left: 60px;">
+          <div class="lottie-anchor" style="margin-left: 40px;">
             <div ref="lottieEl" class="title-animation-v3"></div>
           </div>
 
-          <router-link  to="/" aria-label="Home" class="home-hitbox"></router-link>
           <q-space />
         </q-toolbar>
       </div>
@@ -253,7 +252,7 @@
 
 
 .drawer-btn {
-  margin-left: 0;
+  margin-top: -6px;
 }
 
 ::v-deep .essential-contact:hover {
@@ -301,13 +300,7 @@
 
 .toolbar { position: relative; z-index: 1; }
 
-.home-hitbox {
-  position: absolute;
-  top: 8px; left: 20px;
-  width: 280px; height: 40px;
-  z-index: 2001;
-  pointer-events: auto;
-}
+
 
 
 
@@ -338,12 +331,6 @@
   transform: translateY(-7.1%) translateX(-103%) scale(2.5);
   }
 
-  .home-hitbox {
-    top: 8px; left: 60px;
-    width: 170px; height: 40px;
-    z-index: 2001;
-    pointer-events: auto;
-  }
 }
 
 /* @media (min-width: 1520px) {

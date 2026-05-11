@@ -6,7 +6,7 @@
                 <q-icon name="translate" class="project-icon" />
                 <div class="project-info">
                     <div class="project-title">
-                        ANKIFY TOOLBAR
+                        Ankify Toolbar
                         <!-- <span class="sub">(Electron / Vue / AnkiConnect)</span> -->
                     </div>
                 </div>

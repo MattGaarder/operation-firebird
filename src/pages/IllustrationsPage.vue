@@ -1,6 +1,6 @@
 
 <template>
-  <q-page padding class="text-black">
+  <q-page class="illustrations-page">
     <div class="page-head">
     </div>
 
@@ -164,6 +164,11 @@ const illustrations = [
 </script>
 
 <style scoped>
+.illustrations-page {
+  margin-top: -220px;
+  z-index: 2500;
+  background: transparent !important;
+}
 .page-head {
   margin-bottom: 1rem;
   display: flex;
@@ -177,10 +182,10 @@ const illustrations = [
 }
 
 .masonry-item {
-    width: 25%; 
+    width: 25%;
     padding: 1rem;
     box-sizing: border-box;
-    display: flex;              
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -207,8 +212,8 @@ const illustrations = [
 .img-wrapper {
    align-items: center;
   justify-content: center;
-  width: 100%;   
-  height: 100%;  
+  width: 100%;
+  height: 100%;
 }
 
 .masonry-img {
@@ -220,10 +225,10 @@ const illustrations = [
   color: white;
     max-width: 100%;
   max-height: 100%;
-  object-fit: contain; 
+  object-fit: contain;
   border-radius: 4px;
-    transition: transform 0.2s; 
-  
+    transition: transform 0.2s;
+
 }
 
 .masonry-item:hover .masonry-img {
@@ -252,10 +257,10 @@ const illustrations = [
 </style>
 
 <!-- const illustrations = [
-    
+
     { src: '/src/assets/illustrations/deer.png', alt: 'Concept B', span: 1 },
         { src: '/src/assets/illustrations/brief.png', alt: 'brief', span: 1 },
-        
+
     { src: '/src/assets/illustrations/bike.png', alt: 'bike', span: 1 },
 
     { src: '/src/assets/illustrations/composer.png', alt: 'Concept B', span: 1 },
@@ -287,5 +292,5 @@ const illustrations = [
         { src: '/src/assets/illustrations/life1.png', alt: 'Poster C', span: 1 },
     { src: '/src/assets/illustrations/yuka-clean.png', alt: 'Poster C', span: 2 },
     { src: '/src/assets/illustrations/cato.png', alt: 'cato', span: 1 },
-    
+
 ]; -->
