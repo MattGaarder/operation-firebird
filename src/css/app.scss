@@ -338,36 +338,43 @@ html, body, #q-app {
 
 
 
-.window-handle-header, 
 .window-handle {
   min-height: 30px !important;
   height: 30px !important;
   display: flex;
+  align-items: center; /* Center buttons vertically */
   cursor: move;
   font-weight: bolder;
+  padding: 0 4px;
 }
 
+.window-handle-header {
+  border-bottom: 1.2px solid #000;
+}
 
+.window-handle-footer {
+
+
+  gap: 0px;
+}
 
 /* Standardize buttons in both handles */
-.window-handle-header .q-btn,
 .window-handle .q-btn {
-  min-height: 29px !important;
-  height: 29px !important;
-}
+  height: 24px;
+  min-height: 24px;
+  font-size: 0.7rem;
 
-/* Align the 'Close' icon and 'Launch' icon vertically */
-/* Shift ONLY the buttons in the footer to keep the border-top static */
-.window-handle:not(.window-handle-header) .q-btn {
-  position: relative;
-  left: 5px;
 }
 
 .window-handle-header .q-btn:last-child {
-  margin-right: 7px !important;
+  margin-right: 4px !important;
 }
 
-.window-handle .q-btn:first-child {
+.window-handle-footer .q-btn:last-child {
+  margin-right: -9px !important;
+}
+
+.window-handle-footer .q-btn:first-child {
   margin-right: -4px !important;
 }
 
@@ -601,9 +608,9 @@ pre[class*="language-"] {
 
   /* Larger, more pronounced draggable handles for mobile touch targets */
   .drv {
-    --d04bd352-handlesSize: 15px !important;
-    --d04bd352-handlesHalfSize: 11px !important;
-    --d04bd352-handlesBorder: 1.2px solid #000 !important;
+    --d04bd352-handlesSize: 18px !important;
+    --d04bd352-handlesHalfSize: 18px !important;
+    --d04bd352-handlesBorder: 1.2px solid #707070 !important;
 
   }
 }
@@ -657,6 +664,7 @@ pre[class*="language-"] {
 
 .theme-dark .drv-handle {
   background-color: #707070!important;
+  opacity: 0.5;
 }
 
 .theme-light [alt*="Articulate"],
@@ -672,6 +680,41 @@ pre[class*="language-"] {
 .theme-light [src*="prism"],
 .theme-light [style*="prism"] {
   filter: invert(1) brightness(0.6) contrast(1.2) !important;
+}
+
+.body--dark img.q-img__image[src*="ollama.svg"] {
+  filter: invert(1) brightness(100);
+}
+/* Project Component Specific Styles (Centralized) */
+.vibely-project-header {
+  background-color: var(--project-header-bg, #263442);
+  margin: -16px -16px 0 -16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 122px;
+  border-bottom: 2px solid #000;
+  overflow: hidden;
+}
+
+.vibely-logo {
+  width: 660px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.vibely-logo svg path {
+  transition: fill 0.3s ease;
+}
+
+.read-me-code {
+  height: 230px;
+}
+
+/* Apply only when the page is in light mode */
+.theme-light .window-handle-footer {
+  border-top: 1px solid #000 !important;
+  background-color: #ffffff !important; 
 }
 
 /* Specific Dark Mode Color Palette Overrides */

@@ -287,40 +287,4 @@ const isNarrow = computed(() => props.containerWidth > 0 && props.containerWidth
 </script>
 
 <style scoped>
-.project-header {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  overflow:hidden;
-}
-
-.read-me-code {
-  height: 230px;
-}
-
-:deep(.vibely-logo svg path) {
-  transition: fill 0.3s ease;
-}
-
-.vibely-project-header {
-  background-color: var(--project-header-bg, #263442);
-  margin-left: -16px;
-  margin-right: -16px;
-  margin-top: -16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 122px;
-  border-left: 2px;
-  border-color: black;
-  border-width: 2px;
-
-}
-
-.vibely-logo {
-  width: 660px;
-  margin-top: 0rem;
-  margin-bottom: -1rem;
-  position: absolute;
-}
 </style>

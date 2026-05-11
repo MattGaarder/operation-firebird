@@ -20,14 +20,14 @@
                             <q-space />
                             <q-btn flat icon="close" @click="closeWindow(i)" />
                         </q-card-section>
-                        <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 48px)">
+                        <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 60px)">
                             <!-- <p>{{ win.project.summary }}</p> <br /> -->
                             <div class="window-body">
                                 <component :is="win.project.component" :images="win.project.images"
                                     :container-width="win.width"></component>
                             </div>
                         </q-card-section>
-                        <div class="row window-handle">
+                        <div class="row window-handle window-handle-footer">
                             <q-btn flat icon="code" label="GitHub" :disable="!win.project.repo[0]"
                                 :href="win.project.repo[1]" target="_blank"/>
                             <q-btn flat icon="launch" label="Live" :disable="!win.project.deployed[0]"
@@ -57,6 +57,7 @@ import ProjectOnafa from 'src/components/projects/ProjectOnafa.vue';
 import ThisPortfolio from 'src/components/projects/ThisPortfolio.vue';
 import CodeJournal from 'src/components/projects/PostworkProjects.vue';
 import ProjectAnkify from 'src/components/projects/ProjectAnkify.vue';
+import MedJp from 'src/components/projects/MedJp.vue';
 
 const leftDrawerOpen = inject('leftDrawerOpen');
 const isDark = inject('isDark');
@@ -128,6 +129,31 @@ function loadTechLogo(relativePath) {
     return new URL(`/src/assets/tech_logos/${relativePath}`, import.meta.url).href;
 }
 const projects = [
+  {
+        id: 'med-jp',
+        title: 'med-jp',
+        images: [
+            loadProjectLogo('med-jp-logo'),
+            'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif',
+            'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif',
+        ],
+        deployed: [false, 'https://code-journal.netlify.app'],
+        repo: 'https://github.com/MattGaarder/med-jp',
+        summary: 'Hybrid Japanese medical-language preprocessing and retrieval pipeline combining fuzzy matching, deinflection, beam-search segmentation, grammar peeling, and semantic reranking to normalize noisy romaji input into linguistically coherent Japanese token streams.',
+        summaryBullets: [
+            'Custom Japanese NLP pipeline built from scratch for medical-domain language processing and retrieval.',
+            'Implemented typo-tolerant romaji → kana normalization using WanaKana, Fuse.js, phonetic mutation systems, and canonical suffix recovery.',
+            'Designed recursive deinflection engine with verb legality masking, weighted grammar chains, and contextual grammar interpretation.',
+            'Built Viterbi/beam-search tokenizer with grammar peeling, multi-path candidate competition, and contextual semantic reranking.',
+            'Integrated HNSW vector reranking and neighbor-context semantic boosting to improve ambiguity resolution in medical terminology.',
+        ],
+        technology: [
+            { name: 'Ollama', logo: loadTechLogo('ollama.svg') },
+            { name: 'Qwen 3', logo: loadTechLogo('qwen-color.svg') },
+            { name: 'SQLite', logo: loadTechLogo('sqlite-icon.svg') },
+        ],
+        component: markRaw(MedJp),
+    },
     {
         id: 'project8journal',
         title: 'Postwork',

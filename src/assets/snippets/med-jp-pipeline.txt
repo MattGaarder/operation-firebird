@@ -1,0 +1,436 @@
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                         USER INPUT                                          ││                                                                                              │
+│  CLI / Terminal                                                                              │
+│  index.js                                                                                    │
+│    └── interpret(rawInput)                                                                   │
+│         Example: "JAP: mune itai"                                                            │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
+                                               │
+                                               ▼
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                      interpreter.js                                         ││                                                                                              │
+│  interpret()                                                                                 │
+│    ├── buildPrompt(rawInput)                                                                 │
+│    ├── stream orchestration                                                                  │
+│    ├── RAG diagnostics                                                                       │
+│    └── output streaming                                                                      │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
+                                               │
+                                               ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                   promptBuilder.js                                          ║
+║                                CORE ORCHESTRATION LAYER                                     ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                ┌───────────────────────────────────────────────────────────────┐
+                │ Direction Detection                                                        │
+                │  ENG: → ENG→JP pipeline                                       │
+                │  JAP: → JAP→ENG pipeline                                      │
+                └───────────────────────────────────────────────────────────────┘
+                                               │
+                           ┌───────────────────┴───────────────────┐
+                           ▼                                       ▼
+
+╔══════════════════════════════════╗      ╔══════════════════════════════════════════════════╗
+║           ENG→JP PATH           ║      ║                 JAP→ENG PATH                     ║
+╚══════════════════════════════════╝      ╚══════════════════════════════════════════════════╝
+
+ preprocessEng()                            preprocessJapTrace()
+ │                                          │
+ ├── lowercase normalize                    └── dispatch(input)
+ ├── whitespace collapse                         │
+ └── lightweight cleanup                         ├───────────────────────────────────────────────┐
+                                                 ▼                                               │
+                            ╔══════════════════════════════════════════════════════╗             │
+                            ║                  PREPROCESSOR                        ║             │
+                            ║                  preprocessor.js                     ║             │
+                            ╚══════════════════════════════════════════════════════╝             │
+                                                                                                 │
+                            ┌─────────────────────────────────────────────────────┐             │
+                            │ dispatch()                                          │             │
+                            │                                                     │             │
+                            │ ├── punctuation-aware chunk orchestration           │             │
+                            │ │     ├── split by 。！？ commas whitespace         │             │
+                            │ │     └── preserve punctuation as tokens            │             │
+                            │ │                                                   │             │
+                            │ ├── resolveChunk(rawChunk)                          │─────────────┘
+                            │ └── collapseGrammarTokens()                         │
+                            └─────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ resolveChunk(rawChunk)                                                │
+                    │                                                                        │
+                    │ ├── WanaKana Script Canonicalization                                  │
+                    │ │     ├── wanakana.toHiragana()                                       │
+                    │ │     ├── mixed-script normalization                                  │
+                    │ │     ├── romaji → kana stabilization                                 │
+                    │ │     ├── wkNormalize()                                               │
+                    │ │     │     ├── hiragana → canonical romaji                           │
+                    │ │     │     └── romanization variance stabilization                   │
+                    │ │     └── hiraToRaw positional alignment map                          │
+                    │ │                                                                     │
+                    │ ├── Full-Chunk Confidence Gate                                        │
+                    │ │     ├── evaluateChunk(rawChunk)                                     │
+                    │ │     ├── exact dictionary dominance                                  │
+                    │ │     ├── lexical confidence arbitration                              │
+                    │ │     └── short-circuit if adjustedScore > 1100                       │
+                    │ │                                                                     │
+                    │ ├── Strong Verb Detection Gate                                        │
+                    │ │     ├── deinflect(hiragana)                                         │
+                    │ │     ├── legality-preserving transforms                              │
+                    │ │     ├── fuzzy stem validation                                       │
+                    │ │     ├── grammar confidence heuristics                               │
+                    │ │     └── verb-class compatibility checks                             │
+                    │ │                                                                     │
+                    │ └── Beam/Viterbi Linguistic Segmentation                              │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                               BEAM SEARCH + SEGMENTATION                                   ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ runBeamSearch()                                                       │
+                    │                                                                        │
+                    │ ├── dynamic prefix exploration                                        │
+                    │ │     ├── all prefix windows                                          │
+                    │ │     ├── cumulative cost propagation                                 │
+                    │ │     └── beam pruning                                                │
+                    │ │                                                                     │
+                    │ ├── Viterbi-style path competition                                    │
+                    │ │     ├── multi-path survival                                         │
+                    │ │     ├── best-path convergence                                       │
+                    │ │     └── fallback passthrough preservation                           │
+                    │ │                                                                     │
+                    │ └── evaluatePrefix()                                                  │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ evaluatePrefix()                                                      │
+                    │                                                                        │
+                    │ ├── Romaji ↔ Hiragana Alignment                                       │
+                    │ │     └── hiraToRaw exact extraction                                  │
+                    │ │                                                                     │
+                    │ ├── memoization cache                                                 │
+                    │ ├── grammar peel analysis                                             │
+                    │ ├── candidate path expansion                                          │
+                    │ └── segment cost synthesis                                            │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                  evaluateChunk() ENGINE                                    ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ evaluateChunk()                                                       │
+                    │                                                                        │
+                    │ ├── Special Particle Resolver                                         │
+                    │ │     ├── wa → は                                                     │
+                    │ │     ├── o  → を                                                     │
+                    │ │     ├── particle semantic injection                                 │
+                    │ │     └── grammatical particle metadata                               │
+                    │ │                                                                     │
+                    │ ├── Variant Explosion Engine                                          │
+                    │ │   │                                                                 │
+                    │ │   ├── corruption repair                                             │
+                    │ │   │     └── stuck consonant recovery                                │
+                    │ │   │                                                                 │
+                    │ │   ├── consonant doubling synthesis                                  │
+                    │ │   │     └── kitte / matte handling                                  │
+                    │ │   │                                                                 │
+                    │ │   ├── dakuten phonetic mutation                                     │
+                    │ │   │     ├── k ↔ g                                                   │
+                    │ │   │     ├── s ↔ z                                                   │
+                    │ │   │     └── h ↔ b                                                   │
+                    │ │   │                                                                 │
+                    │ │   └── wkNormalize()                                                 │
+                    │ │         ├── romaji → hiragana                                       │
+                    │ │         ├── hiragana → canonical romaji                             │
+                    │ │         └── stabilization of input variance                         │
+                    │ │                                                                     │
+                    │ ├── Exact Match Engine                                                │
+                    │ │     ├── exactMatchIndex lookup                                      │
+                    │ │     ├── lexical scoring                                             │
+                    │ │     ├── dominance detection                                         │
+                    │ │     └── confidence ceilings                                         │
+                    │ │                                                                     │
+                    │ ├── Fuse.js Fuzzy Retrieval                                           │
+                    │ │     │                                                               │
+                    │ │     ├── Fuse search over romaji vocab                               │
+                    │ │     ├── typo-tolerant candidate generation                          │
+                    │ │     ├── edit-distance-aware scoring                                 │
+                    │ │     └── domain/frequency weighted reranking                         │
+                    │ │                                                                     │
+                    │ ├── Deinflection Engine                                               │
+                    │ │   │                                                                 │
+                    │ │   ├── deinflect()                                                   │
+                    │ │   │     ├── recursive suffix peeling                                │
+                    │ │   │     ├── conjugation graph traversal                             │
+                    │ │   │     ├── legality-preserving transforms                          │
+                    │ │   │     └── weighted grammar chains                                 │
+                    │ │   │                                                                 │
+                    │ │   ├── getCanonicalSuffixes()                                        │
+                    │ │   │     ├── canonical conjugation inventory                         │
+                    │ │   │     ├── suffix normalization graph                              │
+                    │ │   │     └── reversed-string indexing                                │
+                    │ │   │                                                                 │
+                    │ │   ├── Reverse Suffix Fuse Search                                    │
+                    │ │   │     ├── reversed suffix lookup                                  │
+                    │ │   │     ├── fuzzy suffix recovery                                   │
+                    │ │   │     └── typo-tolerant conjugation repair                        │
+                    │ │   │                                                                 │
+                    │ │   ├── Verb-Class Compatibility                                      │
+                    │ │   │     ├── Ichidan                                                 │
+                    │ │   │     ├── Godan                                                   │
+                    │ │   │     ├── Suru                                                    │
+                    │ │   │     ├── Kuru                                                    │
+                    │ │   │     └── adjective legality masks                                │
+                    │ │   │                                                                 │
+                    │ │   └── interpretReasonChains()                                       │
+                    │ │         ├── tense extraction                                        │
+                    │ │         ├── passive/potential/causative tags                        │
+                    │ │         └── grammatical semantic metadata                           │
+                    │ │                                                                     │
+                    │ ├── Candidate Scoring System                                          │
+                    │ │     ├── calculateCandidateScore()                                   │
+                    │ │     ├── lexical frequency priors                                    │
+                    │ │     ├── fuzzy distance penalties                                    │
+                    │ │     ├── beam-context boosts                                         │
+                    │ │     ├── stability margins                                           │
+                    │ │     ├── grammar legality weighting                                  │
+                    │ │     ├── medical-domain weighting                                    │
+                    │ │     └── semantic/domain boosts                                      │
+                    │ │                                                                     │
+                    │ └── Fragment Plausibility Filter                                      │
+                    │       ├── anti-garbage heuristics                                     │
+                    │       ├── short fuzzy rejection                                       │
+                    │       ├── deinflection sanity checks                                  │
+                    │       └── hallucination suppression                                   │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                 GRAMMAR PEEL SYSTEM                                        ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ grammarPeel.js                                                        │
+                    │                                                                        │
+                    │ ├── loadGrammarAnchors(db)                                            │
+                    │ │     ├── grammar anchor DB                                           │
+                    │ │     └── anchored suffix metadata                                    │
+                    │ │                                                                     │
+                    │ ├── peelGrammarSuffix()                                               │
+                    │ │     ├── から                                                        │
+                    │ │     ├── たり                                                        │
+                    │ │     ├── ように                                                      │
+                    │ │     ├── anchored suffix stripping                                   │
+                    │ │     ├── fuzzy grammar matching                                      │
+                    │ │     └── stem re-evaluation                                          │
+                    │ │                                                                     │
+                    │ ├── grammar-aware beam insertion                                      │
+                    │ ├── multi-token grammar detection                                     │
+                    │ ├── orphan merge repair                                               │
+                    │ └── collapseGrammarTokens()                                           │
+                    │       ├── cross-boundary grammar recognition                          │
+                    │       └── grammatical phrase collapsing                               │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                              CONTEXTUAL SEMANTIC PASSES                                    ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ Neighbor Context Semantic Pass                                        │
+                    │                                                                        │
+                    │ ├── ±3 token semantic window                                          │
+                    │ ├── meaning overlap extraction                                        │
+                    │ ├── contextual rescoring                                              │
+                    │ ├── semantic candidate resurrection                                   │
+                    │ └── local coherence optimization                                      │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                   SEMANTIC / RAG LAYER                                     ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ ensureANN()                                                           │
+                    │                                                                        │
+                    │ ├── HNSW binary index load                                            │
+                    │ ├── metadata.json load                                                │
+                    │ ├── better-sqlite3 initialization                                     │
+                    │ └── ANN readiness gate                                                │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ Query Construction                                                    │
+                    │                                                                        │
+                    │ ├── token trace extraction                                            │
+                    │ ├── POS filtering                                                     │
+                    │ ├── medical priority routing                                          │
+                    │ ├── anchor token generation                                           │
+                    │ ├── combined_text expansion                                           │
+                    │ └── embedding-space alignment                                         │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ EMBEDDING GENERATION                                                  │
+                    │                                                                        │
+                    │ getSentenceEmbedding()                                                │
+                    │                                                                        │
+                    │ Ollama /api/embeddings                                                │
+                    │   └── Qwen embedding model                                            │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ HNSW ANN SEARCH                                                       │
+                    │                                                                        │
+                    │ searchANN()                                                           │
+                    │                                                                        │
+                    │ ├── approximate nearest neighbor search                               │
+                    │ ├── cosine similarity                                                 │
+                    │ ├── semantic vector retrieval                                         │
+                    │ ├── anchor boosting                                                   │
+                    │ └── top-K retrieval                                                   │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ SQLite Hydration                                                      │
+                    │                                                                        │
+                    │ vocab.db                                                              │
+                    │                                                                        │
+                    │ ├── romaji                                                            │
+                    │ ├── kana                                                              │
+                    │ ├── kanji                                                             │
+                    │ ├── meanings                                                          │
+                    │ ├── POS tags                                                          │
+                    │ ├── MeSH annotations                                                  │
+                    │ ├── mesh_domains                                                      │
+                    │ └── semantic/domain metadata                                          │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ Hybrid RAG Filtering                                                  │
+                    │                                                                        │
+                    │ ├── direct dictionary hit injection                                   │
+                    │ ├── semantic threshold filtering                                      │
+                    │ ├── medical-domain gating                                             │
+                    │ ├── duplicate elimination                                             │
+                    │ ├── glossary assembly                                                 │
+                    │ └── tone hint extraction                                              │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                   VECTOR RE-RANKING PASS                                   ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ rerankTrace()                                                         │
+                    │                                                                        │
+                    │ ├── HNSW Vector Retrieval                                             │
+                    │ │     ├── hnswIndex.getPoint(id)                                      │
+                    │ │     ├── neighbor vector extraction                                  │
+                    │ │     └── embedding-space candidate lookup                            │
+                    │ │                                                                     │
+                    │ ├── Context Vector Synthesis                                          │
+                    │ │     ├── ±3 neighboring winners                                      │
+                    │ │     ├── averaged semantic vectors                                   │
+                    │ │     └── optional query embedding blending                           │
+                    │ │                                                                     │
+                    │ ├── cosineSimilarity()                                                │
+                    │ │     ├── semantic proximity scoring                                  │
+                    │ │     ├── contextual coherence scoring                                │
+                    │ │     └── meaning-space alignment                                     │
+                    │ │                                                                     │
+                    │ ├── Semantic Resurrection Pass                                        │
+                    │ │     ├── weak lexical candidate revival                              │
+                    │ │     ├── domain-context correction                                   │
+                    │ │     ├── semantic boost injection                                    │
+                    │ │     └── contextual reranking                                        │
+                    │ │                                                                     │
+                    │ └── Exact-Match Safety Ceilings                                       │
+                    │       ├── hallucination prevention                                    │
+                    │       ├── fuzzy semantic suppression                                  │
+                    │       ├── grammar protection                                          │
+                    │       └── high-confidence lexical locking                             │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                       PROMPT ASSEMBLY                                      ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ Prompt Templates                                                      │
+                    │                                                                        │
+                    │ ├── ENG_TO_JP_TEMPLATE                                                │
+                    │ ├── JP_TO_ENG_TEMPLATE                                                │
+                    │ ├── glossary injection                                                │
+                    │ ├── clinical translation rules                                        │
+                    │ ├── hallucination suppression                                         │
+                    │ ├── tone hint injection                                               │
+                    │ └── /no_think directive                                               │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                         LLM GENERATION                                     ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ ollamaClient.js                                                       │
+                    │                                                                        │
+                    │ generate(prompt)                                                      │
+                    │                                                                        │
+                    │ ├── HTTP POST                                                         │
+                    │ ├── Ollama /api/generate                                              │
+                    │ ├── Qwen3 inference                                                   │
+                    │ ├── stream=true                                                       │
+                    │ ├── think=false                                                       │
+                    │ ├── incremental JSON parsing                                          │
+                    │ ├── async generator streaming                                         │
+                    │ └── TextDecoder pipeline                                              │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                         OUTPUT PIPELINE                                    ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+                    ┌────────────────────────────────────────────────────────────────────────┐
+                    │ interpreter.js                                                        │
+                    │                                                                        │
+                    │ ├── stream consumption                                                │
+                    │ ├── prefix echo stripping                                             │
+                    │ ├── terminal streaming                                                │
+                    │ ├── timing metrics                                                    │
+                    │ ├── token diagnostics                                                 │
+                    │ └── final output emission                                             │
+                    └────────────────────────────────────────────────────────────────────────┘
+                                                 │
+                                                 ▼
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                       TERMINAL OUTPUT                                       │
+│                                                                                              │
+│  > JAP: mune itai                                                                            │
+│                                                                                              │
+│  [Token Trace]                                                                               │
+│  [Semantic Reranking]                                                                        │
+│  [Deinflection Paths]                                                                        │
+│  [RAG Hits]                                                                                  │
+│                                                                                              │
+│  "I have chest pain."                                                                        │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
