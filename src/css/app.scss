@@ -662,8 +662,16 @@ pre[class*="language-"] {
 .theme-light [alt*="Articulate"],
 .theme-light [aria-label*="Articulate"],
 .theme-light [src*="Articulate"],
-.theme-light [style*="Articulate"] {
-  filter: invert(1) brightness(0.2) !important;
+.theme-light [style*="Articulate"],
+.theme-light [alt*="Express"],
+.theme-light [aria-label*="Express"],
+.theme-light [src*="express"],
+.theme-light [style*="express"],
+.theme-light [alt*="Prism"],
+.theme-light [aria-label*="Prism"],
+.theme-light [src*="prism"],
+.theme-light [style*="prism"] {
+  filter: invert(1) brightness(0.6) contrast(1.2) !important;
 }
 
 /* Specific Dark Mode Color Palette Overrides */

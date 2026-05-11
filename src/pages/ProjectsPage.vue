@@ -144,8 +144,8 @@ const projects = [
             { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg') },
             { name: 'HTML', logo: loadTechLogo('html-5-logo-svgrepo-com.svg') },
             { name: 'CSS', logo: loadTechLogo('Official_CSS_Logo.svg') },
-            { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg') },
-            { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg') },
+            // { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg') },
+            // { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg') },
             { name: 'Postman', logo: loadTechLogo('postman-icon-svgrepo-com.svg') },
 
         ],
@@ -187,7 +187,7 @@ const projects = [
         technology: [
             { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg') },
             { name: 'Jest', logo: loadTechLogo('jest-js-icon.svg') },
-            { name: 'Inquirer', logo: loadTechLogo('inquirer_readme.svg') },
+            // { name: 'Inquirer', logo: loadTechLogo('inquirer_readme.svg') },
             { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg') },
             { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg') },
             { name: 'React', logo: loadTechLogo('react-2.svg') },

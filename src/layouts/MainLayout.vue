@@ -8,13 +8,13 @@
 
 
           <!-- Vertical Utility Column (Absolutely positioned below the menu) -->
-          <div class="column items-center absolute-top" style="top: -1px; left: 0; width: 42px;">
+          <div class="column items-center absolute-top" style="top: -1px; left: -10px; width: 42px;">
             <q-btn flat dense round icon="menu" class="drawer-btn" aria-label="Menu" @click="toggleLeftDrawer" />
             <q-btn flat dense round :icon="isHome ? 'download' : 'home'" class="drawer-btn" style="margin-top: -8px;" :to="!isHome ? '/' : undefined" @click="onHomeBtnClick" aria-label="Home or Download CV"/>
             <q-btn flat dense round :icon="isDark ? 'dark_mode' : 'light_mode'" class="toggle-theme drawer-btn" aria-label="Toggle dark mode" @click="toggleTheme" />
           </div>
           <!-- Lottie Zero-Width Anchor (Nudged to the right) -->
-          <div class="lottie-anchor" style="margin-left: 40px;">
+          <div class="lottie-anchor" style="margin-left: 30px;">
             <div ref="lottieEl" class="title-animation-v3"></div>
           </div>
 
