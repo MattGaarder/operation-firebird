@@ -20,6 +20,7 @@
             :alt="ill.alt || 'illustration'"
             loading="lazy"
             class="masonry-img"
+            @load="msnry?.layout()"
           />
         </div>
       </div>
@@ -38,7 +39,9 @@ let msnry = null;
 function initMasonry() {
   if (!grid.value) return;
 
+  // Ensure DOM is ready
   nextTick(() => {
+    // Wait for ALL images to load before initializing Masonry
     imagesLoaded(grid.value, () => {
       msnry = new Masonry(grid.value, {
         itemSelector: '.masonry-item',
@@ -49,6 +52,7 @@ function initMasonry() {
       msnry.layout();
     });
 
+    // Also trigger layout on progress as each image loads for safety
     imagesLoaded(grid.value).on('progress', () => {
       msnry?.layout();
     });
@@ -117,31 +121,34 @@ import lg_lady from '/src/assets/illustrations/lg-lady.png';
 
 
 const illustrations = [
-    { src: deer, alt: 'deer', span: 1 },
+  { src: deer, alt: 'deer', span: 1 },
+  { src: notebook, alt: 'notebook', span: 1 },
+    { src: self3, alt: 'self3', span: 1 },
+    { src: self2, alt: 'self2', span: 1 },
+    { src: samurai, alt: 'samurai', span: 1 },
+    { src: self, alt: 'self', span: 1 },
+    { src: osaka, alt: 'osaka', span: 1 },
+    { src: haggard, alt: 'haggard', span: 1 },
     { src: brief, alt: 'brief', span: 1 },
     { src: bike, alt: 'bike', span: 1 },
     { src: composer, alt: 'composer', span: 1 },
-    { src: samurai, alt: 'samurai', span: 1 },
+
     { src: fall, alt: 'fall', span: 1 },
     { src: french, alt: 'french', span: 1 },
     { src: frenchNkd, alt: 'frenchNkd', span: 1 },
-    { src: haggard, alt: 'haggard', span: 1 },
     { src: frog, alt: 'frog', span: 1 },
     { src: bignosedude, alt: 'bignosedude', span: 1 },
     { src: faces, alt: 'faces', span: 2 },
-    { src: kobe, alt: 'kobe', span: 1 },
     { src: nachi, alt: 'nachi', span: 1 },
-    { src: notebook, alt: 'notebook', span: 1 },
-    { src: osaka, alt: 'osaka', span: 1 },
     { src: penguin1, alt: 'penguin1', span: 1 },
     { src: penguin2, alt: 'penguin2', span: 1 },
     { src: penguins, alt: 'penguins', span: 2 },
     { src: rosen, alt: 'rosen', span: 1 },
     { src: skull, alt: 'skull', span: 1 },
     { src: overthere, alt: 'overthere', span: 1 },
-    { src: self, alt: 'self', span: 1 },
-    { src: self2, alt: 'self2', span: 1 },
-    { src: self3, alt: 'self3', span: 1 },
+
+
+
     { src: life1, alt: 'life1', span: 1 },
     { src: quick, alt: 'quick', span: 1 },
     { src: yuka_clean, alt: 'yuka_clean', span: 2 },
@@ -160,12 +167,13 @@ const illustrations = [
     { src: animedude, alt: 'animedude', span: 1 },
     { src: smokechar, alt: 'smokechar', span: 1 },
     { src: lg_lady, alt: 'lg_lady', span: 1 },
+    { src: kobe, alt: 'kobe', span: 1 },
 ];
 </script>
 
 <style scoped>
 .illustrations-page {
-  margin-top: -220px;
+  margin-top: -178px;
   z-index: 2500;
   background: transparent !important;
 }
@@ -183,7 +191,7 @@ const illustrations = [
 
 .masonry-item {
     width: 25%;
-    padding: 1rem;
+
     box-sizing: border-box;
     display: flex;
     align-items: center;

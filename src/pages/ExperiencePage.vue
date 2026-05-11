@@ -1,9 +1,9 @@
 <template>
   <q-page padding class="experience-page">
-    <div class="text-h6 q-pa-sm top-border">Skills</div>
+    <div class="text-h6 q-pa-sm q-pl-md top-border">Skills</div>
     <SkillsSection class="bg-primary top-border"></SkillsSection>
 
-    <div class="text-h6 top-border q-pa-sm">Experience</div>
+    <div class="text-h8 top-border q-pa-sm q-pl-md">Experience</div>
 
     <ExperienceSection
       v-for="entry in experiences"

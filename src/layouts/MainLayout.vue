@@ -85,7 +85,14 @@
     }
   })
 
-  const isDark = ref(true);
+  const savedTheme = localStorage.getItem('isDark');
+  const isDark = ref(savedTheme !== null ? JSON.parse(savedTheme) : true);
+
+  watch(isDark, (val) => {
+    $q.dark.set(val);
+    localStorage.setItem('isDark', JSON.stringify(val));
+  }, { immediate: true });
+
   const toggleTheme = () => {
     isDark.value = !isDark.value;
   };
