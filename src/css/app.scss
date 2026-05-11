@@ -310,8 +310,10 @@ html, body, #q-app {
   background: var(--project-card-bg);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   border-color: var(--project-border);
-  padding: 16px !important; /* q-pa-md */
-  margin: 8px !important;   /* q-ma-sm */
+  padding: 8px !important; 
+  margin: 8px !important;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .code-journal-icon {
@@ -423,8 +425,9 @@ html, body, #q-app {
 }
 
 .full-width-expansion {
-  margin-left: -0.7rem;
-  margin-right: -0.7rem;
+  width: calc(100% + 16px) !important;
+  margin-left: -8px !important;
+  box-sizing: border-box !important;
 }
 
 .separator {
@@ -703,8 +706,8 @@ pre[class*="language-"] {
   /* Expansion item toggle styling for dark mode */
   .q-expansion-item .q-item {
     background-color: #252525 !important;
-     border-bottom: 1px solid #707070 !important;
-     margin-bottom: -1px;
+    border-bottom: 1px solid #707070 !important;
+    margin-bottom: -1px;
   }
 
   .q-expansion-item .q-item:hover,
