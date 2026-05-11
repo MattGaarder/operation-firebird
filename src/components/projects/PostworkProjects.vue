@@ -107,7 +107,7 @@
         <q-icon name="cloud" class="project-icon" />
         <div class="project-info">
           <div class="project-title">
-            Weather Refactored<span class="sub">(jQuery / JavaScript)</span>
+            Weather Refactored
           </div>
         </div>
       </q-card-section>
@@ -246,7 +246,7 @@
         <q-icon name="receipt_long" class="project-icon" />
         <div class="project-info">
           <div class="project-title">
-            Expenses<span class="sub">(Node.js CLI)</span>
+            Expenses
           </div>
         </div>
       </q-card-section>

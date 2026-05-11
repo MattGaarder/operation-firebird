@@ -9,8 +9,8 @@
         <teleport to="body">
             <div class="windows-layer" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }">
                 <draggable-resizable-vue v-for="(win, i) in windows" :key="win.uid" v-model:x="win.x" v-model:y="win.y"
-                    v-model:h="win.height" v-model:w="win.width" v-model:active="win.active" :minWidth="212"
-                    :minHeight="100" :style="{ zIndex: win.zIndex }" :drag-handle="'.window-handle'"
+                    v-model:h="win.height" v-model:w="win.width" v-model:active="win.active" :minWidth="120"
+                    :minHeight="64" :style="{ zIndex: win.zIndex }" :drag-handle="'.window-handle'"
                     @mousedown="bringToFront(i)" :parent="true">
 
                     <q-card class="window-card bg-primary" bordered>
@@ -29,7 +29,7 @@
                         </q-card-section>
                         <div class="row window-handle">
                             <q-btn flat icon="code" label="GitHub" :disable="!win.project.repo[0]"
-                                :href="win.project.repo[1]" target="_blank" class="q-pl-sm p- bordered" />
+                                :href="win.project.repo[1]" target="_blank"/>
                             <q-btn flat icon="launch" label="Live" :disable="!win.project.deployed[0]"
                                 :href="win.project.deployed[1]" target="_blank" />
                         </div>

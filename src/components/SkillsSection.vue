@@ -5,24 +5,24 @@
             <div class="row skill-summary-row">
                 <div class="col-12 col-md-4 col-lg-4 skill-column">
                     <ul>
-                        <li><span class="text-weight-bolder text-size-larger">JavaScript</span>, Vue, CSS </li>
-                        <li>C#, Power Platform, <span class="text-weight-bolder text-size-larger">Excel (VBA)</span></li>
-                        <li>Alteryx, Power BI</li>
+                        <li><span class="text-weight-bolder text-size-larger">JavaScript</span> ecosystem — TypeScript, <span class="text-weight-bolder text-size-larger">Vue</span>.js 3, Node.js</li>
+                        <li>Alteryx Designer, SQL, Google Apps Script</li>
+                        <li>Microsoft <span class="text-weight-bolder text-size-larger">Power</span> — BI, Automate, Query; Excel VBA, C#</li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4 col-lg-4 skill-column">
                     <ul>
-                        <li><span class="text-weight-bolder text-size-larger">Japanese</span> Speaker</li>
-                        <li>Illustrator</li>
-                        <li>Climber</li>
+                        <li><span class="text-weight-bolder text-size-larger">Japanese</span> (Fluent), Portuguese</li>
+                        <li>Illustration</li>
+                        <li>Rock Climbing</li>
                     </ul>
                 </div>
 
                 <div class="col-12 col-md-4 col-lg-4 skill-column">
                     <ul>
-                        <li><span class="text-weight-bolder text-size-larger">Photoshop</span>, Illustrator</li>
-                        <li>Premiere, <span class="text-weight-bolder text-size-larger">AfterEffects</span></li>
-                        <li>Articulate <span class="text-weight-bolder text-size-larger">Storyline</span>, Blender</li>
+                        <li><span class="text-weight-bolder text-size-larger">Adobe</span> — After Effects, Illustrator, Photoshop, Premiere</li>
+                        <li>Articulate<span class="text-weight-bolder text-size-larger"> Storyline</span> 360, Instructional Design</li>
+                        <li>Blender, Unity</li>
                     </ul>
                 </div>
 

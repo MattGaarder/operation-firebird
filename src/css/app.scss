@@ -340,18 +340,12 @@ html, body, #q-app {
 .window-handle {
   min-height: 30px !important;
   height: 30px !important;
-  padding: 0 !important;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
   cursor: move;
   font-weight: bolder;
 }
 
-/* Ensure footer handle has its top border */
-.window-handle:not(.window-handle-header) {
-  border-top: 1px black solid;
-}
+
 
 /* Standardize buttons in both handles */
 .window-handle-header .q-btn,
@@ -364,13 +358,15 @@ html, body, #q-app {
 /* Shift ONLY the buttons in the footer to keep the border-top static */
 .window-handle:not(.window-handle-header) .q-btn {
   position: relative;
-  left: 10px;
+  left: 5px;
 }
 
-/* Remove extra right margin on the end buttons */
-.window-handle-header .q-btn:last-child,
-.window-handle .q-btn:last-child {
-  margin-right: 0 !important;
+.window-handle-header .q-btn:last-child {
+  margin-right: 7px !important;
+}
+
+.window-handle .q-btn:first-child {
+  margin-right: -4px !important;
 }
 
 .project-tagline {
@@ -507,6 +503,10 @@ pre[class*="language-"] {
   padding-right: 0 !important;
 }
 
+.q-btn .q-icon {
+  font-size: 1.2rem !important;
+}
+
 
 
 .info-code {
@@ -593,7 +593,7 @@ pre[class*="language-"] {
 
   .window-handle .q-btn:last-of-type {
     padding-left: 0px !important;
-    font-size: 1rem;
+
   }
 
   /* Larger, more pronounced draggable handles for mobile touch targets */
@@ -656,6 +656,13 @@ pre[class*="language-"] {
   background-color: #707070!important;
 }
 
+.theme-light [alt*="Articulate"],
+.theme-light [aria-label*="Articulate"],
+.theme-light [src*="Articulate"],
+.theme-light [style*="Articulate"] {
+  filter: invert(1) brightness(0.2) !important;
+}
+
 /* Specific Dark Mode Color Palette Overrides */
 .theme-dark {
   .window-card {
@@ -704,4 +711,8 @@ pre[class*="language-"] {
   .q-expansion-item .q-item[aria-expanded="true"] {
     background-color: #263442 !important;
   }
+
+
+
+  
 }

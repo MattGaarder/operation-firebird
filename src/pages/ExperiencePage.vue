@@ -1,6 +1,6 @@
 <template>
   <q-page padding class="experience-page">
-    <div class="text-h6 q-pa-sm q-pl-md top-border">Skills</div>
+    <div class="text-h8 q-pa-sm q-pl-md top-border">Skills</div>
     <SkillsSection class="bg-primary top-border"></SkillsSection>
 
     <div class="text-h8 top-border q-pa-sm q-pl-md">Experience</div>
@@ -20,6 +20,61 @@
         'q-pr-none': isMobile
       }"
     />
+    <div class="text-h8 top-border q-pa-sm q-pl-md">Education</div>
+      <q-card flat class="q-mb-md bg-primary top-border">
+        <q-card-section>
+          <div class="row experience-section q-pt-lg">
+            <div class="col-12 col-md-3 col-lg-4">
+              <div class="text-h6">
+                The University of Manchester
+              </div>
+              <div class="text-h7">
+                BA Japanese and Screen Studies
+              </div>
+              <div class="text-caption text-grey-6">
+                2011 – 2015
+              </div>
+            </div>
+            <div class="col-12 col-md-9 col-lg-8">
+              <ul class="bullet-points">
+                <li class="bullet">
+                  Gained Japanese language skills, knowledge in medieval history and contemporary sociology.
+                </li>
+                <li class="bullet">
+                  Developed skills in filmmaking, editing, directing and producing short films.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card flat class="q-mb-md bg-primary top-border">
+        <q-card-section>
+          <div class="row experience-section q-pt-lg">
+            <div class="col-12 col-md-3 col-lg-4">
+              <div class="text-h6">
+                EDX Trinity Skills Bootcamp
+              </div>
+              <div class="text-h7">
+                Front-End Web Dev Bootcamp
+              </div>
+              <div class="text-caption text-grey-6">
+                2023
+              </div>
+            </div>
+            <div class="col-12 col-md-9 col-lg-8">
+              <ul class="bullet-points">
+                <li class="bullet">
+                  Graduated with skills in HTML5, CSS3, JavaScript, jQuery, React.js and Node.js.
+                </li>
+                <li class="bullet">
+                  Projects included a social media app, weather dashboard, command-line applications and a film comparison app.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
   </q-page>
 </template>
 
@@ -116,7 +171,7 @@
 <style scoped>
 
 .experience-page {
-  margin-top: -194px !important;
+  margin-top: -182px !important;
 }
 
 @media (max-width: 900px) {
