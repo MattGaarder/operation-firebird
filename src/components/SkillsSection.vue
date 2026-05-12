@@ -56,6 +56,7 @@
 
     ul li {
         padding: 0.4rem;
+        line-height: 1.4;
     }
 
     .skill-column {
@@ -71,8 +72,7 @@
         }
 
         .skill-column {
-            line-height: 0.8rem;
-
+            line-height: 1.2;
         }
     }
 
