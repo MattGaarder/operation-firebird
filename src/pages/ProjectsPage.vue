@@ -453,7 +453,10 @@ const projects = [
    MOBILE SCROLL-FOCUS — Scale cards based on viewport proximity
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  .project-card-wrapper {
+  /* Transform the INNER card, not the observed wrapper,
+     so the wrapper's bounding box never changes and the
+     IntersectionObserver can't enter a feedback loop. */
+  .project-card-wrapper :deep(.project-section.q-card) {
     transition:
       transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
       opacity 0.4s ease !important;
@@ -461,18 +464,18 @@ const projects = [
   }
 
   /* Unfocused (resting) state — slightly smaller & dimmed */
-  .project-card-wrapper:not(.mobile-focused) {
+  .project-card-wrapper:not(.mobile-focused) :deep(.project-section.q-card) {
     transform: scale(0.92);
     opacity: 0.65;
   }
 
-  /* Focused state — full size with a subtle lift */
-  .project-card-wrapper.mobile-focused {
-    transform: scale(1.02);
+  /* Focused state — full size */
+  .project-card-wrapper.mobile-focused :deep(.project-section.q-card) {
+    transform: scale(1.0);
     opacity: 1;
   }
 
-  /* Disable desktop hover/active transforms on mobile */
+  /* Disable desktop hover lift on mobile (scroll-focus replaces it) */
   .project-card-wrapper :deep(.project-section.q-card:hover) {
     transform: none !important;
   }
