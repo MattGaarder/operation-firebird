@@ -8,6 +8,15 @@
                 <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]"
                     class="bg-primary q-pt-xl" :style="cardStyles[idx]" />
             </div>
+            <q-btn
+              v-back-to-top.animate="{offset: 500, duration: 200}"
+              round
+              color="primary"
+              class="fixed-bottom-right animate-pop"
+              style="margin: 0 15px 15px 0"
+            >
+              <q-icon name="keyboard_arrow_up" />
+            </q-btn>
         </div>
         <teleport to="body">
             <div class="windows-layer" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }">
