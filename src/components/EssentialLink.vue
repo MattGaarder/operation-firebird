@@ -5,12 +5,12 @@
     </q-item-section>
 
     <q-item-section >
-      
-      <q-item-label class="text-bold">{{ props.title }}<q-icon :name="props.name" class="arrow-outward-icon"></q-icon></q-item-label>
+
+      <q-item-label>{{ props.title }}<q-icon :name="props.name" class="arrow-outward-icon"></q-icon></q-item-label>
       <q-item-label caption>{{ props.caption }}</q-item-label>
-      
+
     </q-item-section>
-    
+
   </q-item>
 </template>
 

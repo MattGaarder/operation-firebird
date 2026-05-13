@@ -3,7 +3,7 @@
         <div class="row project-row bg-primary" :class="{ 'three-col': !leftDrawerOpen }">
             <div v-for="project in projects" :key="project.id" class="col-12 col-md-6 col-lg-4 cursor-pointer"
                 @click="openProject(project)">
-                <ProjectSection v-bind="project" class="bg-primary q-pt-xl" />
+                <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]" class="bg-primary q-pt-xl" />
             </div>
         </div>
         <teleport to="body">
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, markRaw, inject } from 'vue';
+import { ref, markRaw, inject, computed } from 'vue';
 import { useQuasar } from 'quasar';
 
 import DraggableResizableVue from 'draggable-resizable-vue3';
@@ -49,7 +49,7 @@ import DraggableResizableVue from 'draggable-resizable-vue3';
 import ProjectSection from 'src/components/ProjectSection.vue';
 // import ProjectVibely from 'src/components/projects/ProjectVibely.vue';
 import TeamBuilder from 'src/components/projects/EdXProjects.vue';
-import MoovieMatch from 'src/components/projects/MoovieMatch.vue';
+
 import ProjectNocado from 'src/components/projects/ProjectNocado.vue';
 import PwCProjects from 'src/components/projects/PwCProjects.vue';
 // import WeatherDashboard from 'src/components/projects/WeatherDashboard.vue';
@@ -63,6 +63,7 @@ const leftDrawerOpen = inject('leftDrawerOpen');
 const isDark = inject('isDark');
 
 const $q = useQuasar();
+const portfolioFilter = computed(() => isDark.value ? 'none' : 'invert(1)');
 const windows = ref([]);
 
 let topZ = 2001;
@@ -128,25 +129,27 @@ function loadProjectLogo(name, ext = 'svg') {
 function loadTechLogo(relativePath) {
     return new URL(`/src/assets/tech_logos/${relativePath}`, import.meta.url).href;
 }
+function getProjectLogo(project) {
+    if (!project.logo) return project.images[0]
+    const logoName = isDark.value ? project.logo.dark : project.logo.light
+    return loadProjectLogo(logoName)
+}
 const projects = [
   {
         id: 'med-jp',
         title: 'med-jp',
+        logo: {
+            light: 'med-jp-light',
+            dark: 'med-jp-dark',
+        },
         images: [
-            loadProjectLogo('med-jp-logo'),
+            null,
             'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif',
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif',
         ],
         deployed: [false, 'https://code-journal.netlify.app'],
-        repo: 'https://github.com/MattGaarder/med-jp',
-        summary: 'Hybrid Japanese medical-language preprocessing and retrieval pipeline combining fuzzy matching, deinflection, beam-search segmentation, grammar peeling, and semantic reranking to normalize noisy romaji input into linguistically coherent Japanese token streams.',
-        summaryBullets: [
-            'Custom Japanese NLP pipeline built from scratch for medical-domain language processing and retrieval.',
-            'Implemented typo-tolerant romaji → kana normalization using WanaKana, Fuse.js, phonetic mutation systems, and canonical suffix recovery.',
-            'Designed recursive deinflection engine with verb legality masking, weighted grammar chains, and contextual grammar interpretation.',
-            'Built Viterbi/beam-search tokenizer with grammar peeling, multi-path candidate competition, and contextual semantic reranking.',
-            'Integrated HNSW vector reranking and neighbor-context semantic boosting to improve ambiguity resolution in medical terminology.',
-        ],
+        repo: 'https://github.com/MattGaarder/med-jp-logo-dark',
+        summary: 'Japanese NLP pipeline combines fuzzy matching, deinflection, beam-search segmentation, RAG semantic reranking to normalize noisy romaji input into coherent Japanese token streams.',
         technology: [
             { name: 'Ollama', logo: loadTechLogo('ollama.svg') },
             { name: 'Qwen 3', logo: loadTechLogo('qwen-color.svg') },
@@ -157,15 +160,19 @@ const projects = [
     {
         id: 'project8journal',
         title: 'Postwork',
+        logo: {
+            light: 'postwork-light_1',
+            dark: 'postwork-dark',
+        },
         images: [
-            loadProjectLogo('postwork'),
+            null,
             'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFmcmc0Z2xlZ3RudTE5aWF3anNidGJtM3kxcncwZWV1bnZiaGRkdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JgYrWwBoJ06MYTvMPS/giphy.gif',
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif',
         ],
         deployed: [true, 'https://code-journal.netlify.app'],
         repo: 'https://github.com/MattGaarder/postwork-journal',
         summary: 'Hands-on coding across varied technical domains to create high-quality datasets used in the training of frontier AI systems.',
-        summaryBullets: ['Highlighted Projects:', 'Markdown-powered web journal for documenting coding projects with formatted code snippets and explanations.', 'CLI tool that processes monthly expense CSV reports into structured text files.', 'Persistent, personalised dashboard of weather insights for saved locations (x2) — jQuery, and refactored with JavaScript.'],
+
         technology: [
             { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg') },
             { name: 'HTML', logo: loadTechLogo('html-5-logo-svgrepo-com.svg') },
@@ -180,14 +187,17 @@ const projects = [
     {
         id: 'project4pwc',
         title: 'PwC',
+        logo: {
+            light: 'PricewaterhouseCoopers_Logo',
+            dark: 'PricewaterhouseCoopers_light',
+        },
         images: [
-            loadProjectLogo('PwC_Logo_white'),
+            null,
             'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzFkZjk4NzUwYzBmMDI1YzgzYzQ5YzQxMTE2ZTg4NjVmYjI2ZTg1ZCZjdD1n/pgvPIQVTNPtA2nL1S1/giphy.gif'
         ],
         deployed: [false],
         repo: [false],
         summary: 'PwC projects include custom Storyline functionality with JavaScript triggers, VBA with Excel for data analysis, and Apps Script automations to streamline repetitive tasks.',
-        summaryBullets: ['Highlighted Projects:', 'Google form to template folder structure generator in Drive.', 'Docs toolbar UI element for content templates in documents.', 'Document trawler for comprehensive logging and detailing of user Drive.'],
         technology: [
             { name: 'GoogleAppsScript', logo: loadTechLogo('Google_AppsScript.svg') },
             { name: 'ArticulateStoryline', logo: loadTechLogo('Articulate.svg') },
@@ -202,14 +212,14 @@ const projects = [
         id: 'project6teamb',
         title: 'edX Trinity Skills',
         images: [
-            loadProjectLogo('EdX_newer_logo'),
+            loadProjectLogo('edx-1'),
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif',
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjg4YTUxNDUzMTFjOTZlMTZlZjU3MjlkMjc0YmEzMjZhZmMzODkxYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/W59zLvbEsDbE9Q7iMQ/giphy.gif',
         ],
         deployed: [false],
         repo: [true, 'https://github.com/MattGaarder/team-profile-generator'],
         summary: "Trinity Skills Bootcamp in Web Development — 16-week online bootcamp covering key front-end technologies and modern web-development practices.",
-        summaryBullets: ['Highlighted Projects:', 'Node.js CLI suite — Formatted, badge-topped, and sectioned README.md generator for your project — can collect team member details via prompts to generate a polished HTML page summary for your software engineering team.', "Real-time social feed where you 'Vibe' or 'Not a Vibe' to posts."],
+
         technology: [
             { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg') },
             { name: 'Jest', logo: loadTechLogo('jest-js-icon.svg') },
@@ -217,6 +227,8 @@ const projects = [
             { name: 'MaterialUI', logo: loadTechLogo('material-ui-1.svg') },
             { name: 'Firebase', logo: loadTechLogo('firebase-icon.svg') },
             { name: 'React', logo: loadTechLogo('react-2.svg') },
+            { name: 'jQuery', logo: loadTechLogo('j-query.svg') },
+            { name: 'Git', logo: loadTechLogo('Git-Icon-1788C.svg') },
 
         ],
         component: markRaw(TeamBuilder),
@@ -224,8 +236,12 @@ const projects = [
     {
         id: 'project12nocado',
         title: 'Nocado',
+        logo: {
+            light: 'ncado-light_1',
+            dark: 'ncado-dark',
+        },
         images: [
-            loadProjectLogo('Nocado'),
+            null,
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWY3NTcxZTc1ODg5ZDg4NGFkNTdhMzhiZTM3YjAxNTJkMjU2YTFkMSZjdD1n/DoHFVICa66Y0ZSNZqv/giphy.gif'
         ],
         deployed: [false, 'https://github.com/MattGaarder/team-profile-generator'],
@@ -241,9 +257,9 @@ const projects = [
     },
     {
         id: 'project-jsanki-toolbar',
-        title: 'Ankify',
+        title: 'Ankipi',
         images: [
-            loadProjectLogo('Anki_logo'),
+            loadProjectLogo('ankipi_nobndr'),
             'https://yourdomain.com/path/to/demo-gif.gif'  // placeholder
         ],
         deployed: [false, 'https://github.com/MattGaarder/jsanki-toolbar'],
@@ -257,27 +273,14 @@ const projects = [
         component: markRaw(ProjectAnkify),
     },
     {
-        id: 'project3moviem',
-        title: 'Moovie Match',
-        images: [
-            loadProjectLogo('cow-white'),
-            'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdkNjkyN2FiNmMxODUzMTVkN2ExOWRiOTZhMzYyODkxYmMwMDBlNiZjdD1n/32AslOrbvFhGKaEO4Q/giphy.gif'
-        ],
-        deployed: [true, 'https://mattgaarder.github.io/moovie-search/'],
-        repo: [true, 'https://github.com/MattGaarder/moovie-search'],
-        summary: 'Spend forever picking what to watch? Go through the process every time? Compare options side-by-side with trailers, key details, and save picks to persistent watch or seen lists.',
-        technology: [
-            { name: 'jQuery', logo: loadTechLogo('j-query.svg') },
-            { name: 'Git', logo: loadTechLogo('Git-Icon-1788C.svg') },
-            { name: 'iFrameYoutubeAPI', logo: loadTechLogo('iframe-svgrepo-com.svg') },
-        ],
-        component: markRaw(MoovieMatch),
-    },
-    {
         id: 'project5onafa',
         title: 'Onafã',
+        logo: {
+            light: 'onafa-light_1',
+            dark: 'onafa-dark-v2',
+        },
         images: [
-            loadProjectLogo('onafa-white-v3'),
+            null,
             'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTdjOGI2MjRmMmI4Y2NmNGIyMzU2NTIwZjI4YjA0M2MyNTYwYjhlZiZjdD1n/mTkFZnQ8EvNSXfV9xP/giphy.gif'
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
@@ -310,6 +313,10 @@ const projects = [
 </script>
 
 <style scoped>
+:deep(.project7) {
+    filter: v-bind(portfolioFilter);
+}
+
 .window-card {
     width: 100%;
     max-height: 100%;
@@ -331,6 +338,10 @@ const projects = [
 
 .project-body {
     padding: 0px !important;
+}
+
+.project-row {
+  gap: 5px;
 }
 
 @media (min-width: 600px) and (max-width: 1550px) {
@@ -370,21 +381,14 @@ const projects = [
     pointer-events: auto;
 }
 
-/* @media (max-width: 400px) {
-    .project-page-title {
-        margin-bottom: 0rem;
-        margin-top: 0.5rem;
-        padding-top: 1rem;
-    }
-} */
-
 .projects-page {
-  margin-top: -254px !important;
+  margin-top: -184px !important;
+  z-index: 2000;
 }
 
 @media (max-width: 900px) {
   .projects-page {
-    margin-top: -164px !important;
+    margin-top: -144px !important;
   }
 }
 

@@ -15,7 +15,7 @@
             </q-tooltip>
           </div>
         </div>
-      <div class="wrapper flex-center q-pl-md" >
+      <div class="wrapper flex-center" >
         <q-img
           v-if="images.length"
           :src="images[0]"
@@ -24,7 +24,7 @@
           :class="id"
           :to="deployed"
         />
-        <div class="text-caption q-pt-md project-summary" :to="repo">{{ summary }}</div>
+        <div class="text-caption project-summary" :to="repo">{{ summary }}</div>
         <ul v-if="summaryBullets.length" class="summary-bullets">
           <li v-for="item in summaryBullets" :key="item">
             {{ item }}
@@ -56,17 +56,19 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    justify-content: center;
     z-index: 2000;
+    border: 1px solid #afafaf;
+    border-right: 1px solid #646464;
+    border-radius: 16px 0px 0px 16px;
   }
 
   .wrapper {
     display: flex;
     flex-direction: column;
+    /* background-color: #ececec; */
   }
 
-  .tech-logo {
-    /* filter: var(--logo-filter, brightness(1.2)); */
+ .tech-logo {
     transition: filter 0.3s ease, opacity 0.3s ease;
     width: 1.6rem;
     height: auto;
@@ -78,31 +80,15 @@
     opacity: 1;
   }
 
-  .project-logo {
-    max-width: 20rem;
-    max-height: 6.5rem;
-    min-height: 5rem;
-    filter: var(--logo-filter, none);
-    margin-right: 1.8rem;
-  }
-
-
-
-
-
-  :deep(.project4pwc) .q-img__image {
-    margin-left: 1.5rem;
-  }
-
-
   .project-logo,
   .project-summary,
   .technology {
     /* opacity: 0.4; */
     transition: opacity 0.3s ease;
+    padding: 1rem 1rem 1rem 1rem;
   }
 
-  .summary-bullets {
+  /* .summary-bullets {
     list-style: disc;
     padding-left: 0%;
   }
@@ -117,7 +103,7 @@
     list-style-type: none;
     font-weight: 600;
     margin-left: -0.7rem;
-  }
+  } */
 
   .project-section:hover .project-logo,
   .project-section:hover .project-summary,
@@ -127,12 +113,9 @@
   }
 
   @media (max-width: 400px) {
-
     .tech-list {
-      flex-direction: row;
-      position: absolute;
-      top: -6%;
-      right: 7%;
+      padding: 10px 10px 0px 10px !important;
+      border-radius: 16px 0px 0px 16px !important;
     }
 
 
@@ -149,5 +132,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    /* border: 0px; */
   }
 </style>

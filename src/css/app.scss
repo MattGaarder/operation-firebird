@@ -11,6 +11,36 @@
   }
 }
 
+// .q-card__section--vert {
+//   padding-left: 0px;
+// }
+
+.contact-block {
+  margin-bottom: 0px;
+}
+
+
+.q-drawer .q-item.top-border,
+.q-drawer .essential-contact.contact-block.top-border,
+.q-drawer .q-card.top-border {
+  
+  margin-left: -16px !important;
+  padding-left: 32px !important; 
+  width: calc(100% + 40px) !important;
+}
+
+
+.q-drawer .q-card.top-border {
+  margin-left: -1rem !important;
+  margin-right: -24px !important;
+  width: calc(100% + 1rem + 24px) !important;
+}
+
+/* Remove ripple rounding so it fits the full-width rectangular item */
+.q-drawer .q-item.top-border .q-focus-helper {
+  border-radius: 0 !important;
+}
+
 html {
   color: var(--site-text, #fff);
 }
@@ -73,12 +103,11 @@ body.body--dark {
   margin-right: 0.5px;
 }
 
-
-
-
-.drawer {
-    padding-left: 9rem;
+.q-item__section--avatar {
+  min-width: 40px !important; /* Standard is 56px, reducing to 40px or less */
 }
+
+
 
 
 
@@ -141,6 +170,150 @@ body.body--dark {
 .project-row {
     display: flex !important;
     flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TACTILE PROJECT CARD — "Physical Object" Design System
+   ═══════════════════════════════════════════════════════════════ */
+
+/* --- 1. Physical Foundation --- */
+.project-section.q-card {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 0px !important;
+  overflow: hidden;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+
+  /* Layered soft shadow for realistic depth */
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 16px 32px rgba(0, 0, 0, 0.1),
+    0 24px 48px rgba(0, 0, 0, 0.08) !important;
+
+
+
+  /* Elastic motion physics */
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s ease !important;
+  cursor: pointer;
+}
+
+/* --- 2. Hover: "Lift" the object --- */
+.project-section.q-card:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.15),
+    0 32px 64px rgba(0, 0, 0, 0.15),
+    0 45px 90px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* --- 3. Active: "Press" the object --- */
+.project-section.q-card:active {
+  transform: translateY(-2px) scale(0.975) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.08) !important;
+  transition-duration: 0.12s !important;
+}
+
+/* --- 4. Logo Container Standardization --- */
+.project-section .project-logo.q-img {
+  height: 180px !important;
+  width: 100% !important;
+
+  border-radius: 0 20px 0 0 !important;
+
+  border: 0 !important;
+  overflow: hidden !important;
+  flex-shrink: 0;
+}
+
+.project-section .project-logo .q-img__image {
+  object-fit: cover !important;
+  border-top: 1px solid #afafaf;
+  border-right: 1px solid #dadada;
+}
+
+/* --- 5. Content Area: flex-grow alignment --- */
+.project-section .project-flex {
+  padding: 20px 24px 24px !important;
+  flex-grow: 1 !important;
+  display: flex !important;
+}
+
+/* Push summary text down, keep it flexible */
+.project-section .project-summary {
+  flex-grow: 1;
+  background-color: #263442;
+
+  border: 1px solid #afafaf;
+  border-left: 0;
+
+  border-radius: 0px 0px 20px 0px;
+}
+
+/* --- 6. Dark Mode Adaptation --- */
+.body--dark .project-section.q-card,
+.theme-dark .project-section.q-card {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    0 24px 48px rgba(0, 0, 0, 0.3) !important;
+}
+
+.body--dark .project-section.q-card:hover,
+.theme-dark .project-section.q-card:hover {
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 30px 60px rgba(0, 0, 0, 0.5),
+    0 40px 80px rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.body--dark .project-section.q-card:active,
+.theme-dark .project-section.q-card:active {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 6px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.body--dark .project-section .project-logo.q-img,
+.theme-dark .project-section .project-logo.q-img {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* --- 7. Mobile Touch Adjustments --- */
+@media (max-width: 600px) {
+  .project-section.q-card {
+    border-radius: 16px !important;
+  }
+
+  .project-section .project-logo.q-img {
+    height: 140px !important;
+  }
+
+  .project-section .project-logo .q-img__image {
+    // padding: 6px !important;
+  }
+
+  .project-section .project-flex {
+    padding: 0px 0px 0px 0px !important;
+  }
+
+  .project-section .project-logo.q-img {
+    border-radius: 0 16px 0 0 !important;
+  }
+
+  .project-section .project-summary {
+    border-radius: 0 0 16px 0 !important;
+  }
 }
 
 .my-tooltip {
@@ -221,7 +394,7 @@ body.body--dark {
 .theme-light .text-caption,
 .theme-light .text-grey-6,
 .theme-light [caption] {
-  color: #000000 !important;
+  color: #ffffff !important;
 }
 
 .q-item-label--caption {
@@ -378,7 +551,11 @@ html, body, #q-app {
   margin-right: -4px !important;
 }
 
-
+.q-item__label--header {
+  padding-left: 6px !important;
+  padding-bottom: 10px;
+  font-size: 0.9rem;
+}
 
 .project-tagline {
   padding: 1.5rem;

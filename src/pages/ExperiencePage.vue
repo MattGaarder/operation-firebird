@@ -1,9 +1,9 @@
 <template>
   <q-page padding class="experience-page">
-    <div class="text-h8 q-pa-sm q-pl-md top-border">Skills</div>
+    <div class="q-pa-sm q-pl-md top-border section-header">Skills / Interests</div>
     <SkillsSection class="bg-primary top-border"></SkillsSection>
 
-    <div class="text-h8 top-border q-pa-sm q-pl-md">Experience</div>
+    <div class="q-pa-sm q-pl-md top-border section-header">Professional Experience</div>
 
     <ExperienceSection
       v-for="entry in experiences"
@@ -20,7 +20,7 @@
         'q-pr-none': isMobile
       }"
     />
-    <div class="text-h8 top-border q-pa-sm q-pl-md">Education</div>
+    <div class="top-border q-pa-sm q-pl-md section-header">Education</div>
       <q-card flat class="q-mb-md bg-primary top-border">
         <q-card-section>
           <div class="row experience-section q-pt-lg">
@@ -176,9 +176,11 @@
 
 @media (max-width: 900px) {
   .experience-page {
-    margin-top: -182px !important;
+    margin-top: -132px !important;
   }
 }
 
-
+.section-header {
+  font-size: 0.8rem;
+}
 </style>

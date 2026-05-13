@@ -36,13 +36,13 @@
           I'm a creative technologist and former educator fluent in Japanese. I tackle complex problems with JavaScript-powered solutions and multimedia design.
         </q-card-section>
       </q-card>
-        <q-list>
-          <EssentialContact v-for="link in contactList" :key="link.title" v-bind="link" class="top-border q-pr-xl"/>
-        </q-list>
-        <q-list>
-          <q-item-label header>Links</q-item-label>
-          <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" class="top-border q-pr-xl" :to="link.link"/>
-        </q-list>
+      <q-list>
+        <EssentialContact v-for="link in contactList" :key="link.title" v-bind="link" class="top-border contact-block"/>
+      </q-list>
+      <q-list>
+        <!-- <q-item-label header class="q-pa-md">Navigation</q-item-label> -->
+        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" class="top-border" :to="link.link"/>
+      </q-list>
 
     </q-drawer>
 
@@ -254,6 +254,8 @@
 .bio {
   margin-top: 0.3rem;
   font-size: 0.86rem;
+  padding-left: 0px;
+  padding-right: 4rem;
 }
 
 
