@@ -4,9 +4,9 @@
             <div v-for="(project, idx) in projects" :key="project.id"
                 :ref="el => setCardRef(el, idx)"
                 class="col-12 col-md-6 col-lg-4 cursor-pointer project-card-wrapper"
-                :class="{ 'mobile-focused': focusedIndex === idx && isMobile }"
                 @click="openProject(project)">
-                <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]" class="bg-primary q-pt-xl" />
+                <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]"
+                    class="bg-primary q-pt-xl" :style="cardStyles[idx]" />
             </div>
         </div>
         <teleport to="body">
@@ -65,58 +65,96 @@ import MedJp from 'src/components/projects/MedJp.vue';
 const leftDrawerOpen = inject('leftDrawerOpen');
 
 // ── Mobile scroll-focus system ──────────────────────────────────
-const focusedIndex = ref(0);
 const isMobile = ref(false);
 const cardRefs = ref([]);
-let observer = null;
+const cardStyles = ref([]);
 let mql = null;
+let scrollParent = null;
+let rafId = null;
+
+// Tuning knobs
+const TRIGGER_POSITION = 0.53; // trigger line at 53% from top of viewport
+const FALLOFF_PX = 400;        // distance (px) over which proximity fades from 1→0
+const SCALE_MIN = 0.88;        // furthest-away scale
+const SCALE_MAX = 1.0;         // at-trigger scale
+const OPACITY_MIN = 0.45;      // furthest-away opacity
+const OPACITY_MAX = 1.0;       // at-trigger opacity
 
 function setCardRef(el, idx) {
   if (el) cardRefs.value[idx] = el;
 }
 
-function setupObserver() {
-  if (observer) { observer.disconnect(); observer = null; }
+// Compute a 0→1 proximity for each card based on distance to the trigger line,
+// then map that to continuous scale + opacity values.
+function updateFocus() {
+  if (!isMobile.value) { cardStyles.value = []; return; }
+
+  const triggerY = window.innerHeight * TRIGGER_POSITION;
+
+  cardStyles.value = cardRefs.value.map((el) => {
+    if (!el) return {};
+    const rect = el.getBoundingClientRect();
+    // Use the card's vertical center for a more natural feel
+    const cardCenter = rect.top + rect.height / 2;
+    const dist = Math.abs(cardCenter - triggerY);
+    // Proximity: 1 when right at trigger, fading to 0 at FALLOFF_PX away
+    const proximity = Math.max(0, 1 - dist / FALLOFF_PX);
+    // Ease the curve for a snappier near-trigger response
+    const eased = proximity * proximity * (3 - 2 * proximity); // smoothstep
+
+    const scale = SCALE_MIN + (SCALE_MAX - SCALE_MIN) * eased;
+    const opacity = OPACITY_MIN + (OPACITY_MAX - OPACITY_MIN) * eased;
+
+    return {
+      transform: `scale(${scale.toFixed(4)})`,
+      opacity: opacity.toFixed(3),
+    };
+  });
+}
+
+function onScroll() {
+  if (rafId) return; // throttle to animation frames
+  rafId = requestAnimationFrame(() => {
+    updateFocus();
+    rafId = null;
+  });
+}
+
+function setupScrollListener() {
+  teardownScrollListener();
   if (!isMobile.value) return;
 
-  // Build a dense threshold array so we get granular ratio updates
-  const thresholds = Array.from({ length: 21 }, (_, i) => i / 20);
+  // Find the scroll container (Quasar wraps content in a scrollable div)
+  scrollParent = document.querySelector('.q-page-container') || window;
+  scrollParent.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  const ratios = new Map();
+  // Initial check
+  updateFocus();
+}
 
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(e => ratios.set(e.target, e.intersectionRatio));
-
-      // Find the card with the highest visibility ratio
-      let bestIdx = 0;
-      let bestRatio = 0;
-      cardRefs.value.forEach((el, idx) => {
-        const r = ratios.get(el) || 0;
-        if (r > bestRatio) { bestRatio = r; bestIdx = idx; }
-      });
-      focusedIndex.value = bestIdx;
-    },
-    { threshold: thresholds }
-  );
-
-  cardRefs.value.forEach(el => { if (el) observer.observe(el); });
+function teardownScrollListener() {
+  if (scrollParent && scrollParent !== window) {
+    scrollParent.removeEventListener('scroll', onScroll);
+  }
+  window.removeEventListener('scroll', onScroll);
+  if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
 }
 
 function onMediaChange(e) {
   isMobile.value = e.matches;
-  nextTick(() => setupObserver());
+  nextTick(() => setupScrollListener());
 }
 
 onMounted(() => {
   mql = window.matchMedia('(max-width: 600px)');
   isMobile.value = mql.matches;
   mql.addEventListener('change', onMediaChange);
-  nextTick(() => setupObserver());
+  nextTick(() => setupScrollListener());
 });
 
 onUnmounted(() => {
-  if (observer) observer.disconnect();
+  teardownScrollListener();
   if (mql) mql.removeEventListener('change', onMediaChange);
 });
 const isDark = inject('isDark');
@@ -450,32 +488,20 @@ const projects = [
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MOBILE SCROLL-FOCUS — Scale cards based on viewport proximity
+   MOBILE SCROLL-FOCUS — Continuous proximity-based scaling
+   Scale + opacity are set as inline styles by JS; CSS just
+   handles the transition easing and active press state.
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  /* Transform the INNER card, not the observed wrapper,
-     so the wrapper's bounding box never changes and the
-     IntersectionObserver can't enter a feedback loop. */
   .project-card-wrapper :deep(.project-section.q-card) {
     transition:
-      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-      opacity 0.4s ease !important;
+      transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity 0.25s ease !important;
     transform-origin: center center;
+    will-change: transform, opacity;
   }
 
-  /* Unfocused (resting) state — slightly smaller & dimmed */
-  .project-card-wrapper:not(.mobile-focused) :deep(.project-section.q-card) {
-    transform: scale(0.92);
-    opacity: 0.65;
-  }
-
-  /* Focused state — full size */
-  .project-card-wrapper.mobile-focused :deep(.project-section.q-card) {
-    transform: scale(1.0);
-    opacity: 1;
-  }
-
-  /* Disable desktop hover lift on mobile (scroll-focus replaces it) */
+  /* Disable desktop hover lift on mobile */
   .project-card-wrapper :deep(.project-section.q-card:hover) {
     transform: none !important;
   }
