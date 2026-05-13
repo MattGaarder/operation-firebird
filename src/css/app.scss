@@ -233,10 +233,58 @@ body.body--dark {
   flex-shrink: 0;
 }
 
-.project-section .project-logo .q-img__image {
-  object-fit: cover !important;
-  border-top: 1px solid #afafaf;
-  border-right: 1px solid #dadada;
+// .project-section .project-logo .q-img__image__container {
+
+//   border-top: 1px solid #afafaf;
+//   border-right: 1px solid #dadada;
+// }
+
+.project-section .project-logo .q-img__container {
+  /* 
+     inset [x-offset] [y-offset] [blur] [spread] [color]
+  */
+  box-shadow: 
+    inset 0 1px 0 0 #afafaf,  /* Top "border" */
+    inset -1px 0 0 0 #dadada; /* Right "border" */
+}
+
+/* --- Per-Project Logo Position Overrides --- */
+.project-section .med-jp .q-img__image {
+  object-fit: contain !important;
+  transform: translate(5px, 2px) scale(1.5);
+}
+
+.project-section .postwork .q-img__image {
+  object-fit: contain !important;
+  transform: translate(12px, 2px) scale(1.2);
+}
+
+.project-section .pwc .q-img__image {
+  object-fit: contain !important;
+  transform: translate(0px, -22px) scale(1.3);
+}
+
+.project-section .edx .q-img__image {
+    object-position: 40% 60% !important; 
+}
+
+.project-section .nocado .q-img__image {
+  object-fit: contain !important;
+  transform: translate(0px, 0px) scale(0.9);
+}
+
+.project-section .ankipi .q-img__image {
+  object-fit: contain !important;
+  transform: translate(0px, 5px) scale(0.95);
+}
+
+.project-section .onafa .q-img__image {
+  object-fit: contain !important;
+  transform: translate(0px, -5px) scale(1.05);
+}
+
+.project-section .portfolio .q-img__image {
+    object-position: 40% 60% !important; 
 }
 
 /* --- 5. Content Area: flex-grow alignment --- */
@@ -249,7 +297,8 @@ body.body--dark {
 /* Push summary text down, keep it flexible */
 .project-section .project-summary {
   flex-grow: 1;
-  background-color: #263442;
+  background-color: #E8E8E8;
+  color: #000000 !important;
 
   border: 1px solid #afafaf;
   border-left: 0;
@@ -379,7 +428,7 @@ body.body--dark {
 .theme-dark .text-caption,
 .theme-dark .text-grey-6,
 .theme-dark [caption] {
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 
 .theme-light .bg-primary {
@@ -394,7 +443,7 @@ body.body--dark {
 .theme-light .text-caption,
 .theme-light .text-grey-6,
 .theme-light [caption] {
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 
 .q-item-label--caption {

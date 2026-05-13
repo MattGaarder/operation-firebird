@@ -1,7 +1,10 @@
 <template>
     <q-page padding class="projects-page">
         <div class="row project-row bg-primary" :class="{ 'three-col': !leftDrawerOpen }">
-            <div v-for="project in projects" :key="project.id" class="col-12 col-md-6 col-lg-4 cursor-pointer"
+            <div v-for="(project, idx) in projects" :key="project.id"
+                :ref="el => setCardRef(el, idx)"
+                class="col-12 col-md-6 col-lg-4 cursor-pointer project-card-wrapper"
+                :class="{ 'mobile-focused': focusedIndex === idx && isMobile }"
                 @click="openProject(project)">
                 <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]" class="bg-primary q-pt-xl" />
             </div>
@@ -41,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref, markRaw, inject, computed } from 'vue';
+import { ref, markRaw, inject, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import { useQuasar } from 'quasar';
 
 import DraggableResizableVue from 'draggable-resizable-vue3';
@@ -60,6 +63,62 @@ import ProjectAnkify from 'src/components/projects/ProjectAnkify.vue';
 import MedJp from 'src/components/projects/MedJp.vue';
 
 const leftDrawerOpen = inject('leftDrawerOpen');
+
+// ── Mobile scroll-focus system ──────────────────────────────────
+const focusedIndex = ref(0);
+const isMobile = ref(false);
+const cardRefs = ref([]);
+let observer = null;
+let mql = null;
+
+function setCardRef(el, idx) {
+  if (el) cardRefs.value[idx] = el;
+}
+
+function setupObserver() {
+  if (observer) { observer.disconnect(); observer = null; }
+  if (!isMobile.value) return;
+
+  // Build a dense threshold array so we get granular ratio updates
+  const thresholds = Array.from({ length: 21 }, (_, i) => i / 20);
+
+  const ratios = new Map();
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => ratios.set(e.target, e.intersectionRatio));
+
+      // Find the card with the highest visibility ratio
+      let bestIdx = 0;
+      let bestRatio = 0;
+      cardRefs.value.forEach((el, idx) => {
+        const r = ratios.get(el) || 0;
+        if (r > bestRatio) { bestRatio = r; bestIdx = idx; }
+      });
+      focusedIndex.value = bestIdx;
+    },
+    { threshold: thresholds }
+  );
+
+  cardRefs.value.forEach(el => { if (el) observer.observe(el); });
+}
+
+function onMediaChange(e) {
+  isMobile.value = e.matches;
+  nextTick(() => setupObserver());
+}
+
+onMounted(() => {
+  mql = window.matchMedia('(max-width: 600px)');
+  isMobile.value = mql.matches;
+  mql.addEventListener('change', onMediaChange);
+  nextTick(() => setupObserver());
+});
+
+onUnmounted(() => {
+  if (observer) observer.disconnect();
+  if (mql) mql.removeEventListener('change', onMediaChange);
+});
 const isDark = inject('isDark');
 
 const $q = useQuasar();
@@ -158,7 +217,7 @@ const projects = [
         component: markRaw(MedJp),
     },
     {
-        id: 'project8journal',
+        id: 'postwork',
         title: 'Postwork',
         logo: {
             light: 'postwork-light_1',
@@ -174,18 +233,18 @@ const projects = [
         summary: 'Hands-on coding across varied technical domains to create high-quality datasets used in the training of frontier AI systems.',
 
         technology: [
+          { name: 'Postman', logo: loadTechLogo('postman-icon-svgrepo-com.svg') },
             { name: 'JavaScript', logo: loadTechLogo('javascript-logo-svgrepo-com.svg') },
             { name: 'HTML', logo: loadTechLogo('html-5-logo-svgrepo-com.svg') },
             { name: 'CSS', logo: loadTechLogo('Official_CSS_Logo.svg') },
             // { name: 'OpenWeatherAPI', logo: loadTechLogo('openweather-logo.svg') },
             // { name: 'Momentjs', logo: loadTechLogo('momentjs-svgrepo-com.svg') },
-            { name: 'Postman', logo: loadTechLogo('postman-icon-svgrepo-com.svg') },
 
         ],
         component: markRaw(CodeJournal),
     },
     {
-        id: 'project4pwc',
+        id: 'pwc',
         title: 'PwC',
         logo: {
             light: 'PricewaterhouseCoopers_Logo',
@@ -209,7 +268,7 @@ const projects = [
         component: markRaw(PwCProjects),
     },
     {
-        id: 'project6teamb',
+        id: 'edx',
         title: 'edX Trinity Skills',
         images: [
             loadProjectLogo('edx-1'),
@@ -234,7 +293,7 @@ const projects = [
         component: markRaw(TeamBuilder),
     },
     {
-        id: 'project12nocado',
+        id: 'nocado',
         title: 'Nocado',
         logo: {
             light: 'ncado-light_1',
@@ -256,7 +315,7 @@ const projects = [
         component: markRaw(ProjectNocado),
     },
     {
-        id: 'project-jsanki-toolbar',
+        id: 'ankipi',
         title: 'Ankipi',
         images: [
             loadProjectLogo('ankipi_nobndr'),
@@ -273,7 +332,7 @@ const projects = [
         component: markRaw(ProjectAnkify),
     },
     {
-        id: 'project5onafa',
+        id: 'onafa',
         title: 'Onafã',
         logo: {
             light: 'onafa-light_1',
@@ -294,7 +353,7 @@ const projects = [
         component: markRaw(ProjectOnafa),
     },
     {
-        id: 'project7',
+        id: 'portfolio',
         title: 'this.portfolio',
         images: [
             loadProjectLogo('this_portfolio'),
@@ -340,9 +399,7 @@ const projects = [
     padding: 0px !important;
 }
 
-.project-row {
-  gap: 5px;
-}
+
 
 @media (min-width: 600px) and (max-width: 1550px) {
     .project-row>.col-lg-4 {
@@ -389,6 +446,39 @@ const projects = [
 @media (max-width: 900px) {
   .projects-page {
     margin-top: -144px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE SCROLL-FOCUS — Scale cards based on viewport proximity
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .project-card-wrapper {
+    transition:
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.4s ease !important;
+    transform-origin: center center;
+  }
+
+  /* Unfocused (resting) state — slightly smaller & dimmed */
+  .project-card-wrapper:not(.mobile-focused) {
+    transform: scale(0.92);
+    opacity: 0.65;
+  }
+
+  /* Focused state — full size with a subtle lift */
+  .project-card-wrapper.mobile-focused {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+
+  /* Disable desktop hover/active transforms on mobile */
+  .project-card-wrapper :deep(.project-section.q-card:hover) {
+    transform: none !important;
+  }
+  .project-card-wrapper :deep(.project-section.q-card:active) {
+    transform: scale(0.97) !important;
+    transition-duration: 0.12s !important;
   }
 }
 
