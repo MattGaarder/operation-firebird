@@ -181,6 +181,7 @@ body.body--dark {
   background: #ffffff !important;
   border-radius: 20px !important;
   padding: 0px !important;
+
   overflow: hidden;
   height: 100% !important;
   display: flex !important;
@@ -188,7 +189,7 @@ body.body--dark {
 
   /* Layered soft shadow for realistic depth */
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.1),
+    0px 4px 8px rgba(0, 0, 0, 0.1),
     0 16px 32px rgba(0, 0, 0, 0.1),
     0 24px 48px rgba(0, 0, 0, 0.08) !important;
 
@@ -226,9 +227,6 @@ body.body--dark {
   height: 180px !important;
   width: 100% !important;
 
-  border-radius: 0 20px 0 0 !important;
-
-  border: 0 !important;
   overflow: hidden !important;
   flex-shrink: 0;
 }
@@ -240,12 +238,7 @@ body.body--dark {
 // }
 
 .project-section .project-logo .q-img__container {
-  /* 
-     inset [x-offset] [y-offset] [blur] [spread] [color]
-  */
-  box-shadow: 
-    inset 0 1px 0 0 #afafaf,  /* Top "border" */
-    inset -1px 0 0 0 #dadada; /* Right "border" */
+  border-radius: 20px 0 0 0 !important;
 }
 
 /* --- Per-Project Logo Position Overrides --- */
@@ -284,7 +277,8 @@ body.body--dark {
 }
 
 .project-section .portfolio .q-img__image {
-    object-position: 40% 60% !important; 
+  object-fit: contain !important;
+  transform: translate(0px,0px) scale(1.03);
 }
 
 /* --- 5. Content Area: flex-grow alignment --- */
@@ -297,13 +291,8 @@ body.body--dark {
 /* Push summary text down, keep it flexible */
 .project-section .project-summary {
   flex-grow: 1;
-  background-color: #E8E8E8;
+  background-color: #ffffff;
   color: #000000 !important;
-
-  border: 1px solid #afafaf;
-  border-left: 0;
-
-  border-radius: 0px 0px 20px 0px;
 }
 
 /* --- 6. Dark Mode Adaptation --- */
@@ -525,19 +514,6 @@ html, body, #q-app {
   background-color: var(--project-wrapper-bg, transparent);
 }
 
-.project-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 6px;
-  background: var(--project-card-bg);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  border-color: var(--project-border);
-  padding: 8px !important; 
-  margin: 8px !important;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
 .code-journal-icon {
   font-size: 1.9rem;
   font-weight: 900;
@@ -575,29 +551,38 @@ html, body, #q-app {
 }
 
 .window-handle-footer {
-
-
   gap: 0px;
 }
+
+.on-left {
+  margin-right: 4.5px;
+}
+
+.github-btn {
+  margin: -5px;
+}
+
+.launch-btn {
+  margin: -5px;
+}
+
+
 
 /* Standardize buttons in both handles */
 .window-handle .q-btn {
   height: 24px;
   min-height: 24px;
   font-size: 0.7rem;
-
+  padding: 0 3px;
 }
 
 .window-handle-header .q-btn:last-child {
-  margin-right: 4px !important;
+  margin-right: 0px !important;
 }
 
-.window-handle-footer .q-btn:last-child {
-  margin-right: -9px !important;
-}
-
-.window-handle-footer .q-btn:first-child {
-  margin-right: -4px !important;
+.window-handle-footer {
+  padding: 0 4px;
+  gap: 0px;
 }
 
 .q-item__label--header {
@@ -814,24 +799,17 @@ pre[class*="language-"] {
     display: none !important;
   }
 
-  /* 1. Push the button group to the right */
-  .window-handle .q-btn:first-of-type {
+  /* Push the button group to the right and add spacing */
+  .window-handle {
+    gap: 4px !important;
+  }
+
+  .window-handle .q-btn:first-child {
     margin-left: auto !important;
   }
 
-  /* 2. Tighten the space between the buttons on mobile */
   .window-handle .q-btn {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
-
-  .window-handle .q-btn:first-of-type {
-    padding-right: 0px !important;
-  }
-
-  .window-handle .q-btn:last-of-type {
-    padding-left: 0px !important;
-
+    padding: 0 4px !important;
   }
 
   /* Larger, more pronounced draggable handles for mobile touch targets */
@@ -946,6 +924,18 @@ pre[class*="language-"] {
 }
 
 /* Specific Dark Mode Color Palette Overrides */
+/* Seamless, Square, and Borderless Project Cards */
+html body .project-card-wrapper,
+html body .project-card-wrapper *,
+html body .project-card-wrapper .q-card,
+html body .project-card-wrapper .q-img,
+html body .project-card-wrapper .tech-list,
+html body .project-card-wrapper .project-summary {
+  border-radius: 0px !important;
+  border: none !important;
+}
+
+/* Specific Dark Mode Color Palette Overrides */
 .theme-dark {
   .window-card {
     background-color: #252525 !important;
@@ -969,11 +959,6 @@ pre[class*="language-"] {
     border-top: 1px solid #707070 !important;
   }
 
-  .project-card {
-    background-color: #121212 !important;
-    border-color: #707070 !important;
-  }
-
   .project-header {
     background-color: #263442 !important;
   }
@@ -993,8 +978,4 @@ pre[class*="language-"] {
   .q-expansion-item .q-item[aria-expanded="true"] {
     background-color: #263442 !important;
   }
-
-
-
-  
 }

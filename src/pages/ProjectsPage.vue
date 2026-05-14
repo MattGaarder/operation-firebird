@@ -6,17 +6,18 @@
                 class="col-12 col-md-6 col-lg-4 cursor-pointer project-card-wrapper"
                 @click="openProject(project)">
                 <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]"
+                    :technology="getProjectTechnologies(project)"
                     class="bg-primary q-pt-xl" :style="cardStyles[idx]" />
             </div>
-            <q-btn
-              v-back-to-top.animate="{offset: 500, duration: 200}"
+            <!-- <q-btn
+              v-back-to-top.animate="{offset: 300, duration: 200}"
               round
               color="primary"
-              class="fixed-bottom-right animate-pop"
+              class="fixed-bottom-center animate-pop"
               style="margin: 0 15px 15px 0"
             >
               <q-icon name="keyboard_arrow_up" />
-            </q-btn>
+            </q-btn> -->
         </div>
         <teleport to="body">
             <div class="windows-layer" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }">
@@ -30,7 +31,7 @@
                             class="window-handle window-handle-header bg-primary row items-center text-white q-pa-none">
                             <div class="col project-title-window">{{ win.project.title }}</div>
                             <q-space />
-                            <q-btn flat icon="close" @click="closeWindow(i)" />
+                            <q-btn flat class="close-btn" icon="close" @click="closeWindow(i)" />
                         </q-card-section>
                         <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 60px)">
                             <!-- <p>{{ win.project.summary }}</p> <br /> -->
@@ -40,9 +41,9 @@
                             </div>
                         </q-card-section>
                         <div class="row window-handle window-handle-footer">
-                            <q-btn flat icon="code" label="GitHub" :disable="!win.project.repo[0]"
+                            <q-btn flat class="github-btn" icon="code" label="GitHub" :disable="!win.project.repo[0]"
                                 :href="win.project.repo[1]" target="_blank"/>
-                            <q-btn flat icon="launch" label="Live" :disable="!win.project.deployed[0]"
+                            <q-btn flat class="launch-btn" icon="launch" label="Live" :disable="!win.project.deployed[0]"
                                 :href="win.project.deployed[1]" target="_blank" />
                         </div>
                     </q-card>
@@ -53,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, markRaw, inject, computed, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, markRaw, inject, onMounted, onUnmounted, nextTick } from 'vue';
 import { useQuasar } from 'quasar';
 
 import DraggableResizableVue from 'draggable-resizable-vue3';
@@ -82,10 +83,10 @@ let scrollParent = null;
 let rafId = null;
 
 // Tuning knobs
-const TRIGGER_POSITION = 0.53; // trigger line at 53% from top of viewport
-const FALLOFF_PX = 400;        // distance (px) over which proximity fades from 1→0
-const SCALE_MIN = 0.88;        // furthest-away scale
-const SCALE_MAX = 1.0;         // at-trigger scale
+const TRIGGER_POSITION = 0.45; // trigger line at 53% from top of viewport
+const FALLOFF_PX = 200;        // distance (px) over which proximity fades from 1→0
+const SCALE_MIN = 0.7;        // furthest-away scale
+const SCALE_MAX = 1;         // at-trigger scale
 const OPACITY_MIN = 0.45;      // furthest-away opacity
 const OPACITY_MAX = 1.0;       // at-trigger opacity
 
@@ -169,7 +170,7 @@ onUnmounted(() => {
 const isDark = inject('isDark');
 
 const $q = useQuasar();
-const portfolioFilter = computed(() => isDark.value ? 'none' : 'invert(1)');
+// const portfolioFilter = computed(() => isDark.value ? 'none' : 'invert(1)');
 const windows = ref([]);
 
 let topZ = 2001;
@@ -240,6 +241,15 @@ function getProjectLogo(project) {
     const logoName = isDark.value ? project.logo.dark : project.logo.light
     return loadProjectLogo(logoName)
 }
+function getProjectTechnologies(project) {
+    return project.technology.map(tech => {
+        if (tech.logo && typeof tech.logo === 'object') {
+            const logoName = isDark.value ? tech.logo.dark : tech.logo.light
+            return { ...tech, logo: loadTechLogo(logoName) }
+        }
+        return tech
+    })
+}
 const projects = [
   {
         id: 'med-jp',
@@ -254,10 +264,10 @@ const projects = [
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif',
         ],
         deployed: [false, 'https://code-journal.netlify.app'],
-        repo: 'https://github.com/MattGaarder/med-jp-logo-dark',
+        repo: [true, 'https://github.com/MattGaarder/med-jp-logo-dark'],
         summary: 'Japanese NLP pipeline combines fuzzy matching, deinflection, beam-search segmentation, RAG semantic reranking to normalize noisy romaji input into coherent Japanese token streams.',
         technology: [
-            { name: 'Ollama', logo: loadTechLogo('ollama.svg') },
+            { name: 'Ollama', logo: { light: 'ollama.svg', dark: 'ollama_dark.svg' } },
             { name: 'Qwen 3', logo: loadTechLogo('qwen-color.svg') },
             { name: 'SQLite', logo: loadTechLogo('sqlite-icon.svg') },
         ],
@@ -276,7 +286,7 @@ const projects = [
             'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBmNmVjODI4NmM1NDgzYThjYjgyZDgxMmNlYTAzNThkYzBhZDAxZiZjdD1n/wZSaxEBZAxF1K5yrxy/giphy.gif',
         ],
         deployed: [true, 'https://code-journal.netlify.app'],
-        repo: 'https://github.com/MattGaarder/postwork-journal',
+        repo: [true, 'https://github.com/MattGaarder/postwork-journal'],
         summary: 'Hands-on coding across varied technical domains to create high-quality datasets used in the training of frontier AI systems.',
 
         technology: [
@@ -402,12 +412,16 @@ const projects = [
     {
         id: 'portfolio',
         title: 'this.portfolio',
+        logo: {
+            light: 'thisportfolio_light',
+            dark: 'thisportfolio_dark',
+        },
         images: [
-            loadProjectLogo('this_portfolio'),
+            // loadProjectLogo('this_portfolio'),
             'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGM3MDVmYTRiZDkyMDM4YmQ5OWQzNWUzMWY1NzA5MmRjYjA2Yjg5ZSZjdD1n/HbVX9TkQKmc0mOLV4C/giphy.gif'
         ],
         deployed: [true, 'https://gaarder.netlify.app/#/'],
-        repo: 'https://github.com/MattGaarder/operation-firebird',
+        repo: [true, 'https://github.com/MattGaarder/operation-firebird'],
         summary: 'Vue3/Quasar portfolio with dynamic theme switching, Masonry illustration gallery, responsive layout, smart internal/external link handling, CV download, and interactive contact integration. Thanks for checking it out!',
         technology: [
             { name: 'Quasar', logo: loadTechLogo('Quasar.svg') },
@@ -419,9 +433,9 @@ const projects = [
 </script>
 
 <style scoped>
-:deep(.project7) {
+/* :deep(.project7) {
     filter: v-bind(portfolioFilter);
-}
+} */
 
 .window-card {
     width: 100%;
@@ -508,6 +522,8 @@ const projects = [
       opacity 0.25s ease !important;
     transform-origin: center center;
     will-change: transform, opacity;
+    border-radius: 0 20px 0 0 !important;
+
   }
 
   /* Disable desktop hover lift on mobile */

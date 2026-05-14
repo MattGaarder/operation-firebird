@@ -57,9 +57,6 @@
     flex-direction: column;
     gap: 0.5rem;
     z-index: 2000;
-    border: 1px solid #afafaf;
-    border-right: 1px solid #646464;
-    border-radius: 16px 0px 0px 16px;
   }
 
   .wrapper {
@@ -70,7 +67,7 @@
 
  .tech-logo {
     transition: filter 0.3s ease, opacity 0.3s ease;
-    width: 1.6rem;
+    width: 1.5rem;
     height: auto;
     object-fit: fill;
   }
@@ -114,15 +111,11 @@
 
   @media (max-width: 400px) {
     .tech-list {
-      padding: 10px 10px 0px 10px !important;
-      border-radius: 16px 0px 0px 16px !important;
+      padding: 7px 5px 0px 5px !important;
     }
 
-
-
-
     .summary-bullets li {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
 
 
     }
@@ -132,6 +125,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* border: 0px; */
+    
   }
 </style>
