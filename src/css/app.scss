@@ -138,6 +138,7 @@ body.body--dark {
     margin-top: 0.2rem;
     font-size: 0.92rem;
     line-height: 1.2rem;
+    padding-left: 8px;
 }
 
 .bullet {
@@ -395,6 +396,10 @@ body.body--dark {
   color: #ffffff !important;
 }
 
+.theme-dark .project-section .project-summary {
+  color: #000000 !important;
+}
+
 .theme-light .q-drawer,
 .theme-light .q-drawer__content,
 .theme-light .q-card,
@@ -417,7 +422,7 @@ body.body--dark {
 .theme-dark .text-caption,
 .theme-dark .text-grey-6,
 .theme-dark [caption] {
-  color: #000000 !important;
+  color: #ffffff !important;
 }
 
 .theme-light .bg-primary {
@@ -750,6 +755,10 @@ pre[class*="language-"] {
   .project-card {
     padding: 8px !important;
     margin: 4px !important;
+  }
+
+  .link-title {
+    font-size: 0.9rem !important;
   }
 
   .project-body {

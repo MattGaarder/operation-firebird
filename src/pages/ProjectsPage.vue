@@ -18,7 +18,8 @@
             >
               <q-icon name="keyboard_arrow_up" />
             </q-btn> -->
-        </div>
+          </div>
+          <div class="page-padding" style="height: 200px;"></div>
         <teleport to="body">
             <div class="windows-layer" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }">
                 <draggable-resizable-vue v-for="(win, i) in windows" :key="win.uid" v-model:x="win.x" v-model:y="win.y"
@@ -265,7 +266,7 @@ const projects = [
         ],
         deployed: [false, 'https://code-journal.netlify.app'],
         repo: [true, 'https://github.com/MattGaarder/med-jp-logo-dark'],
-        summary: 'Japanese NLP pipeline combines fuzzy matching, deinflection, beam-search segmentation, RAG semantic reranking to normalize noisy romaji input into coherent Japanese token streams.',
+        summary: 'Custom Japanese <b>NLP</b> engine for typo-tolerant language interpretation. Uses <b>RAG</b> semantic reranking, IME-style normalization, and grammatical reasoning.',
         technology: [
             { name: 'Ollama', logo: { light: 'ollama.svg', dark: 'ollama_dark.svg' } },
             { name: 'Qwen 3', logo: loadTechLogo('qwen-color.svg') },
@@ -287,7 +288,7 @@ const projects = [
         ],
         deployed: [true, 'https://code-journal.netlify.app'],
         repo: [true, 'https://github.com/MattGaarder/postwork-journal'],
-        summary: 'Hands-on coding across varied technical domains to create high-quality datasets used in the training of frontier AI systems.',
+        summary: 'Coding projects across varied technical domains used in the training of frontier AI systems. <b>Node.js</b> CLI tools, text-parsing, <b>API</b> integrations.',
 
         technology: [
           { name: 'Postman', logo: loadTechLogo('postman-icon-svgrepo-com.svg') },
@@ -313,7 +314,7 @@ const projects = [
         ],
         deployed: [false],
         repo: [false],
-        summary: 'PwC projects include custom Storyline functionality with JavaScript triggers, VBA with Excel for data analysis, and Apps Script automations to streamline repetitive tasks.',
+        summary: 'Custom <b>Storyline</b> functionality with <b>JavaScript</b> triggers, <b>VBA</b> and <b>Alteryx</b> for data analysis, <b>Google Apps Script</b> and <b>Power Automate</b> for workflow automation.',
         technology: [
             { name: 'GoogleAppsScript', logo: loadTechLogo('Google_AppsScript.svg') },
             { name: 'ArticulateStoryline', logo: loadTechLogo('Articulate.svg') },
@@ -334,7 +335,7 @@ const projects = [
         ],
         deployed: [false],
         repo: [true, 'https://github.com/MattGaarder/team-profile-generator'],
-        summary: "Trinity Skills Bootcamp in Web Development — 16-week online bootcamp covering key front-end technologies and modern web-development practices.",
+        summary: "Vibely, social media App where you can Vibe, or not. Movie-match, compare options side-by-side, and save to persistent watch or seen lists. ",
 
         technology: [
             { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg') },
@@ -362,7 +363,7 @@ const projects = [
         ],
         deployed: [false, 'https://github.com/MattGaarder/team-profile-generator'],
         repo: [true, 'https://github.com/MattGaarder/ocado-helper-frontend'],
-        summary: 'Upload your Ocado receipt — "sync" and all purchased items are arranged into “Fridge, Cupboard & Freezer” sections in your Notion database for all your shopping-listing needs.',
+        summary: 'Upload your shopping receipt pdf, "sync" and groceries are arranged into “Fridge, Cupboard & Freezer” sections in your <b>Notion databases</b> for your shopping-list needs.',
         technology: [
 
             { name: 'MongoDB', logo: loadTechLogo('mongodb-svgrepo-com.svg') },
@@ -380,7 +381,7 @@ const projects = [
         ],
         deployed: [false, 'https://github.com/MattGaarder/jsanki-toolbar'],
         repo: [true, 'https://github.com/MattGaarder/ankify'],
-        summary: 'Electron toolbar app: paste Japanese text, extract kanji plus readings/meanings and instantly add them to your Anki deck on click. Zero friction between reading and flashcard creation.',
+        summary: '<b>Electron</b> toolbar app, paste Japanese text, extract kanji plus readings/meanings and instantly add them to your Anki deck on click. Zero friction between reading and flashcard creation.',
         technology: [
             { name: 'Electron', logo: loadTechLogo('Electron.svg') },
             { name: 'Vue3', logo: loadTechLogo('Vue.js_Logo_2.svg') },
@@ -401,7 +402,7 @@ const projects = [
         ],
         deployed: [false, 'https://mattgaarder.github.io/password-generator/'],
         repo: [false, 'https://github.com/MattGaarder/password-generator'],
-        summary: 'View my design iteration process — assets created with Adobe software — plus dynamic, parallax-scroll transforms, infinite scrolling galleries, and more.',
+        summary: 'View my design iteration process — assets created with <b>Adobe software</b> — plus dynamic, parallax-scroll transforms, infinite scrolling galleries, and more.',
         technology: [
             { name: 'Premiere', logo: loadTechLogo('Adobe_Premiere_Pro.svg') },
             { name: 'Illustrator', logo: loadTechLogo('Adobe_Illustrator.svg') },
@@ -422,7 +423,7 @@ const projects = [
         ],
         deployed: [true, 'https://gaarder.netlify.app/#/'],
         repo: [true, 'https://github.com/MattGaarder/operation-firebird'],
-        summary: 'Vue3/Quasar portfolio with dynamic theme switching, Masonry illustration gallery, responsive layout, smart internal/external link handling, CV download, and interactive contact integration. Thanks for checking it out!',
+        summary: 'A <b>Vue.js 3</b> and <b>Quasar</b> portfolio, theme switching, Masonry gallery, responsive layout. Thanks for checking me out!',
         technology: [
             { name: 'Quasar', logo: loadTechLogo('Quasar.svg') },
             { name: 'Prism', logo: loadTechLogo('prism.svg') },

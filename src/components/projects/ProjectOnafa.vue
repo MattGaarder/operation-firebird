@@ -11,23 +11,23 @@
       <q-card-section class="project-header">
         <q-icon name="restaurant" class="project-icon" />
         <div class="project-info">
-          <div class="project-title">ONAFÃ</div>
+          <div class="project-title">Onafã</div>
         </div>
       </q-card-section>
       <q-separator class="separator" />
 
       <!-- Tagline -->
       <div class="project-tagline">
+        <em>
+          Layered parallax, infinite gallery tracks, and a modal “menu” gallery — a pure JavaScript restaurant landing
+          page that feels like a motion design piece, powered only by DOM APIs, scroll events and transforms.
+        </em>
+        <q-separator class="separator invisi" />
         This is a vanilla JavaScript frontend implementing layered parallax scrolling, looping image carousels,
         and a paginated modal gallery. On scroll it shifts hero, main, and background elements at different rates
         for depth, triggers a splash animation past a threshold, and continuously animates three duplicated gallery
         tracks for infinite horizontal scroll using <code>requestAnimationFrame</code>. A modal toggles visibility with
         next/prev controls showing two gallery items per page. No frameworks—just DOM APIs and event listeners.
-        <q-separator class="separator invisi" />
-        <em>
-          Layered parallax, infinite gallery tracks, and a modal “menu” gallery — a pure JavaScript restaurant landing
-          page that feels like a motion design piece, powered only by DOM APIs, scroll events and transforms.
-        </em>
       </div>
 
       <!-- Code Snippets (expandable) -->
@@ -202,7 +202,7 @@ const slide = ref(1);
 
 .c-carousel {
   padding: 0;
-  
+
 }
 
 

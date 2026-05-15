@@ -24,7 +24,7 @@
           :class="id"
           :to="deployed"
         />
-        <div class="text-caption project-summary" :to="repo">{{ summary }}</div>
+        <div class="text-caption project-summary" :to="repo" v-html="summary"></div>
         <ul v-if="summaryBullets.length" class="summary-bullets">
           <li v-for="item in summaryBullets" :key="item">
             {{ item }}

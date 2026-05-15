@@ -29,10 +29,7 @@
                 The University of Manchester
               </div>
               <div class="text-h7">
-                BA Japanese and Screen Studies
-              </div>
-              <div class="text-caption text-grey-6">
-                2011 – 2015
+                BA Japanese and Screen Studies | 2011-2015
               </div>
             </div>
             <div class="col-12 col-md-9 col-lg-8">
@@ -56,10 +53,7 @@
                 EDX Trinity Skills Bootcamp
               </div>
               <div class="text-h7">
-                Front-End Web Dev Bootcamp
-              </div>
-              <div class="text-caption text-grey-6">
-                2023
+                Front-End Web Dev Bootcamp | 2023
               </div>
             </div>
             <div class="col-12 col-md-9 col-lg-8">
