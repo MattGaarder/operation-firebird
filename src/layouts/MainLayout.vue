@@ -33,7 +33,7 @@
     >
       <q-card bordered="false" flat square class="bg-primary text-weight-bold q-pa-xs top-border">
         <q-card-section  class="bio">
-          I'm a creative technologist and former educator fluent in Japanese. I tackle complex problems with JavaScript-powered solutions and multimedia design.
+          <SemanticStream :chunks="bioChunks" :delay="300" />
         </q-card-section>
       </q-card>
       <q-list>
@@ -64,6 +64,45 @@
 
   import EssentialLink from 'components/EssentialLink.vue';
   import EssentialContact from 'src/components/EssentialContact.vue';
+  import SemanticStream from 'src/components/SemanticStream.vue';
+
+  const bioChunks = [
+    {
+      stable: "I'm a ",
+      candidates: [],
+      duration: 100
+    },
+    {
+      stable: "creative technologist",
+      candidates: ["design engineer", "creative systems builder", "creative technology"],
+      duration: 1000
+    },
+    {
+      stable: " and former educator",
+      candidates: [" and teaching background", " and instructional background", " and educator"],
+      duration: 800
+    },
+    {
+      stable: " fluent in Japanese.",
+      candidates: [" with language skills.", " with Japanese skills."],
+      duration: 900
+    },
+    {
+      stable: " I tackle complex problems",
+      candidates: [" I build things", " I solve problems", " I tackle problems"],
+      duration: 1100
+    },
+    {
+      stable: " with JavaScript-powered solutions",
+      candidates: [" with code", " with web tech", " with JavaScript", " with JavaScript systems"],
+      duration: 1200
+    },
+    {
+      stable: " and multimedia design.",
+      candidates: [" and design.", " and media design."],
+      duration: 900
+    }
+  ];
 
   const $q = useQuasar();
   const router = useRouter();
