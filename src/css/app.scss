@@ -822,11 +822,12 @@ pre[class*="language-"] {
   }
 
   /* Larger, more pronounced draggable handles for mobile touch targets */
-  .drv {
-    --d04bd352-handlesSize: 18px !important;
-    --d04bd352-handlesHalfSize: 18px !important;
-    --d04bd352-handlesBorder: 1.2px solid #707070 !important;
-
+  .drv-handles .drv-handle {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+    border: 1.2px solid #707070 !important;
   }
 }
 
@@ -855,20 +856,11 @@ pre[class*="language-"] {
 }
 
 .drv-handle {
-  /* 1. Ensure it's above the window content and shadow */
   z-index: 999; 
-  
-  /* 2. Add the box shadow */
-  /* Use a dark, high-opacity shadow for testing */
-
-  
-  /* Ensure it's not being clipped by anything */
   overflow: visible !important;
-  
-  /* Optional: make sure it's visible against the window */
   border: 1px solid white;
 }
-/* Dark mode draggable handles and outline */
+
 .theme-dark .drv {
   --d04bd352-handlesBorder: 1px solid #ffffff !important;
 }
