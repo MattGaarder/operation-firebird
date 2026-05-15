@@ -523,8 +523,6 @@ const projects = [
       opacity 0.25s ease !important;
     transform-origin: center center;
     will-change: transform, opacity;
-    border-radius: 0 20px 0 0 !important;
-
   }
 
   /* Disable desktop hover lift on mobile */

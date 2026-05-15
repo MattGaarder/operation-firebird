@@ -57,6 +57,8 @@
     flex-direction: column;
     gap: 0.5rem;
     z-index: 2000;
+    margin-right: 12px;
+    margin-left: -13px;
   }
 
   .wrapper {
@@ -112,6 +114,8 @@
   @media (max-width: 400px) {
     .tech-list {
       padding: 7px 5px 0px 5px !important;
+      margin-right: 0px;
+      margin-left: 0px;
     }
 
     .summary-bullets li {
@@ -125,6 +129,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    
+
   }
 </style>
