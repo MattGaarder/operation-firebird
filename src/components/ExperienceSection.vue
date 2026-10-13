@@ -3,16 +3,16 @@
     <q-card-section>
 
             <div class="row experience-section">
-                <div class="col-12 col-md-3 col-lg-4">
+                <div class="col-12 col-md-4 col-lg-4">
                     <div class="text-h7">{{ role }}</div>
                     <div class="text-h6">{{ company }}</div>
-                    <div class="text-caption text-grey-6">{{ duration }}</div>
-                    <div class="text-caption text-grey-6">{{ location }}</div>
+                    <div class="job-meta">{{ duration }}</div>
+                    <div class="job-meta" v-if="location">{{ location }}</div>
                 </div>
 
-                <div class="col-12 col-md-9 col-lg-8">
+                <div class="col-12 col-md-8 col-lg-8">
                     <ul class="bullet-points">
-                        <li class="bullet" v-for="(item, i) in bullets" :key="i">{{ item }}</li>
+                        <li class="bullet" v-for="(item, i) in bullets" :key="i" v-html="item"></li>
                     </ul>
                 </div>
             </div>

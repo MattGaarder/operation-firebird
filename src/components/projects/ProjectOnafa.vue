@@ -1,6 +1,6 @@
 <template>
   <!-- Hero video -->
-  <video class="vidya" autoplay muted loop playsinline>
+  <video v-if="splash" class="vidya" autoplay muted loop playsinline>
     <source :src="splash" type="video/mp4" />
   </video>
 
@@ -162,14 +162,16 @@
 
 <script setup>
 import { ref } from 'vue';
-import splash from 'src/assets/onafa/splash-main_7.mp4';
 import tshirt from 'src/assets/onafa/SVG/t-shirt.svg';
 import iteration1 from 'src/assets/onafa/iteration-1.png';
 import mockup from 'src/assets/onafa/mockup.png';
-import screenR1 from 'src/assets/onafa/Screen_Recording1.gif';
 import screenR2 from 'src/assets/onafa/Screen2.gif';
 import screenR3 from 'src/assets/onafa/Screen3.gif';
 import onafaCode from 'src/assets/snippets/onafa-code.txt?raw';
+
+// Graceful fallbacks for deleted or large media assets
+const splash = null;
+const screenR1 = screenR2;
 
 const slide = ref(1);
 </script>

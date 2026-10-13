@@ -4,10 +4,6 @@
 .q-drawer {
     .q-item {
         opacity: 1;
-  &.q-router-link--exact-active {
-    opacity: 1;
-    background-color: white;
-    }
   }
 }
 
@@ -42,24 +38,24 @@
 }
 
 html {
-  color: var(--site-text, #fff);
+  color: var(--site-text, #85BAD6);
 }
 
 /* 2. Define theme colors at the root */
 :root {
   --app-bg-light: #ffffff; /* Or your preferred light color */
-  --app-bg-dark: #000000;  /* Or your preferred dark color */
+  --app-bg-dark: #202020;  /* VS Code editor dark background */
 }
 
 /* 3. Apply the background to the body based on the active theme */
 body.body--light {
   background-color: var(--app-bg-light) !important;
-  color: #000000;
+  color: #4A80AD;
 }
 
 body.body--dark {
   background-color: var(--app-bg-dark) !important;
-  color: #ffffff;
+  color: #85BAD6;
 }
 
 /* Ensure the layout container doesn't block the body background */
@@ -68,21 +64,21 @@ body.body--dark {
 }
 
 .theme-dark {
-  --site-bg: #000000; 
-  --site-text: #fff;
+  --site-bg: #202020; 
+  --site-text: #85BAD6;
   --logo-filter: none;
-  --caption-text: #9e9e9e;
-  --project-card-bg: #121212;
-  --project-wrapper-bg: #000000;
+  --caption-text: #85BAD6;
+  --project-card-bg: #202020;
+  --project-wrapper-bg: #202020;
   --project-border: #333333;
   --project-code-bg: #1e1e1e;
 }
 
 .theme-light {
   --site-bg: #ffffff;
-  --site-text: #000000;
+  --site-text: #4A80AD;
   --logo-filter: invert(1) brightness(0);
-  --caption-text: #616161;
+  --caption-text: #4A80AD;
   --project-card-bg: #ffffff;
   --project-wrapper-bg: rgb(242, 242, 242);
   --project-border: rgb(196, 196, 196);
@@ -91,7 +87,7 @@ body.body--dark {
 
 .theme-light .q-layout__section--marginal  {
   background-color: var(--site-bg) !important;
-  color: #000000
+  color: #4A80AD;
 }
 
 .theme-light .text-white {
@@ -116,13 +112,38 @@ body.body--dark {
 }
 
 .top-border {
-  border-top: 1px solid rgba(255, 255, 255, 0.479);
+  border-top: 1px solid #BA50BA !important;
   margin-left: -8px;
   margin-right: -8px;
 }
 
 .experience-section {
     max-width: 950px;
+    align-items: flex-start;
+
+    .text-h6 {
+        font-size: 1.05rem;
+        line-height: 1.3;
+        color: #4A80AD !important; /* div blue (company name) */
+    }
+    .text-h7 {
+        font-size: 0.82rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        margin-top: 0;
+        color: #85BAD6 !important; /* class blue (job title) */
+
+        .job-meta {
+            font-size: 0.82rem !important;
+        }
+    }
+    .text-caption,
+    .job-meta {
+        font-size: 0.64rem;
+        line-height: 1.25;
+        color: #43A28F !important; /* green (job location and date) */
+        white-space: nowrap;
+    }
 }
 
 .q-layout-padding {
@@ -131,18 +152,39 @@ body.body--dark {
 
 .surname {
     font-weight: bold;
-    font-size: larger;
+    font-size: 1.05rem;
 }
 
 .bullet-points {
-    margin-top: 0.2rem;
-    font-size: 0.92rem;
-    line-height: 1.2rem;
-    padding-left: 8px;
+    margin: 0;
+    padding-top: 0;
+    font-size: 0.76rem;
+    line-height: 1.25rem;
+    padding-left: 0;
+    list-style: none;
 }
 
 .bullet {
-    margin-top: 0.9rem;
+    position: relative;
+    margin-top: 0.75rem;
+    padding-left: 1.2rem;
+    color: var(--site-text, #85BAD6);
+}
+
+.bullet::before {
+    content: "–"; /* dash bullet */
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 1.25rem;
+    color: #BA50BA !important; /* divider pink (change dashes as well to this colour) */
+    font-weight: 600;
+}
+
+.bullet:first-child,
+.bullet-points li:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .bumper {
@@ -282,8 +324,20 @@ body.body--dark {
 /* Push summary text down, keep it flexible */
 .project-section .project-summary {
   flex-grow: 1;
-  background-color: #ffffff;
-  color: #000000 !important;
+  font-size: 0.78rem;
+  line-height: 1.38;
+}
+
+.body--dark .project-section .project-summary,
+.theme-dark .project-section .project-summary {
+  background-color: transparent !important;
+  color: #85BAD6 !important;
+}
+
+.body--light .project-section .project-summary,
+.theme-light .project-section .project-summary {
+  background-color: #ffffff !important;
+  color: #4A80AD !important;
 }
 
 /* --- 6. Dark Mode Adaptation --- */
@@ -369,61 +423,166 @@ body.body--dark {
 }
 
 .theme-dark .q-drawer,
+.theme-dark .q-drawer,
 .theme-dark .q-drawer__content,
 .theme-dark .q-card,
-.theme-dark .q-item,
 .theme-dark .q-page,
-.theme-dark .q-page-container {
+.theme-dark .q-page-container,
+.theme-dark .q-header {
   background-color: var(--site-bg) !important;
-  color: #ffffff !important;
+  color: #85BAD6 !important;
 }
 
-.theme-dark .project-section .project-summary {
-  color: #000000 !important;
+.theme-dark .bullet,
+.theme-dark .bullet-points {
+  color: #85BAD6 !important;
 }
+
 
 .theme-light .q-drawer,
 .theme-light .q-drawer__content,
 .theme-light .q-card,
-.theme-light .q-item,
 .theme-light .q-page,
 .theme-light .q-page-container {
   background-color: var(--site-bg) !important;
-  color: #000000 !important;
+  color: #4A80AD !important;
+}
+
+.theme-light .bullet,
+.theme-light .bullet-points {
+  color: #4A80AD !important;
 }
 
 .theme-light .top-border {
-  border-top: 1px solid #000000 !important;
+  border-top: 1px solid #BA50BA !important;
 }
 
 .theme-dark .bg-primary {
-  background-color: #000000 !important;
-  color: #ffffff !important;
+  background-color: #202020 !important;
+  color: #85BAD6 !important;
 }
 
-.theme-dark .text-caption,
+.theme-dark .text-caption:not(.job-meta),
 .theme-dark .text-grey-6,
 .theme-dark [caption] {
-  color: #ffffff !important;
+  color: #85BAD6 !important;
 }
 
 .theme-light .bg-primary {
   background-color: #ffffff !important;
-  color: #000000 !important;
+  color: #4A80AD !important;
 }
 
 .theme-light .text-white {
-  color: #000000 !important;
+  color: #4A80AD !important;
 }
 
-.theme-light .text-caption,
+.theme-light .text-caption:not(.job-meta),
 .theme-light .text-grey-6,
 .theme-light [caption] {
-  color: #000000 !important;
+  color: #4A80AD !important;
 }
 
-.q-item-label--caption {
-  color: var(--caption-text) !important;
+.job-meta,
+.experience-section .job-meta,
+.theme-dark .job-meta,
+.theme-light .job-meta {
+  color: #43A28F !important; /* green (job location and date) */
+}
+
+.theme-light .q-item {
+  color: #4A80AD !important;
+}
+
+.theme-light .info {
+  color: #4A80AD !important;
+}
+
+.theme-light .experience-section .text-h7 {
+  color: #4A80AD !important;
+}
+
+.theme-light .q-item__label--caption,
+.theme-light .q-item-label--caption {
+  color: #4A80AD !important;
+}
+
+.link-title {
+  font-size: 0.72rem !important;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #4A80AD !important; /* div blue (link titles) */
+}
+
+.contacts {
+  font-size: 0.72rem;
+  color: #4A80AD !important; /* div blue (link titles) */
+}
+
+.q-item__label--caption,
+.q-item-label--caption,
+[caption],
+.text-caption:not(.job-meta) {
+  font-size: 0.64rem !important;
+  line-height: 1.25 !important;
+  color: #85BAD6 !important; /* class blue (link labels) */
+}
+
+.section-header {
+  color: #A57663 !important; /* string brown (section headers) */
+}
+
+.skill-yellow,
+.skill-highlight {
+  color: #CEAE1A !important; /* skill yellow */
+}
+
+.pop-yellow {
+  font-weight: bold;
+  color: #F5F543 !important;
+}
+
+.theme-light .pop-yellow,
+body.body--light .pop-yellow {
+  color: #A67800 !important;
+}
+
+/* Disable Quasar focus-helper pseudo-overlays in drawer */
+.q-drawer .q-focus-helper {
+  display: none !important;
+}
+
+/* VS Code Dark Theme: Link Hover (red #541A1E) and Active (yellow #3C432B) */
+.q-drawer.theme-dark .q-item:hover,
+.theme-dark .q-drawer .q-item:hover,
+.theme-dark .q-item:hover,
+.q-drawer.theme-dark .essential-contact:hover,
+.theme-dark .essential-contact:hover {
+  background-color: #541A1E !important; /* hover red */
+}
+
+.q-drawer.theme-dark .q-item:active,
+.theme-dark .q-drawer .q-item:active,
+.theme-dark .q-item:active,
+.q-drawer.theme-dark .essential-contact:active,
+.theme-dark .essential-contact:active,
+.q-drawer.theme-dark .q-item.q-router-link--exact-active,
+.theme-dark .q-drawer .q-item.q-router-link--exact-active,
+.theme-dark .q-item.q-router-link--exact-active,
+.q-drawer.theme-dark .q-item.q-router-link--active,
+.theme-dark .q-drawer .q-item.q-router-link--active,
+.theme-dark .q-item.q-router-link--active,
+.q-drawer.theme-dark .q-item--active,
+.theme-dark .q-drawer .q-item--active,
+.theme-dark .q-item--active {
+  background-color: #3C432B !important; /* active yellow */
+}
+
+.theme-dark .drawer-btn:hover {
+  background-color: #541A1E !important;
+}
+.theme-dark .drawer-btn:active {
+  background-color: #3C432B !important;
 }
 
 .theme-light .q-item:hover,
@@ -437,19 +596,45 @@ body.body--dark {
   color: white !important;
 }
 
-/* active / exact-active link */
+/* active / exact-active / clicked link in light mode */
+.q-drawer.theme-light .q-item:active,
+.theme-light .q-drawer .q-item:active,
+.theme-light .q-item:active,
+.q-drawer.theme-light .essential-contact:active,
+.theme-light .essential-contact:active,
+.theme-light .essential-contact.q-item--clickable:active,
+.theme-light .essential-contact.q-item--clickable:active > .q-item__section,
+.q-drawer.theme-light .q-item.q-router-link--exact-active,
+.theme-light .q-drawer .q-item.q-router-link--exact-active,
 .theme-light .q-item.q-router-link--exact-active,
+.q-drawer.theme-light .q-item.q-router-link--active,
+.theme-light .q-drawer .q-item.q-router-link--active,
 .theme-light .q-item.q-router-link--active,
+.q-drawer.theme-light .q-item--active,
+.theme-light .q-drawer .q-item--active,
 .theme-light .q-item--active {
-  background-color: #ffffff !important;
-  color: #000000 !important;
+  background-color: #3C432B !important; /* active yellow like dark mode */
+  color: #ffffff !important;
 }
 
+.theme-light .q-item:active .q-item__label,
+.theme-light .essential-contact:active .q-item__label,
 .theme-light .q-item.q-router-link--exact-active .q-item__label,
 .theme-light .q-item.q-router-link--active .q-item__label,
 .theme-light .q-item--active .q-item__label,
-.theme-light .q-item--active .info {
-  color: #000000 !important;
+.theme-light .q-item:active .info,
+.theme-light .essential-contact:active .info,
+.theme-light .q-item.q-router-link--exact-active .info,
+.theme-light .q-item.q-router-link--active .info,
+.theme-light .q-item--active .info,
+.theme-light .essential-contact:active .arrow-outward-icon,
+.theme-light .q-item.q-router-link--exact-active .arrow-outward-icon,
+.theme-light .q-item.q-router-link--active .arrow-outward-icon {
+  color: #ffffff !important;
+}
+
+.theme-light .drawer-btn:active {
+  background-color: #3C432B !important;
 }
 
 .theme-light .essential-contact.q-item--clickable.q-hoverable:hover,
@@ -467,15 +652,43 @@ body.body--dark {
   color: white !important;
 }
 
+$font-family-mono: 'Consolas', 'Menlo', 'Monaco', monospace;
+
+:root {
+  --app-font-family: #{$font-family-mono};
+}
+
 html, body, #q-app {
-  background-color: var(--site-bg, #000000);
-  color: var(--site-text, #fff);
+  font-family: $font-family-mono;
+  background-color: var(--site-bg, #202020);
+  color: var(--site-text, #85BAD6);
   min-height: 100%; /* ensure full height */
   overflow-x: hidden;
 }
 
+body,
+button,
+input,
+textarea,
+select,
+.q-layout,
+.q-page,
+.q-drawer,
+.q-header,
+.q-footer,
+.q-btn,
+.q-card,
+.q-item,
+.q-toolbar,
+.text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6,
+.text-subtitle1, .text-subtitle2,
+.text-body1, .text-body2,
+.text-caption, .text-overline {
+  font-family: $font-family-mono;
+}
+
 .info {
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   color: var(--site-text);
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
@@ -484,7 +697,7 @@ html, body, #q-app {
 
 .sub {
   color: #6B7C94;
-  font-size: small;
+  font-size: 0.72rem;
   font-weight: 400;
   padding-left: 0.6rem;
 }
@@ -512,12 +725,12 @@ html, body, #q-app {
 }
 
 .project-title {
-  font-size: 1.15rem;
+  font-size: 1.02rem;
   font-weight: 500;
 }
 
 .project-title-window {
-  font-size: 1rem;
+  font-size: 0.88rem;
   padding-left: 0.8rem;
 }
 
@@ -575,15 +788,15 @@ html, body, #q-app {
 .q-item__label--header {
   padding-left: 6px !important;
   padding-bottom: 10px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .project-tagline {
   padding: 1.5rem;
   padding-left: 1.2rem;
   padding-top: 0.7rem;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  font-size: 0.82rem;
+  line-height: 1.38;
   margin: 24px !important; /* q-mx-lg q-my-lg */
 }
 
@@ -696,6 +909,16 @@ html, body, #q-app {
   color: white;
 }
 
+/* 8px padding for project-titles in project windows */
+.windows-layer .project-header.q-card__section--vert,
+.windows-layer .project-header,
+.window-card .project-header.q-card__section--vert,
+.window-card .project-header,
+.window-body .project-header.q-card__section--vert,
+.window-body .project-header {
+  padding: 8px !important;
+}
+
 .project-icon {
   color: #ffffff;
   font-size: 1.3rem;
@@ -720,10 +943,8 @@ pre[class*="language-"] {
 
 
 .info-code {
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   color: var(--site-text);
-
-
 }
 
 @media (max-width: 360px) {
@@ -740,7 +961,7 @@ pre[class*="language-"] {
   }
 
   .link-title {
-    font-size: 0.9rem !important;
+    font-size: 0.72rem !important;
   }
 
   .project-body {

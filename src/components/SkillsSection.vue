@@ -48,26 +48,26 @@ const s8 = ref(false);
 const s9 = ref(false);
 
 const skill1Chunks = [
-  { stable: '<span class="text-weight-bolder text-size-larger">JavaScript</span> ecosystem', candidates: ['frontend development', 'JavaScript systems', 'JavaScript tooling'], duration: 800 },
+  { stable: '<span class="text-weight-bolder text-size-larger pop-yellow">JavaScript</span> ecosystem', candidates: ['frontend development', '<span class="pop-yellow">JavaScript</span> systems', '<span class="pop-yellow">JavaScript</span> tooling'], duration: 800 },
   { stable: ' — TypeScript,', candidates: [' — typed code,', ' — type systems,'], duration: 600 },
-  { stable: ' <span class="text-weight-bolder text-size-larger">Vue</span>.js 3,', candidates: [' UI frameworks,', ' Vue development,'], duration: 700 },
+  { stable: ' <span class="text-weight-bolder text-size-larger pop-yellow">Vue</span>.js 3,', candidates: [' UI frameworks,', ' <span class="pop-yellow">Vue</span> development,'], duration: 700 },
   { stable: ' Node.js', candidates: [' backend runtime', ' backend JS'], duration: 600 }
 ];
 
 const skill2Chunks = [
   { stable: 'Alteryx Designer, ', candidates: ['data tools, ', 'workflow tools, ', 'Alteryx, '], duration: 750 },
-  { stable: 'SQL, ', candidates: ['databases, ', 'relational DBs, '], duration: 600 },
+  { stable: '<span class="text-weight-bolder text-size-larger pop-yellow">SQL</span>, ', candidates: ['databases, ', 'relational DBs, '], duration: 600 },
   { stable: 'Google Apps Script', candidates: ['integrations', 'Google APIs'], duration: 700 }
 ];
 
 const skill3Chunks = [
-  { stable: 'Microsoft <span class="text-weight-bolder text-size-larger">Power</span> — ', candidates: ['enterprise tools — ', 'Microsoft tools — ', 'Microsoft Platform — '], duration: 850 },
+  { stable: 'Microsoft <span class="text-weight-bolder text-size-larger pop-yellow">Power</span> — ', candidates: ['enterprise tools — ', 'Microsoft tools — ', 'Microsoft Platform — '], duration: 850 },
   { stable: 'BI, Automate, Query;', candidates: ['dashboards, workflows;', 'BI, workflows;'], duration: 800 },
   { stable: ' Excel VBA, C#', candidates: [' legacy code', ' VBA and C#'], duration: 700 }
 ];
 
 const skill4Chunks = [
-  { stable: '<span class="text-weight-bolder text-size-larger">Japanese</span> (Fluent),', candidates: ['foreign languages,', 'Japanese language,'], duration: 900 },
+  { stable: '<span class="text-weight-bolder text-size-larger pop-yellow">Japanese</span> (Fluent),', candidates: ['foreign languages,', '<span class="pop-yellow">Japanese</span> language,'], duration: 900 },
   { stable: ' Portuguese', candidates: ['Norwegian', ' Portuguese (Basic)'], duration: 600 }
 ];
 
@@ -80,13 +80,13 @@ const skill6Chunks = [
 ];
 
 const skill7Chunks = [
-  { stable: '<span class="text-weight-bolder text-size-larger">Adobe</span> — ', candidates: ['creative software — ', 'Creative Cloud — '], duration: 700 },
+  { stable: '<span class="text-weight-bolder text-size-larger pop-yellow">Adobe</span> — ', candidates: ['creative software — ', 'Creative Cloud — '], duration: 700 },
   { stable: 'After Effects, Illustrator, ', candidates: ['video and vector, ', 'motion and vector, '], duration: 800 },
   { stable: 'Photoshop, Premiere', candidates: ['photo and video editing', 'Photoshop, video editing'], duration: 700 }
 ];
 
 const skill8Chunks = [
-  { stable: 'Articulate<span class="text-weight-bolder text-size-larger"> Storyline</span> 360, ', candidates: ['e-learning tools, ', 'Articulate tools, '], duration: 900 },
+  { stable: 'Articulate <span class="text-weight-bolder text-size-larger pop-yellow">Storyline</span> 360, ', candidates: ['e-learning tools, ', 'Articulate tools, '], duration: 900 },
   { stable: 'Instructional Design', candidates: ['learning architecture', 'course design'], duration: 700 }
 ];
 
@@ -99,27 +99,34 @@ const skill9Chunks = [
 <style scoped>
 
 
-    .row {
-        align-items: center;
-        justify-content: center;
+    .row,
+    .skill-summary-row {
+        align-items: flex-start !important;
+        justify-content: flex-start;
     }
 
     ul {
         list-style: none;
-
         padding-left: 0;
-        font-size: medium;
+        margin: 0;
+        font-size: 0.78rem;
     }
 
     ul li {
-        padding: 0.4rem;
-        line-height: 1.4;
+        padding: 0.35rem 0.4rem;
+        line-height: 1.45;
+        color: #CEAE1A;
+    }
+
+    ul li:first-child {
+        padding-top: 0;
     }
 
     .skill-column {
         display: flex;
         flex-direction: column;
-
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 
 
@@ -135,7 +142,7 @@ const skill9Chunks = [
 
     @media (max-width: 400px) {
         .skill-column ul {
-            font-size: 0.9rem;
+            font-size: 0.72rem;
             margin-bottom: -1.8rem;
         }
 
@@ -144,7 +151,7 @@ const skill9Chunks = [
         }
 
         .skill-column h1 {
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #3b4553;
         }
 

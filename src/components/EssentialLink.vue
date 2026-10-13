@@ -45,3 +45,21 @@
     },
   });
 </script>
+
+<style scoped>
+.link-title {
+  font-size: 0.72rem;
+  color: #4A80AD !important;
+}
+
+:deep(.q-item__label--caption),
+.q-item__label--caption,
+[caption] {
+  font-size: 0.64rem;
+  color: #85BAD6 !important;
+}
+
+:deep(.q-icon) {
+  color: #4A80AD;
+}
+</style>

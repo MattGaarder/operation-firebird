@@ -25,7 +25,12 @@
 
 <style >
 .contacts {
-  font-size: small;
+  font-size: 0.72rem;
+  color: #4A80AD !important;
+}
+
+.arrow-outward-icon {
+  color: #4A80AD;
 }
 
 

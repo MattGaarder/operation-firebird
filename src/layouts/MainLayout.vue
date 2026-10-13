@@ -73,18 +73,18 @@
       duration: 100
     },
     {
-      stable: "creative technologist",
-      candidates: ["design engineer", "creative systems builder", "creative technology"],
+      stable: '<span class="pop-yellow">creative technologist</span>',
+      candidates: ['<span class="pop-yellow">design engineer</span>', '<span class="pop-yellow">creative systems builder</span>', '<span class="pop-yellow">creative technology</span>'],
       duration: 1000
     },
     {
-      stable: " and former educator",
-      candidates: [" and teaching background", " and instructional background", " and educator"],
+      stable: " and former educator ",
+      candidates: [" and teaching background ", " and instructional background ", " and educator "],
       duration: 800
     },
     {
-      stable: " fluent in Japanese.",
-      candidates: [" with language skills.", " with Japanese skills."],
+      stable: '<span class="pop-yellow">fluent in Japanese</span>.',
+      candidates: ['<span class="pop-yellow">with language skills</span>.', '<span class="pop-yellow">with Japanese skills</span>.'],
       duration: 900
     },
     {
@@ -93,13 +93,13 @@
       duration: 1100
     },
     {
-      stable: " with JavaScript-powered solutions",
-      candidates: [" with code", " with web tech", " with JavaScript", " with JavaScript systems"],
+      stable: ' with <span class="pop-yellow">JavaScript-powered solutions</span>',
+      candidates: [' with <span class="pop-yellow">code</span>', ' with <span class="pop-yellow">web tech</span>', ' with <span class="pop-yellow">JavaScript</span>', ' with <span class="pop-yellow">JavaScript systems</span>'],
       duration: 1200
     },
     {
-      stable: " and multimedia design.",
-      candidates: [" and design.", " and media design."],
+      stable: ' and <span class="pop-yellow">multimedia design</span>.',
+      candidates: [' and <span class="pop-yellow">design</span>.', ' and <span class="pop-yellow">media design</span>.'],
       duration: 900
     }
   ];
@@ -292,20 +292,31 @@
 <style scoped>
 .bio {
   margin-top: 0.3rem;
-  font-size: 0.86rem;
+  font-size: 0.76rem;
+  line-height: 1.38;
   padding-left: 0px;
   padding-right: 4rem;
+  color: var(--site-text, #85BAD6);
 }
-
-
 
 .drawer-btn {
   margin-top: -6px;
+  color: #4A80AD;
 }
 
-::v-deep .essential-contact:hover {
+.theme-light ::v-deep .essential-contact:hover {
   background-color: white !important;
   color: black !important;
+}
+
+.page-container {
+  padding-top: 182px !important;
+}
+
+@media (max-width: 900px) {
+  .page-container {
+    padding-top: 132px !important;
+  }
 }
 
 .page-container.with-padding {
