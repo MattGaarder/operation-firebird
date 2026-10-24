@@ -791,34 +791,52 @@ select,
   font-size: 0.8rem;
 }
 
-.project-tagline {
-  padding: 1.5rem;
-  padding-left: 1.2rem;
-  padding-top: 0.7rem;
-  font-size: 0.82rem;
-  line-height: 1.38;
+.project-tagline,
+.project-body {
+  padding: 1.5rem !important;
+  padding-left: 1.2rem !important;
+  padding-top: 0.7rem !important;
+  font-size: 0.82rem !important;
+  line-height: 1.38 !important;
   margin: 24px !important; /* q-mx-lg q-my-lg */
+  box-sizing: border-box;
 }
 
 .project-body {
   display: flex;
   gap: 1rem;
+
+  .feature-list {
+    flex: 1 1 auto;
+    width: 100%;
+  }
 }
 
 .project-body-left {
   flex: 0 1 50%;
-  
+}
+
+.project-body:not(:has(.project-demo)) .project-body-left {
+  flex: 1 1 100%;
+  width: 100%;
 }
 
 .feature-list {
   list-style: none;
   padding: 0;
-
+  margin: 0;
+  font-size: 0.82rem !important;
+  line-height: 1.38 !important;
 }
 
 .feature-list li {
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.82rem !important;
+  line-height: 1.38 !important;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .project-demo {
@@ -856,8 +874,14 @@ select,
 }
 
 .project-code {
+  padding: 0 !important;
+  margin: 24px !important;
+  box-sizing: border-box;
+}
 
-  padding: 0;
+.carousel-wrapper .text-subtitle2 {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
 }
 
 .code-container {
@@ -926,9 +950,13 @@ select,
 
 .prism-block,
 pre[class*="language-"] {
-  padding: 0.5rem !important;
+  padding: 1.5rem !important;
+  padding-left: 1.2rem !important;
+  padding-top: 0.7rem !important;
   margin: 0 !important;
   background-color: #ffffff !important;
+  box-sizing: border-box;
+  min-height: 100%;
 }
 
 /* Remove padding from expansion item toggle arrow */
@@ -966,7 +994,6 @@ pre[class*="language-"] {
 
   .project-body {
     flex-direction: column;
-    padding-top: 0;
   }
   
   .project-video {
@@ -976,9 +1003,22 @@ pre[class*="language-"] {
     margin-top: -1rem;
   }
 
-  .project-tagline {
+  .project-tagline,
+  .project-body,
+  .project-code {
     margin: 0 !important;
+  }
+
+  .project-tagline,
+  .project-body,
+  .prism-block,
+  pre[class*="language-"] {
     padding: 1.5rem 1rem 1.5rem 1rem !important;
+  }
+
+  .carousel-wrapper .text-subtitle2 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 
   .project-title-window {
@@ -1167,7 +1207,8 @@ html body .project-card-wrapper .project-summary {
     background-color: #263442 !important;
   }
 
-  .project-tagline {
+  .project-tagline,
+  .project-body {
     background-color: #121212 !important;
   }
 

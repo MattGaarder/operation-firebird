@@ -34,7 +34,7 @@
                             <q-space />
                             <q-btn flat class="close-btn" icon="close" @click="closeWindow(i)" />
                         </q-card-section>
-                        <q-card-section class="project-body" style="overflow:auto; height:calc(100% - 60px)">
+                        <q-card-section class="window-scroll-body" style="overflow:auto; height:calc(100% - 60px)">
                             <!-- <p>{{ win.project.summary }}</p> <br /> -->
                             <div class="window-body">
                                 <component :is="win.project.component" :images="win.project.images"
@@ -72,6 +72,7 @@ import ThisPortfolio from 'src/components/projects/ThisPortfolio.vue';
 import CodeJournal from 'src/components/projects/PostworkProjects.vue';
 import ProjectAnkify from 'src/components/projects/ProjectAnkify.vue';
 import MedJp from 'src/components/projects/MedJp.vue';
+import EmployMe from 'src/components/projects/EmployMe.vue';
 
 const leftDrawerOpen = inject('leftDrawerOpen');
 
@@ -240,7 +241,7 @@ function loadTechLogo(relativePath) {
 function getProjectLogo(project) {
     if (!project.logo) return project.images[0]
     const logoName = isDark.value ? project.logo.dark : project.logo.light
-    return loadProjectLogo(logoName)
+    return loadProjectLogo(logoName, project.logo.ext || 'svg')
 }
 function getProjectTechnologies(project) {
     return project.technology.map(tech => {
@@ -252,6 +253,29 @@ function getProjectTechnologies(project) {
     })
 }
 const projects = [
+  {
+        id: 'employ-me',
+        title: 'employ-me',
+        logo: {
+            light: 'employ-me',
+            dark: 'employ-me',
+            ext: 'jpg',
+        },
+        images: [
+            null,
+        ],
+        deployed: [false],
+        repo: [true, 'https://github.com/MattGaarder/employ-me'],
+        summary: 'An <span class="pop-yellow">AI</span>-assisted job search pipeline that finds relevant <span class="pop-yellow">LinkedIn</span> roles, and then uses an autonomous browser agent to fill in the application form.',
+        technology: [
+            { name: 'LinkedIn', logo: loadTechLogo('linkedin.svg') },
+            { name: 'Gemini', logo: loadTechLogo('gemini-color.svg') },
+            { name: 'LangChain', logo: loadTechLogo('langchain-color.svg') },
+            { name: 'SQLite', logo: loadTechLogo('sqlite-icon.svg') },
+            { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg') },
+        ],
+        component: markRaw(EmployMe),
+    },
   {
         id: 'med-jp',
         title: 'med-jp',
@@ -266,11 +290,12 @@ const projects = [
         ],
         deployed: [false, 'https://code-journal.netlify.app'],
         repo: [true, 'https://github.com/MattGaarder/med-jp-logo-dark'],
-        summary: 'Custom Japanese <span class="pop-yellow">NLP</span> engine for typo-tolerant language interpretation. Uses <span class="pop-yellow">RAG</span> semantic reranking, IME-style normalization, and grammatical reasoning.',
+        summary: 'A local <span class="pop-yellow">NLP</span> engine for Japanese ⇄ English medical interpreting. Reconstructs hurried romaji via <span class="pop-yellow">Viterbi beam search</span>, and <span class="pop-yellow">HNSW</span> vector <span class="pop-yellow">RAG</span> for local <span class="pop-yellow">Ollama</span> translation.',
         technology: [
             { name: 'Ollama', logo: { light: 'ollama.svg', dark: 'ollama_dark.svg' } },
             { name: 'Qwen 3', logo: loadTechLogo('qwen-color.svg') },
             { name: 'SQLite', logo: loadTechLogo('sqlite-icon.svg') },
+            { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg') },
         ],
         component: markRaw(MedJp),
     },
@@ -457,7 +482,7 @@ const projects = [
     scrollbar-width: none !important;
 }
 
-.project-body {
+.window-scroll-body {
     padding: 0px !important;
 }
 
