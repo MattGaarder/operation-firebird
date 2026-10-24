@@ -38,24 +38,24 @@
 }
 
 html {
-  color: var(--site-text, #85BAD6);
+  color: var(--site-text, #9cdcfe);
 }
 
 /* 2. Define theme colors at the root */
 :root {
   --app-bg-light: #ffffff; /* Or your preferred light color */
-  --app-bg-dark: #202020;  /* VS Code editor dark background */
+  --app-bg-dark: #1e1e1e;  /* VS Code editor dark background */
 }
 
 /* 3. Apply the background to the body based on the active theme */
 body.body--light {
   background-color: var(--app-bg-light) !important;
-  color: #4A80AD;
+  color: #001080; /* Light+ variables */
 }
 
 body.body--dark {
   background-color: var(--app-bg-dark) !important;
-  color: #85BAD6;
+  color: #9cdcfe;
 }
 
 /* Ensure the layout container doesn't block the body background */
@@ -64,30 +64,32 @@ body.body--dark {
 }
 
 .theme-dark {
-  --site-bg: #202020; 
-  --site-text: #85BAD6;
+  --site-bg: #1e1e1e; 
+  --site-text: #9cdcfe;
   --logo-filter: none;
-  --caption-text: #85BAD6;
-  --project-card-bg: #202020;
-  --project-wrapper-bg: #202020;
+  --caption-text: #6a9954;
+  --project-card-bg: #252526;
+  --project-wrapper-bg: #252526;
+  --project-header-bg: #333333;
   --project-border: #333333;
   --project-code-bg: #1e1e1e;
 }
 
 .theme-light {
   --site-bg: #ffffff;
-  --site-text: #4A80AD;
+  --site-text: #001080;
   --logo-filter: invert(1) brightness(0);
-  --caption-text: #4A80AD;
+  --caption-text: #008000;
   --project-card-bg: #ffffff;
-  --project-wrapper-bg: rgb(242, 242, 242);
+  --project-wrapper-bg: #f3f3f3; /* sidebar background */
+  --project-header-bg: #2c2c2c;  /* activity bar */
   --project-border: rgb(196, 196, 196);
   --project-code-bg: #ECF2F8;
 }
 
 .theme-light .q-layout__section--marginal  {
   background-color: var(--site-bg) !important;
-  color: #4A80AD;
+  color: #001080;
 }
 
 .theme-light .text-white {
@@ -131,7 +133,7 @@ body.body--dark {
         font-weight: 500;
         line-height: 1.25rem;
         margin-top: 0;
-        color: #85BAD6 !important; /* class blue (job title) */
+        color: #9cdcfe !important; /* class blue (job title) */
 
         .job-meta {
             font-size: 0.82rem !important;
@@ -168,7 +170,7 @@ body.body--dark {
     position: relative;
     margin-top: 0.75rem;
     padding-left: 1.2rem;
-    color: var(--site-text, #85BAD6);
+    color: var(--site-text, #9cdcfe);
 }
 
 .bullet::before {
@@ -331,19 +333,19 @@ body.body--dark {
 .body--dark .project-section .project-summary,
 .theme-dark .project-section .project-summary {
   background-color: transparent !important;
-  color: #85BAD6 !important;
+  color: #9cdcfe !important;
 }
 
 .body--light .project-section .project-summary,
 .theme-light .project-section .project-summary {
   background-color: #ffffff !important;
-  color: #4A80AD !important;
+  color: #001080 !important;
 }
 
 /* --- 6. Dark Mode Adaptation --- */
 .body--dark .project-section.q-card,
 .theme-dark .project-section.q-card {
-  background: #1a1a1a !important;
+  background: #252526 !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.3),
@@ -430,12 +432,12 @@ body.body--dark {
 .theme-dark .q-page-container,
 .theme-dark .q-header {
   background-color: var(--site-bg) !important;
-  color: #85BAD6 !important;
+  color: #9cdcfe !important;
 }
 
 .theme-dark .bullet,
 .theme-dark .bullet-points {
-  color: #85BAD6 !important;
+  color: #9cdcfe !important;
 }
 
 
@@ -445,12 +447,12 @@ body.body--dark {
 .theme-light .q-page,
 .theme-light .q-page-container {
   background-color: var(--site-bg) !important;
-  color: #4A80AD !important;
+  color: #001080 !important;
 }
 
 .theme-light .bullet,
 .theme-light .bullet-points {
-  color: #4A80AD !important;
+  color: #001080 !important;
 }
 
 .theme-light .top-border {
@@ -458,53 +460,51 @@ body.body--dark {
 }
 
 .theme-dark .bg-primary {
-  background-color: #202020 !important;
-  color: #85BAD6 !important;
+  background-color: #1e1e1e !important;
+  color: #9cdcfe !important;
 }
 
 .theme-dark .text-caption:not(.job-meta),
 .theme-dark .text-grey-6,
 .theme-dark [caption] {
-  color: #85BAD6 !important;
+  color: #9cdcfe !important;
 }
 
 .theme-light .bg-primary {
   background-color: #ffffff !important;
-  color: #4A80AD !important;
+  color: #001080 !important;
 }
 
 .theme-light .text-white {
-  color: #4A80AD !important;
+  color: #001080 !important;
 }
 
 .theme-light .text-caption:not(.job-meta),
 .theme-light .text-grey-6,
 .theme-light [caption] {
-  color: #4A80AD !important;
+  color: #001080 !important;
 }
 
 .job-meta,
-.experience-section .job-meta,
-.theme-dark .job-meta,
-.theme-light .job-meta {
-  color: #43A28F !important; /* green (job location and date) */
+.experience-section .job-meta {
+  color: #b5cea8 !important; /* numbers: default green */
 }
 
 .theme-light .q-item {
-  color: #4A80AD !important;
+  color: #001080 !important;
 }
 
 .theme-light .info {
-  color: #4A80AD !important;
+  color: #795e26 !important; /* function */
 }
 
 .theme-light .experience-section .text-h7 {
-  color: #4A80AD !important;
+  color: #795e26 !important; /* function (job title) */
 }
 
 .theme-light .q-item__label--caption,
 .theme-light .q-item-label--caption {
-  color: #4A80AD !important;
+  color: #008000 !important; /* comment (link labels) */
 }
 
 .link-title {
@@ -525,7 +525,7 @@ body.body--dark {
 .text-caption:not(.job-meta) {
   font-size: 0.64rem !important;
   line-height: 1.25 !important;
-  color: #85BAD6 !important; /* class blue (link labels) */
+  color: #9cdcfe !important; /* class blue (link labels) */
 }
 
 .section-header {
@@ -544,7 +544,7 @@ body.body--dark {
 
 .theme-light .pop-yellow,
 body.body--light .pop-yellow {
-  color: #A67800 !important;
+  color: #0000ff !important; /* keyword */
 }
 
 /* Disable Quasar focus-helper pseudo-overlays in drawer */
@@ -552,13 +552,13 @@ body.body--light .pop-yellow {
   display: none !important;
 }
 
-/* VS Code Dark Theme: Link Hover (red #541A1E) and Active (yellow #3C432B) */
+/* VS Code Dark Theme: Link Hover (red #2a2d2e) and Active (yellow #264f78) */
 .q-drawer.theme-dark .q-item:hover,
 .theme-dark .q-drawer .q-item:hover,
 .theme-dark .q-item:hover,
 .q-drawer.theme-dark .essential-contact:hover,
 .theme-dark .essential-contact:hover {
-  background-color: #541A1E !important; /* hover red */
+  background-color: #2a2d2e !important; /* hover red */
 }
 
 .q-drawer.theme-dark .q-item:active,
@@ -575,25 +575,19 @@ body.body--light .pop-yellow {
 .q-drawer.theme-dark .q-item--active,
 .theme-dark .q-drawer .q-item--active,
 .theme-dark .q-item--active {
-  background-color: #3C432B !important; /* active yellow */
+  background-color: #264f78 !important; /* active yellow */
 }
 
 .theme-dark .drawer-btn:hover {
-  background-color: #541A1E !important;
+  background-color: #2a2d2e !important;
 }
 .theme-dark .drawer-btn:active {
-  background-color: #3C432B !important;
+  background-color: #264f78 !important;
 }
 
 .theme-light .q-item:hover,
 .theme-light .essential-contact:hover {
-  background-color: #000000 !important;
-  color: white !important;
-}
-
-.theme-light .q-item:hover .q-item__label,
-.theme-light .essential-contact:hover .q-item__label {
-  color: white !important;
+  background-color: #e8e8e8 !important; /* list hover */
 }
 
 /* active / exact-active / clicked link in light mode */
@@ -613,43 +607,18 @@ body.body--light .pop-yellow {
 .q-drawer.theme-light .q-item--active,
 .theme-light .q-drawer .q-item--active,
 .theme-light .q-item--active {
-  background-color: #3C432B !important; /* active yellow like dark mode */
-  color: #ffffff !important;
-}
-
-.theme-light .q-item:active .q-item__label,
-.theme-light .essential-contact:active .q-item__label,
-.theme-light .q-item.q-router-link--exact-active .q-item__label,
-.theme-light .q-item.q-router-link--active .q-item__label,
-.theme-light .q-item--active .q-item__label,
-.theme-light .q-item:active .info,
-.theme-light .essential-contact:active .info,
-.theme-light .q-item.q-router-link--exact-active .info,
-.theme-light .q-item.q-router-link--active .info,
-.theme-light .q-item--active .info,
-.theme-light .essential-contact:active .arrow-outward-icon,
-.theme-light .q-item.q-router-link--exact-active .arrow-outward-icon,
-.theme-light .q-item.q-router-link--active .arrow-outward-icon {
-  color: #ffffff !important;
+  background-color: #add6ff !important; /* selection highlight */
 }
 
 .theme-light .drawer-btn:active {
-  background-color: #3C432B !important;
+  background-color: #add6ff !important;
 }
 
 .theme-light .essential-contact.q-item--clickable.q-hoverable:hover,
 .theme-light .essential-contact.q-item--clickable.q-hoverable:hover > .q-item__section {
-  background-color: #000000 !important;
+  background-color: #e8e8e8 !important;
   transition-duration: 0s !important;
   font-weight: bold;
-}
-
-/* force the labels inside to be white on hover */
-.theme-light .essential-contact:hover .q-item__label {
-  color: white !important;
-}
-.theme-light .essential-contact:hover .arrow-outward-icon {
-  color: white !important;
 }
 
 $font-family-mono: 'Consolas', 'Menlo', 'Monaco', monospace;
@@ -660,8 +629,8 @@ $font-family-mono: 'Consolas', 'Menlo', 'Monaco', monospace;
 
 html, body, #q-app {
   font-family: $font-family-mono;
-  background-color: var(--site-bg, #202020);
-  color: var(--site-text, #85BAD6);
+  background-color: var(--site-bg, #1e1e1e);
+  color: var(--site-text, #9cdcfe);
   min-height: 100%; /* ensure full height */
   overflow-x: hidden;
 }
@@ -954,7 +923,7 @@ pre[class*="language-"] {
   padding-left: 1.2rem !important;
   padding-top: 0.7rem !important;
   margin: 0 !important;
-  background-color: #ffffff !important;
+  background-color: var(--project-code-bg, #1e1e1e) !important;
   box-sizing: border-box;
   min-height: 100%;
 }
@@ -1086,8 +1055,8 @@ pre[class*="language-"] {
 .theme-light .q-item[aria-expanded="true"],
 .theme-light .q-item[aria-expanded="true"] .q-item__label,
 .theme-light .q-item[aria-expanded="true"] .info {
-  background-color: #000000 !important;
-  color: #ffffff !important;
+  background-color: #dddddd !important;
+  color: #795e26 !important;
 }
 
 /* Non-expanded state */
@@ -1095,7 +1064,7 @@ pre[class*="language-"] {
 .theme-light .q-item[aria-expanded="false"] .q-item__label,
 .theme-light .q-item[aria-expanded="false"] .info {
   background-color: #ffffff !important;
-  color: #000000 !important;
+  color: #795e26 !important;
 }
 
 .drv-handle {
@@ -1163,8 +1132,8 @@ pre[class*="language-"] {
 
 /* Apply only when the page is in light mode */
 .theme-light .window-handle-footer {
-  border-top: 1px solid #000 !important;
-  background-color: #ffffff !important; 
+  border-top: 1px solid #005a9e !important;
+  background-color: #007acc !important; /* status bar */
 }
 
 /* Specific Dark Mode Color Palette Overrides */
@@ -1179,48 +1148,491 @@ html body .project-card-wrapper .project-summary {
   border: none !important;
 }
 
-/* Specific Dark Mode Color Palette Overrides */
-.theme-dark {
-  .window-card {
-    background-color: #252525 !important;
-    border-color: #707070 !important;
-  }
 
-  .projects-wrapper {
-    background-color: #252525 !important;
-  }
 
-  .window-handle,
-  .window-handle-header {
-    background-color: #121212 !important;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   VS CODE LIGHT+ PALETTE (light mode only)
+   Workbench: editor #ffffff · sidebar #f3f3f3 · activity bar #2c2c2c
+              status bar #007acc · title bar #dddddd · selection #add6ff
+   Syntax:    variables #001080 · strings #a31515 · keywords #0000ff
+              functions #795e26 · comments #008000 · numbers #098658
+              types/classes #267f99
+   ═══════════════════════════════════════════════════════════════ */
 
-  .window-handle-header {
-    border-bottom: 1px solid #707070 !important;
-  }
+body.body--light ::selection,
+.theme-light ::selection {
+  background: #add6ff;
+  color: inherit;
+}
 
-  .window-handle:not(.window-handle-header) {
-    border-top: 1px solid #707070 !important;
-  }
+/* Sidebar (drawer) */
+.theme-light .q-drawer,
+.theme-light .q-drawer__content,
+.theme-light .q-drawer .q-card,
+.theme-light .q-drawer .bg-primary {
+  background-color: #ffffff !important;
+}
 
-  .project-header {
-    background-color: #263442 !important;
-  }
+/* Activity bar: header buttons + project header bars */
+.theme-light .q-btn.drawer-btn {
+  color: #2c2c2c;
+}
 
-  .project-tagline,
-  .project-body {
-    background-color: #121212 !important;
-  }
+.theme-light .project-header {
+  background-color: #2c2c2c !important;
+}
 
-  /* Expansion item toggle styling for dark mode */
-  .q-expansion-item .q-item {
-    background-color: #252525 !important;
-    border-bottom: 1px solid #707070 !important;
-    margin-bottom: -1px;
-  }
+/* Title bar (project window) */
+.theme-light .window-handle.window-handle-header {
+  background-color: #dddddd !important;
+  color: #333333 !important;
+  border-bottom: 1px solid #c8c8c8 !important;
+}
 
-  .q-expansion-item .q-item:hover,
-  .q-expansion-item .q-item[aria-expanded="true"] {
-    background-color: #263442 !important;
-  }
+.theme-light .window-handle-header .project-title-window,
+.theme-light .window-handle-header .q-btn {
+  color: #333333 !important;
+}
+
+/* Status bar (project window footer) */
+.theme-light .window-handle.window-handle-footer,
+.theme-light .window-handle-footer .q-btn {
+  color: #ffffff !important;
+}
+
+/* Experience / education */
+.theme-light .experience-section .text-h6 {
+  color: #267f99 !important; /* type: company / institution */
+}
+
+.theme-light .experience-section .text-h7 {
+  color: #795e26 !important; /* function: job title */
+}
+
+.theme-light .experience-section .job-meta,
+.theme-light .experience-section .text-caption {
+  color: #098658 !important; /* number: dates */
+}
+
+.theme-light .experience-section .job-meta + .job-meta {
+  color: #008000 !important; /* comment: location */
+}
+
+.theme-light .section-header,
+.theme-light .experience-page .section-header {
+  color: #a31515 !important; /* string: section headers */
+}
+
+.theme-light .sub {
+  color: #008000;
+}
+
+/* Inline emphasis */
+.theme-light .skill-yellow,
+.theme-light .skill-highlight {
+  color: #267f99 !important; /* type: technology names */
+}
+
+.theme-light .skill-column ul li {
+  color: #001080 !important;
+}
+
+/* Sidebar links, contacts and icons */
+.theme-light .q-item .link-title {
+  color: #0000ff !important; /* keyword */
+}
+
+.theme-light .q-item .contacts {
+  color: #a31515 !important; /* string: email / phone / location */
+}
+
+.theme-light .q-item .q-item__label--caption,
+.theme-light .q-item [caption] {
+  color: #008000 !important; /* comment */
+}
+
+.theme-light .q-item .q-icon {
+  color: #2c2c2c;
+}
+
+.theme-light .q-item .link-title .arrow-outward-icon {
+  color: #0000ff;
+}
+
+.theme-light .q-item .contacts .arrow-outward-icon {
+  color: #a31515;
+}
+
+/* Project window text */
+.theme-light .project-tagline,
+.theme-light .project-body,
+.theme-light .feature-list {
+  color: #001080;
+}
+
+.theme-light .project-tagline strong,
+.theme-light .feature-list strong {
+  color: #267f99; /* type: labels */
+}
+
+.theme-light .project-tagline code,
+.theme-light .feature-list code {
+  color: #795e26; /* function: identifiers */
+  background: transparent;
+}
+
+.theme-light .project-tagline em {
+  color: #008000; /* comment: quotes */
+}
+
+/* Code snippets (Prism) */
+.theme-light code[class*="language-"],
+.theme-light pre[class*="language-"] {
+  color: #001080;
+  text-shadow: none;
+}
+
+.theme-light .token.comment,
+.theme-light .token.prolog,
+.theme-light .token.doctype,
+.theme-light .token.cdata {
+  color: #008000;
+}
+
+.theme-light .token.punctuation,
+.theme-light .token.operator {
+  color: #000000;
+  background: none;
+}
+
+.theme-light .token.property,
+.theme-light .token.variable,
+.theme-light .token.tag,
+.theme-light .token.symbol,
+.theme-light .token.deleted {
+  color: #001080;
+}
+
+.theme-light .token.boolean,
+.theme-light .token.keyword,
+.theme-light .token.atrule,
+.theme-light .token.attr-value {
+  color: #0000ff;
+}
+
+.theme-light .token.number,
+.theme-light .token.constant {
+  color: #098658;
+}
+
+.theme-light .token.string,
+.theme-light .token.char,
+.theme-light .token.attr-name,
+.theme-light .token.selector,
+.theme-light .token.inserted,
+.theme-light .token.entity,
+.theme-light .token.url,
+.theme-light .language-css .token.string,
+.theme-light .style .token.string {
+  color: #a31515;
+  background: none;
+}
+
+.theme-light .token.function {
+  color: #795e26;
+}
+
+.theme-light .token.class-name,
+.theme-light .token.builtin {
+  color: #267f99;
+}
+
+.theme-light .token.regex,
+.theme-light .token.important {
+  color: #811f3f;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VS CODE DARK+ PALETTE (dark mode only)
+   Workbench: editor #1e1e1e · sidebar #252526 · activity bar #333333
+              status bar #007acc · title bar #3c3c3c · selection #264f78
+   Syntax:    variables #9cdcfe · strings #ce9178 · keywords #569cd6
+              functions #dcdcaa · comments #6a9954 · numbers #b5cea8
+              types/classes #4ec9b0
+   ═══════════════════════════════════════════════════════════════ */
+
+body.body--dark ::selection,
+.theme-dark ::selection {
+  background: #264f78;
+  color: inherit;
+}
+
+/* Sidebar (drawer) */
+.theme-dark .q-drawer,
+.theme-dark .q-drawer__content,
+.theme-dark .q-drawer .q-card,
+.theme-dark .q-drawer .bg-primary {
+  background-color: #252526 !important;
+}
+
+.theme-dark .top-border {
+  border-top: 1px solid #333333 !important;
+}
+
+/* Activity bar: header buttons + project header bars */
+.theme-dark .q-btn.drawer-btn {
+  color: #cccccc;
+}
+
+.theme-dark .q-btn.drawer-btn:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+.theme-dark .q-btn.drawer-btn:active {
+  background-color: #264f78 !important;
+}
+
+.theme-dark .project-header {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+/* Title bar (project window) */
+.theme-dark .window-handle.window-handle-header {
+  background-color: #3c3c3c !important;
+  color: #cccccc !important;
+  border-bottom: 1px solid #252526 !important;
+}
+
+.theme-dark .window-handle-header .project-title-window,
+.theme-dark .window-handle-header .q-btn {
+  color: #cccccc !important;
+}
+
+.theme-dark .window-handle-header .close-btn:hover {
+  background-color: #e81123 !important;
+  color: #ffffff !important;
+}
+
+/* Status bar (project window footer) */
+.theme-dark .window-handle.window-handle-footer {
+  border-top: 1px solid #005a9e !important;
+  background-color: #007acc !important; /* status bar signature blue */
+  color: #ffffff !important;
+}
+
+.theme-dark .window-handle-footer .q-btn {
+  color: #ffffff !important;
+}
+
+.theme-dark .window-handle-footer .q-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Window card & projects wrapper */
+.theme-dark .window-card {
+  background-color: #1e1e1e !important;
+  border: 1px solid #3c3c3c !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+.theme-dark .projects-wrapper {
+  background-color: #252526 !important;
+}
+
+/* Expansion item styling for project windows */
+.theme-dark .q-expansion-item .q-item {
+  background-color: #252526 !important;
+  border-bottom: 1px solid #333333 !important;
+  color: #dcdcaa !important;
+  margin-bottom: -1px;
+}
+
+.theme-dark .q-expansion-item .q-item:hover {
+  background-color: #2a2d2e !important;
+}
+
+.theme-dark .q-expansion-item .q-item[aria-expanded="true"] {
+  background-color: #333333 !important;
+  color: #dcdcaa !important;
+}
+
+.theme-dark .q-item[aria-expanded="true"],
+.theme-dark .q-item[aria-expanded="true"] .q-item__label,
+.theme-dark .q-item[aria-expanded="true"] .info {
+  background-color: #333333 !important;
+  color: #dcdcaa !important;
+}
+
+.theme-dark .q-item[aria-expanded="false"],
+.theme-dark .q-item[aria-expanded="false"] .q-item__label,
+.theme-dark .q-item[aria-expanded="false"] .info {
+  background-color: #252526 !important;
+  color: #dcdcaa !important;
+}
+
+/* Experience / education */
+.theme-dark .experience-section .text-h6 {
+  color: #4ec9b0 !important; /* type: company / institution */
+}
+
+.theme-dark .experience-section .text-h7 {
+  color: #dcdcaa !important; /* function: job title */
+}
+
+.theme-dark .experience-section .job-meta,
+.theme-dark .job-meta,
+.theme-dark .experience-section .text-caption {
+  color: #b5cea8 !important; /* number: dates */
+}
+
+.theme-dark .experience-section .job-meta + .job-meta {
+  color: #6a9954 !important; /* comment: location */
+}
+
+.theme-dark .section-header,
+.theme-dark .experience-page .section-header {
+  color: #ce9178 !important; /* string: section headers */
+}
+
+.theme-dark .sub {
+  color: #6a9954; /* comment */
+}
+
+/* Inline emphasis & skills */
+.theme-dark .skill-yellow,
+.theme-dark .skill-highlight {
+  color: #4ec9b0 !important; /* type: technology names */
+}
+
+.theme-dark .pop-yellow,
+body.body--dark .pop-yellow {
+  color: #dcdcaa !important; /* function / method: soft yellow */
+}
+
+.theme-dark .skill-column ul li {
+  color: #9cdcfe !important; /* variables: property text */
+}
+
+/* Sidebar links, contacts and icons */
+.theme-dark .q-item .link-title {
+  color: #569cd6 !important; /* keyword */
+}
+
+.theme-dark .q-item .contacts {
+  color: #ce9178 !important; /* string: email / phone / location */
+}
+
+.theme-dark .q-item .q-item__label--caption,
+.theme-dark .q-item [caption],
+.theme-dark .q-item-label--caption {
+  color: #6a9954 !important; /* comment */
+}
+
+.theme-dark .q-item .q-icon {
+  color: #cccccc;
+}
+
+.theme-dark .q-item .link-title .arrow-outward-icon {
+  color: #569cd6;
+}
+
+.theme-dark .q-item .contacts .arrow-outward-icon {
+  color: #ce9178;
+}
+
+/* Project window text */
+.theme-dark .project-tagline,
+.theme-dark .project-body,
+.theme-dark .feature-list {
+  background-color: #1e1e1e !important;
+  color: #9cdcfe;
+}
+
+.theme-dark .project-tagline strong,
+.theme-dark .feature-list strong {
+  color: #4ec9b0; /* type: labels */
+}
+
+.theme-dark .project-tagline code,
+.theme-dark .feature-list code,
+.theme-dark .project-body code {
+  color: #dcdcaa; /* function: identifiers */
+  background: transparent;
+}
+
+.theme-dark .project-tagline em,
+.theme-dark .project-body em {
+  color: #6a9954; /* comment: quotes */
+}
+
+/* Code snippets (Prism) */
+.theme-dark code[class*="language-"],
+.theme-dark pre[class*="language-"],
+.theme-dark .prism-block {
+  background-color: #1e1e1e !important;
+  color: #9cdcfe;
+  text-shadow: none;
+}
+
+.theme-dark .token.comment,
+.theme-dark .token.prolog,
+.theme-dark .token.doctype,
+.theme-dark .token.cdata {
+  color: #6a9954;
+  font-style: italic;
+}
+
+.theme-dark .token.punctuation,
+.theme-dark .token.operator {
+  color: #d4d4d4;
+  background: none;
+}
+
+.theme-dark .token.property,
+.theme-dark .token.variable,
+.theme-dark .token.tag,
+.theme-dark .token.symbol,
+.theme-dark .token.deleted {
+  color: #9cdcfe;
+}
+
+.theme-dark .token.boolean,
+.theme-dark .token.keyword,
+.theme-dark .token.atrule,
+.theme-dark .token.attr-value {
+  color: #569cd6;
+}
+
+.theme-dark .token.number,
+.theme-dark .token.constant {
+  color: #b5cea8;
+}
+
+.theme-dark .token.string,
+.theme-dark .token.char,
+.theme-dark .token.attr-name,
+.theme-dark .token.selector,
+.theme-dark .token.inserted,
+.theme-dark .token.entity,
+.theme-dark .token.url,
+.theme-dark .language-css .token.string,
+.theme-dark .style .token.string {
+  color: #ce9178;
+  background: none;
+}
+
+.theme-dark .token.function {
+  color: #dcdcaa;
+}
+
+.theme-dark .token.class-name,
+.theme-dark .token.builtin {
+  color: #4ec9b0;
+}
+
+.theme-dark .token.regex,
+.theme-dark .token.important {
+  color: #d16969;
 }
