@@ -8,7 +8,7 @@
                 @click="handleCardClick(project, idx)">
                 <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]"
                     :technology="getProjectTechnologies(project)"
-                    class="bg-primary q-pt-xl" :style="cardStyles[idx]" />
+                    class="bg-primary" :style="cardStyles[idx]" />
             </div>
             <!-- <q-btn
               v-back-to-top.animate="{offset: 300, duration: 200}"
@@ -102,10 +102,10 @@ function setCardRef(el, idx) {
   if (el) cardRefs.value[idx] = el;
 }
 
-// Compute proximity for each card relative to screen center and track closest
 function updateFocus() {
   if (!isMobile.value) { cardStyles.value = []; return; }
 
+  const currentY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
   const triggerY = window.innerHeight * TRIGGER_POSITION;
   let closestIdx = 0;
   let minDistance = Infinity;
@@ -119,6 +119,14 @@ function updateFocus() {
     if (dist < minDistance) {
       minDistance = dist;
       closestIdx = idx;
+    }
+
+    // Keep the top card fully active and focused when at page start
+    if (currentY <= 60 && idx === 0) {
+      return {
+        transform: 'scale(1.0000)',
+        opacity: '1.000',
+      };
     }
 
     const proximity = Math.max(0, 1 - dist / FALLOFF_PX);
@@ -147,7 +155,7 @@ function lockToProject(idx) {
   const offsetDiff = cardCenter - triggerY;
 
   const currentY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-  const targetY = Math.round(currentY + offsetDiff);
+  const targetY = Math.max(0, Math.round(currentY + offsetDiff));
 
   isLocking = true;
   lockedIndex.value = idx;
@@ -159,7 +167,7 @@ function lockToProject(idx) {
 
   if (scrollParent && scrollParent !== window && scrollParent.scrollHeight > scrollParent.clientHeight) {
     scrollParent.scrollTo({
-      top: scrollParent.scrollTop + offsetDiff,
+      top: Math.max(0, scrollParent.scrollTop + offsetDiff),
       behavior: 'smooth'
     });
   }
@@ -172,6 +180,10 @@ function lockToProject(idx) {
 
 function lockToNearestProject() {
   if (!isMobile.value || isLocking || windows.value.length > 0) return;
+
+  const currentY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+  // If at the very top of the page, remain flush at the top
+  if (currentY <= 60) return;
 
   const triggerY = window.innerHeight * TRIGGER_POSITION;
   let nearestIdx = -1;
@@ -672,12 +684,14 @@ const projects = [
 
 .projects-page {
   margin-top: -184px !important;
+  padding-top: 0 !important;
   z-index: 2000;
 }
 
 @media (max-width: 900px) {
   .projects-page {
     margin-top: -144px !important;
+    padding-top: 0 !important;
   }
 }
 
@@ -688,13 +702,22 @@ const projects = [
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
   .projects-page {
-    margin-top: -120px !important;
-    padding-top: calc(50vh - 220px) !important;
+    margin-top: -144px !important;
+    padding-top: 0 !important;
+  }
+
+  .project-row {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .project-card-wrapper :deep(.project-section) {
+    padding-top: 0 !important;
   }
 
   .mobile-bottom-spacer {
-    height: calc(50vh - 120px) !important;
-    min-height: 250px;
+    height: 120px !important;
+    min-height: 120px;
   }
 
   .project-card-wrapper {
