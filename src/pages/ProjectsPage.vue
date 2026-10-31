@@ -4,7 +4,8 @@
             <div v-for="(project, idx) in projects" :key="project.id"
                 :ref="el => setCardRef(el, idx)"
                 class="col-12 col-md-6 col-lg-4 cursor-pointer project-card-wrapper"
-                @click="openProject(project)">
+                :class="{ 'is-locked': isMobile && lockedIndex === idx }"
+                @click="handleCardClick(project, idx)">
                 <ProjectSection v-bind="project" :images="[getProjectLogo(project), ...project.images.slice(1)]"
                     :technology="getProjectTechnologies(project)"
                     class="bg-primary q-pt-xl" :style="cardStyles[idx]" />
@@ -19,7 +20,7 @@
               <q-icon name="keyboard_arrow_up" />
             </q-btn> -->
           </div>
-          <div class="page-padding" style="height: 200px;"></div>
+          <div class="page-padding mobile-bottom-spacer" style="height: 200px;"></div>
         <teleport to="body">
             <div class="windows-layer" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }">
                 <draggable-resizable-vue v-for="(win, i) in windows" :key="win.uid" v-model:x="win.x" v-model:y="win.y"
@@ -73,45 +74,54 @@ import CodeJournal from 'src/components/projects/PostworkProjects.vue';
 import ProjectAnkify from 'src/components/projects/ProjectAnkify.vue';
 import MedJp from 'src/components/projects/MedJp.vue';
 import EmployMe from 'src/components/projects/EmployMe.vue';
+import ProjectFortship from 'src/components/projects/ProjectFortship.vue';
 
 const leftDrawerOpen = inject('leftDrawerOpen');
 
-// ── Mobile scroll-focus system ──────────────────────────────────
+// ── Mobile scroll-locking & focus system ─────────────────────────
 const isMobile = ref(false);
 const cardRefs = ref([]);
 const cardStyles = ref([]);
+const lockedIndex = ref(0);
 let mql = null;
 let scrollParent = null;
 let rafId = null;
+let scrollTimeout = null;
+let isUserTouching = false;
+let isLocking = false;
 
-// Tuning knobs
-const TRIGGER_POSITION = 0.45; // trigger line at 53% from top of viewport
-const FALLOFF_PX = 200;        // distance (px) over which proximity fades from 1→0
-const SCALE_MIN = 0.7;        // furthest-away scale
-const SCALE_MAX = 1;         // at-trigger scale
-const OPACITY_MIN = 0.45;      // furthest-away opacity
-const OPACITY_MAX = 1.0;       // at-trigger opacity
+// Tuning knobs for mobile legibility and snap threshold
+const TRIGGER_POSITION = 0.50; // exact 50% vertical center of viewport
+const FALLOFF_PX = 240;        // smooth proximity fade distance
+const SCALE_MIN = 0.93;        // high minimum scale for crisp font legibility
+const SCALE_MAX = 1.0;         // full 100% scale at center lock
+const OPACITY_MIN = 0.55;      // comfortable readable contrast for inactive cards
+const OPACITY_MAX = 1.0;       // 100% solid opacity for locked card
 
 function setCardRef(el, idx) {
   if (el) cardRefs.value[idx] = el;
 }
 
-// Compute a 0→1 proximity for each card based on distance to the trigger line,
-// then map that to continuous scale + opacity values.
+// Compute proximity for each card relative to screen center and track closest
 function updateFocus() {
   if (!isMobile.value) { cardStyles.value = []; return; }
 
   const triggerY = window.innerHeight * TRIGGER_POSITION;
+  let closestIdx = 0;
+  let minDistance = Infinity;
 
-  cardStyles.value = cardRefs.value.map((el) => {
+  cardStyles.value = cardRefs.value.map((el, idx) => {
     if (!el) return {};
     const rect = el.getBoundingClientRect();
-    // Use the card's vertical center for a more natural feel
     const cardCenter = rect.top + rect.height / 2;
     const dist = Math.abs(cardCenter - triggerY);
-    // Proximity: 1 when right at trigger, fading to 0 at FALLOFF_PX away
+
+    if (dist < minDistance) {
+      minDistance = dist;
+      closestIdx = idx;
+    }
+
     const proximity = Math.max(0, 1 - dist / FALLOFF_PX);
-    // Ease the curve for a snappier near-trigger response
     const eased = proximity * proximity * (3 - 2 * proximity); // smoothstep
 
     const scale = SCALE_MIN + (SCALE_MAX - SCALE_MIN) * eased;
@@ -122,26 +132,134 @@ function updateFocus() {
       opacity: opacity.toFixed(3),
     };
   });
+
+  lockedIndex.value = closestIdx;
+}
+
+function lockToProject(idx) {
+  if (!isMobile.value || idx < 0 || idx >= cardRefs.value.length) return;
+  const targetEl = cardRefs.value[idx];
+  if (!targetEl) return;
+
+  const triggerY = window.innerHeight * TRIGGER_POSITION;
+  const rect = targetEl.getBoundingClientRect();
+  const cardCenter = rect.top + rect.height / 2;
+  const offsetDiff = cardCenter - triggerY;
+
+  const currentY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+  const targetY = Math.round(currentY + offsetDiff);
+
+  isLocking = true;
+  lockedIndex.value = idx;
+
+  window.scrollTo({
+    top: targetY,
+    behavior: 'smooth'
+  });
+
+  if (scrollParent && scrollParent !== window && scrollParent.scrollHeight > scrollParent.clientHeight) {
+    scrollParent.scrollTo({
+      top: scrollParent.scrollTop + offsetDiff,
+      behavior: 'smooth'
+    });
+  }
+
+  setTimeout(() => {
+    isLocking = false;
+    updateFocus();
+  }, 400);
+}
+
+function lockToNearestProject() {
+  if (!isMobile.value || isLocking || windows.value.length > 0) return;
+
+  const triggerY = window.innerHeight * TRIGGER_POSITION;
+  let nearestIdx = -1;
+  let minDist = Infinity;
+
+  cardRefs.value.forEach((el, idx) => {
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const cardCenter = rect.top + rect.height / 2;
+    const dist = Math.abs(cardCenter - triggerY);
+    if (dist < minDist) {
+      minDist = dist;
+      nearestIdx = idx;
+    }
+  });
+
+  if (nearestIdx === -1 || minDist < 3) return; // already centered
+
+  lockToProject(nearestIdx);
+}
+
+function scheduleLock(delay = 120) {
+  if (scrollTimeout) clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    if (!isUserTouching && !isLocking && isMobile.value && windows.value.length === 0) {
+      lockToNearestProject();
+    }
+  }, delay);
 }
 
 function onScroll() {
-  if (rafId) return; // throttle to animation frames
+  if (rafId) return;
   rafId = requestAnimationFrame(() => {
     updateFocus();
     rafId = null;
   });
+
+  if (!isLocking) {
+    scheduleLock(130);
+  }
+}
+
+function onTouchStart() {
+  isUserTouching = true;
+  isLocking = false;
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = null;
+  }
+}
+
+function onTouchEnd() {
+  isUserTouching = false;
+  scheduleLock(90);
+}
+
+function onScrollEnd() {
+  if (!isUserTouching && !isLocking) {
+    lockToNearestProject();
+  }
+}
+
+function handleCardClick(project, idx) {
+  if (isMobile.value) {
+    // If the card is already locked at center, open project window
+    if (lockedIndex.value === idx) {
+      openProject(project);
+    } else {
+      // Otherwise, lock and center this project first
+      lockToProject(idx);
+    }
+  } else {
+    openProject(project);
+  }
 }
 
 function setupScrollListener() {
   teardownScrollListener();
   if (!isMobile.value) return;
 
-  // Find the scroll container (Quasar wraps content in a scrollable div)
   scrollParent = document.querySelector('.q-page-container') || window;
   scrollParent.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Initial check
+  window.addEventListener('touchstart', onTouchStart, { passive: true });
+  window.addEventListener('touchend', onTouchEnd, { passive: true });
+  window.addEventListener('scrollend', onScrollEnd, { passive: true });
+
   updateFocus();
 }
 
@@ -150,7 +268,11 @@ function teardownScrollListener() {
     scrollParent.removeEventListener('scroll', onScroll);
   }
   window.removeEventListener('scroll', onScroll);
+  window.removeEventListener('touchstart', onTouchStart);
+  window.removeEventListener('touchend', onTouchEnd);
+  window.removeEventListener('scrollend', onScrollEnd);
   if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  if (scrollTimeout) { clearTimeout(scrollTimeout); scrollTimeout = null; }
 }
 
 function onMediaChange(e) {
@@ -253,6 +375,29 @@ function getProjectTechnologies(project) {
     })
 }
 const projects = [
+  {
+        id: 'fortship',
+        title: 'Fortship',
+        logo: {
+            light: 'Logo-Claro-Fortship',
+            dark: 'Logo-Claro-Fortship',
+            ext: 'png',
+        },
+        images: [
+            null,
+        ],
+        deployed: [false],
+        repo: [true, 'https://github.com/MattGaarder/fortship'],
+        summary: 'Take raw port schedules from an <span class="pop-yellow">Excel</span> spreadsheet, structure the data for <span class="pop-yellow">mobile and desktop</span>, and generate a clean, responsive <span class="pop-yellow">HTML email</span>.',
+        technology: [
+            { name: 'Nodejs', logo: loadTechLogo('nodejs-icon.svg') },
+            { name: 'Expressjs', logo: loadTechLogo('express.svg') },
+            { name: 'Azure', logo: loadTechLogo('Azure.svg') },
+            { name: 'OpenWeather', logo: loadTechLogo('openweather-logo.svg') },
+            { name: 'HTML5', logo: loadTechLogo('html-5-logo-svgrepo-com.svg') },
+        ],
+        component: markRaw(ProjectFortship),
+    },
   {
         id: 'employ-me',
         title: 'employ-me',
@@ -542,12 +687,45 @@ const projects = [
    handles the transition easing and active press state.
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
+  .projects-page {
+    margin-top: -120px !important;
+    padding-top: calc(50vh - 220px) !important;
+  }
+
+  .mobile-bottom-spacer {
+    height: calc(50vh - 120px) !important;
+    min-height: 250px;
+  }
+
+  .project-card-wrapper {
+    margin-bottom: 24px;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+  }
+
   .project-card-wrapper :deep(.project-section.q-card) {
     transition:
-      transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      opacity 0.25s ease !important;
+      transform 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity 0.28s ease,
+      box-shadow 0.28s ease,
+      border-color 0.28s ease !important;
     transform-origin: center center;
     will-change: transform, opacity;
+  }
+
+  /* Locked project card focus emphasis */
+  .project-card-wrapper.is-locked :deep(.project-section.q-card) {
+    border-color: rgba(156, 220, 254, 0.45) !important;
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.6),
+      0 0 16px rgba(156, 220, 254, 0.16) !important;
+  }
+
+  .theme-light .project-card-wrapper.is-locked :deep(.project-section.q-card) {
+    border-color: rgba(0, 16, 128, 0.35) !important;
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.18),
+      0 0 16px rgba(0, 16, 128, 0.12) !important;
   }
 
   /* Disable desktop hover lift on mobile */
