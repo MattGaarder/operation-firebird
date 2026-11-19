@@ -96,7 +96,6 @@
         </q-card-section>
       </q-expansion-item>
       <q-separator class="separator" />
-      <div class="bumper"></div>
     </q-card>
 
 
@@ -236,7 +235,6 @@
       </q-expansion-item>
 
       <q-separator class="separator" />
-      <div class="bumper"></div>
     </q-card>
 
     <!-- POST-WORK EXPENSES -->
@@ -338,7 +336,6 @@
         </q-card-section>
       </q-expansion-item>
       <q-separator class="separator" />
-      <div class="bumper"></div>
     </q-card>
   </div>
 </template>

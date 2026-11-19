@@ -2,13 +2,7 @@
   <div class="projects-wrapper">
     <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header">
-        <q-icon name="person_outline" class="project-icon" />
-        <div class="project-info">
-          <div class="project-title">THIS.PORTFOLIO</div>
-        </div>
-      </q-card-section>
-      <q-separator class="separator" />
+
 
       <!-- Tagline -->
       <div class="project-tagline">

@@ -8,13 +8,7 @@
   <div class="projects-wrapper">
     <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header">
-        <q-icon name="restaurant" class="project-icon" />
-        <div class="project-info">
-          <div class="project-title">Onafã</div>
-        </div>
-      </q-card-section>
-      <q-separator class="separator" />
+
 
       <!-- Tagline -->
       <div class="project-tagline">

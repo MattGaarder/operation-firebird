@@ -2,14 +2,7 @@
   <div class="projects-wrapper">
     <q-card bordered class="project-card">
       <!-- Header -->
-      <q-card-section class="project-header">
-        <q-icon name="medical_services" class="project-icon code-journal-icon" />
-        <div class="project-info">
-          <div class="project-title">med-jp</div>
-        </div>
-      </q-card-section>
 
-      <q-separator class="separator" />
 
       <!-- Tagline -->
       <div class="project-tagline">

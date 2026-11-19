@@ -101,6 +101,13 @@ body.body--dark {
   margin-right: 0.5px;
 }
 
+/* Ensure project cards are distinct and show their full border-radius */
+.project-card {
+  overflow: visible !important;
+  border-radius: 4px !important;
+  background-color: var(--project-card-bg, #252526) !important;
+}
+
 .q-item__section--avatar {
   min-width: 40px !important; /* Standard is 56px, reducing to 40px or less */
 }
@@ -673,9 +680,10 @@ select,
 .info {
   font-size: 0.78rem;
   color: var(--site-text);
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
   margin-left: 24px !important; /* q-ml-lg */
+  line-height: 1.2;
 }
 
 .sub {
@@ -694,6 +702,8 @@ select,
   margin-top: -0.3rem;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0;
   background-color: var(--project-wrapper-bg, transparent);
 }
 
@@ -708,8 +718,10 @@ select,
 }
 
 .project-title {
-  font-size: 1.02rem;
+  font-size: 0.78rem;
   font-weight: 500;
+  margin-left: 0.5rem;
+  line-height: 1.2;
 }
 
 .project-title-window {
@@ -945,6 +957,13 @@ pre[class*="language-"] {
 /* Remove padding from expansion item toggle arrow */
 .q-expansion-item .q-item__section--side {
   padding-right: 0 !important;
+}
+
+/* Compact expansion toggle header row */
+.project-card .q-expansion-item > .q-expansion-item__container > .q-item {
+  min-height: 32px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
 }
 
 .q-btn .q-icon {

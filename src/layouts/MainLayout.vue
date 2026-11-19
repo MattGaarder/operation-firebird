@@ -242,6 +242,16 @@
 
   const linksList = [
     {
+      title: 'Home',
+      caption: 'MATTEUS-GAARDER.pdf',
+      icon: 'home',
+      link: '/',
+      name: '',
+      isExternal: false,
+      exact: true,
+      cvDownload: true,
+    },
+    {
       title: 'Projects',
       caption: 'web.dev/projects',
       icon: 'code',
